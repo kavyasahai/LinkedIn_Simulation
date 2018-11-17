@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Home from "./LandingPage/Home";
 
 import { createStore, applyMiddleware, compose } from "redux";
@@ -12,6 +12,7 @@ import { Provider } from "react-redux";
 // const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 // const store = createStore(rootReducer, composePlugin(applyMiddleware(promise)));
 import store from "../store";
+import NotFound from "./common/notFound";
 
 //Create a Main Component
 class Main extends Component {
@@ -20,8 +21,13 @@ class Main extends Component {
       <Provider store={store}>
         <BrowserRouter>
           <div>
-            {/*Render Different Component based on Route*/}
-            <Route exact path="/" component={Home} />
+            <Switch>
+              {/*Render Different Component based on Route*/}
+              <Route path="/home" exact component={Home} />
+              <Route path="/not-found" exact component={NotFound} />
+              <Route path="/" exact component={Home} />
+              <Redirect to="/not-found" />
+            </Switch>
           </div>
         </BrowserRouter>
       </Provider>
