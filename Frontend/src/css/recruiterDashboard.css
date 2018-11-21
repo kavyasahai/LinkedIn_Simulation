@@ -1,0 +1,17 @@
+.sidebar_dashboard {
+  width: auto;
+  position: fixed;
+  margin: 10vw 0 0 2vw;
+  float: left;
+}
+
+.active_link {
+  color: #0067db;
+}
+
+.displayCharts {
+  float: right;
+  margin: 7vw 2vw 0 0;
+  width: 75vw;
+  height: auto;
+}

@@ -13,6 +13,9 @@ import { Provider } from "react-redux";
 // const store = createStore(rootReducer, composePlugin(applyMiddleware(promise)));
 import store from "../store";
 import NotFound from "./common/notFound";
+import RecruiterDashboardCityWise from "./RecruiterDashboard/recruiterDashboardCityWise";
+import RecruiterDashboardTop10 from "./RecruiterDashboard/recruiterDashboardTop10";
+import RecruiterDashboardTop5 from "./RecruiterDashboard/recruiterDashboardTop5";
 
 //Create a Main Component
 class Main extends Component {
@@ -24,6 +27,21 @@ class Main extends Component {
             <Switch>
               {/*Render Different Component based on Route*/}
               <Route path="/home" exact component={Home} />
+              <Route
+                path="/recruiterdashboardcitywise"
+                exact
+                component={RecruiterDashboardCityWise}
+              />
+              <Route
+                path="/recruiterdashboardtop10"
+                exact
+                component={RecruiterDashboardTop10}
+              />
+              <Route
+                path="/recruiterdashboardtop5"
+                exact
+                component={RecruiterDashboardTop5}
+              />
               <Route path="/not-found" exact component={NotFound} />
               <Route path="/" exact component={Home} />
               <Redirect to="/not-found" />
