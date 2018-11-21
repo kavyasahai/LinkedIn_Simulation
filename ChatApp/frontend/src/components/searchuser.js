@@ -15,14 +15,12 @@ export default class SearchUser extends Component {
 
   render() {
     const { search } = this.props;
-    const users = this.props.store.searchUsers(search);
+    const users = this.props.store.getSearchUsers(search);
 
-    console.log("Here is users", users);
     return (
       <div className="search-user">
         <div className="user-list">
           {users.map((user, key) => {
-            console.log(user);
             return (
               <div
                 onClick={() => this._onUserClick(user)}
@@ -30,7 +28,9 @@ export default class SearchUser extends Component {
                 className="user"
               >
                 <img src={user.avatar} alt="..." />
-                <h2>{user.name}</h2>
+                <h2>
+                  {user.firstName} {user.lastName}
+                </h2>
               </div>
             );
           })}
