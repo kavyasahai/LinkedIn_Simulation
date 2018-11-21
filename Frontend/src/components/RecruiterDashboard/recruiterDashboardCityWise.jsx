@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router";
 import Chart from "react-google-charts";
 import "../../css/recruiterDashboard.css";
 
@@ -38,15 +37,8 @@ class RecruiterDashboardCityWise extends Component {
       ["Job9", 1030, 540, 350, 1030, 540, 350, 1030, 540, 350, 1030, 540, 350],
       ["Job10", 1030, 540, 350, 1030, 540, 350, 1030, 540, 350, 1030, 540, 350]
     ];
-
-    let redirectVar = null;
-    const token = localStorage.getItem("username");
-    if (!token && token === "Bearer undefined") {
-      redirectVar = <Redirect to="/home" />;
-    }
     return (
       <React.Fragment>
-        {redirectVar}
         <div className="sidebar_dashboard">
           <a href="#" onClick={this.handleFilter1}>
             Top 10 job postings
