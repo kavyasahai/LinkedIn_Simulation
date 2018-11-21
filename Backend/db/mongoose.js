@@ -3,7 +3,7 @@ var mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 
 mongoose
-  .connect("mongodb://kavya:homeawaylab2@ds249583.mlab.com:49583/lab2/lab2")
+  .connect("mongodb://kesha:kesha123@ds155718.mlab.com:55718/homeaway")
   .then(() => console.log("Connected to MongoDB"))
   .catch(() => console.log("could not connect to mongodb:"));
 module.exports = { mongoose };
