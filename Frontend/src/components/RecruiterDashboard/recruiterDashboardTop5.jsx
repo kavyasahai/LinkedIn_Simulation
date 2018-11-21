@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router";
 import "../../css/recruiterDashboard.css";
 import Chart from "react-google-charts";
 
@@ -19,8 +20,14 @@ class RecruiterDashboardTop5 extends Component {
       ["Job5", 25]
     ];
 
+    let redirectVar = null;
+    const token = localStorage.getItem("username");
+    if (!token && token === "Bearer undefined") {
+      redirectVar = <Redirect to="/home" />;
+    }
     return (
       <React.Fragment>
+        {redirectVar}
         <div className="sidebar_dashboard">
           <a href="#" onClick={this.handleFilter1}>
             Top 10 job postings
