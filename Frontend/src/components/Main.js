@@ -1,6 +1,15 @@
 import React, { Component } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Home from "./LandingPage/Home";
+import NotFound from "./common/notFound";
+import RecruiterDashboardCityWise from "./RecruiterDashboard/recruiterDashboardCityWise";
+import RecruiterDashboardTop10 from "./RecruiterDashboard/recruiterDashboardTop10";
+import RecruiterDashboardTop5 from "./RecruiterDashboard/recruiterDashboardTop5";
+import Login from "./Applicant/login";
+import PostSignUp from "./Applicant/postSignUp";
+import ApplicantDetails from "./Applicant/applicantDetails";
+import UserSchoolData from "./Applicant/userSchoolData";
+import UserProfilePhoto from "./Applicant/userProfilePhoto";
 
 import { createStore, applyMiddleware, compose } from "redux";
 import promise from "redux-promise";
@@ -12,10 +21,6 @@ import { Provider } from "react-redux";
 // const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 // const store = createStore(rootReducer, composePlugin(applyMiddleware(promise)));
 import store from "../store";
-import NotFound from "./common/notFound";
-import RecruiterDashboardCityWise from "./RecruiterDashboard/recruiterDashboardCityWise";
-import RecruiterDashboardTop10 from "./RecruiterDashboard/recruiterDashboardTop10";
-import RecruiterDashboardTop5 from "./RecruiterDashboard/recruiterDashboardTop5";
 
 //Create a Main Component
 class Main extends Component {
@@ -27,6 +32,11 @@ class Main extends Component {
             <Switch>
               {/*Render Different Component based on Route*/}
               <Route path="/home" exact component={Home} />
+              <Route path="/login" component={Login} />
+              <Route path="/postsignup" component={PostSignUp} />
+              <Route path="/applicantdetails" component={ApplicantDetails} />
+              <Route path="/school" component={UserSchoolData} />
+              <Route path="/profilepicture" component={UserProfilePhoto} />
               <Route
                 path="/recruiterdashboardcitywise"
                 exact
