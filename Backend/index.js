@@ -36,7 +36,7 @@ app.use(
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 //Allow Access Control
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader(
@@ -52,9 +52,9 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.post("/login", function(request, response) {
+app.post("/login", function (request, response) {
   console.log("in request login", request.body.data);
-  kafka.make_request("linkedinlogin", request.body, function(err, results) {
+  kafka.make_request("linkedinlogin", request.body, function (err, results) {
     console.log("in result");
     console.log(results);
     if (err) {
@@ -74,9 +74,9 @@ app.post("/login", function(request, response) {
     }
   });
 });
-app.post("/register", function(request, response) {
+app.post("/register", function (request, response) {
   console.log("In signup method");
-  kafka.make_request("linkedinsignup", request.body, function(err, results) {
+  kafka.make_request("linkedinsignup", request.body, function (err, results) {
     console.log("in result");
     console.log(results);
     if (err) {
@@ -94,9 +94,9 @@ app.post("/register", function(request, response) {
     }
   });
 });
-app.post("/prodetails", function(request, response) {
+app.post("/prodetails", function (request, response) {
   console.log("In professional details method");
-  kafka.make_request("linkedinprodetails", request.body, function(
+  kafka.make_request("linkedinprodetails", request.body, function (
     err,
     results
   ) {
@@ -117,9 +117,9 @@ app.post("/prodetails", function(request, response) {
     }
   });
 });
-app.post("/locationdata", function(request, response) {
+app.post("/locationdata", function (request, response) {
   console.log("In location method");
-  kafka.make_request("linkedinloc", request.body, function(err, results) {
+  kafka.make_request("linkedinloc", request.body, function (err, results) {
     console.log("in result");
     console.log(results);
     if (err) {
@@ -137,5 +137,31 @@ app.post("/locationdata", function(request, response) {
     }
   });
 });
+app.post("/recruiter/post-a-job", function (request, response) {
+  console.log("In post a job")
+  kafka.make_request('post_a_job', request.body, function (err, results) {
+    console.log('in results');
+    console.log(results);
+    if (err) {
+      console.log("Inside err")
+      response.json({
+        status: "BAD_REQUEST",
+        errors: {
+          code: "400",
+          description: err
+        },
+        payload: null
+      })
+    } else {
+      console.log("Inside else")
+      response.json({
+        status: "OK",
+        payload: results,
+        data: "Post job successful"
+      })
+    }
+  })
+})
+
 app.listen(3001);
 console.log("Server Listening on port 3001");
