@@ -2,4 +2,6 @@ node_modules
 build
 npm-debug.log
 .env
+linkedin.pem
+loaddata.py
 .DS_Store
