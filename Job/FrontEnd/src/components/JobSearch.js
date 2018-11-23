@@ -19,6 +19,7 @@ import image from './download.jpg'
   view1:[],
   properties2:[],
   properties:[],
+  imageNumber:0,
   
           imageView:[],
           open:false
@@ -61,7 +62,8 @@ closebox(){
        this.props.search(data,()=>{ 
            
         this.setState({
-            properties1:this.state.properties1.concat(this.props.properties)
+            properties1:this.state.properties1.concat(this.props.properties),
+            view1:this.state.view1.concat(this.props.properties[0])
         });
         this.state.properties1.map( property=>{
      
@@ -86,14 +88,17 @@ view=(e)=>{
     console.log(e);  
    var  properties1=this.props.properties  
    console.log(properties1)
-   var marvelHeroes =  properties1.filter(function(hero) {
-	return hero._id == e
+   var propertydetails =   properties1.filter(function(property) {
+	return property._id == e
 });
-  console.log(marvelHeroes)
+var index = properties1.findIndex(function(item){ return item._id == e})
+console.log(index);
+
 this.setState({
-    view1: marvelHeroes
+    view1: propertydetails,
+   imageNumber : index
 })
-  console.log(this.state.view1)
+ 
    
 }
   
@@ -132,13 +137,13 @@ this.setState({
         )
         })
 
-        let Details1=this.props.properties.map(property=>
+        let Details1=this.state.view1.map(property=>
                     { return (<div class=" col-6">
                         Aish
                      <div class="Jobs  row">
                
                <div class="col-1">]
-              <img src={this.state.imageView}></img> 
+              <img src={imageView[this.state.imageNumber]}></img> 
               </div>
                 <div class="col-6" style={{"padding-left":'20px', "padding-top":"10px"}}>
                       <li class="blue"  >{property.Position}</li><br>
