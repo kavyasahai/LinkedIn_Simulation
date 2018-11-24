@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import './JobSearch.css'
-
+import Home from './filter.js'
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Modal from 'react-responsive-modal';
-import image from './download.jpg'
+import image from './download.jpg';
+
 
   class JobSearch extends Component{
     constructor(props){
@@ -15,11 +16,11 @@ import image from './download.jpg'
         this.state = {
           Job:"",
           Location:"",
-  properties1:[],
-  view1:[],
-  properties2:[],
-  properties:[],
-  imageNumber:0,
+        properties1:[],
+        view1:[],
+        properties2:[],
+        properties:[],
+        imageNumber:0,
   
           imageView:[],
           open:false
@@ -115,13 +116,13 @@ this.setState({
             return(
                 
                 <div class="row">
-                  <div class="col-6">
+             
                     <div class="Jobs  row">
                
                          <div class="col-1">
                         <img src={imageView[i]}></img> 
                         </div>
-                          <div class="col-6"style={{"padding-left":'30px', "padding-top":"10px"}}>
+                          <div class="col-11"style={{"padding-left":'30px', "padding-top":"10px"}}>
                                 <li class="blue" onClick={this.view.bind(this,property._id)} >{property.Position}</li><br>
                                 </br>
                                 {property.Company}<br></br>
@@ -131,21 +132,23 @@ this.setState({
                           </div>
                     </div>
                     </div>
-                    </div>
-      
+                   
             
         )
         })
 
         let Details1=this.state.view1.map(property=>
-                    { return (<div class=" col-6">
-                        Aish
-                     <div class="Jobs  row">
+                    { return (
+                    
+                     <div class="Jobs">
+                     <div class="row">
                
-               <div class="col-1">]
-              <img src={imageView[this.state.imageNumber]}></img> 
+               <div class="col-4">
+              <img src={imageView[this.state.imageNumber]} style={{"width":"200px","height":"150px"}
+              }></img> 
               </div>
-                <div class="col-6" style={{"padding-left":'20px', "padding-top":"10px"}}>
+
+                <div class="col-8" style={{"padding-left":'20px', "padding-top":"10px"}}>
                       <li class="blue"  >{property.Position}</li><br>
                       </br>
                       {property.Company}<br></br>
@@ -153,6 +156,82 @@ this.setState({
                       <button class="Button" onClick={this.Search}>Save</button>
                       <button class="Button" onClick={this.openbox}>Apply</button>
                       
+                </div>
+                <div class="row">
+                <div class="col-4" style={{"padding-left":"40px","padding-top":"20px"}}>
+                   Job 
+                   <br></br>
+                   
+                       <li> &bull;0 applicants</li>
+                  
+                </div>
+                <div class="col-4" style={{"padding-left":"40px","padding-top":"20px"}}>
+                Company
+                <br></br>
+        
+                    <li>
+                    &bull; Architecture & Planning
+                    </li>
+                    <br></br>
+                    <li>
+                    &bull; 1000 employess
+                    </li>
+          
+                </div>
+                <div class="col-4" style={{"padding-left":"40px","padding-top":"20px"}}>
+                Connections
+                <br></br>
+               
+                    <li>
+                       &bull; 0 Connections
+                    </li>
+              
+                </div>
+                <div style={{"padding-left":"30px", "padding-top":"20px", "color": "rgba(0,0,0,.6)"}}>
+                      Job Description 
+                   
+
+                </div> 
+                          <hr></hr> 
+                </div>
+               
+               
+                
+                <div class="row" style={{"padding-left":"30px"}}>
+                 
+                      
+                <div class="col-6">
+                <div style={{"text-align":"justify","padding-bottom":"10px"}}> {property.Details}</div>
+                     
+                      <div style={{"text-align":"justify","padding-bottom":"10px"}}>
+                      M Moser Associates is looking for a seasoned Interior Designer to lead our San Francisco team of architects, interior designers, and construction professionals in the design and delivery of transformative large scale workplace projects.
+
+
+                      </div>
+                      <div style={{"text-align":"justify","padding-bottom":"10px"   }}>M Moser aims to transform the way people work and as such we are seeking design professionals who are motivated by people and are inspired by how design connects elements of people, organizations and culture, to realize business goals.</div>
+                      <div style={{"text-align":"justify"}}>As the Design Leader you will play a key role in advancing our design solutions, in generating new ideas for both projects and for the systems we use execute work, while maintaining enthusiasm about achieving clients business goals through our design</div>
+                      </div>
+                      <div class="col-6">
+                      <div style={{"color": "rgba(0,0,0,.6)","padding-bottom":"10px"}}>
+                      Job Details
+                      </div>
+                      <div style={{"color": "rgba(0,0,0,.75)","font-size": "1.0rem"}}>
+                        Employment Type
+                    </div>
+                    <div style={{"padding-bottom":"10px"}}>Full Time</div>
+                    <div style={{"color": "rgba(0,0,0,.75)","font-size": "1.0rem"}}>
+                        Industry
+                    </div>
+                    <div style={{"padding-bottom":"10px"}}>Designing</div>
+                    <div style={{"color": "rgba(0,0,0,.75)","font-size": "1.0rem"}}>
+                        Functions
+                    </div>
+                    <div style={{"padding-bottom":"10px"}}>Planning</div>
+                    </div> 
+
+                      
+                      </div>
+{/* ---------------------------Model------------------------------------------------------------------------- */}
                       <div class="modal-dialog modal-lg">
                       <Modal open={this.state.open} onClose={this.closebox} style={{'min-width':'800px'}} center>
                       <header class="modal-header">   
@@ -199,10 +278,10 @@ this.setState({
                     </div>
                   </Modal>
                   </div>
-                   }
+                   
                     </div>
            </div>
-            </div> 
+
          ) })
               
         return(
@@ -224,94 +303,10 @@ this.setState({
                     <i class="fa fa-user w3-jumbo"></i>
                     </div>
                </div>
-               <div class="filer row">
-               <div class="col-2">               
-               
-                            <li class=" nav-item dropdown ">
-                             <a class="  dropdown-toggle "  id="navbardrop" data-toggle="dropdown">
-                             Jobs
-                             </a>
-                              <div class="dropdown-menu">
-                                <a class="dropdown-item" >All</a>
-                                <a class="dropdown-item" >People</a>
-                                <a class="dropdown-item" >Content</a>
-                                <a class="dropdown-item" >Companies</a>
-                                <a class="dropdown-item" >Groups</a>
-                                <a class="dropdown-item" >Schools</a>
-                                </div>
-                                </li>
-                                </div>
-             <div class="col-2"> 
-                            <li class=" dropdown ">
-                             <a class="  dropdown-toggle border"  id="navbardrop" data-toggle="dropdown">
-                            Date Posted
-                             </a>
-                              <div class="dropdown-menu">
-                             
-                               
-                               <input type="radio" checked="checked" name="radio"></input> Past 24Hours <br></br>
-                               <input type="radio" checked="checked" name="radio"></input> Past Week<br></br>
-                               <input type="radio" checked="checked" name="radio"></input> Past Month<br></br>
-                               <input type="radio" checked="checked" name="radio"></input> Any Time<br></br>
-                                            
-                                            </div>
-                                            </li>
-            </div>
-                                            <div class="col-2"> 
-                                            <li class=" dropdown ">
-                             <a class="  dropdown-toggle border"  id="navbardrop" data-toggle="dropdown">
-                            LinkedIn Features
-                             </a>
-                            
-                              <div class="dropdown-menu">
-                             
-                               
-                               <input type="radio" checked="checked" name="radio"></input> In Your Network <br></br>
-                               <input type="radio" checked="checked" name="radio"></input> Easy Apply<br></br>
-                               <input type="radio" checked="checked" name="radio"></input> Under 10 Applicants<br></br>
-                           
-                                            
-                                            </div>
-                                            </li>
-                                            </div>
-                                            <div class="col-2"> 
-                                            <li class=" dropdown ">
-                             <a class="  dropdown-toggle border"  id="navbardrop" data-toggle="dropdown">
-                            Company                             </a>
-                              <div class="dropdown-menu">
-                             
-                               
-                               <input type="radio" checked="checked" name="radio"></input> Google <br></br>
-                               <input type="radio" checked="checked" name="radio"></input> Facebook<br></br>
-                               <input type="radio" checked="checked" name="radio"></input> IBM<br></br>
-                               <input type="radio" checked="checked" name="radio"></input> Netflix<br></br>
-                                            
-                                            </div>
-                                            </li>
-                                            </div>
-                                            <div class="col-2"> 
-                                            <li class=" dropdown ">
-                             <a class="  dropdown-toggle border"  id="navbardrop" data-toggle="dropdown">
-                            Experience Level
-                             </a>
-                              <div class="dropdown-menu">
-                             
-                               
-                               <input type="radio" checked="checked" name="radio"></input> Internship <br></br>
-                               <input type="radio" checked="checked" name="radio"></input> Entry Level<br></br>
-                               <input type="radio" checked="checked" name="radio"></input> Aassociate<br></br>
-                               <input type="radio" checked="checked" name="radio"></input> Mid-Senior Level<br></br>
-                               <input type="radio" checked="checked" name="radio"></input> Director
-                               <br></br>
-                               <input type="radio"  name="radio"></input> Executive<br></br>
-                                            
-                                            </div>
-                                            </li>
-                                            </div>
-                                            <div class="col-2"> 
-                                            <li>All Filters</li>
-                                            </div>
+               <div>
+                <Home></Home>
                </div>
+           
             
                
                <div>
