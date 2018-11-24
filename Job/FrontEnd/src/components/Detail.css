@@ -1,0 +1,15 @@
+.image1{
+    top:0;
+    left: 0;
+    position: relative;
+}
+.over{
+    top:150px;
+    left:350px;
+    width : 750px;
+    position:absolute;
+    border-color: aquamarine;
+    border: solid 2px;
+    background: white;
+
+}
