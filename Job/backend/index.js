@@ -98,7 +98,12 @@ app.post('/data',function (req,res){
 
 
 }).then(docs=>{
-  res.send(docs);
+  res.json({
+    updatedList:docs
+});
+
+res.end();
+ 
    console.log(docs);
 },(err) => {
     console.log(err);

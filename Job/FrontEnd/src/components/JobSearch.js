@@ -336,7 +336,7 @@ const mapStateToProps = state => {
     return {
      
        properties:state.Property.updatedList,
-       view:state.Property
+       view:state.Property.updatedList
     }
 }
 const mapDispatchStateToProps = dispatch => {
