@@ -8,8 +8,8 @@
     left:350px;
     width : 750px;
     position:absolute;
-    border-color: aquamarine;
-    border: solid 2px;
+   
+    border: gray solid 0.5px;
     background: white;
 
 }

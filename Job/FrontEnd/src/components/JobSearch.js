@@ -149,7 +149,7 @@ this.setState({
               </div>
 
                 <div class="col-8" style={{"padding-left":'20px', "padding-top":"10px"}}>
-                      <li class="blue"  ><Link to="/Detail">{property.Position}</Link></li><br>
+                      <li class="blue"  ><a target="_blank" href="/Detail">{property.Position}</a></li><br>
                       </br>
                       {property.Company}<br></br>
                       {property.Location}<br></br>
