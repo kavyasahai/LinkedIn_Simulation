@@ -335,7 +335,7 @@ const mapStateToProps = state => {
     console.log("JOB",state);
     return {
      
-       properties:state.Property,
+       properties:state.Property.updatedList,
        view:state.Property
     }
 }
