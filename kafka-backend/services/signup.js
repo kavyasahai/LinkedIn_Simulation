@@ -1,5 +1,5 @@
-var db = require("../../backend/app/db");
-var pool = require("../../backend/pool");
+var db = require("../../Backend/app/db");
+var pool = require("../../Backend/pool");
 var Users = require("../../Backend/models/user");
 require("../../Backend/db/mongoose");
 

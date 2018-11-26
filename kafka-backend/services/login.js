@@ -1,8 +1,8 @@
 require("../../Backend/db/mongoose");
-var db = require("../../backend/app/db");
-var crypt = require("../../backend/app/crypt");
+var db = require("../../Backend/app/db");
+var crypt = require("../../Backend/app/crypt");
 var jwt = require("jsonwebtoken");
-var config = require("../../backend/config/database");
+var config = require("../../Backend/config/database");
 
 function handle_request(msg, callback) {
   db.findUser(
