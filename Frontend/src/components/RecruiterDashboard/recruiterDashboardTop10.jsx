@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 import "../../css/recruiterDashboard.css";
 import Chart from "react-google-charts";
+import { connect } from "react-redux";
+import { getRecruiterDashboardTop10 } from "../../actions/recruiterDashboardActions";
 
 class RecruiterDashboardTop10 extends Component {
+  componentDidMount() {
+    this.props.getRecruiterDashboardTop10();
+  }
   handleFilter2 = () => {
     this.props.history.push("/recruiterdashboardcitywise");
   };
@@ -10,6 +15,7 @@ class RecruiterDashboardTop10 extends Component {
     this.props.history.push("/recruiterdashboardtop5");
   };
   render() {
+    console.log("props=", this.props.data_top10);
     const data = [
       [
         "Job",
@@ -112,4 +118,11 @@ class RecruiterDashboardTop10 extends Component {
   }
 }
 
-export default RecruiterDashboardTop10;
+const mapStateToProps = state => ({
+  data_top10: state.recruiterDashboard.data_top10
+});
+
+export default connect(
+  mapStateToProps,
+  { getRecruiterDashboardTop10 }
+)(RecruiterDashboardTop10);
