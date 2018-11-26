@@ -18,7 +18,7 @@ export default function(state = initialState, action) {
     case APPLICANT_LOGIN:
       return {
         ...state,
-        authFlag: true,
+        // authFlag: true,
         token: action.payload
       };
 

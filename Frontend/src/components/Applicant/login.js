@@ -70,13 +70,14 @@ class Login extends Component {
       //set the with credentials to true
       axios.defaults.withCredentials = true;
       this.props.login(data, response => {
-        if (response.data.length === 0) {
+        if (response.data.updatedList.status == "400") {
           window.alert("Username and/or Password is incorrect.");
         } else if (response.data.updatedList !== "Bearer ") {
           console.log("Login successful.");
 
           const token = response.data.updatedList;
           localStorage.setItem("username", token);
+          this.props.history.push("/home");
         }
       });
     }
@@ -99,9 +100,7 @@ class Login extends Component {
   };
   render() {
     let redirectVar = null;
-    if (this.props.authFlag) {
-      redirectVar = <Redirect to="/home" />;
-    }
+
     if (this.props.inserted) {
       redirectVar = <Redirect to="/postsignup" />;
     }
@@ -299,8 +298,7 @@ class Login extends Component {
 const mapStateToProps = state => ({
   username: state.applicantLogin.username,
   inserted: state.applicantLogin.inserted,
-  token: state.applicantLogin.token,
-  authFlag: state.applicantLogin.authFlag
+  token: state.applicantLogin.token
 });
 
 //export default Login;
