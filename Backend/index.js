@@ -78,7 +78,6 @@ app.post("/login", function(request, response) {
 app.post("/register", function(request, response) {
   console.log("In signup method");
   kafka.make_request("linkedinsignup", request.body, function(err, results) {
-    console.log("in result");
     console.log(results);
     if (err) {
       console.log("Inside err");
@@ -87,11 +86,7 @@ app.post("/register", function(request, response) {
         msg: "System Error, Try Again."
       });
     } else {
-      console.log("Inside else");
-      response.json({
-        updatedList: results
-      });
-      response.end();
+      response.send(JSON.stringify(results));
     }
   });
 });
@@ -101,7 +96,6 @@ app.post("/prodetails", function(request, response) {
     err,
     results
   ) {
-    console.log("in result");
     console.log(results);
     if (err) {
       console.log("Inside err");
@@ -110,7 +104,6 @@ app.post("/prodetails", function(request, response) {
         msg: "System Error, Try Again."
       });
     } else {
-      console.log("Inside else");
       response.json({
         updatedList: results
       });
@@ -121,7 +114,6 @@ app.post("/prodetails", function(request, response) {
 app.post("/locationdata", function(request, response) {
   console.log("In location method");
   kafka.make_request("linkedinloc", request.body, function(err, results) {
-    console.log("in result");
     console.log(results);
     if (err) {
       console.log("Inside err");
@@ -130,7 +122,6 @@ app.post("/locationdata", function(request, response) {
         msg: "System Error, Try Again."
       });
     } else {
-      console.log("Inside else");
       response.json({
         updatedList: results
       });

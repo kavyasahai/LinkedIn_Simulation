@@ -69,7 +69,16 @@ class Login extends Component {
       console.log("username and password in submit login", data);
       //set the with credentials to true
       axios.defaults.withCredentials = true;
-      this.props.onSubmitHandle(data);
+      this.props.login(data, response => {
+        if (response.data.length === 0) {
+          window.alert("Username and/or Password is incorrect.");
+        } else if (response.data.updatedList !== "Bearer ") {
+          console.log("Login successful.");
+
+          const token = response.data.updatedList;
+          localStorage.setItem("username", token);
+        }
+      });
     }
   };
   submitRegister = e => {
@@ -86,12 +95,12 @@ class Login extends Component {
     console.log("data in submit register", data);
     //set the with credentials to true
     axios.defaults.withCredentials = true;
-    this.props.onRegisterHandle(data);
+    this.props.register(data);
   };
   render() {
     let redirectVar = null;
     if (this.props.authFlag) {
-      redirectVar = <Redirect to="/homepage" />;
+      redirectVar = <Redirect to="/home" />;
     }
     if (this.props.inserted) {
       redirectVar = <Redirect to="/postsignup" />;
@@ -288,8 +297,10 @@ class Login extends Component {
 }
 
 const mapStateToProps = state => ({
-  authFlag: state.applicantLogin.authFlag,
-  inserted: state.applicantLogin.inserted
+  username: state.applicantLogin.username,
+  inserted: state.applicantLogin.inserted,
+  token: state.applicantLogin.token,
+  authFlag: state.applicantLogin.authFlag
 });
 
 //export default Login;

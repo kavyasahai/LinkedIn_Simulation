@@ -8,10 +8,9 @@ import {
 const initialState = {
   authFlag: false,
   username: "",
-  firstname: "",
   location: false,
-  inserted: false,
-  details: false
+  details: false,
+  inserted: false
 };
 
 export default function(state = initialState, action) {
@@ -20,8 +19,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         authFlag: true,
-        username: action.payload.username,
-        firstname: action.payload.firstname
+        token: action.payload
       };
 
     case APPLICANT_LOCATION_DATA:
@@ -37,11 +35,11 @@ export default function(state = initialState, action) {
       };
 
     case APPLICANT_SIGNUP:
+      console.log("payload=", action.payload);
       return {
         ...state,
         inserted: true,
-        firstname: action.payload.firstname,
-        username: action.payload.username
+        username: action.payload.email
       };
 
     default:

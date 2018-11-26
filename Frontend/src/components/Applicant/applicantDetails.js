@@ -43,13 +43,14 @@ class ApplicantDetails extends Component {
     //prevent page from refresh
     e.preventDefault();
     const data = {
-      jobtitle: this.state.jobtitle,
-      company: this.state.company
+      jobTitle: this.state.jobtitle,
+      company: this.state.company,
+      username: this.props.username
     };
     //set the with credentials to true
     axios.defaults.withCredentials = true;
     console.log("post details data", data);
-    this.props.onRegisterHandle(data);
+    this.props.proDetails(data);
   };
   // usernameChangeHandler = (e) => {
   //     this.setState({
@@ -78,7 +79,7 @@ class ApplicantDetails extends Component {
   render() {
     let redirectVar = null;
     if (this.props.details) {
-      redirectVar = <Redirect to="/schooldetails" />;
+      redirectVar = <Redirect to="/school" />;
     }
     //redirect based on successful login
     // let redirectVar = null;
@@ -305,7 +306,8 @@ class ApplicantDetails extends Component {
 }
 
 const mapStateToProps = state => ({
-  details: state.applicantLogin.details
+  details: state.applicantLogin.details,
+  username: state.applicantLogin.username
 });
 
 //export default details;

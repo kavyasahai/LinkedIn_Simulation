@@ -43,22 +43,42 @@ export const locationData = data => async dispatch => {
   }
 };
 
-export const login = data => async dispatch => {
+// export const login = data => async dispatch => {
+//   try {
+//     setHeader();
+//     const res = await axios.post(`${ROOT_URL}/login`, data);
+//     dispatch({
+//       type: APPLICANT_LOGIN,
+//       payload: res.data.updatedList,
+//       statusCode: res.status
+//     });
+//   } catch (e) {
+//     return {
+//       type: APPLICANT_LOGIN,
+//       payload: e
+//     };
+//   }
+// };
+
+export function login(data, callback) {
   try {
     setHeader();
-    const res = await axios.post(`${ROOT_URL}/login`, data);
-    dispatch({
+    const request = axios
+      .post(`${ROOT_URL}/login`, data)
+      .then(res => callback(res));
+
+    return {
       type: APPLICANT_LOGIN,
-      payload: res.data.updatedList,
-      statusCode: res.status
-    });
+      payload: request.data.updatedList,
+      statusCode: request.status
+    };
   } catch (e) {
     return {
       type: APPLICANT_LOGIN,
       payload: e
     };
   }
-};
+}
 
 export const register = data => async dispatch => {
   try {
@@ -66,7 +86,7 @@ export const register = data => async dispatch => {
     const res = await axios.post(`${ROOT_URL}/register`, data);
     dispatch({
       type: APPLICANT_SIGNUP,
-      payload: res.data.updatedList,
+      payload: res.data,
       statusCode: res.status
     });
   } catch (e) {

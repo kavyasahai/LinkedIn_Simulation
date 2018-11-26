@@ -116,7 +116,7 @@ db.findUser = function(user, successCallback, failureCallback) {
   console.log("db username" + user.username);
   console.log("db password" + user.password);
   var sqlQuery =
-    "SELECT * FROM usertable WHERE Username = '" + user.username + "';";
+    "SELECT * FROM users WHERE username = '" + user.username + "';";
   console.log(sqlQuery);
   connection.query(sqlQuery, function(err, rows) {
     if (err) {

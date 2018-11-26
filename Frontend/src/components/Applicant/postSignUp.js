@@ -57,12 +57,12 @@ class PostSignUp extends Component {
     const data = {
       country: this.state.country,
       zipcode: this.state.zipcode,
-      firstname: this.props.firstname
+      username: this.props.username
     };
     //set the with credentials to true
     axios.defaults.withCredentials = true;
     console.log("post sign up data", data);
-    this.props.onRegisterHandle(data);
+    this.props.locationData(data);
   };
   render() {
     //let redirect = null;
@@ -72,7 +72,7 @@ class PostSignUp extends Component {
     //redirect based on successful login
     let redirectVar = null;
     if (this.props.location) {
-      redirectVar = <Redirect to="/details" />;
+      redirectVar = <Redirect to="/applicantdetails" />;
     }
     return (
       <div class="container">
@@ -496,7 +496,7 @@ class PostSignUp extends Component {
 }
 
 const mapStateToProps = state => ({
-  firstname: state.applicantLogin.firstname,
+  username: state.applicantLogin.username,
   location: state.applicantLogin.location
 });
 

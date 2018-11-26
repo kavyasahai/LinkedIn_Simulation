@@ -29,7 +29,7 @@ function handle_request(msg, callback) {
       crypt.createHash(msg.password, function(res) {
         passwordHash = res;
       });
-      console.log(passwordHash);
+      console.log("hash=", passwordHash);
       // Check if password matches
       crypt.compareHash(
         msg.password,
@@ -40,15 +40,19 @@ function handle_request(msg, callback) {
             var token = jwt.sign(user, config.secret, {
               expiresIn: 10080 // in seconds
             });
-            console.log(token);
-            var resData = {
-              authFlag: true,
-              username: msg.username,
-              firstname: res.firstname,
-              status: 200
-            };
-            console.log("success");
-            callback(null, resData);
+            console.log("token=", token);
+            const newToken = "Bearer " + token;
+            console.log("token=", newToken);
+            callback(null, newToken);
+
+            // var resData = {
+            //   authFlag: true,
+            //   username: msg.username,
+            //   firstname: res.firstname,
+            //   status: 200
+            // };
+            // console.log("success");
+            // callback(null, resData);
           } else {
             resData = {
               status: 400
