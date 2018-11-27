@@ -10,7 +10,8 @@ var app = express();
 
 var jwt = require('jsonwebtoken');
 var {mongoose}=require('./mongoose');
-var {jobdata}=require("./models/job")
+var {jobdata}=require("./models/job");
+var {savejob}=require("./models/savejob");
 
 
 
@@ -102,6 +103,8 @@ app.post('/data',function (req,res){
     updatedList:docs
 });
 
+
+
 res.end();
  
    console.log(docs);
@@ -111,6 +114,20 @@ res.end();
     res.end("Bad Request");
 })
 });
+app.post('/save',function(req,res){
+  console.log(req.body);
+  var save=new savejob({
+    JobID:req.body.jobid,
+    Timestamp:req.body.timestamp,
+    UserID:"Kesha@gmail.com"
+  });
+  save.save().then((docs)=>{
+    console.log("Row Created : ",docs);
+   res.end("ok");
+
+  })
+
+})
 // Start the server
 app.listen(port);
 console.log('Your server is running on port ' + port + '.');

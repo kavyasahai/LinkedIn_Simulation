@@ -82,6 +82,21 @@ closebox(){
 
      
  }
+
+save=(e)=>{
+    console.log("clicke");
+    const data={
+        jobid:e,
+
+        timestamp:new Date()
+        
+    }
+    axios.post('http://localhost:3001/save',data)
+    .then(response=>{
+        console.log(response.data);
+    })
+
+}
        
    
 
@@ -153,7 +168,7 @@ this.setState({
                       </br>
                       {property.Company}<br></br>
                       {property.Location}<br></br>
-                      <button class="Button" onClick={this.Search}>Save</button>
+                      <button class="Button" onClick={this.save.bind(this,property._id)}>Save</button>
                       <button class="Button" onClick={this.openbox}>Apply</button>
                       
                 </div>
