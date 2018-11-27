@@ -17,6 +17,16 @@ var connection = mysql.createConnection({
   database: config.database_name
   //socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock'
 });
+var redis = require("redis");
+var client = redis.createClient();
+client.on("error", function(err) {
+  console.log("Something went wrong ", err);
+});
+client.set("my test key", "my test value", redis.print);
+client.get("my test key", function(error, result) {
+  if (error) throw error;
+  console.log("GET result ->", result);
+});
 
 //Connecting to database
 pool.getConnection(function(err) {
@@ -118,21 +128,46 @@ db.findUser = function(user, successCallback, failureCallback) {
   var sqlQuery =
     "SELECT * FROM users WHERE username = '" + user.username + "';";
   console.log(sqlQuery);
-  connection.query(sqlQuery, function(err, rows) {
-    if (err) {
-      failureCallback(err);
-      console.log("in");
-      return;
-    }
-    if (rows.length > 0) {
-      console.log("data from login in db", rows);
-      successCallback(rows[0]);
-      console.log("insidesucces");
+  /*SQL Caching with REDIS */
+
+  client.get(sqlQuery, function(error, result) {
+    console.log("INSIDE REDIS GET KEY");
+    if (error) {
+      console.log("REDIS GET ERROR.");
+      failureCallback(error);
     } else {
-      failureCallback("User not found.");
-      console.log("Wrong arf");
+      if (result == null) {
+        console.log("INSIDE REDIS NO KEY FOUND");
+        connection.query(sqlQuery, function(err, rows) {
+          if (err) {
+            console.log("INSIDE SQL CANT CONNECT");
+            failureCallback(err);
+            console.log("in");
+            return;
+          }
+          if (rows.length > 0) {
+            console.log("data from login in db", rows);
+            console.log("INSIDE SQL USER FOUND AND MAKING KEY");
+            console.log("STRINGIFIED ROWS:", JSON.stringify(rows[0]));
+            client.set(sqlQuery, JSON.stringify(rows[0]), redis.print);
+            successCallback(rows[0]);
+            console.log("insidesucces");
+          } else {
+            console.log("INSIDE SQL NO USER FOUND");
+            failureCallback("User not found.");
+            console.log("Wrong arf");
+          }
+        });
+      } else {
+        console.log("INSIDE REDIS KEY FOUND AND GETTING KEY");
+        console.log("KEY VALUE fOUND: ", result);
+        successCallback(JSON.parse(result));
+        console.log("GET result ->", result);
+      }
     }
   });
+
+  /*SQL Caching with REDIS */
 };
 
 module.exports = db;

@@ -2,7 +2,8 @@ import axios from "axios";
 import { RECRUITER_DASHBOARD_TOP10 } from "./types";
 import { setHeader } from "../components/common/auth";
 
-const ROOT_URL = "http://localhost:3001";
+const ROOT_URL =
+  "http://localhost:3001";
 
 export const getRecruiterDashboardTop10 = data => async dispatch => {
   try {
