@@ -74,9 +74,10 @@ class Login extends Component {
           window.alert("Username and/or Password is incorrect.");
         } else if (response.data.updatedList !== "Bearer ") {
           console.log("Login successful.");
-
           const token = response.data.updatedList;
           localStorage.setItem("username", token);
+          localStorage.setItem("email", data.username);
+
           this.props.history.push("/home");
         }
       });

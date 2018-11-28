@@ -10,6 +10,7 @@ import PostSignUp from "./Applicant/postSignUp";
 import ApplicantDetails from "./Applicant/applicantDetails";
 import UserSchoolData from "./Applicant/userSchoolData";
 import UserProfilePhoto from "./Applicant/userProfilePhoto";
+import ProfileViews from "./ProfileViews/ProfileViews";
 
 import { createStore, applyMiddleware, compose } from "redux";
 import promise from "redux-promise";
@@ -52,6 +53,8 @@ class Main extends Component {
                 exact
                 component={RecruiterDashboardTop5}
               />
+              <Route path="/profileviews" exact component={ProfileViews} />
+
               <Route path="/not-found" exact component={NotFound} />
               <Route path="/" exact component={Home} />
               <Redirect to="/not-found" />

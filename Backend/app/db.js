@@ -138,24 +138,33 @@ db.findUser = function(user, successCallback, failureCallback) {
     } else {
       if (result == null) {
         console.log("INSIDE REDIS NO KEY FOUND");
-        connection.query(sqlQuery, function(err, rows) {
+        pool.getConnection(function(err, con) {
+          ("INSIDE POOL MAKE CONNECTION");
           if (err) {
-            console.log("INSIDE SQL CANT CONNECT");
+            ("INSIDE POOL ERROR MAKING CONNECTION");
             failureCallback(err);
-            console.log("in");
-            return;
-          }
-          if (rows.length > 0) {
-            console.log("data from login in db", rows);
-            console.log("INSIDE SQL USER FOUND AND MAKING KEY");
-            console.log("STRINGIFIED ROWS:", JSON.stringify(rows[0]));
-            client.set(sqlQuery, JSON.stringify(rows[0]), redis.print);
-            successCallback(rows[0]);
-            console.log("insidesucces");
           } else {
-            console.log("INSIDE SQL NO USER FOUND");
-            failureCallback("User not found.");
-            console.log("Wrong arf");
+            ("INSIDE POOL MADE CONNECTION");
+            connection.query(sqlQuery, function(err, rows) {
+              if (err) {
+                console.log("INSIDE SQL CANT CONNECT");
+                failureCallback(err);
+                console.log("in");
+                return;
+              }
+              if (rows.length > 0) {
+                console.log("data from login in db", rows);
+                console.log("INSIDE SQL USER FOUND AND MAKING KEY");
+                console.log("STRINGIFIED ROWS:", JSON.stringify(rows[0]));
+                client.set(sqlQuery, JSON.stringify(rows[0]), redis.print);
+                successCallback(rows[0]);
+                console.log("insidesucces");
+              } else {
+                console.log("INSIDE SQL NO USER FOUND");
+                failureCallback("User not found.");
+                console.log("Wrong arf");
+              }
+            });
           }
         });
       } else {

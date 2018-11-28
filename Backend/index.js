@@ -174,5 +174,20 @@ app.post("/recruiter/post-a-job", function(request, response) {
 //   });
 // });
 
+app.post("/getProfileViews", function(request, response) {
+  console.log("Profile Views");
+  kafka.make_request("get_profileviews", request.query, function(err, results) {
+    console.log(result);
+    if (err) {
+      res.json({
+        status: "error",
+        msg: "Error in retrieving data."
+      });
+    } else {
+      res.send(JSON.stringify(result));
+    }
+  });
+});
+
 app.listen(3001);
 console.log("Server Listening on port 3001");
