@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Chart from "react-google-charts";
 import "../../css/recruiterDashboard.css";
+import Header from "../Header/header";
 
 class RecruiterDashboardCityWise extends Component {
   handleFilter1 = () => {
@@ -39,6 +40,7 @@ class RecruiterDashboardCityWise extends Component {
     ];
     return (
       <React.Fragment>
+        <Header />
         <div className="sidebar_dashboard">
           <a href="#" onClick={this.handleFilter1}>
             Top 10 job postings

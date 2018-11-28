@@ -3,6 +3,7 @@ import "../../css/recruiterDashboard.css";
 import Chart from "react-google-charts";
 import { connect } from "react-redux";
 import { getRecruiterDashboardTop10 } from "../../actions/recruiterDashboardActions";
+import Header from "../Header/header";
 
 class RecruiterDashboardTop10 extends Component {
   componentDidMount() {
@@ -46,6 +47,7 @@ class RecruiterDashboardTop10 extends Component {
 
     return (
       <React.Fragment>
+        <Header />
         <div className="sidebar_dashboard">
           <a href="#">
             <span className="active_link">Top 10 job postings</span>

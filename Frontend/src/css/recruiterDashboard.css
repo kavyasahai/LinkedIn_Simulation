@@ -1,5 +1,5 @@
 .sidebar_dashboard {
-  width: auto;
+  width: 25vw;
   position: fixed;
   margin: 10vw 0 0 2vw;
   float: left;
@@ -11,7 +11,7 @@
 
 .displayCharts {
   float: right;
-  margin: 7vw 2vw 0 0;
-  width: 75vw;
+  margin: 7vw 6vw 0 0;
+  width: 70vw;
   height: auto;
 }

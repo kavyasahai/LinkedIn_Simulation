@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../../css/recruiterDashboard.css";
 import Chart from "react-google-charts";
+import Header from "../Header/header";
 
 class RecruiterDashboardTop5 extends Component {
   handleFilter2 = () => {
@@ -21,6 +22,7 @@ class RecruiterDashboardTop5 extends Component {
 
     return (
       <React.Fragment>
+        <Header />
         <div className="sidebar_dashboard">
           <a href="#" onClick={this.handleFilter1}>
             Top 10 job postings
