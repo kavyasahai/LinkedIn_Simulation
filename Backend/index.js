@@ -156,23 +156,23 @@ app.post("/recruiter/post-a-job", function(request, response) {
   });
 });
 
-// app.post("/getRecruiterDashboardTop10", function(request, response) {
-//   console.log("Recruiter Dashboard Top 10 Post Request");
-//   kafka.make_request("recruiterDashboardTop10_topic", request.body, function(
-//     err,
-//     results
-//   ) {
-//     console.log(result);
-//     if (err) {
-//       res.json({
-//         status: "error",
-//         msg: "Error in retrieving data."
-//       });
-//     } else {
-//       res.send(JSON.stringify(result));
-//     }
-//   });
-// });
+app.post("/getRecruiterDashboardTop10", function(request, response) {
+  console.log("Recruiter Dashboard Top 10 Post Request");
+  kafka.make_request("recruiterDashboardTop10_topic", request.body, function(
+    err,
+    results
+  ) {
+    console.log(results);
+    if (err) {
+      response.json({
+        status: "error",
+        msg: "Error in retrieving data."
+      });
+    } else {
+      response.send(JSON.stringify(results));
+    }
+  });
+});
 
 app.post("/getProfileViews", function(request, response) {
   console.log("Profile Views");
