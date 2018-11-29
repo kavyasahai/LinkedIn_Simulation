@@ -11,75 +11,70 @@ class ProfileViews extends Component {
   render() {
     var week_start = new Date();
     week_start.setDate(week_start.getDate() - 7);
-    console.log("WEEK START", week_start);
 
     var allviews = {};
     var total_views = this.props.data_profileviews.length;
-
     var profileviews = this.props.data_profileviews;
 
     profileviews = profileviews.filter(v => {
-      return new Date(v.viewDate) >= week_start;
+      const a = new Date(v.viewDate);
+      const b = new Date(week_start);
+      return new Date(a.getDate()) >= new Date(b.getDate());
     });
 
-    console.log("PV", profileviews);
+    const monthNames = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"
+    ];
+
+    var i;
+    for (i = 29; i >= 0; i--) {
+      var date = new Date();
+      date.setDate(date.getDate() - i);
+      var datestring = monthNames[date.getMonth()] + " " + date.getDate();
+      allviews[datestring] = 0;
+    }
+
     this.props.data_profileviews.forEach(eachview => {
       var date = new Date(eachview.viewDate);
-      const monthNames = [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec"
-      ];
       var datestring = monthNames[date.getMonth()] + " " + date.getDate();
-      if (allviews[datestring]) allviews[datestring]++;
-      else allviews[datestring] = 1;
+      allviews[datestring]++;
     });
 
-    // allviews.foreach(view => {
-    //   console.log("DATE", view.viewDate);
-    // });
+    console.log(allviews);
 
     const data = [["Day", "views"]];
-    const nums = [1, 2, 1, 3, 2];
 
-    nums.map((num, idx) => {
-      data.push([`Day${idx + 1}`, num]);
-    });
+    for (const [date, numviews] of Object.entries(allviews)) {
+      data.push([date, numviews]);
+    }
 
     console.log("DS:", data);
 
     return (
       <React.Fragment>
-        <div className="displayViews">
+        <div className="displayviews">
           <Chart
             chartType="AreaChart"
             loader={<div>Loading Chart</div>}
-            width="75vw"
-            height="25vw"
+            width="100vw"
+            height="30vw"
             options={{
               //   isStacked: true,
               title: `${total_views} profile viewers in the past 30 days`
             }}
             data={data}
           />
-          <br />
-          <br />
-          <br />
-          <br />
-
-          <br />
-          <br />
-          <br />
-          <br />
         </div>
       </React.Fragment>
     );
