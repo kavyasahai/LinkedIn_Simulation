@@ -27,11 +27,6 @@ class RecruiterDashboardCityWise extends Component {
 
     var x = document.getElementById("displayChartsCity");
     x.style.display = "block";
-    // if (x.style.display === "none") {
-    //   x.style.display = "block";
-    // } else {
-    //   x.style.display = "none";
-    // }
   };
 
   render() {

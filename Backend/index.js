@@ -14,6 +14,10 @@ var morgan = require("morgan");
 var requireAuth = passport.authenticate("jwt", { session: false });
 var crypt = require("./app/crypt");
 var db = require("./app/db");
+
+var redis = require("redis");
+var client = redis.createClient();
+
 app.use(morgan("dev"));
 var kafka = require("./kafka/client");
 require("./db/mongoose");
@@ -55,26 +59,56 @@ app.use(function(req, res, next) {
 
 app.post("/login", function(request, response) {
   console.log("in request login", request.body.data);
-  kafka.make_request("linkedinlogin", request.body, function(err, results) {
-    console.log("in result");
-    console.log(results);
-    if (err) {
-      console.log("Inside err");
+  var sqlQuery =
+    "SELECT * FROM users WHERE username = '" + request.body.username + "';";
+  console.log(sqlQuery);
+  /*SQL Caching with REDIS */
+
+  client.get(sqlQuery, function(error, result) {
+    console.log("INSIDE REDIS GET KEY");
+    if (error) {
+      console.log("REDIS GET ERROR.");
       res.json({
         status: "error",
         msg: "System Error, Try Again."
       });
     } else {
-      console.log("Inside else");
-      console.log(results);
-      response.json({
-        updatedList: results
-      });
+      if (result == null) {
+        console.log("INSIDE REDIS NO KEY FOUND");
+        kafka.make_request("linkedinlogin", request.body, function(
+          err,
+          results
+        ) {
+          console.log("in result");
+          console.log(results);
+          if (err) {
+            console.log("Inside err");
+            res.json({
+              status: "error",
+              msg: "System Error, Try Again."
+            });
+          } else {
+            console.log("Inside else");
+            console.log(results);
+            response.json({
+              updatedList: results
+            });
 
-      response.end();
+            response.end();
+          }
+        });
+      } else {
+        console.log("INSIDE REDIS KEY FOUND AND GETTING KEY");
+        console.log("KEY VALUE fOUND: ", result);
+        response.json({
+          updatedList: result
+        });
+        console.log("GET result ->", result);
+      }
     }
   });
 });
+
 app.post("/register", function(request, response) {
   console.log("In signup method");
   kafka.make_request("linkedinsignup", request.body, function(err, results) {
@@ -229,7 +263,7 @@ app.get("/getRecruiterDashboardCity/:jobId", function(request, response) {
 });
 
 app.get("/getProfileViews", function(request, response) {
-  console.log("Profile Views");
+  console.log("Profile Views", request.query);
   kafka.make_request("get_profileviews", request.query, function(err, result) {
     console.log(result);
     if (err) {
