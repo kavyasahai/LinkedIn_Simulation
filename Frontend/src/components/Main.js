@@ -11,10 +11,13 @@ import ApplicantDetails from "./Applicant/applicantDetails";
 import UserSchoolData from "./Applicant/userSchoolData";
 import UserProfilePhoto from "./Applicant/userProfilePhoto";
 import ProfileViews from "./ProfileViews/ProfileViews";
+import Recruiter from "./Recruiter/Recruiter"
+import PostAJob from "./Recruiter/PostAJob"
 
 import { createStore, applyMiddleware, compose } from "redux";
 import promise from "redux-promise";
 import { Provider } from "react-redux";
+import PrivateRoute from "./common/PrivateRoute";
 
 //middleware settings
 // To resolve promise to store we use apply
@@ -27,36 +30,38 @@ import store from "../store";
 class Main extends Component {
   render() {
     return (
-      <Provider store={store}>
+      <Provider store={ store }>
         <BrowserRouter>
           <div>
             <Switch>
-              {/*Render Different Component based on Route*/}
-              <Route path="/home" exact component={Home} />
-              <Route path="/login" component={Login} />
-              <Route path="/postsignup" component={PostSignUp} />
-              <Route path="/applicantdetails" component={ApplicantDetails} />
-              <Route path="/school" component={UserSchoolData} />
-              <Route path="/profilepicture" component={UserProfilePhoto} />
+              {/*Render Different Component based on Route*/ }
+              <Route path="/home" exact component={ Home } />
+              <Route path="/login" component={ Login } />
+              <Route path="/postsignup" component={ PostSignUp } />
+              <Route path="/applicantdetails" component={ ApplicantDetails } />
+              <Route path="/school" component={ UserSchoolData } />
+              <Route path="/profilepicture" component={ UserProfilePhoto } />
               <Route
                 path="/recruiterdashboardcitywise"
                 exact
-                component={RecruiterDashboardCityWise}
+                component={ RecruiterDashboardCityWise }
               />
               <Route
                 path="/recruiterdashboardtop10"
                 exact
-                component={RecruiterDashboardTop10}
+                component={ RecruiterDashboardTop10 }
               />
               <Route
                 path="/recruiterdashboardtop5"
                 exact
-                component={RecruiterDashboardTop5}
+                component={ RecruiterDashboardTop5 }
               />
-              <Route path="/profileviews" exact component={ProfileViews} />
+              <Route path="/profileviews" exact component={ ProfileViews } />
+              <PrivateRoute path="/recruiter" component={ Recruiter } />
+              <Route path="/recruiter/post-a-job" component={ PostAJob } />
 
-              <Route path="/not-found" exact component={NotFound} />
-              <Route path="/" exact component={Home} />
+              <Route path="/not-found" exact component={ NotFound } />
+              <Route path="/" exact component={ Home } />
               <Redirect to="/not-found" />
             </Switch>
           </div>

@@ -35,9 +35,5 @@ exports.Jobs = mongoose.model("Jobs", {
   },
   numberOfApplications: {
     type: Number
-  },
-  isSave: {
-    type: Boolean,
-    required: true
   }
 });

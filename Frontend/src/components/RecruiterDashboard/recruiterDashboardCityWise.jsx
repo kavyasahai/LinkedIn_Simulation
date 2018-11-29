@@ -2,16 +2,43 @@ import React, { Component } from "react";
 import Chart from "react-google-charts";
 import "../../css/recruiterDashboard.css";
 import Header from "../Header/header";
+import {
+  getRecruiterJobs,
+  getRecruiterDashboardCity
+} from "../../actions/recruiterDashboardActions";
+import { connect } from "react-redux";
 
 class RecruiterDashboardCityWise extends Component {
+  componentDidMount() {
+    var username = localStorage.getItem("email");
+    this.props.getRecruiterJobs(username);
+  }
   handleFilter1 = () => {
     this.props.history.push("/recruiterdashboardtop10");
   };
   handleFilter3 = () => {
     this.props.history.push("/recruiterdashboardtop5");
   };
+
+  handleSelectJob = () => {
+    var job_select = document.getElementById("dashboard_select");
+    var jobId = job_select.options[job_select.selectedIndex].value;
+    this.props.getRecruiterDashboardCity(jobId);
+
+    var x = document.getElementById("displayChartsCity");
+    x.style.display = "block";
+    // if (x.style.display === "none") {
+    //   x.style.display = "block";
+    // } else {
+    //   x.style.display = "none";
+    // }
+  };
+
   render() {
-    const data = [
+    let jobs = this.props.recruiter_jobs;
+    let optionItems = jobs.map(job => <option key={job._id}>{job._id}</option>);
+
+    var data = [
       [
         "City",
         "January",
@@ -26,18 +53,54 @@ class RecruiterDashboardCityWise extends Component {
         "October",
         "November",
         "December"
-      ],
-      ["City1", 1000, 400, 200, 1000, 400, 200, 1000, 400, 200, 1000, 400, 200],
-      ["City2", 1170, 460, 250, 1170, 460, 250, 1170, 460, 250, 1170, 460, 250],
-      ["City3", 660, 1120, 300, 660, 1120, 300, 660, 1120, 300, 660, 1120, 300],
-      ["City4", 1030, 540, 350, 1030, 540, 350, 1030, 540, 350, 1030, 540, 350],
-      ["City5", 1030, 540, 350, 1030, 540, 350, 1030, 540, 350, 1030, 540, 350],
-      ["City6", 1030, 540, 350, 1030, 540, 350, 1030, 540, 350, 1030, 540, 350],
-      ["City7", 1030, 540, 350, 1030, 540, 350, 1030, 540, 350, 1030, 540, 350],
-      ["City8", 1030, 540, 350, 1030, 540, 350, 1030, 540, 350, 1030, 540, 350],
-      ["City9", 1030, 540, 350, 1030, 540, 350, 1030, 540, 350, 1030, 540, 350],
-      ["City10", 1030, 540, 350, 1030, 540, 350, 1030, 540, 350, 1030, 540, 350]
+      ]
     ];
+    for (var index = 0; index < this.props.data_city.length; index++) {
+      var flag = false;
+      var rep_month = 0;
+      var rep_count = 0;
+      var rep_index = 0;
+      for (var jindex = 1; jindex < index; jindex++) {
+        if (
+          this.props.data_city[index]._id &&
+          this.props.data_city[index]._id.city == data[jindex][0]
+        ) {
+          flag = true;
+          rep_month = this.props.data_city[index]._id.month;
+          rep_count = this.props.data_city[index].count;
+          rep_index = jindex;
+          break;
+        }
+      }
+
+      var count = this.props.data_city[index].count;
+      var month = this.props.data_city[index]._id
+        ? this.props.data_city[index]._id.month
+        : 0;
+
+      if (flag == false)
+        data[index + 1] = [
+          this.props.data_city[index]._id
+            ? this.props.data_city[index]._id.city
+            : "",
+          month == 1 ? count : 0,
+          month == 2 ? count : 0,
+          month == 3 ? count : 0,
+          month == 4 ? count : 0,
+          month == 5 ? count : 0,
+          month == 6 ? count : 0,
+          month == 7 ? count : 0,
+          month == 8 ? count : 0,
+          month == 9 ? count : 0,
+          month == 10 ? count : 0,
+          month == 11 ? count : 0,
+          month == 12 ? count : 0
+        ];
+      else {
+        data[rep_index][rep_month] = rep_count;
+      }
+    }
+
     return (
       <React.Fragment>
         <Header />
@@ -55,8 +118,18 @@ class RecruiterDashboardCityWise extends Component {
           <a href="#" onClick={this.handleFilter3}>
             Top 5 job postings with least number of applications
           </a>
+          <br /> <br /> <br />
+          <select id="dashboard_select">{optionItems}</select>{" "}
+          <a
+            href="#"
+            onClick={this.handleSelectJob}
+            className="dashboard_submit"
+          >
+            Submit
+          </a>
         </div>
-        <div className="displayCharts">
+
+        <div className="displayChartsCity" id="displayChartsCity">
           {" "}
           <Chart
             chartType="AreaChart"
@@ -116,4 +189,12 @@ class RecruiterDashboardCityWise extends Component {
   }
 }
 
-export default RecruiterDashboardCityWise;
+const mapStateToProps = state => ({
+  recruiter_jobs: state.recruiterDashboard.recruiter_jobs,
+  data_city: state.recruiterDashboard.data_city
+});
+
+export default connect(
+  mapStateToProps,
+  { getRecruiterJobs, getRecruiterDashboardCity }
+)(RecruiterDashboardCityWise);

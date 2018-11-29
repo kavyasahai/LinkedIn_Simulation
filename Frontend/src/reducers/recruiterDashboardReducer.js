@@ -1,11 +1,15 @@
 import {
   RECRUITER_DASHBOARD_TOP10,
-  RECRUITER_DASHBOARD_TOP5
+  RECRUITER_DASHBOARD_TOP5,
+  GET_RECRUITER_JOBS,
+  RECRUITER_DASHBOARD_CITY
 } from "../actions/types";
 
 const initialState = {
   data_top10: [],
-  data_top5: []
+  data_top5: [],
+  recruiter_jobs: [],
+  data_city: []
 };
 
 export default function(state = initialState, action) {
@@ -20,6 +24,18 @@ export default function(state = initialState, action) {
       return {
         ...state,
         data_top5: action.payload
+      };
+
+    case GET_RECRUITER_JOBS:
+      return {
+        ...state,
+        recruiter_jobs: action.payload
+      };
+
+    case RECRUITER_DASHBOARD_CITY:
+      return {
+        ...state,
+        data_city: action.payload
       };
     default:
       return state;
