@@ -174,6 +174,24 @@ app.post("/getRecruiterDashboardTop10", function(request, response) {
   });
 });
 
+app.post("/getRecruiterDashboardTop5", function(request, response) {
+  console.log("Recruiter Dashboard Top 5 Post Request");
+  kafka.make_request("recruiterDashboardTop5_topic", request.body, function(
+    err,
+    results
+  ) {
+    console.log(results);
+    if (err) {
+      response.json({
+        status: "error",
+        msg: "Error in retrieving data."
+      });
+    } else {
+      response.send(JSON.stringify(results));
+    }
+  });
+});
+
 app.post("/getProfileViews", function(request, response) {
   console.log("Profile Views");
   kafka.make_request("get_profileviews", request.query, function(err, results) {

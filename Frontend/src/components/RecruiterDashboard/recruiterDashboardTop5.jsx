@@ -2,8 +2,14 @@ import React, { Component } from "react";
 import "../../css/recruiterDashboard.css";
 import Chart from "react-google-charts";
 import Header from "../Header/header";
+import { connect } from "react-redux";
+import { getRecruiterDashboardTop5 } from "../../actions/recruiterDashboardActions";
 
 class RecruiterDashboardTop5 extends Component {
+  componentDidMount() {
+    this.props.getRecruiterDashboardTop5();
+  }
+
   handleFilter2 = () => {
     this.props.history.push("/recruiterdashboardcitywise");
   };
@@ -11,14 +17,14 @@ class RecruiterDashboardTop5 extends Component {
     this.props.history.push("/recruiterdashboardtop10");
   };
   render() {
-    const data = [
-      ["Job", "Number of Applications"],
-      ["Job1", 50],
-      ["Job2", 13],
-      ["Job3", 30],
-      ["Job4", 18],
-      ["Job5", 25]
-    ];
+    // console.log("props=", this.props.data_top5);
+    var data = [["Job", "Number of Applications"]];
+    for (var index = 0; index < this.props.data_top5.length; index++) {
+      data[index + 1] = [
+        this.props.data_top5[index]._id.jobId,
+        this.props.data_top5[index].count
+      ];
+    }
 
     return (
       <React.Fragment>
@@ -90,4 +96,11 @@ class RecruiterDashboardTop5 extends Component {
   }
 }
 
-export default RecruiterDashboardTop5;
+const mapStateToProps = state => ({
+  data_top5: state.recruiterDashboard.data_top5
+});
+
+export default connect(
+  mapStateToProps,
+  { getRecruiterDashboardTop5 }
+)(RecruiterDashboardTop5);

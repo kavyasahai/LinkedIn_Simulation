@@ -8,6 +8,7 @@ var location = require("./services/location");
 var prodetails = require("./services/prodetails");
 var post_a_job = require("./services/post_a_job");
 var recruiterDashboardTop10 = require("./services/RecruiterDashboard/top10");
+var recruiterDashboardTop5 = require("./services/RecruiterDashboard/top5");
 var ProfileViews = require("./services/ProfileViews/ProfileViews");
 
 function handleTopicRequest(topic_name, fname) {
@@ -50,4 +51,5 @@ handleTopicRequest("linkedinloc", location);
 handleTopicRequest("linkedinprodetails", prodetails);
 handleTopicRequest("post_a_job", post_a_job);
 handleTopicRequest("recruiterDashboardTop10_topic", recruiterDashboardTop10);
+handleTopicRequest("recruiterDashboardTop5_topic", recruiterDashboardTop5);
 handleTopicRequest("get_profileviews", ProfileViews);
