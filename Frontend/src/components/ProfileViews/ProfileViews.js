@@ -9,7 +9,45 @@ class ProfileViews extends Component {
     this.props.getProfileViews();
   }
   render() {
-    console.log("props=", this.props.username);
+    var week_start = new Date();
+    week_start.setDate(week_start.getDate() - 7);
+    console.log("WEEK START", week_start);
+
+    var allviews = {};
+    var total_views = this.props.data_profileviews.length;
+
+    var profileviews = this.props.data_profileviews;
+
+    profileviews = profileviews.filter(v => {
+      return new Date(v.viewDate) >= week_start;
+    });
+
+    console.log("PV", profileviews);
+    this.props.data_profileviews.forEach(eachview => {
+      var date = new Date(eachview.viewDate);
+      const monthNames = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec"
+      ];
+      var datestring = monthNames[date.getMonth()] + " " + date.getDate();
+      if (allviews[datestring]) allviews[datestring]++;
+      else allviews[datestring] = 1;
+    });
+
+    // allviews.foreach(view => {
+    //   console.log("DATE", view.viewDate);
+    // });
+
     const data = [["Day", "views"]];
     const nums = [1, 2, 1, 3, 2];
 
@@ -19,7 +57,6 @@ class ProfileViews extends Component {
 
     console.log("DS:", data);
 
-    var no_views = "10";
     return (
       <React.Fragment>
         <div className="displayViews">
@@ -30,7 +67,7 @@ class ProfileViews extends Component {
             height="25vw"
             options={{
               //   isStacked: true,
-              title: `${no_views} profile viewers in the past 30 days`
+              title: `${total_views} profile viewers in the past 30 days`
             }}
             data={data}
           />
@@ -49,11 +86,11 @@ class ProfileViews extends Component {
   }
 }
 
-// const mapStateToProps = state => ({
-//   data_profileviews: state.getProfileViewsReducer.data_profileviews
-// });
+const mapStateToProps = state => ({
+  data_profileviews: state.getProfileViewsReducer.data_profileviews
+});
 
 export default connect(
-  null,
+  mapStateToProps,
   { getProfileViews }
 )(ProfileViews);

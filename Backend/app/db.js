@@ -46,7 +46,7 @@ db.createUser = function(user, successCallback, failureCallback) {
 
     console.log("enscrypted password", passwordHash);
     var sqlQuery =
-      "INSERT INTO  usertable(firstname,lastname,username,password,plainpassword) VALUES ( " +
+      "INSERT INTO  users(firstname,lastname,username,password) VALUES ( " +
       mysql.escape(user.firstname) +
       " , " +
       mysql.escape(user.lastname) +
@@ -54,8 +54,6 @@ db.createUser = function(user, successCallback, failureCallback) {
       mysql.escape(user.username) +
       "," +
       mysql.escape(passwordHash) +
-      " , " +
-      mysql.escape(user.password) +
       ") ";
     console.log(sqlQuery);
 

@@ -7,11 +7,13 @@ const ROOT_URL = "http://localhost:3001";
 export const getProfileViews = () => async dispatch => {
   try {
     setHeader();
+
     const res = await axios.get(`${ROOT_URL}/getProfileViews`, {
       params: {
         email: localStorage.getItem("email")
       }
     });
+
     dispatch({
       type: PROFILE_VIEWS,
       payload: res.data

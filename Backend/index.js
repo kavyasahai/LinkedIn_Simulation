@@ -174,17 +174,17 @@ app.post("/recruiter/post-a-job", function(request, response) {
 //   });
 // });
 
-app.post("/getProfileViews", function(request, response) {
+app.get("/getProfileViews", function(request, response) {
   console.log("Profile Views");
-  kafka.make_request("get_profileviews", request.query, function(err, results) {
+  kafka.make_request("get_profileviews", request.query, function(err, result) {
     console.log(result);
     if (err) {
-      res.json({
+      response.json({
         status: "error",
         msg: "Error in retrieving data."
       });
     } else {
-      res.send(JSON.stringify(result));
+      response.send(result);
     }
   });
 });
