@@ -7,10 +7,11 @@ import {
   getRecruiterDashboardCity
 } from "../../actions/recruiterDashboardActions";
 import { connect } from "react-redux";
+import { getJWTUsername } from "../common/auth";
 
 class RecruiterDashboardCityWise extends Component {
   componentDidMount() {
-    var username = localStorage.getItem("email");
+    var username = getJWTUsername();
     this.props.getRecruiterJobs(username);
   }
   handleFilter1 = () => {

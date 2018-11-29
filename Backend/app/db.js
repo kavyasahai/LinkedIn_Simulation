@@ -49,7 +49,6 @@ db.findUser = function(user, successCallback, failureCallback) {
   var sqlQuery =
     "SELECT * FROM users WHERE username = '" + user.username + "';";
   console.log(sqlQuery);
-  /*SQL Caching with REDIS */
 
   pool.getConnection(function(err, con) {
     ("INSIDE POOL MAKE CONNECTION");

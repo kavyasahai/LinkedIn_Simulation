@@ -76,7 +76,7 @@ class Login extends Component {
           console.log("Login successful.");
           const token = response.data.updatedList;
           localStorage.setItem("username", token);
-          localStorage.setItem("email", data.username);
+          //localStorage.setItem("email", data.username);
 
           this.props.history.push("/home");
         }
