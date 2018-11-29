@@ -7,9 +7,9 @@ const ROOT_URL = "http://localhost:3001";
 
 export const getProfileViews = () => async dispatch => {
   try {
-    setHeader();
     var email = getJWTUsername();
     console.log("EMAIL", email);
+    setHeader();
     const res = await axios.get(`${ROOT_URL}/getProfileViews`, {
       params: {
         email: email

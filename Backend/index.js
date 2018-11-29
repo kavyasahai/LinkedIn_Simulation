@@ -14,7 +14,8 @@ var morgan = require("morgan");
 var requireAuth = passport.authenticate("jwt", { session: false });
 var crypt = require("./app/crypt");
 var db = require("./app/db");
-
+var config = require("../Backend/config/database");
+var jwt = require("jsonwebtoken");
 var redis = require("redis");
 var client = redis.createClient();
 
@@ -62,6 +63,7 @@ app.post("/login", function(request, response) {
   var sqlQuery =
     "SELECT * FROM users WHERE username = '" + request.body.username + "';";
   console.log(sqlQuery);
+
   /*SQL Caching with REDIS */
 
   client.get(sqlQuery, function(error, result) {
@@ -100,10 +102,14 @@ app.post("/login", function(request, response) {
       } else {
         console.log("INSIDE REDIS KEY FOUND AND GETTING KEY");
         console.log("KEY VALUE fOUND: ", result);
+        var data = { username: request.body.username };
+        var token = jwt.sign(data, config.secret, { expiresIn: 600000 });
+        console.log("token=", token);
+        const newToken = "Bearer " + token;
+        console.log("token=", newToken);
         response.json({
-          updatedList: result
+          updatedList: newToken
         });
-        console.log("GET result ->", result);
       }
     }
   });
