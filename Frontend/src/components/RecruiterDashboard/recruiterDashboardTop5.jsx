@@ -7,7 +7,8 @@ import { getRecruiterDashboardTop5 } from "../../actions/recruiterDashboardActio
 
 class RecruiterDashboardTop5 extends Component {
   componentDidMount() {
-    this.props.getRecruiterDashboardTop5();
+    var username = localStorage.getItem("email");
+    this.props.getRecruiterDashboardTop5(username);
   }
 
   handleFilter2 = () => {

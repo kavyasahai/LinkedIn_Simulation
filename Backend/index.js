@@ -192,17 +192,38 @@ app.post("/getRecruiterDashboardTop5", function(request, response) {
   });
 });
 
-app.get("/getProfileViews", function(request, response) {
-  console.log("Profile Views");
-  kafka.make_request("get_profileviews", request.query, function(err, result) {
-    console.log(result);
+app.get("/getRecruiterJobs/:username", function(request, response) {
+  console.log("Get Recruiter Jobs GET Request");
+  kafka.make_request("recruiterJobs_topic", request.params, function(
+    err,
+    results
+  ) {
+    console.log(results);
     if (err) {
       response.json({
         status: "error",
         msg: "Error in retrieving data."
       });
     } else {
-      response.send(result);
+      response.send(JSON.stringify(results));
+    }
+  });
+});
+
+app.get("/getRecruiterDashboardCity/:jobId", function(request, response) {
+  console.log("Get Recruiter Dashboard GET Request");
+  kafka.make_request("recruiterDashboardCity_topic", request.params, function(
+    err,
+    results
+  ) {
+    console.log(results);
+    if (err) {
+      response.json({
+        status: "error",
+        msg: "Error in retrieving data."
+      });
+    } else {
+      response.send(JSON.stringify(results));
     }
   });
 });

@@ -9,6 +9,8 @@ var prodetails = require("./services/prodetails");
 var post_a_job = require("./services/post_a_job");
 var recruiterDashboardTop10 = require("./services/RecruiterDashboard/top10");
 var recruiterDashboardTop5 = require("./services/RecruiterDashboard/top5");
+var recruiterDashboardCity = require("./services/RecruiterDashboard/city");
+var recruiterJobs = require("./services/RecruiterDashboard/recruiterJobs");
 var ProfileViews = require("./services/ProfileViews/ProfileViews");
 
 function handleTopicRequest(topic_name, fname) {
@@ -52,4 +54,6 @@ handleTopicRequest("linkedinprodetails", prodetails);
 handleTopicRequest("post_a_job", post_a_job);
 handleTopicRequest("recruiterDashboardTop10_topic", recruiterDashboardTop10);
 handleTopicRequest("recruiterDashboardTop5_topic", recruiterDashboardTop5);
+handleTopicRequest("recruiterJobs_topic", recruiterJobs);
 handleTopicRequest("get_profileviews", ProfileViews);
+handleTopicRequest("recruiterDashboardCity_topic", recruiterDashboardCity);

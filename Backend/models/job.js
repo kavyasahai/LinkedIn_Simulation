@@ -1,24 +1,17 @@
-var mongoose = require("mongoose");
-var jobdata = mongoose.model(
-  "JobDetails",
-  {
-    Company: {
-      type: "String"
-    },
-    Position: {
-      type: "String"
-    },
-    Location: {
-      type: "String"
-    },
-    Details: {
-      type: "String"
-    },
-    Icon: {
-      type: "String"
-    }
-  },
-  "JobDetails"
-);
+const mongoose = require("mongoose");
 
-module.exports = { jobdata };
+const jobdataSchema = new mongoose.Schema({
+  title: String,
+  description: String,
+  industry: String,
+  employmentType: String,
+  location: String,
+  jobFunction: String,
+  applicantsCount: String,
+  viewsCount: String,
+  postedDateTime: Date,
+  clicks: String,
+  postedBy: String
+});
+
+module.exports = mongoose.model("job", jobdataSchema, "job");
