@@ -7,7 +7,8 @@ import Header from "../Header/header";
 
 class RecruiterDashboardTop10 extends Component {
   componentDidMount() {
-    this.props.getRecruiterDashboardTop10();
+    var username = localStorage.getItem("email");
+    this.props.getRecruiterDashboardTop10(username);
   }
   handleFilter2 = () => {
     this.props.history.push("/recruiterdashboardcitywise");

@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import { getPostedApplications } from '../../actions/recruiterActions'
+import { Link } from "react-router-dom";
 
 class Recruiter extends React.Component {
   constructor(props) {
@@ -35,7 +36,7 @@ class Recruiter extends React.Component {
         <h3>Posted applications</h3>
         { posted_applications }
       </div>
-    )
+    );
   }
 }
 

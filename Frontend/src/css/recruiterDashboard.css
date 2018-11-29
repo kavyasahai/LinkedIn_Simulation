@@ -11,7 +11,34 @@
 
 .displayCharts {
   float: right;
-  margin: 7vw 6vw 0 0;
+  margin: 10vw 6vw 0 0;
   width: 70vw;
   height: auto;
+}
+
+.displayChartsCity {
+  float: right;
+  margin: 17vw 6vw 0 0;
+  width: 70vw;
+  height: auto;
+  display: none;
+}
+
+.sidebar_dashboard button {
+  font-size: 1vw;
+}
+
+.sidebar_dashboard select {
+  border: 1px solid black;
+  width: 15vw;
+}
+
+.dashboard_submit {
+  border: 1px solid black;
+  padding: 0.5vw;
+  text-decoration: none;
+}
+
+.dashboard_submit:hover {
+  text-decoration: none;
 }

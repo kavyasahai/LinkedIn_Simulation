@@ -8,17 +8,16 @@ function handle_request(msg, callback) {
         submittedTime: {
           $ne: null
         },
-        postedBy: msg.username
+        jobId: msg.jobId
       }
     },
     {
       $group: {
-        _id: { jobId: "$jobId" },
+        _id: { city: "$city", month: { $month: "$submittedTime" } },
         count: { $sum: 1 }
       }
     },
-    { $sort: { count: 1 } },
-    { $limit: 5 }
+    { $sort: { city: 1 } }
   ]).then(
     result => {
       if (result.length !== 0) {

@@ -1,3 +1,6 @@
-.displayViews {
-  margin-top: 10vw;
+.displayviews {
+  position: fixed;
+  margin: 10vw 0 0 2vw;
+
+  height: auto;
 }
