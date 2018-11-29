@@ -1,5 +1,5 @@
 import React from 'react';
-import getJWTUsername from '../common/auth'
+import { getJWTUsername } from '../common/auth'
 import uuid from 'uuidv4'
 import axios from 'axios';
 
