@@ -11,7 +11,8 @@ const jobdataSchema = new mongoose.Schema({
   viewsCount: String,
   postedDateTime: Date,
   clicks: String,
-  postedBy: String
+  postedBy: String,
+  company: String
 });
 
 module.exports = mongoose.model("job", jobdataSchema, "job");
