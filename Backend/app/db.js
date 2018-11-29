@@ -58,7 +58,7 @@ db.createUser = function(user, successCallback, failureCallback) {
     console.log(sqlQuery);
 
     var sql2 =
-      "INSERT INTO userdetails(username,firstname,lastname) VALUES ( " +
+      "INSERT INTO users(username,firstname,lastname) VALUES ( " +
       mysql.escape(user.username) +
       "," +
       mysql.escape(user.firstname) +
@@ -74,7 +74,6 @@ db.createUser = function(user, successCallback, failureCallback) {
       } else {
         connection.query(sql2, function(err) {
           if (err) {
-            console.log("in userdetails");
             console.log(err);
             failureCallback(err);
             return;
