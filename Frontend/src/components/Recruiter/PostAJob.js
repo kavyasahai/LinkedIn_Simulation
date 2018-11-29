@@ -35,7 +35,14 @@ export default class PostAJob extends React.Component {
         Authorization: token,
       },
       data: this.state
-    })
+    }).then(res => {
+      if (res.data.success) {
+        console.log('post success')
+      } else {
+        console.log('post not success')
+        console.log(res.data)
+      }
+    }).catch(err => console.log(err))
   }
   render() {
     return (
