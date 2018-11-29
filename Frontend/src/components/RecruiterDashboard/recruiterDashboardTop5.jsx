@@ -19,11 +19,13 @@ class RecruiterDashboardTop5 extends Component {
     this.props.history.push("/recruiterdashboardtop10");
   };
   render() {
-    // console.log("props=", this.props.data_top5);
+    console.log("props=", this.props.data_top5);
     var data = [["Job", "Number of Applications"]];
     for (var index = 0; index < this.props.data_top5.length; index++) {
       data[index + 1] = [
-        this.props.data_top5[index]._id.jobId,
+        this.props.data_top5[index]._id
+          ? this.props.data_top5[index]._id.jobId
+          : "",
         this.props.data_top5[index].count
       ];
     }

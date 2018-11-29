@@ -32,7 +32,11 @@ class RecruiterDashboardCityWise extends Component {
 
   render() {
     let jobs = this.props.recruiter_jobs;
-    let optionItems = jobs.map(job => <option key={job._id}>{job._id}</option>);
+    let optionItems = null;
+    if (jobs !== "Could not fetch job details.") {
+      optionItems =
+        jobs && jobs.map(job => <option key={job._id}>{job._id}</option>);
+    }
 
     var data = [
       [
