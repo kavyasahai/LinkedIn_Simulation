@@ -8,15 +8,7 @@ var db = {};
 // var {Users} = require('../models/users');
 // var {UserInfo}=require('../models/userinfo');
 // Creating a connection object for connecting to mysql database
-var connection = mysql.createConnection({
-  host: config.database_host,
-  limit: config.connectionLimit,
-  port: config.database_port,
-  user: config.database_user,
-  password: config.database_password,
-  database: config.database_name
-  //socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock'
-});
+
 var redis = require("redis");
 var client = redis.createClient();
 client.on("error", function(err) {
@@ -29,14 +21,14 @@ client.get("my test key", function(error, result) {
 });
 
 //Connecting to database
-pool.getConnection(function(err) {
-  if (err) {
-    console.error("error connecting: " + err.stack);
-    return;
-  }
+// pool.getConnection(function(err) {
+//   if (err) {
+//     console.error("error connecting: " + err.stack);
+//     return;
+//   }
 
-  console.log("connected as id " + connection.threadId);
-});
+//   console.log("connected as id " + connection.threadId);
+// });
 
 db.createUser = function(user, successCallback, failureCallback) {
   var passwordHash;
@@ -56,29 +48,18 @@ db.createUser = function(user, successCallback, failureCallback) {
       mysql.escape(passwordHash) +
       ") ";
     console.log(sqlQuery);
-
-    var sql2 =
-      "INSERT INTO users(username,firstname,lastname) VALUES ( " +
-      mysql.escape(user.username) +
-      "," +
-      mysql.escape(user.firstname) +
-      "," +
-      mysql.escape(user.lastname) +
-      ")";
-    console.log(sql2);
-
-    connection.query(sqlQuery, function(err) {
+    pool.getConnection(function(err, con) {
       if (err) {
-        console.log("in usertable");
-        console.log(err);
+        res.writeHead(400, {
+          "Content-Type": "text/plain"
+        });
+        res.end("Could Not Get Connection Object");
       } else {
-        connection.query(sql2, function(err) {
+        con.query(sqlQuery, function(err, result) {
           if (err) {
-            console.log(err);
             failureCallback(err);
-            return;
           } else {
-            console.log("Success");
+            console.log("INSERT RESULT: ", result);
             successCallback();
           }
         });
@@ -142,7 +123,7 @@ db.findUser = function(user, successCallback, failureCallback) {
             failureCallback(err);
           } else {
             ("INSIDE POOL MADE CONNECTION");
-            connection.query(sqlQuery, function(err, rows) {
+            con.query(sqlQuery, function(err, rows) {
               if (err) {
                 console.log("INSIDE SQL CANT CONNECT");
                 failureCallback(err);
