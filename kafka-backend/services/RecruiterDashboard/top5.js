@@ -7,7 +7,8 @@ function handle_request(msg, callback) {
       $match: {
         submittedTime: {
           $ne: null
-        }
+        },
+        postedBy: msg.username
       }
     },
     {

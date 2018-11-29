@@ -28,10 +28,12 @@ export const getRecruiterDashboardTop10 = data => async dispatch => {
   }
 };
 
-export const getRecruiterDashboardTop5 = data => async dispatch => {
+export const getRecruiterDashboardTop5 = username => async dispatch => {
   try {
     setHeader();
-    const res = await axios.post(`${ROOT_URL}/getRecruiterDashboardTop5`, data);
+    const res = await axios.get(
+      `${ROOT_URL}/getRecruiterDashboardTop5/${username}`
+    );
     dispatch({
       type: RECRUITER_DASHBOARD_TOP5,
       payload: res.data

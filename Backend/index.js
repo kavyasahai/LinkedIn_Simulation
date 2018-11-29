@@ -174,9 +174,9 @@ app.post("/getRecruiterDashboardTop10", function(request, response) {
   });
 });
 
-app.post("/getRecruiterDashboardTop5", function(request, response) {
+app.get("/getRecruiterDashboardTop5/:username", function(request, response) {
   console.log("Recruiter Dashboard Top 5 Post Request");
-  kafka.make_request("recruiterDashboardTop5_topic", request.body, function(
+  kafka.make_request("recruiterDashboardTop5_topic", request.params, function(
     err,
     results
   ) {

@@ -12,7 +12,8 @@ const jobApplicationSchema = new mongoose.Schema({
   submitted: Boolean,
   savedTime: Date,
   submittedTime: Date,
-  clickTime: Date
+  clickTime: Date,
+  postedBy: String
 });
 
 module.exports = mongoose.model(
