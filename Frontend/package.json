@@ -25,6 +25,7 @@
     "redux-promise": "^0.6.0",
     "redux-thunk": "^2.3.0",
     "superagent": "^4.0.0-beta.5",
+    "uuid4": "^1.1.4",
     "uuidv4": "^2.0.0"
   },
   "scripts": {
