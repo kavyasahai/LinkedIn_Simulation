@@ -1,26 +1,22 @@
 import axios from "axios";
-import { PROFILE_VIEWS } from "./types";
+import { SEARCH_JOB } from "./types";
 import { setHeader } from "../components/common/auth";
 import { getJWTUsername } from "../components/common/auth";
 
 const ROOT_URL = "http://localhost:3001";
 
-export const getProfileViews = () => async dispatch => {
+export const searchJob = data => async dispatch => {
   try {
     var email = getJWTUsername();
     setHeader();
-    const res = await axios.get(`${ROOT_URL}/getProfileViews`, {
-      params: {
-        email: email
-      }
-    });
+    const res = await axios.post(`${ROOT_URL}/searchJob`, data);
     dispatch({
-      type: PROFILE_VIEWS,
+      type: SEARCH_JOB,
       payload: res.data
     });
   } catch (e) {
     return {
-      type: PROFILE_VIEWS,
+      type: SEARCH_JOB,
       payload: e
     };
   }

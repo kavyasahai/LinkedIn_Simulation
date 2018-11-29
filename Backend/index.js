@@ -93,8 +93,7 @@ app.post("/download/:file(*)", (req, res) => {
   res.end(base64img);
 });
 
-// Register new users
-app.post("/data", function(req, res) {
+app.post("/searchJob", function(req, res) {
   console.log(req.body);
   var Job;
   // var Location;
