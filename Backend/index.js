@@ -93,34 +93,19 @@ app.post("/download/:file(*)", (req, res) => {
   res.end(base64img);
 });
 
-app.post("/searchJob", function(req, res) {
-  console.log(req.body);
-  var Job;
-  // var Location;
-  if (req.body.Job == "") {
-    Job = "InternShip";
-  } else {
-    Job = req.body.Job;
-  }
-  jobdata
-    .find({
-      Position: Job
-    })
-    .then(
-      docs => {
-        res.json({
-          updatedList: docs
-        });
-        res.end();
-
-        console.log(docs);
-      },
-      err => {
-        console.log(err);
-        res.code = "400";
-        res.end("Bad Request");
-      }
-    );
+app.post("/searchJob", function(request, response) {
+  console.log("Search Job Post Request");
+  kafka.make_request("jobSearch_topic", request.body, function(err, results) {
+    console.log(results);
+    if (err) {
+      response.json({
+        status: "error",
+        msg: "Error in retrieving data."
+      });
+    } else {
+      response.send(JSON.stringify(results));
+    }
+  });
 });
 
 app.post("/save", function(req, res) {
