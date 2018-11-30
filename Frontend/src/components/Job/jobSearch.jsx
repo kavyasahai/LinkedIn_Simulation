@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import Modal from "react-responsive-modal";
 import supportingImage4 from "../../images/supportingImage4.jpg";
 import supportingImage2 from "../../images/supportingImage2.png";
-import { searchJob } from "../../actions/jobActions";
+import { searchJob, saveJob, applyJob } from "../../actions/jobActions";
 
 class JobSearch extends Component {
   constructor(props) {
@@ -86,9 +86,7 @@ class JobSearch extends Component {
 
       timestamp: new Date()
     };
-    axios.post("http://localhost:3001/save", data).then(response => {
-      console.log(response.data);
-    });
+    this.props.saveJob(data);
   };
 
   sendApplication = e => {
@@ -98,10 +96,7 @@ class JobSearch extends Component {
       timestamp: new Date()
     };
     console.log(data);
-    axios.post("http://localhost:3001/Apply", data).then(response => {
-      console.log(response.data);
-      alert("Saved A Job");
-    });
+    this.props.applyJob(data);
   };
 
   view = e => {
@@ -472,5 +467,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { searchJob }
+  { searchJob, saveJob, applyJob }
 )(JobSearch);

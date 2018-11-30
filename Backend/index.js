@@ -108,7 +108,7 @@ app.post("/searchJob", function(request, response) {
   });
 });
 
-app.post("/save", function(req, res) {
+app.post("/saveJob", function(req, res) {
   console.log(req.body);
   var save = new savejob({
     JobID: req.body.jobid,
@@ -121,7 +121,7 @@ app.post("/save", function(req, res) {
   });
 });
 
-app.post("/Apply", function(req, res) {
+app.post("/applyJob", function(req, res) {
   console.log(req.body);
   var save = new Applyjob({
     JobID: req.body.jobid,

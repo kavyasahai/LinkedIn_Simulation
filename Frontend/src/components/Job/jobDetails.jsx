@@ -53,7 +53,7 @@ class JobDetails extends Component {
               </div>
 
               <div
-                class="col-8"
+                className="col-8 "
                 style={{ "padding-left": "20px", "padding-top": "10px" }}
               >
                 <li class="blue">InternShip</li>
