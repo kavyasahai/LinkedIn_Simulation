@@ -56,10 +56,12 @@ class JobSearch extends Component {
     });
   };
   Search = e => {
+    console.log("Clicked")
     const data = {
       Job: this.state.Job,
       Location: this.state.Location
     };
+    console.log(data);
     this.props.searchJob(data, () => {
       this.setState({
         properties1: this.props.properties,
@@ -426,25 +428,28 @@ class JobSearch extends Component {
             <i class="fa fa-linkedin-square" />
           </div>
 
-         
+            <div class="job">
             <div class="row">
-            <div col="col-2">
+            <div col="col-2" class="inputfield ">
+          
             <input
-              className="jobsearch"
+              style={{"background-color": "#e1e9ee"}}
               type="text"
               placeholder="Search"
               onChange={this.SearchChangeHandler}
             />
             </div>
-            <div col="col-2">
+          
+            <div col="col-2" class="inputfield1 ">
             <input
-              className="jobsearch"
+             style={{"background-color": "#e1e9ee"}}
               type="text"
               placeholder="Job Location"
               onChange={this.LocationChangeHandler}
             />
             </div>
-           
+            
+           </div>
             </div>
          
           <button class="Button" onClick={this.Search}>
