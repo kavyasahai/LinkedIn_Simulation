@@ -4,6 +4,7 @@ import image2 from './download.jpg'
 import image1 from "./Image1.png"
 import Modal from 'react-responsive-modal';
 import job from './Job.png'
+import axios from 'axios';
 import './Detail.css'
 class Detail extends Component{
     constructor(props){
@@ -23,14 +24,26 @@ class Detail extends Component{
     
 }
     openbox(){
-        this.setState({
-            open:true
-        })
+       window.location.href="http://localhost:3000/Apply"
     }
     closebox(){
         this.setState({
         open:false
         })
+    }
+    save=(e)=>{
+        console.log("clicke");
+        const data={
+            jobid:e,
+    
+            timestamp:new Date()
+            
+        }
+        axios.post('http://localhost:3001/save',data)
+        .then(response=>{
+            console.log(response.data);
+        })
+    
     }
     render(){
         return(

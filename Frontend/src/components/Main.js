@@ -15,9 +15,10 @@ import UserProfilePhoto from "./Applicant/userProfilePhoto";
 import ProfileViews from "./ProfileViews/ProfileViews";
 import Recruiter from "./Recruiter/Recruiter";
 import PostAJob from "./Recruiter/PostAJob";
+import jobDetails from "./Job/jobDetails";
+import jobFilter from "./Job/jobFilter";
+import jobSearch from "./Job/jobSearch.jsx";
 
-import { createStore, applyMiddleware, compose } from "redux";
-import promise from "redux-promise";
 import { Provider } from "react-redux";
 import PrivateRoute from "./common/PrivateRoute";
 
@@ -62,6 +63,9 @@ class Main extends Component {
               <Route path="/profileviews" exact component={ProfileViews} />
               <PrivateRoute path="/recruiter" component={Recruiter} />
               <Route path="/recruiter/post-a-job" component={PostAJob} />
+              <Route path="/job-details" component={jobDetails} />
+              <Route path="/job-filter" component={jobFilter} />
+              <Route path="/job-search" component={jobSearch} />
 
               <Route path="/not-found" exact component={NotFound} />
               <Route path="/" exact component={Login} />

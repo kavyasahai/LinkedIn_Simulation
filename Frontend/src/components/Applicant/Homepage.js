@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import '../../Css/homepage.css';
+import '../../css/homepage.css';
 import axios from 'axios';
 import cookie from 'react-cookies';
 import {Redirect} from 'react-router';
 import { connect } from 'react-redux';
+
 import { DropdownMenu, MenuItem } from 'react-bootstrap-dropdown-menu';
 
 //Define a Login Component
@@ -31,6 +32,10 @@ class Homepage extends Component
     //Call the Will Mount to set the auth Flag to false
     componentWillMount(){
     }
+    // deleteAccount(e) {
+    //   $("#myModal").modal("show");
+    // }
+    
     //username change handler to update state variable with the text entered by the user
     // firstnameChangeHandler = (e) => {
     //     this.setState({
@@ -188,18 +193,18 @@ class Homepage extends Component
   </h3>
 <div class="profilesection">
     <div class="pv-top-card-v2-section__actions mt4 display-flex">
+    
       <section id="ember1116" class="pe-hub-section mb2 ember-view">
       
-      
-          
-  <DropdownMenu text="Add Profile Section">
-        <MenuItem text="Summary" location="/home" />
-        <MenuItem text="Work Experience" location="/profile" />
-        <MenuItem text="Education" location="/change-password" />
-        <MenuItem text="Skills" location="/privacy-settings" />
-</DropdownMenu>
-  
-
+      <div class="dropdown">
+  <button class="dropbtn">Add Profile Section</button>
+  <div class="dropdown-content">
+    <a data-toggle="modal" href="#summary">Summary</a>
+    <a data-toggle="modal" href="#myModal">Work Experience</a>
+    <a data-toggle="modal" href="#myModal">Education</a>
+    <a data-toggle="modal" href="#myModal">Skills</a>
+  </div>
+</div>
 
 </section>
 
@@ -278,6 +283,550 @@ class Homepage extends Component
         
         </div>
         </div>
+        <div id="summary" class="modal fade" role="dialog" >
+  <div class="modal-dialog">
+
+    
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit Intro</h4>
+      </div>
+      <div class="modal-body">
+      <div id="ember3308" class="carousel-body ember-view"><div id="ember3309" class="carousel-item focused-easeInOut-motion carousel-item--show ember-view">  <div id="ember3310" class="form-edit ember-view">        <form class="pe-form  pe-top-card-form" data-ember-action="" data-ember-action-3312="3312">
+      <div class="pe-s-form__container">
+       
+
+        <div class="pe-s-form__body pe-form-body pe-form-body--align-top">
+          <div class="pe-top-card-form__background-image-container relative">
+              <div id="ember3316" class="profile-background-image--no-rounded-corners profile-background-image profile-background-image--loading ember-view"></div>
+            
+            
+          </div>
+    
+          <div class="pe-form-body__content">
+            <div class="pe-form-body_top-area relative display-flex">
+           </div>
+    
+            <div class="pe-form-field pe-top-card-form__photo-field pe-top-card-form__photo-field--floating pe-top-card-form__photo-wrapper pe-top-card-v2-form__photo-wrapper EntityPhoto-circle-8">
+              <div id="ember3318" class="pe-top-card-form__photo profile-photo-edit--large-preview profile-photo-edit ember-view">  <button data-control-name="edit_profile_photo" class="profile-photo-edit__edit-btn" data-ember-action="" data-ember-action-3319="3319">
+          <img src="https://media.licdn.com/dms/image/C5603AQHVVPM_Y5GT8w/profile-displayphoto-shrink_200_200/0?e=1548892800&amp;v=beta&amp;t=ft0HBIT7DODYrcap2naj-e5JB_NqcRwEBFO5eLAPZ0U" class="profile-photo-edit__preview" alt="Edit photo" height="152" width="152" />
+        <span class="profile-photo-edit__edit-icon profile-photo-edit__edit-icon--for-top-card-v2 svg-icon-wrap"><li-icon aria-hidden="true" type="pencil-icon" size="small"><svg viewBox="0 0 24 24" width="24px" height="24px" x="0" y="0" preserveAspectRatio="xMinYMin meet" class="artdeco-icon" focusable="false"><path d="M14.71,4L12,1.29a1,1,0,0,0-1.41,0L3,8.85,1,15l6.15-2,7.55-7.55A1,1,0,0,0,15,4.71,1,1,0,0,0,14.71,4Zm-8.84,7.6-1.5-1.5L9.42,5.07l1.5,1.5Zm5.72-5.72-1.5-1.5,1.17-1.17,1.5,1.5Z" class="small-icon" ></path></svg></li-icon></span>
+      </button>
+    </div>
+            </div>
+    
+            <div class="pe-s-multi-field">
+                <div class="pe-top-card-form__name-field">
+                  <div class="pe-s-multi-field__item pe-form-field pe-top-card-form__first-name-field floating-label  " data-form-elem-focus="true">
+     <label for="topcard-firstname" class="pe-form-field__label label-text required">
+        First Name
+      </label>
+    
+      <input name="firstName" maxlength="20" id="topcard-firstname" class="ember-text-field pe-form-field__text-input ember-view" type="text" />
+    
+    </div>
+    
+               </div>
+                <div class="pe-top-card-form__name-field">
+                  <div class="pe-s-multi-field__item pe-form-field pe-top-card-form__last-name-field floating-label  " data-form-elem-focus="true">
+    <label for="topcard-lastname" class="pe-form-field__label label-text required">
+        Last Name
+      </label>
+    
+      <input name="lastName" maxlength="40" id="topcard-lastname" class="ember-text-field pe-form-field__text-input ember-view" type="text" />
+    
+    </div>
+    
+               </div>
+            </div>
+    
+              
+    
+    
+            <div class="pe-form-field pe-top-card-form__headline-field floating-label  " data-form-elem-focus="true">
+     <label for="topcard-headline" class="pe-form-field__label label-text required">
+        Headline
+      </label>
+    
+      <textarea name="headline" id="topcard-headline" class="pe-top-card-form__headline-text ember-text-area pe-form-field__textarea ember-view"></textarea>
+    </div>  
+            <div id="ember3332" class="pe-form-field pe-top-card-form__location-picker ember-view"><div class="pe-s-multi-field">
+      <div class="pe-s-multi-field__item pe-form-field ">
+        <label class="pe-form-field__label required" for="location-country">
+          Country/Region
+        </label>
+    
+    <div id="ember3333" class="pe-secondary-locale-tooltip-trigger ember-view">        <select data-control-name="location_country_chooser" name="locationCountry" id="location-country" class="ember-view">
+      <option value="us">United States</option>
+      <option value="af">Afghanistan</option>
+      <option value="ax">Aland Islands</option>
+      <option value="al">Albania</option>
+      <option value="dz">Algeria</option>
+      <option value="as">American Samoa</option>
+      <option value="ad">Andorra</option>
+      <option value="ao">Angola</option>
+      <option value="ai">Anguilla</option>
+      <option value="aq">Antarctica</option>
+      <option value="ag">Antigua and Barbuda</option>
+      <option value="ar">Argentina</option>
+      <option value="am">Armenia</option>
+      <option value="aw">Aruba</option>
+      <option value="au">Australia</option>
+      <option value="at">Austria</option>
+      <option value="az">Azerbaijan</option>
+      <option value="bs">Bahamas</option>
+      <option value="bh">Bahrain</option>
+      <option value="bd">Bangladesh</option>
+      <option value="bb">Barbados</option>
+      <option value="by">Belarus</option>
+      <option value="be">Belgium</option>
+      <option value="bz">Belize</option>
+      <option value="bj">Benin</option>
+      <option value="bm">Bermuda</option>
+      <option value="bt">Bhutan</option>
+      <option value="bo">Bolivia</option>
+      <option value="ba">Bosnia and Herzegovina</option>
+      <option value="bw">Botswana</option>
+      <option value="bv">Bouvet Island</option>
+      <option value="br">Brazil</option>
+      <option value="io">British Indian Ocean Territory</option>
+      <option value="bn">Brunei Darussalam</option>
+      <option value="bg">Bulgaria</option>
+      <option value="bf">Burkina Faso</option>
+      <option value="bi">Burundi</option>
+      <option value="kh">Cambodia</option>
+      <option value="cm">Cameroon</option>
+      <option value="ca">Canada</option>
+      <option value="cv">Cape Verde</option>
+      <option value="cb">Caribbean Nations</option>
+      <option value="ky">Cayman Islands</option>
+      <option value="cf">Central African Republic</option>
+      <option value="td">Chad</option>
+      <option value="cl">Chile</option>
+      <option value="cn">China</option>
+      <option value="cx">Christmas Island</option>
+      <option value="cc">Cocos (Keeling) Islands</option>
+      <option value="co">Colombia</option>
+      <option value="km">Comoros</option>
+      <option value="cg">Congo</option>
+      <option value="ck">Cook Islands</option>
+      <option value="cr">Costa Rica</option>
+      <option value="ci">Cote D’Ivoire (Ivory Coast)</option>
+      <option value="hr">Croatia</option>
+      <option value="cu">Cuba</option>
+      <option value="cy">Cyprus</option>
+      <option value="cz">Czech Republic</option>
+      <option value="cd">Democratic Republic of the Congo</option>
+      <option value="dk">Denmark</option>
+      <option value="dj">Djibouti</option>
+      <option value="dm">Dominica</option>
+      <option value="do">Dominican Republic</option>
+      <option value="ec">Ecuador</option>
+      <option value="eg">Egypt</option>
+      <option value="sv">El Salvador</option>
+      <option value="gq">Equatorial Guinea</option>
+      <option value="er">Eritrea</option>
+      <option value="ee">Estonia</option>
+      <option value="et">Ethiopia</option>
+      <option value="fk">Falkland Islands (Malvinas)</option>
+      <option value="fo">Faroe Islands</option>
+      <option value="fm">Federated States of Micronesia</option>
+      <option value="fj">Fiji</option>
+      <option value="fi">Finland</option>
+      <option value="fr">France</option>
+      <option value="gf">French Guiana</option>
+      <option value="pf">French Polynesia</option>
+      <option value="tf">French Southern Territories</option>
+      <option value="ga">Gabon</option>
+      <option value="gm">Gambia</option>
+      <option value="ge">Georgia</option>
+      <option value="de">Germany</option>
+      <option value="gh">Ghana</option>
+      <option value="gi">Gibraltar</option>
+      <option value="gr">Greece</option>
+      <option value="gl">Greenland</option>
+      <option value="gd">Grenada</option>
+      <option value="gp">Guadeloupe</option>
+      <option value="gu">Guam</option>
+      <option value="gt">Guatemala</option>
+      <option value="gg">Guernsey</option>
+      <option value="gn">Guinea</option>
+      <option value="gw">Guinea-Bissau</option>
+      <option value="gy">Guyana</option>
+      <option value="ht">Haiti</option>
+      <option value="hm">Heard Island and McDonald Islands</option>
+      <option value="hn">Honduras</option>
+      <option value="hk">Hong Kong</option>
+      <option value="hu">Hungary</option>
+      <option value="is">Iceland</option>
+      <option value="in">India</option>
+      <option value="id">Indonesia</option>
+      <option value="ir">Iran</option>
+      <option value="iq">Iraq</option>
+      <option value="ie">Ireland</option>
+      <option value="im">Isle of Man</option>
+      <option value="il">Israel</option>
+      <option value="it">Italy</option>
+      <option value="jm">Jamaica</option>
+      <option value="jp">Japan</option>
+      <option value="je">Jersey</option>
+      <option value="jo">Jordan</option>
+      <option value="kz">Kazakhstan</option>
+      <option value="ke">Kenya</option>
+      <option value="ki">Kiribati</option>
+      <option value="kr">Korea</option>
+      <option value="kp">Korea (North)</option>
+      <option value="ko">Kosovo</option>
+      <option value="kw">Kuwait</option>
+      <option value="kg">Kyrgyzstan</option>
+      <option value="la">Laos</option>
+      <option value="lv">Latvia</option>
+      <option value="lb">Lebanon</option>
+      <option value="ls">Lesotho</option>
+      <option value="lr">Liberia</option>
+      <option value="ly">Libya</option>
+      <option value="li">Liechtenstein</option>
+      <option value="lt">Lithuania</option>
+      <option value="lu">Luxembourg</option>
+      <option value="mo">Macao</option>
+      <option value="mk">Macedonia</option>
+      <option value="mg">Madagascar</option>
+      <option value="mw">Malawi</option>
+      <option value="my">Malaysia</option>
+      <option value="mv">Maldives</option>
+      <option value="ml">Mali</option>
+      <option value="mt">Malta</option>
+      <option value="mh">Marshall Islands</option>
+      <option value="mq">Martinique</option>
+      <option value="mr">Mauritania</option>
+      <option value="mu">Mauritius</option>
+      <option value="yt">Mayotte</option>
+      <option value="mx">Mexico</option>
+      <option value="md">Moldova</option>
+      <option value="mc">Monaco</option>
+      <option value="mn">Mongolia</option>
+      <option value="me">Montenegro</option>
+      <option value="ms">Montserrat</option>
+      <option value="ma">Morocco</option>
+      <option value="mz">Mozambique</option>
+      <option value="mm">Myanmar</option>
+      <option value="na">Namibia</option>
+      <option value="nr">Nauru</option>
+      <option value="np">Nepal</option>
+      <option value="nl">Netherlands</option>
+      <option value="an">Netherlands Antilles</option>
+      <option value="nc">New Caledonia</option>
+      <option value="nz">New Zealand</option>
+      <option value="ni">Nicaragua</option>
+      <option value="ne">Niger</option>
+      <option value="ng">Nigeria</option>
+      <option value="nu">Niue</option>
+      <option value="nf">Norfolk Island</option>
+      <option value="mp">Northern Mariana Islands</option>
+      <option value="no">Norway</option>
+      <option value="pk">Pakistan</option>
+      <option value="pw">Palau</option>
+      <option value="ps">Palestinian Territory</option>
+      <option value="pa">Panama</option>
+      <option value="pg">Papua New Guinea</option>
+      <option value="py">Paraguay</option>
+      <option value="pe">Peru</option>
+      <option value="ph">Philippines</option>
+      <option value="pn">Pitcairn</option>
+      <option value="pl">Poland</option>
+      <option value="pt">Portugal</option>
+      <option value="pr">Puerto Rico</option>
+      <option value="qa">Qatar</option>
+      <option value="re">Reunion</option>
+      <option value="ro">Romania</option>
+      <option value="ru">Russian Federation</option>
+      <option value="rw">Rwanda</option>
+      <option value="gs">S. Georgia and S. Sandwich Islands</option>
+      <option value="sh">Saint Helena</option>
+      <option value="kn">Saint Kitts and Nevis</option>
+      <option value="lc">Saint Lucia</option>
+      <option value="pm">Saint Pierre and Miquelon</option>
+      <option value="vc">Saint Vincent and the Grenadines</option>
+      <option value="ws">Samoa</option>
+      <option value="sm">San Marino</option>
+      <option value="st">Sao Tome and Principe</option>
+      <option value="sa">Saudi Arabia</option>
+      <option value="sn">Senegal</option>
+      <option value="rs">Serbia</option>
+      <option value="cs">Serbia and Montenegro</option>
+      <option value="sc">Seychelles</option>
+      <option value="sl">Sierra Leone</option>
+      <option value="sg">Singapore</option>
+      <option value="sk">Slovak Republic</option>
+      <option value="si">Slovenia</option>
+      <option value="sb">Solomon Islands</option>
+      <option value="so">Somalia</option>
+      <option value="za">South Africa</option>
+      <option value="ss">South Sudan</option>
+      <option value="es">Spain</option>
+      <option value="lk">Sri Lanka</option>
+      <option value="sd">Sudan</option>
+      <option value="om">Sultanate of Oman</option>
+      <option value="sr">Suriname</option>
+      <option value="sj">Svalbard and Jan Mayen</option>
+      <option value="sz">Swaziland</option>
+      <option value="se">Sweden</option>
+      <option value="ch">Switzerland</option>
+      <option value="sy">Syria</option>
+      <option value="tw">Taiwan</option>
+      <option value="tj">Tajikistan</option>
+      <option value="tz">Tanzania</option>
+      <option value="th">Thailand</option>
+      <option value="tl">Timor-Leste</option>
+      <option value="tg">Togo</option>
+      <option value="tk">Tokelau</option>
+      <option value="to">Tonga</option>
+      <option value="tt">Trinidad and Tobago</option>
+      <option value="tn">Tunisia</option>
+      <option value="tr">Turkey</option>
+      <option value="tm">Turkmenistan</option>
+      <option value="tc">Turks and Caicos Islands</option>
+      <option value="tv">Tuvalu</option>
+      <option value="ug">Uganda</option>
+      <option value="ua">Ukraine</option>
+      <option value="ae">United Arab Emirates</option>
+      <option value="gb">United Kingdom</option>
+      <option value="uy">Uruguay</option>
+      <option value="uz">Uzbekistan</option>
+      <option value="vu">Vanuatu</option>
+      <option value="va">Vatican City State (Holy See)</option>
+      <option value="ve">Venezuela</option>
+      <option value="vn">Vietnam</option>
+      <option value="vg">Virgin Islands (British)</option>
+      <option value="vi">Virgin Islands (U.S.)</option>
+      <option value="wf">Wallis and Futuna</option>
+      <option value="eh">Western Sahara</option>
+      <option value="ye">Yemen</option>
+      <option value="zm">Zambia</option>
+      <option value="zw">Zimbabwe</option>
+      <option value="oo">Other</option>
+    </select>
+    
+    </div>
+      </div>
+    
+        <div class="pe-s-multi-field__item pe-form-field floating-label zipcode-field
+          " data-form-elem-focus="true">
+          <label for="location-zipcode" class="pe-form-field__label label-text">ZIP code</label>
+    <div id="ember3583" class="pe-secondary-locale-tooltip-trigger ember-view">          <div class="pe-location-picker__postal-code-input-container">
+              <input name="zipcode" maxlength="8" id="location-zipcode" class="pe-form-field__location-zipcode ember-text-field ember-view" type="text" />
+            </div>
+    
+    </div>
+      </div>
+    
+    </div>
+    
+        <div class="pe-form-field ">
+          <label class="pe-form-field__label" for="pe-location-picker__preferred-location">Locations within this area</label>
+    
+    <div id="ember3753" class="pe-secondary-locale-tooltip-trigger ember-view">       
+    <input type="text" name="citystate" class="ember-view" />
+    
+    
+    </div>
+     </div>
+   
+    </div>
+    
+              <div class="pe-form-field industry-field">
+      <label for="topcard-industry" class="pe-form-field__label required">
+        Industry
+      </label>
+    
+    <div id="ember3585" class="pe-secondary-locale-tooltip-trigger ember-view">      <select name="industry" id="topcard-industry" class="ember-view">  <option value="">Choose an industry…</option>
+    
+      <option value="urn:li:fs_industry:47">Accounting</option>
+      <option value="urn:li:fs_industry:94">Airlines/Aviation</option>
+      <option value="urn:li:fs_industry:120">Alternative Dispute Resolution</option>
+      <option value="urn:li:fs_industry:125">Alternative Medicine</option>
+      <option value="urn:li:fs_industry:127">Animation</option>
+      <option value="urn:li:fs_industry:19">Apparel &amp; Fashion</option>
+      <option value="urn:li:fs_industry:50">Architecture &amp; Planning</option>
+      <option value="urn:li:fs_industry:111">Arts &amp; Crafts</option>
+      <option value="urn:li:fs_industry:53">Automotive</option>
+      <option value="urn:li:fs_industry:52">Aviation &amp; Aerospace</option>
+      <option value="urn:li:fs_industry:41">Banking</option>
+      <option value="urn:li:fs_industry:12">Biotechnology</option>
+      <option value="urn:li:fs_industry:36">Broadcast Media</option>
+      <option value="urn:li:fs_industry:49">Building Materials</option>
+      <option value="urn:li:fs_industry:138">Business Supplies &amp; Equipment</option>
+      <option value="urn:li:fs_industry:129">Capital Markets</option>
+      <option value="urn:li:fs_industry:54">Chemicals</option>
+      <option value="urn:li:fs_industry:90">Civic &amp; Social Organization</option>
+      <option value="urn:li:fs_industry:51">Civil Engineering</option>
+      <option value="urn:li:fs_industry:128">Commercial Real Estate</option>
+      <option value="urn:li:fs_industry:118">Computer &amp; Network Security</option>
+      <option value="urn:li:fs_industry:109">Computer Games</option>
+      <option value="urn:li:fs_industry:3">Computer Hardware</option>
+      <option value="urn:li:fs_industry:5">Computer Networking</option>
+      <option value="urn:li:fs_industry:4">Computer Software</option>
+      <option value="urn:li:fs_industry:48">Construction</option>
+      <option value="urn:li:fs_industry:24">Consumer Electronics</option>
+      <option value="urn:li:fs_industry:25">Consumer Goods</option>
+      <option value="urn:li:fs_industry:91">Consumer Services</option>
+      <option value="urn:li:fs_industry:18">Cosmetics</option>
+      <option value="urn:li:fs_industry:65">Dairy</option>
+      <option value="urn:li:fs_industry:1">Defense &amp; Space</option>
+      <option value="urn:li:fs_industry:99">Design</option>
+      <option value="urn:li:fs_industry:132">E-learning</option>
+      <option value="urn:li:fs_industry:69">Education Management</option>
+      <option value="urn:li:fs_industry:112">Electrical &amp; Electronic Manufacturing</option>
+      <option value="urn:li:fs_industry:28">Entertainment</option>
+      <option value="urn:li:fs_industry:86">Environmental Services</option>
+      <option value="urn:li:fs_industry:110">Events Services</option>
+      <option value="urn:li:fs_industry:76">Executive Office</option>
+      <option value="urn:li:fs_industry:122">Facilities Services</option>
+      <option value="urn:li:fs_industry:63">Farming</option>
+      <option value="urn:li:fs_industry:43">Financial Services</option>
+      <option value="urn:li:fs_industry:38">Fine Art</option>
+      <option value="urn:li:fs_industry:66">Fishery</option>
+      <option value="urn:li:fs_industry:34">Food &amp; Beverages</option>
+      <option value="urn:li:fs_industry:23">Food Production</option>
+      <option value="urn:li:fs_industry:101">Fundraising</option>
+      <option value="urn:li:fs_industry:26">Furniture</option>
+      <option value="urn:li:fs_industry:29">Gambling &amp; Casinos</option>
+      <option value="urn:li:fs_industry:145">Glass, Ceramics &amp; Concrete</option>
+      <option value="urn:li:fs_industry:75">Government Administration</option>
+      <option value="urn:li:fs_industry:148">Government Relations</option>
+      <option value="urn:li:fs_industry:140">Graphic Design</option>
+      <option value="urn:li:fs_industry:124">Health, Wellness &amp; Fitness</option>
+      <option value="urn:li:fs_industry:68">Higher Education</option>
+      <option value="urn:li:fs_industry:14">Hospital &amp; Health Care</option>
+      <option value="urn:li:fs_industry:31">Hospitality</option>
+      <option value="urn:li:fs_industry:137">Human Resources</option>
+      <option value="urn:li:fs_industry:134">Import &amp; Export</option>
+      <option value="urn:li:fs_industry:88">Individual &amp; Family Services</option>
+      <option value="urn:li:fs_industry:147">Industrial Automation</option>
+      <option value="urn:li:fs_industry:84">Information Services</option>
+      <option value="urn:li:fs_industry:96">Information Technology &amp; Services</option>
+      <option value="urn:li:fs_industry:42">Insurance</option>
+      <option value="urn:li:fs_industry:74">International Affairs</option>
+      <option value="urn:li:fs_industry:141">International Trade &amp; Development</option>
+      <option value="urn:li:fs_industry:6">Internet</option>
+      <option value="urn:li:fs_industry:45">Investment Banking</option>
+      <option value="urn:li:fs_industry:46">Investment Management</option>
+      <option value="urn:li:fs_industry:73">Judiciary</option>
+      <option value="urn:li:fs_industry:77">Law Enforcement</option>
+      <option value="urn:li:fs_industry:9">Law Practice</option>
+      <option value="urn:li:fs_industry:10">Legal Services</option>
+      <option value="urn:li:fs_industry:72">Legislative Office</option>
+      <option value="urn:li:fs_industry:30">Leisure, Travel &amp; Tourism</option>
+      <option value="urn:li:fs_industry:85">Libraries</option>
+      <option value="urn:li:fs_industry:116">Logistics &amp; Supply Chain</option>
+      <option value="urn:li:fs_industry:143">Luxury Goods &amp; Jewelry</option>
+      <option value="urn:li:fs_industry:55">Machinery</option>
+      <option value="urn:li:fs_industry:11">Management Consulting</option>
+      <option value="urn:li:fs_industry:95">Maritime</option>
+      <option value="urn:li:fs_industry:97">Market Research</option>
+      <option value="urn:li:fs_industry:80">Marketing &amp; Advertising</option>
+      <option value="urn:li:fs_industry:135">Mechanical Or Industrial Engineering</option>
+      <option value="urn:li:fs_industry:126">Media Production</option>
+      <option value="urn:li:fs_industry:17">Medical Device</option>
+      <option value="urn:li:fs_industry:13">Medical Practice</option>
+      <option value="urn:li:fs_industry:139">Mental Health Care</option>
+      <option value="urn:li:fs_industry:71">Military</option>
+      <option value="urn:li:fs_industry:56">Mining &amp; Metals</option>
+      <option value="urn:li:fs_industry:35">Motion Pictures &amp; Film</option>
+      <option value="urn:li:fs_industry:37">Museums &amp; Institutions</option>
+      <option value="urn:li:fs_industry:115">Music</option>
+      <option value="urn:li:fs_industry:114">Nanotechnology</option>
+      <option value="urn:li:fs_industry:81">Newspapers</option>
+      <option value="urn:li:fs_industry:100">Non-profit Organization Management</option>
+      <option value="urn:li:fs_industry:57">Oil &amp; Energy</option>
+      <option value="urn:li:fs_industry:113">Online Media</option>
+      <option value="urn:li:fs_industry:123">Outsourcing/Offshoring</option>
+      <option value="urn:li:fs_industry:87">Package/Freight Delivery</option>
+      <option value="urn:li:fs_industry:146">Packaging &amp; Containers</option>
+      <option value="urn:li:fs_industry:61">Paper &amp; Forest Products</option>
+      <option value="urn:li:fs_industry:39">Performing Arts</option>
+      <option value="urn:li:fs_industry:15">Pharmaceuticals</option>
+      <option value="urn:li:fs_industry:131">Philanthropy</option>
+      <option value="urn:li:fs_industry:136">Photography</option>
+      <option value="urn:li:fs_industry:117">Plastics</option>
+      <option value="urn:li:fs_industry:107">Political Organization</option>
+      <option value="urn:li:fs_industry:67">Primary/Secondary Education</option>
+      <option value="urn:li:fs_industry:83">Printing</option>
+      <option value="urn:li:fs_industry:105">Professional Training &amp; Coaching</option>
+      <option value="urn:li:fs_industry:102">Program Development</option>
+      <option value="urn:li:fs_industry:79">Public Policy</option>
+      <option value="urn:li:fs_industry:98">Public Relations &amp; Communications</option>
+      <option value="urn:li:fs_industry:78">Public Safety</option>
+      <option value="urn:li:fs_industry:82">Publishing</option>
+      <option value="urn:li:fs_industry:62">Railroad Manufacture</option>
+      <option value="urn:li:fs_industry:64">Ranching</option>
+      <option value="urn:li:fs_industry:44">Real Estate</option>
+      <option value="urn:li:fs_industry:40">Recreational Facilities &amp; Services</option>
+      <option value="urn:li:fs_industry:89">Religious Institutions</option>
+      <option value="urn:li:fs_industry:144">Renewables &amp; Environment</option>
+      <option value="urn:li:fs_industry:70">Research</option>
+      <option value="urn:li:fs_industry:32">Restaurants</option>
+      <option value="urn:li:fs_industry:27">Retail</option>
+      <option value="urn:li:fs_industry:121">Security &amp; Investigations</option>
+      <option value="urn:li:fs_industry:7">Semiconductors</option>
+      <option value="urn:li:fs_industry:58">Shipbuilding</option>
+      <option value="urn:li:fs_industry:20">Sporting Goods</option>
+      <option value="urn:li:fs_industry:33">Sports</option>
+      <option value="urn:li:fs_industry:104">Staffing &amp; Recruiting</option>
+      <option value="urn:li:fs_industry:22">Supermarkets</option>
+      <option value="urn:li:fs_industry:8">Telecommunications</option>
+      <option value="urn:li:fs_industry:60">Textiles</option>
+      <option value="urn:li:fs_industry:130">Think Tanks</option>
+      <option value="urn:li:fs_industry:21">Tobacco</option>
+      <option value="urn:li:fs_industry:108">Translation &amp; Localization</option>
+      <option value="urn:li:fs_industry:92">Transportation/Trucking/Railroad</option>
+      <option value="urn:li:fs_industry:59">Utilities</option>
+      <option value="urn:li:fs_industry:106">Venture Capital &amp; Private Equity</option>
+      <option value="urn:li:fs_industry:16">Veterinary</option>
+      <option value="urn:li:fs_industry:93">Warehousing</option>
+      <option value="urn:li:fs_industry:133">Wholesale</option>
+      <option value="urn:li:fs_industry:142">Wine &amp; Spirits</option>
+      <option value="urn:li:fs_industry:119">Wireless</option>
+      <option value="urn:li:fs_industry:103">Writing &amp; Editing</option>
+    </select>
+    
+    </div>
+   </div>
+    
+            <div class="pe-form-field summary-field floating-label  ">
+     <label for="topcard-summary" class="pe-form-field__label label-text">
+        Summary
+      </label>
+    
+      <textarea name="summary" id="topcard-summary" class="ember-text-area pe-form-field__textarea ember-view"></textarea>
+    
+    </div>
+    
+          </div>
+        </div>
+          
+    
+      </div>
+    </form>
+    
+    
+    
+    <div id="ember3742" class="ember-view"><div id="ember3743" class="ember-view"></div></div>
+    </div>
+    </div><div id="ember3744" class="carousel-item focused-easeInOut-motion carousel-item--pop visibility-hidden ember-view"></div><div id="ember3745" class="carousel-item focused-easeInOut-motion carousel-item--pop visibility-hidden ember-view"></div><div id="ember3746" class="carousel-item focused-easeInOut-motion carousel-item--pop visibility-hidden ember-view"></div><div id="ember3747" class="carousel-item focused-easeInOut-motion carousel-item--pop visibility-hidden ember-view"></div>
+    </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" >Save</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
         <br/>
         <br/>
 
