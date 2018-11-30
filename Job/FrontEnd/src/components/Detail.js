@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import image from './Test.jpg'
 import image2 from './download.jpg'
+import image1 from "./Image1.png"
 import Modal from 'react-responsive-modal';
+import job from './Job.png'
 import './Detail.css'
 class Detail extends Component{
     constructor(props){
@@ -32,8 +34,11 @@ class Detail extends Component{
     }
     render(){
         return(
-            <div style={{"position": "relative", "left": "0","top": "0"}}>
+            <div style={{"position": "relative", "left": "0","top": "0"}} class="detail">
                 <img src={image} style={{"width":"100%","height":"250px"}} class="image1"></img>
+                <div class="col-5" style={{"float":"right","padding-left":"100px"}}>
+                <img src={image1} style={{"width":"400px","height":"500px"}}></img>
+                </div>
                 <div class="over">
                 <div >
                      <div class="row">
@@ -54,6 +59,8 @@ class Detail extends Component{
                 </div>
                 </div>
                 </div>
+                </div>
+                <div class="over1">
                 <div class="row">
                 <div class="col-4" style={{"padding-left":"40px","padding-top":"20px"}}>
                    Job 
@@ -93,7 +100,7 @@ class Detail extends Component{
                 </div>
                
                
-                
+               
                 <div class="row" style={{"padding-left":"30px"}}>
                  
                       
@@ -109,6 +116,7 @@ class Detail extends Component{
                       <div style={{"text-align":"justify"}}>As the Design Leader you will play a key role in advancing our design solutions, in generating new ideas for both projects and for the systems we use execute work, while maintaining enthusiasm about achieving clients business goals through our design</div>
                       </div>
                       <div class="col-6">
+                      <img src={job} style={{"width":"250px","height":"500px"}}></img>
                       <div style={{"color": "rgba(0,0,0,.6)","padding-bottom":"10px"}}>
                       Job Details
                       </div>
@@ -125,10 +133,11 @@ class Detail extends Component{
                     </div>
                     <div style={{"padding-bottom":"10px"}}>Planning</div>
                     </div> 
+                    </div>
 
                       
-                      </div>
-{/* ---------------------------Model------------------------------------------------------------------------- */}
+                      
+{/* --------------------------Model------------------------------------------------------------------------- */}
                       <div class="modal-dialog modal-lg">
                       <Modal open={this.state.open} onClose={this.closebox} style={{'min-width':'800px'}} center>
                       <header class="modal-header">   

@@ -12,6 +12,7 @@ var jwt = require('jsonwebtoken');
 var {mongoose}=require('./mongoose');
 var {jobdata}=require("./models/job");
 var {savejob}=require("./models/savejob");
+var {Applyjob}=require("./models/apply");
 
 
 
@@ -126,8 +127,21 @@ app.post('/save',function(req,res){
    res.end("ok");
 
   })
-
 })
+app.post('/Apply',function(req,res){
+    console.log(req.body);
+    var save=new Applyjob({
+      JobID:req.body.jobid,
+      Timestamp:req.body.timestamp,
+      UserID:"Kesha@gmail.com"
+    });
+    save.save().then((docs)=>{
+      console.log("Row Created : ",docs);
+     res.end("ok");
+  
+    })
+  });
+
 // Start the server
 app.listen(port);
 console.log('Your server is running on port ' + port + '.');

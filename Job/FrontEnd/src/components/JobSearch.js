@@ -6,6 +6,7 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Modal from 'react-responsive-modal';
 import image from './download.jpg';
+import job from "./Job.png"
 
 
   class JobSearch extends Component{
@@ -32,6 +33,7 @@ import image from './download.jpg';
         this.LocationChangeHandler=this.LocationChangeHandler.bind(this);
         this.Search=this.Search.bind(this);
         this.view=this.view.bind(this);
+        this.sendApplication=this.sendApplication.bind(this);
  
     
 }
@@ -63,17 +65,19 @@ closebox(){
        this.props.search(data,()=>{ 
            
         this.setState({
-            properties1:this.state.properties1.concat(this.props.properties),
+            properties1:this.props.properties,
             view1:this.state.view1.concat(this.props.properties[0])
         });
         this.state.properties1.map( property=>{
      
         console.log(property.Icon);
-        axios.post('http://localhost:3001/download/'+property.Icon)
+        axios.post('http://localhost:3001/download/'+ property.Icon)
         .then(response => {
             console.log("Imgae Res : ",response);
             let imagePreview = 'data:image/jpg;base64, ' + response.data;
-         this.setState({imageView: this.state.imageView.concat(imagePreview)  });
+         this.setState({
+             imageView: this.state.imageView.concat(imagePreview)  
+            });
         });
  
     })})
@@ -97,7 +101,21 @@ save=(e)=>{
     })
 
 }
-       
+
+sendApplication=(e)=>
+{
+    const data={
+        email:"Kesha@gmail.com",
+        jobid:e,
+        timestamp:new Date()
+    }
+    console.log(data)
+    axios.post('http://localhost:3001/Apply',data)
+    .then(response=>{
+        console.log(response.data);
+        alert("Saved A Job");
+    })
+}
    
 
 view=(e)=>{
@@ -227,6 +245,7 @@ this.setState({
                       <div style={{"text-align":"justify"}}>As the Design Leader you will play a key role in advancing our design solutions, in generating new ideas for both projects and for the systems we use execute work, while maintaining enthusiasm about achieving clients business goals through our design</div>
                       </div>
                       <div class="col-6">
+                      <img src={job} style={{"width":"250px","height":"500px"}}></img>
                       <div style={{"color": "rgba(0,0,0,.6)","padding-bottom":"10px"}}>
                       Job Details
                       </div>
@@ -286,7 +305,7 @@ this.setState({
                       <input type="submit" value="Cancel" onClick={this.closebox} style={{'vertical-align':'middle','width':'40%','height':'44px','background-color':'light-grey','border-color':'light-grey','font-size':'18px','color':'black','padding':' 7px 31px','text-align':'center','cursor':'pointer'}}/>
                       
                       
-                      <input type="submit"  value="Submit Application"  onClick={this.sendQuery}  style={{'margin-left':'5px','vertical-align':'middle','width':'40%','height':'44px','background-color':'#ff8a00','border-color':'#ff8a00','font-size':'18px','color':'#FFE','padding':' 7px 31px','text-align':'center','cursor':'pointer'}}/>
+                      <input type="submit"  value="Submit Application"  onClick={this.sendApplication.bind(this,property._id)}  style={{'margin-left':'5px','vertical-align':'middle','width':'40%','height':'44px','background-color':'#ff8a00','border-color':'#ff8a00','font-size':'18px','color':'#FFE','padding':' 7px 31px','text-align':'center','cursor':'pointer'}}/>
           
                       </span>
           
