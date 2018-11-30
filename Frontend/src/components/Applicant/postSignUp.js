@@ -4,6 +4,7 @@ import axios from "axios";
 import { Redirect } from "react-router";
 import { connect } from "react-redux";
 import { locationData } from "../../actions/applicantActions";
+import { getSignupToken } from "../common/auth";
 
 //Define a Login Component
 class PostSignUp extends Component {
@@ -65,12 +66,16 @@ class PostSignUp extends Component {
     this.props.locationData(data);
   };
   render() {
-    //let redirect = null;
+    const signupStatus = getSignupToken();
+    let redirectVar = null;
+    if (signupStatus === false) {
+      redirectVar = <Redirect to="/login" />;
+    }
     // if(this.props.authFlag){
     //     redirect = <Redirect to= "/homepage"/>
     // }
     //redirect based on successful login
-    let redirectVar = null;
+
     if (this.props.location) {
       redirectVar = <Redirect to="/applicantdetails" />;
     }

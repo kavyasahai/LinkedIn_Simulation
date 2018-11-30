@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import Home from "./LandingPage/home";
 import NotFound from "./common/notFound";
 import RecruiterDashboardCityWise from "./RecruiterDashboard/recruiterDashboardCityWise";
 import RecruiterDashboardTop10 from "./RecruiterDashboard/recruiterDashboardTop10";
@@ -34,7 +33,7 @@ class Main extends Component {
           <div>
             <Switch>
               {/*Render Different Component based on Route*/}
-              <Route path="/home" exact component={Home} />
+
               <Route path="/login" component={Login} />
               <Route path="/postsignup" component={PostSignUp} />
               <Route path="/applicantdetails" component={ApplicantDetails} />
@@ -55,7 +54,7 @@ class Main extends Component {
                 exact
                 component={RecruiterDashboardTop5}
               />
-              <Route path="/homepage" exact component={Homepage} />
+              <Route path="/home" exact component={Homepage} />
               <Route
                 path="/recruiterdashboardjobclicks"
                 exact

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import "../../css/applicantDetails.css";
 import axios from "axios";
-import cookie from "react-cookies";
 import { Redirect } from "react-router";
 import { connect } from "react-redux";
 import { proDetails } from "../../actions/applicantActions";
+import { getSignupToken } from "../common/auth";
 
 //Define a Login Component
 class ApplicantDetails extends Component {
@@ -77,7 +77,12 @@ class ApplicantDetails extends Component {
   //     this.props.onSubmitHandle(data);
   // }
   render() {
+    const signupStatus = getSignupToken();
+
     let redirectVar = null;
+    if (signupStatus === false) {
+      redirectVar = <Redirect to="/login" />;
+    }
     if (this.props.details) {
       redirectVar = <Redirect to="/school" />;
     }

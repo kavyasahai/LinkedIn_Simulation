@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import "../../css/userProfilePhoto.css";
-import axios from "axios";
-import cookie from "react-cookies";
 import { Redirect } from "react-router";
-import { connect } from "react-redux";
+import { getSignupToken } from "../common/auth";
 
 //Define a Login Component
 class UserProfilePhoto extends Component {
@@ -65,6 +63,12 @@ class UserProfilePhoto extends Component {
   //     this.props.onSubmitHandle(data);
   // }
   render() {
+    const signupStatus = getSignupToken();
+
+    let redirectVar = null;
+    if (signupStatus === false) {
+      redirectVar = <Redirect to="/login" />;
+    }
     // let redirect = null;
     // if(this.props.authFlag){
     //     redirect = <Redirect to= "/homepage"/>
@@ -76,6 +80,7 @@ class UserProfilePhoto extends Component {
     // }
     return (
       <div class="container">
+        {redirectVar}
         <div class="authentication-outlet nav-hidden">
           <div class="onboarding-main" role="main">
             <nav class="onboarding-main__nav full-width">

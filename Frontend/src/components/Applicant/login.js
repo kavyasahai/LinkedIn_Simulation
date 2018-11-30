@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "../../App.css";
 import axios from "axios";
-import cookie from "react-cookies";
+import { getToken } from "../common/auth";
 import { Redirect } from "react-router";
 import { connect } from "react-redux";
 import { login, register } from "../../actions/applicantActions";
@@ -98,10 +98,15 @@ class Login extends Component {
     //set the with credentials to true
     axios.defaults.withCredentials = true;
     this.props.register(data);
+    localStorage.setItem("signup", this.state.username);
   };
   render() {
-    let redirectVar = null;
+    const token = getToken();
 
+    let redirectVar = null;
+    if (token === true) {
+      redirectVar = <Redirect to="/home" />;
+    }
     if (this.props.inserted) {
       redirectVar = <Redirect to="/postsignup" />;
     }
