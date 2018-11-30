@@ -39,32 +39,30 @@ class PostSignUp extends Component {
     });
   };
 
-  // usernameChangeHandler = (e) => {
-  //     this.setState({
-  //         username : e.target.value
-  //     })
-  // }
-  // // //password change handler to update state variable with the text entered by the user
-  // passwordChangeHandler = (e) => {
-  //     this.setState({
-  //         password : e.target.value
-  //     })
-  // }
-  // // //submit Login handler to send a request to the node backend
   submitLogin = e => {
-    var headers = new Headers();
-    //prevent page from refresh
-    e.preventDefault();
-    const data = {
-      country: this.state.country,
-      zipcode: this.state.zipcode,
-      username: this.props.username
-    };
-    //set the with credentials to true
-    axios.defaults.withCredentials = true;
-    console.log("post sign up data", data);
-    this.props.locationData(data);
+    if (this.state.country == "") this.setState({ country: "us" });
+
+    var zipcode = this.state.zipcode;
+    if (zipcode == "") window.alert("Postal code cannot be empty.");
+    else if (
+      !(/^[0-9]{5}$/.test(zipcode) || /^[0-9]{5}[-][0-9]{4}$/.test(zipcode))
+    ) {
+      window.alert("Incorrect zipcode format");
+    } else {
+      //prevent page from refresh
+      e.preventDefault();
+      const data = {
+        country: this.state.country,
+        zipcode: this.state.zipcode,
+        username: this.props.username
+      };
+      //set the with credentials to true
+      axios.defaults.withCredentials = true;
+      console.log("post sign up data", data);
+      this.props.locationData(data);
+    }
   };
+
   render() {
     const signupStatus = getSignupToken();
     let redirectVar = null;
@@ -463,6 +461,7 @@ class PostSignUp extends Component {
                                   maxlength="10"
                                   class="onboarding-input onboarding-profile-location__postal-field ember-text-field ember-view"
                                   type="text"
+                                  placeholder="Postal code"
                                   onChange={this.zipcodeChangeHandler}
                                 />
 

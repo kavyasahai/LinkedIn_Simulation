@@ -39,43 +39,30 @@ class ApplicantDetails extends Component {
     });
   };
   submitLogin = e => {
-    var headers = new Headers();
-    //prevent page from refresh
-    e.preventDefault();
-    const data = {
-      jobTitle: this.state.jobtitle,
-      company: this.state.company,
-      username: this.props.username
-    };
-    //set the with credentials to true
-    axios.defaults.withCredentials = true;
-    console.log("post details data", data);
-    this.props.proDetails(data);
+    const { jobtitle, company } = this.state;
+    if (jobtitle == "") window.alert("Job title cannot be empty.");
+    else if (jobtitle.length > 30)
+      window.alert("Job title cannot be more than 30 characters long");
+    else if (!/^[a-zA-Z\s]*$/.test(jobtitle))
+      window.alert("Job title should contain only alphabets");
+    else if (company == "") window.alert("Company cannot be empty.");
+    else if (company.length > 30)
+      window.alert("Company cannot be more than 30 characters long");
+    else {
+      //prevent page from refresh
+      e.preventDefault();
+      const data = {
+        jobTitle: this.state.jobtitle,
+        company: this.state.company,
+        username: this.props.username
+      };
+      //set the with credentials to true
+      axios.defaults.withCredentials = true;
+      console.log("post details data", data);
+      this.props.proDetails(data);
+    }
   };
-  // usernameChangeHandler = (e) => {
-  //     this.setState({
-  //         username : e.target.value
-  //     })
-  // }
-  // // //password change handler to update state variable with the text entered by the user
-  // passwordChangeHandler = (e) => {
-  //     this.setState({
-  //         password : e.target.value
-  //     })
-  // }
-  // // //submit Login handler to send a request to the node backend
-  // submitLogin = (e) => {
-  //     var headers = new Headers();
-  //     //prevent page from refresh
-  //     e.preventDefault();
-  //     const data = {
-  //         email:this.state.username,
-  //         password : this.state.password
-  //     }
-  //     //set the with credentials to true
-  //     axios.defaults.withCredentials = true;
-  //     this.props.onSubmitHandle(data);
-  // }
+
   render() {
     const signupStatus = getSignupToken();
 
@@ -218,6 +205,7 @@ class ApplicantDetails extends Component {
                                         id="typeahead-input-for-title"
                                         type="text"
                                         onChange={this.jobChangeHandler}
+                                        placeholder="Most recent job title"
                                       />
                                     </artdeco-typeahead-deprecated-input>
                                   </artdeco-typeahead-deprecated>
@@ -260,6 +248,7 @@ class ApplicantDetails extends Component {
                                     id="typeahead-input-for-company"
                                     type="text"
                                     onChange={this.companyChangeHandler}
+                                    placeholder="Most recent company"
                                   />
                                   <div
                                     role="status"
