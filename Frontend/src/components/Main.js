@@ -18,6 +18,7 @@ import PostAJob from "./Recruiter/PostAJob";
 import jobDetails from "./Job/jobDetails";
 import jobFilter from "./Job/jobFilter";
 import jobSearch from "./Job/jobSearch.jsx";
+import Homepage from "./Applicant/Homepage";
 
 import { Provider } from "react-redux";
 import PrivateRoute from "./common/PrivateRoute";
@@ -53,6 +54,11 @@ class Main extends Component {
                 path="/recruiterdashboardtop5"
                 exact
                 component={RecruiterDashboardTop5}
+              />
+              <Route
+                path="/homepage"
+                exact
+                component={Homepage}
               />
               <Route
                 path="/recruiterdashboardjobclicks"

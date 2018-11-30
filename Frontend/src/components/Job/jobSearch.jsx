@@ -61,7 +61,7 @@ class JobSearch extends Component {
     const data = {
       Job: this.state.Job,
       Location: this.state.Location,
-      uername=getJWTUsername()
+      
     };
     console.log(data);
     this.props.searchJob(data, () => {
