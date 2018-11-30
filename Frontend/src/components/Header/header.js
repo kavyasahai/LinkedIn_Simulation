@@ -371,7 +371,7 @@ class Homepage extends Component {
                     lang="en"
                   >
                     <a
-                      href="/feed/"
+                      href="/home"
                       data-alias=""
                       data-link-to="feed"
                       data-resource="feed/badge"
@@ -465,7 +465,7 @@ class Homepage extends Component {
                     lang="en"
                   >
                     <a
-                      href="/jobs/"
+                      href="/job-search"
                       data-alias=""
                       data-link-to="jobs"
                       data-resource=""

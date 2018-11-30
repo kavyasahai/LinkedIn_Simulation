@@ -86,7 +86,7 @@ class Homepage extends Component {
         {redirectVar}
         <body
           dir="ltr"
-          class="render-mode-BIGPIPE nav-v2 ember-application boot-complete icons-loaded"
+          class="render-mode-BIGPIPE nav-v2 ember-application boot-complete icons-loaded home_container"
           data-t-link-to-event-attached="true"
         >
           <nav
@@ -439,7 +439,7 @@ class Homepage extends Component {
                     lang="en"
                   >
                     <a
-                      href="/feed/"
+                      href="/home"
                       data-alias=""
                       data-link-to="feed"
                       data-resource="feed/badge"
@@ -533,7 +533,7 @@ class Homepage extends Component {
                     lang="en"
                   >
                     <a
-                      href="/jobs/"
+                      href="/job-search"
                       data-alias=""
                       data-link-to="jobs"
                       data-resource=""

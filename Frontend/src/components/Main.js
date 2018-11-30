@@ -17,7 +17,7 @@ import PostAJob from "./Recruiter/postAJob";
 import jobDetails from "./Job/jobDetails";
 import jobFilter from "./Job/jobFilter";
 import jobSearch from "./Job/jobSearch.jsx";
-import Homepage from "./Applicant/homePage";
+import Homepage from "./Applicant/home";
 
 import { Provider } from "react-redux";
 import PrivateRoute from "./common/privateRoute";
