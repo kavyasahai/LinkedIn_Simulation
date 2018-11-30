@@ -20,6 +20,9 @@ class RecruiterDashboardCityWise extends Component {
   handleFilter3 = () => {
     this.props.history.push("/recruiterdashboardtop5");
   };
+  handleFilter4 = () => {
+    this.props.history.push("/recruiterdashboardjobclicks");
+  };
 
   handleSelectJob = () => {
     var job_select = document.getElementById("dashboard_select");
@@ -107,6 +110,10 @@ class RecruiterDashboardCityWise extends Component {
         <div className="sidebar_dashboard">
           <a href="#" onClick={this.handleFilter1}>
             Top 10 job postings
+          </a>
+          <br /> <br /> <br />
+          <a href="#" onClick={this.handleFilter4}>
+            Number of clicks per job posting
           </a>
           <br /> <br /> <br />
           <a href="#">

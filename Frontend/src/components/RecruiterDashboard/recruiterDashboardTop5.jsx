@@ -12,6 +12,9 @@ class RecruiterDashboardTop5 extends Component {
     this.props.getRecruiterDashboardTop5(username);
   }
 
+  handleFilter4 = () => {
+    this.props.history.push("/recruiterdashboardjobclicks");
+  };
   handleFilter2 = () => {
     this.props.history.push("/recruiterdashboardcitywise");
   };
@@ -36,6 +39,10 @@ class RecruiterDashboardTop5 extends Component {
         <div className="sidebar_dashboard">
           <a href="#" onClick={this.handleFilter1}>
             Top 10 job postings
+          </a>
+          <br /> <br /> <br />
+          <a href="#" onClick={this.handleFilter4}>
+            Number of clicks per job posting
           </a>
           <br /> <br /> <br />
           <a href="#" onClick={this.handleFilter2}>

@@ -356,6 +356,22 @@ app.get("/getProfileViews", function(request, response) {
     }
   });
 });
+
+app.get("/getClicksPerJob", function(request, response) {
+  console.log("Job Clicks: ", request.query);
+  kafka.make_request("get_clicksperjob", request.query, function(err, result) {
+    console.log(result);
+    if (err) {
+      response.json({
+        status: "error",
+        msg: "Error in retrieving data."
+      });
+    } else {
+      response.send(result);
+    }
+  });
+});
+
 app.get("/recruiter/posted_applications", requireAuth, function(
   request,
   response

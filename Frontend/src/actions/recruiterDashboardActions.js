@@ -81,13 +81,13 @@ export const getRecruiterDashboardCity = jobId => async dispatch => {
   }
 };
 
-export const getClicksPerJob = () => async dispatch => {
+export const getClicksPerJob = username => async dispatch => {
   try {
     setHeader();
 
     const res = await axios.get(`${ROOT_URL}/getClicksPerJob`, {
       params: {
-        email: getJWTUsername()
+        email: username
       }
     });
     dispatch({
@@ -102,13 +102,13 @@ export const getClicksPerJob = () => async dispatch => {
   }
 };
 
-// export const getNumSavedJobs = () => async dispatch => {
+// export const getNumSavedJobs = username => async dispatch => {
 //   try {
 //     setHeader();
 
 //     const res = await axios.get(`${ROOT_URL}/getNumSavedJobs`, {
 //       params: {
-//         email: localStorage.getItem("email")
+//         email: username
 //       }
 //     });
 //     dispatch({
@@ -123,13 +123,13 @@ export const getClicksPerJob = () => async dispatch => {
 //   }
 // };
 
-// export const getJobTrace = () => async dispatch => {
+// export const getJobTrace = username => async dispatch => {
 //   try {
 //     setHeader();
 
 //     const res = await axios.get(`${ROOT_URL}/getJobTrace`, {
 //       params: {
-//         email: localStorage.getItem("email")
+//         email: username
 //       }
 //     });
 //     dispatch({

@@ -55,7 +55,7 @@ class Main extends Component {
                 component={RecruiterDashboardTop5}
               />
               <Route
-                path="/clicksPerJob"
+                path="/recruiterdashboardjobclicks"
                 exact
                 component={RecruiterDashboardJobClicks}
               />

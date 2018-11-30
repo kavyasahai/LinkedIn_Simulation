@@ -3,74 +3,82 @@ import "../../css/recruiterDashboard.css";
 import Chart from "react-google-charts";
 import { connect } from "react-redux";
 import { getClicksPerJob } from "../../actions/recruiterDashboardActions";
+import Header from "../Header/header";
+import { getJWTUsername } from "../common/auth";
 
 class recruiterDashboardJobClicks extends Component {
   componentDidMount() {
-    this.props.getClicksPerJob();
+    var username = getJWTUsername();
+    this.props.getClicksPerJob(username);
   }
+  handleFilter1 = () => {
+    this.props.history.push("/recruiterdashboardtop10");
+  };
+  handleFilter3 = () => {
+    this.props.history.push("/recruiterdashboardtop5");
+  };
+  handleFilter2 = () => {
+    this.props.history.push("/recruiterdashboardcitywise");
+  };
+
   render() {
-    var week_start = new Date();
-    week_start.setDate(week_start.getDate() - 7);
+    console.log("PROPS: ", this.props.data_jobclicks);
 
-    var allviews = {};
-    var total_views = this.props.data_profileviews.length;
-    var profileviews = this.props.data_profileviews;
+    const data = [["Job Posting", "Clicks"]];
 
-    profileviews = profileviews.filter(v => {
-      const a = new Date(v.viewDate);
-      const b = new Date(week_start);
-      return new Date(a.getDate()) >= new Date(b.getDate());
-    });
+    this.props.data_jobclicks &&
+      this.props.data_jobclicks.forEach(job => {
+        data.push([job.title + " at " + job.company, parseInt(job.clicks)]);
+      });
 
-    const monthNames = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec"
-    ];
-
-    var i;
-    for (i = 29; i >= 0; i--) {
-      var date = new Date();
-      date.setDate(date.getDate() - i);
-      var datestring = monthNames[date.getMonth()] + " " + date.getDate();
-      allviews[datestring] = 0;
-    }
-
-    this.props.data_profileviews.forEach(eachview => {
-      var date = new Date(eachview.viewDate);
-      var datestring = monthNames[date.getMonth()] + " " + date.getDate();
-      allviews[datestring]++;
-    });
-
-    const data = [["Day", "views"]];
-
-    for (const [date, numviews] of Object.entries(allviews)) {
-      data.push([date, numviews]);
-    }
+    console.log("DATA", data);
 
     return (
       <React.Fragment>
-        <div className="displayviews">
+        <Header />
+        <div className="sidebar_dashboard">
+          <a href="#" onClick={this.handleFilter1}>
+            Top 10 job postings
+          </a>
+          <br /> <br /> <br />
+          <a href="#" onClick={this.handleFilter4}>
+            Number of clicks per job posting
+          </a>
+          <br /> <br /> <br />
+          <a href="#" onClick={this.handleFilter2}>
+            City-wise applications for a job posting
+          </a>
+          <br /> <br /> <br />
+          <a href="#">
+            <span className="active_link">
+              Top 5 job postings with least number of applications
+            </span>
+          </a>
+        </div>
+        <div className="displayCharts">
           <Chart
-            chartType="AreaChart"
-            loader={<div>Loading Chart</div>}
-            width="100vw"
             height="30vw"
-            options={{
-              //   isStacked: true,
-              title: `${total_views} profile viewers in the past 30 days`
-            }}
+            chartType="BarChart"
+            loader={<div>Loading Chart</div>}
             data={data}
+            options={{
+              title: "Clicks per Job Posting",
+              chartArea: { width: "50%" },
+              hAxis: {
+                title: "Number of Clicks",
+                minValue: 0
+              },
+              vAxis: {
+                title: "Job Posting"
+              }
+            }}
+            // For tests
+            rootProps={{ "data-testid": "1" }}
           />
+          <br />
+          <br />
+          <br />
+          <br />
         </div>
       </React.Fragment>
     );
@@ -78,7 +86,7 @@ class recruiterDashboardJobClicks extends Component {
 }
 
 const mapStateToProps = state => ({
-  data_profileviews: state.getProfileViewsReducer.data_profileviews
+  data_jobclicks: state.recruiterDashboard.data_jobclicks
 });
 
 export default connect(

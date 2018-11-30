@@ -17,6 +17,10 @@ class RecruiterDashboardTop10 extends Component {
   handleFilter3 = () => {
     this.props.history.push("/recruiterdashboardtop5");
   };
+
+  handleFilter4 = () => {
+    this.props.history.push("/recruiterdashboardjobclicks");
+  };
   render() {
     console.log("props=", this.props.data_top10);
     const data = [
@@ -53,6 +57,10 @@ class RecruiterDashboardTop10 extends Component {
         <div className="sidebar_dashboard">
           <a href="#">
             <span className="active_link">Top 10 job postings</span>
+          </a>
+          <br /> <br /> <br />
+          <a href="#" onClick={this.handleFilter4}>
+            Number of clicks per job posting
           </a>
           <br /> <br /> <br />
           <a href="#" onClick={this.handleFilter2}>
