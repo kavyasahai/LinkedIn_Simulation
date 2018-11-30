@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../../css/jobSearch.css";
-
+import "../common/auth"
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -9,6 +9,7 @@ import supportingImage4 from "../../images/supportingImage4.jpg";
 import supportingImage2 from "../../images/supportingImage2.png";
 import { searchJob, saveJob, applyJob } from "../../actions/jobActions";
 import Home from './jobFilter'
+import { getJWTUsername } from "../common/auth";
 
 class JobSearch extends Component {
   constructor(props) {
@@ -59,7 +60,8 @@ class JobSearch extends Component {
     console.log("Clicked")
     const data = {
       Job: this.state.Job,
-      Location: this.state.Location
+      Location: this.state.Location,
+      uername=getJWTUsername()
     };
     console.log(data);
     this.props.searchJob(data, () => {
