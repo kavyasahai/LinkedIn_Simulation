@@ -17,51 +17,15 @@ class UserSchoolData extends Component {
     //     password : ""
     // }
     //Bind the handlers to this class
-    // this.firstnameChangeHandler = this.firstnameChangeHandler.bind(this);
-    // this.lastnameChangeHandler = this.lastnameChangeHandler.bind(this);
-    //  this.usernameChangeHandler = this.usernameChangeHandler.bind(this);
-    // this.passwordChangeHandler = this.passwordChangeHandler.bind(this);
-    // this.submitLogin = this.submitLogin.bind(this);
+    this.submitSchoolDetails = this.submitSchoolDetails.bind(this);
   }
   //Call the Will Mount to set the auth Flag to false
   componentWillMount() {}
-  //username change handler to update state variable with the text entered by the user
-  // firstnameChangeHandler = (e) => {
-  //     this.setState({
-  //         firstname : e.target.value
-  //     })
-  // }
 
-  // lastnameChangeHandler = (e) => {
-  //     this.setState({
-  //         lastname : e.target.value
-  //     })
-  // }
+  submitSchoolDetails = e => {
+    //handle form errors here
+  };
 
-  // usernameChangeHandler = (e) => {
-  //     this.setState({
-  //         username : e.target.value
-  //     })
-  // }
-  // // //password change handler to update state variable with the text entered by the user
-  // passwordChangeHandler = (e) => {
-  //     this.setState({
-  //         password : e.target.value
-  //     })
-  // }
-  // // //submit Login handler to send a request to the node backend
-  // submitLogin = (e) => {
-  //     var headers = new Headers();
-  //     //prevent page from refresh
-  //     e.preventDefault();
-  //     const data = {
-  //         email:this.state.username,
-  //         password : this.state.password
-  //     }
-  //     //set the with credentials to true
-  //     axios.defaults.withCredentials = true;
-  //     this.props.onSubmitHandle(data);
-  // }
   render() {
     const signupStatus = getSignupToken();
 
@@ -202,6 +166,7 @@ class UserSchoolData extends Component {
                                         aria-expanded="false"
                                         id="typeahead-input-for-school-name"
                                         type="text"
+                                        placeholder="School or College/University"
                                       />
                                     </div>
                                     <div
@@ -244,7 +209,7 @@ class UserSchoolData extends Component {
                                           class="onboarding-input ember-view"
                                         >
                                           {" "}
-                                          <option value="">-</option>
+                                          <option value="">Start year</option>
                                           <option value="2018">2018</option>
                                           <option value="2017">2017</option>
                                           <option value="2016">2016</option>
@@ -332,7 +297,9 @@ class UserSchoolData extends Component {
                                           class="onboarding-input ember-view"
                                         >
                                           {" "}
-                                          <option value="">-</option>
+                                          <option value="">
+                                            End year (or expected)
+                                          </option>
                                           <option value="2025">2025</option>
                                           <option value="2024">2024</option>
                                           <option value="2023">2023</option>
@@ -476,7 +443,7 @@ class UserSchoolData extends Component {
                                             class="onboarding-input ember-view"
                                           >
                                             {" "}
-                                            <option value="">-</option>
+                                            <option value="">Month</option>
                                             <option value="1">January</option>
                                             <option value="2">February</option>
                                             <option value="3">March</option>
@@ -510,7 +477,7 @@ class UserSchoolData extends Component {
                                             class="onboarding-input ember-view"
                                           >
                                             {" "}
-                                            <option value="">-</option>
+                                            <option value="">Day</option>
                                             <option value="1">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>
@@ -563,7 +530,7 @@ class UserSchoolData extends Component {
                                             class="onboarding-input ember-view"
                                           >
                                             {" "}
-                                            <option value="">-</option>
+                                            <option value="">Year</option>
                                             <option value="2018">2018</option>
                                             <option value="2017">2017</option>
                                             <option value="2016">2016</option>
@@ -662,6 +629,7 @@ onboarding-profile-edu__accordion--is-collapsed mt0
 
                                 <button
                                   data-control-name="profile_edu_continue"
+                                  onClick={this.submitSchoolDetails}
                                   disabled=""
                                   id="ember2607"
                                   class="onboarding-widget__cta onboarding-profile-cta button-primary-x-large full-width ember-view"

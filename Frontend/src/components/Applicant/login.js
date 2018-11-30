@@ -55,10 +55,16 @@ class Login extends Component {
   };
   // //submit Login handler to send a request to the node backend
   submitLogin = e => {
-    console.log("in submit login");
-    if (this.state.username == "" || this.state.password == "") {
-      alert("Username and password are required");
-    } else {
+    const { username, password } = this.state;
+    if (username == "") window.alert("Email cannot be empty.");
+    else if (username.length > 30)
+      window.alert("Email cannot be more than 30 characters long.");
+    else if (!/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(username))
+      window.alert("Email should be a valid email-address.");
+    else if (password == "") window.alert("Password cannot be empty.");
+    else if (password.length > 20 || password.length < 6)
+      window.alert("Password should be between 6-20 characters");
+    else {
       var headers = new Headers();
       //prevent page from refresh
       e.preventDefault();
@@ -84,21 +90,41 @@ class Login extends Component {
     }
   };
   submitRegister = e => {
-    console.log("in submit register");
-    var headers = new Headers();
-    //prevent page from refresh
-    e.preventDefault();
-    const data = {
-      username: this.state.username,
-      password: this.state.password,
-      firstname: this.state.firstname,
-      lastname: this.state.lastname
-    };
-    console.log("data in submit register", data);
-    //set the with credentials to true
-    axios.defaults.withCredentials = true;
-    this.props.register(data);
-    localStorage.setItem("signup", this.state.username);
+    const { username, password, firstname, lastname } = this.state;
+    if (firstname == "") window.alert("First Name cannot be empty.");
+    else if (firstname.length > 30)
+      window.alert("First Name cannot be more than 30 characters long.");
+    else if (!/^[a-zA-Z]*$/.test(firstname))
+      window.alert("First Name should contain only alphabets.");
+    else if (lastname == "") window.alert("Last Name cannot be empty.");
+    else if (lastname.length > 30)
+      window.alert("Last Name cannot be more than 30 characters long.");
+    else if (!/^[a-zA-Z]*$/.test(lastname))
+      window.alert("Last Name should contain only alphabets.");
+    else if (username == "") window.alert("Email cannot be empty.");
+    else if (username.length > 30)
+      window.alert("Email cannot be more than 30 characters long.");
+    else if (!/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(username))
+      window.alert("Email should be a valid email-address.");
+    else if (password == "") window.alert("Password cannot be empty.");
+    else if (password.length > 20 || password.length < 6)
+      window.alert("Password should be between 6-20 characters");
+    else {
+      var headers = new Headers();
+      //prevent page from refresh
+      e.preventDefault();
+      const data = {
+        username: this.state.username,
+        password: this.state.password,
+        firstname: this.state.firstname,
+        lastname: this.state.lastname
+      };
+      console.log("data in submit register", data);
+      //set the with credentials to true
+      axios.defaults.withCredentials = true;
+      this.props.register(data);
+      localStorage.setItem("signup", this.state.username);
+    }
   };
   render() {
     const token = getToken();
