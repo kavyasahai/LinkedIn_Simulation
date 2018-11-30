@@ -35,7 +35,6 @@ export default function(state = initialState, action) {
       };
 
     case APPLICANT_SIGNUP:
-      console.log("payload=", action.payload);
       return {
         ...state,
         inserted: true,

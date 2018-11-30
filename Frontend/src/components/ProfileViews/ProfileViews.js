@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "../../css/recruiterDashboard.css";
 import Chart from "react-google-charts";
 import { connect } from "react-redux";
-import { getProfileViews } from "../../actions/getProfileViewsAction";
+import { getProfileViews } from "../../actions/profileViewsAction";
 
 class ProfileViews extends Component {
   componentDidMount() {

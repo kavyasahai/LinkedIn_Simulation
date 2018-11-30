@@ -43,23 +43,6 @@ export const locationData = data => async dispatch => {
   }
 };
 
-// export const login = data => async dispatch => {
-//   try {
-//     setHeader();
-//     const res = await axios.post(`${ROOT_URL}/login`, data);
-//     dispatch({
-//       type: APPLICANT_LOGIN,
-//       payload: res.data.updatedList,
-//       statusCode: res.status
-//     });
-//   } catch (e) {
-//     return {
-//       type: APPLICANT_LOGIN,
-//       payload: e
-//     };
-//   }
-// };
-
 export function login(data, callback) {
   try {
     setHeader();

@@ -10,7 +10,6 @@ class App extends Component {
       //Use Browser Router to route to different pages
       <BrowserRouter>
         <div>
-          {/* App Component Has a Child Component called Main*/}
           <Main />
         </div>
       </BrowserRouter>

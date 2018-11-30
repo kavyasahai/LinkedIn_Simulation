@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 import { reducer as formReducer } from "redux-form";
 import applicantReducer from "./applicantReducer";
 import recruiterDashboardReducer from "./recruiterDashboardReducer";
-import getProfileViewsReducer from "./getProfileViewsReducer";
+import getProfileViewsReducer from "./profileViewsReducer";
 import recruiterReducer from "./recruiterReducer";
 import jobReducer from "./jobReducer";
 

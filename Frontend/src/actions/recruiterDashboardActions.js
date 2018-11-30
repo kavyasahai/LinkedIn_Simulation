@@ -6,7 +6,7 @@ import {
   RECRUITER_DASHBOARD_CITY,
   RECRUITER_DASHBOARD_JOB_CLICKS
 } from "./types";
-import { setHeader, getJWTUsername } from "../components/common/auth";
+import { setHeader } from "../components/common/auth";
 
 const ROOT_URL = "http://localhost:3001";
 
