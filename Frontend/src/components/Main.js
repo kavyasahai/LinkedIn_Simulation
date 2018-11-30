@@ -5,6 +5,8 @@ import NotFound from "./common/notFound";
 import RecruiterDashboardCityWise from "./RecruiterDashboard/recruiterDashboardCityWise";
 import RecruiterDashboardTop10 from "./RecruiterDashboard/recruiterDashboardTop10";
 import RecruiterDashboardTop5 from "./RecruiterDashboard/recruiterDashboardTop5";
+import RecruiterDashboardJobClicks from "./RecruiterDashboard/recruiterDashboardJobClicks";
+
 import Login from "./Applicant/login";
 import PostSignUp from "./Applicant/postSignUp";
 import ApplicantDetails from "./Applicant/applicantDetails";
@@ -19,11 +21,6 @@ import promise from "redux-promise";
 import { Provider } from "react-redux";
 import PrivateRoute from "./common/PrivateRoute";
 
-//middleware settings
-// To resolve promise to store we use apply
-// const composePlugin = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-// const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
-// const store = createStore(rootReducer, composePlugin(applyMiddleware(promise)));
 import store from "../store";
 
 //Create a Main Component
@@ -56,6 +53,12 @@ class Main extends Component {
                 exact
                 component={RecruiterDashboardTop5}
               />
+              <Route
+                path="/clicksPerJob"
+                exact
+                component={RecruiterDashboardJobClicks}
+              />
+
               <Route path="/profileviews" exact component={ProfileViews} />
               <PrivateRoute path="/recruiter" component={Recruiter} />
               <Route path="/recruiter/post-a-job" component={PostAJob} />

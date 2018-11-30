@@ -3,9 +3,10 @@ import {
   RECRUITER_DASHBOARD_TOP10,
   RECRUITER_DASHBOARD_TOP5,
   GET_RECRUITER_JOBS,
-  RECRUITER_DASHBOARD_CITY
+  RECRUITER_DASHBOARD_CITY,
+  RECRUITER_DASHBOARD_JOB_CLICKS
 } from "./types";
-import { setHeader } from "../components/common/auth";
+import { setHeader, getJWTUsername } from "../components/common/auth";
 
 const ROOT_URL = "http://localhost:3001";
 
@@ -80,26 +81,26 @@ export const getRecruiterDashboardCity = jobId => async dispatch => {
   }
 };
 
-// export const getClicksPerJob = () => async dispatch => {
-//   try {
-//     setHeader();
+export const getClicksPerJob = () => async dispatch => {
+  try {
+    setHeader();
 
-//     const res = await axios.get(`${ROOT_URL}/getClicksPerJob`, {
-//       params: {
-//         email: localStorage.getItem("email")
-//       }
-//     });
-//     dispatch({
-//       type: RECRUITER_DASHBOARD_JOB_CLICKS,
-//       payload: res.data
-//     });
-//   } catch (e) {
-//     return {
-//       type: RECRUITER_DASHBOARD_JOB_CLICKS,
-//       payload: e
-//     };
-//   }
-// };
+    const res = await axios.get(`${ROOT_URL}/getClicksPerJob`, {
+      params: {
+        email: getJWTUsername()
+      }
+    });
+    dispatch({
+      type: RECRUITER_DASHBOARD_JOB_CLICKS,
+      payload: res.data
+    });
+  } catch (e) {
+    return {
+      type: RECRUITER_DASHBOARD_JOB_CLICKS,
+      payload: e
+    };
+  }
+};
 
 // export const getNumSavedJobs = () => async dispatch => {
 //   try {
