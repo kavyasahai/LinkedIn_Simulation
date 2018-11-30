@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../../css/jobSearch.css";
-import jobFilter from "./jobFilter";
+
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -8,6 +8,7 @@ import Modal from "react-responsive-modal";
 import supportingImage4 from "../../images/supportingImage4.jpg";
 import supportingImage2 from "../../images/supportingImage2.png";
 import { searchJob, saveJob, applyJob } from "../../actions/jobActions";
+import Home from './jobFilter'
 
 class JobSearch extends Component {
   constructor(props) {
@@ -424,20 +425,28 @@ class JobSearch extends Component {
           <div class="icon">
             <i class="fa fa-linkedin-square" />
           </div>
-          <div class="inputfield ">
+
+         
+            <div class="row">
+            <div col="col-2">
             <input
-              class="search"
+              className="jobsearch"
               type="text"
               placeholder="Search"
               onChange={this.SearchChangeHandler}
             />
+            </div>
+            <div col="col-2">
             <input
-              class="search"
+              className="jobsearch"
               type="text"
               placeholder="Job Location"
               onChange={this.LocationChangeHandler}
             />
-          </div>
+            </div>
+           
+            </div>
+         
           <button class="Button" onClick={this.Search}>
             Search
           </button>
@@ -447,7 +456,7 @@ class JobSearch extends Component {
           </div>
         </div>
         <div>
-          <jobFilter />
+         <Home/>
         </div>
 
         <div>

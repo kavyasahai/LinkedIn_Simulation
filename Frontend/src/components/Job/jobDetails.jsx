@@ -6,6 +6,7 @@ import Modal from "react-responsive-modal";
 import supportingImage2 from "../../images/supportingImage2.png";
 import "../../css/jobDetails.css";
 
+
 class JobDetails extends Component {
   constructor(props) {
     //Call the constrictor of Super class i.e The Component
