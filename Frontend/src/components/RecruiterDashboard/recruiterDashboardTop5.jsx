@@ -4,10 +4,11 @@ import Chart from "react-google-charts";
 import Header from "../Header/header";
 import { connect } from "react-redux";
 import { getRecruiterDashboardTop5 } from "../../actions/recruiterDashboardActions";
+import { getJWTUsername } from "../common/auth";
 
 class RecruiterDashboardTop5 extends Component {
   componentDidMount() {
-    var username = localStorage.getItem("email");
+    var username = getJWTUsername();
     this.props.getRecruiterDashboardTop5(username);
   }
 
@@ -18,11 +19,13 @@ class RecruiterDashboardTop5 extends Component {
     this.props.history.push("/recruiterdashboardtop10");
   };
   render() {
-    // console.log("props=", this.props.data_top5);
+    console.log("props=", this.props.data_top5);
     var data = [["Job", "Number of Applications"]];
     for (var index = 0; index < this.props.data_top5.length; index++) {
       data[index + 1] = [
-        this.props.data_top5[index]._id.jobId,
+        this.props.data_top5[index]._id
+          ? this.props.data_top5[index]._id.jobId
+          : "",
         this.props.data_top5[index].count
       ];
     }

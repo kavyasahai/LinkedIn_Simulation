@@ -4,10 +4,11 @@ import Chart from "react-google-charts";
 import { connect } from "react-redux";
 import { getRecruiterDashboardTop10 } from "../../actions/recruiterDashboardActions";
 import Header from "../Header/header";
+import { getJWTUsername } from "../common/auth";
 
 class RecruiterDashboardTop10 extends Component {
   componentDidMount() {
-    var username = localStorage.getItem("email");
+    var username = getJWTUsername();
     this.props.getRecruiterDashboardTop10(username);
   }
   handleFilter2 = () => {

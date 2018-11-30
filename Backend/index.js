@@ -14,6 +14,12 @@ var morgan = require("morgan");
 var requireAuth = passport.authenticate("jwt", { session: false });
 var crypt = require("./app/crypt");
 var db = require("./app/db");
+var config = require("../Backend/config/database");
+var jwt = require("jsonwebtoken");
+var redis = require("redis");
+var client = redis.createClient();
+const multer = require("multer");
+
 app.use(morgan("dev"));
 var kafka = require("./kafka/client");
 require("./db/mongoose");
@@ -53,28 +59,136 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.post("/login", function(request, response) {
-  console.log("in request login", request.body.data);
-  kafka.make_request("linkedinlogin", request.body, function(err, results) {
-    console.log("in result");
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "./uploads");
+  },
+  filename: (req, file, cb) => {
+    //const newFilename = `${path.extname(file.originalname)}`;
+    cb(null, file.originalname);
+  }
+});
+
+const upload = multer({ storage });
+//const app = express();
+app.post("/", upload.any(), (req, res) => {
+  //console.log("Req : ",req);
+  console.log("Res : ", res.file);
+  console.log(req.body);
+  ImageInsert = req.body.description;
+
+  console.log(ImageInsert);
+
+  res.send();
+});
+
+app.post("/download/:file(*)", (req, res) => {
+  console.log("Inside download file");
+  var file = req.params.file;
+  var fileLocation = path.join(__dirname + "/uploads", file);
+  var img = fs.readFileSync(fileLocation);
+  var base64img = new Buffer(img).toString("base64");
+
+  res.writeHead(200, { "Content-Type": "image/png" });
+  res.end(base64img);
+});
+
+app.post("/searchJob", function(request, response) {
+  console.log("Search Job Post Request");
+  kafka.make_request("jobSearch_topic", request.body, function(err, results) {
     console.log(results);
     if (err) {
-      console.log("Inside err");
+      response.json({
+        status: "error",
+        msg: "Error in retrieving data."
+      });
+    } else {
+      response.send(JSON.stringify(results));
+    }
+  });
+});
+
+app.post("/saveJob", function(req, res) {
+  console.log(req.body);
+  var save = new savejob({
+    JobID: req.body.jobid,
+    Timestamp: req.body.timestamp,
+    UserID: "Kesha@gmail.com"
+  });
+  save.save().then(docs => {
+    console.log("Row Created : ", docs);
+    res.end("ok");
+  });
+});
+
+app.post("/applyJob", function(req, res) {
+  console.log(req.body);
+  var save = new Applyjob({
+    JobID: req.body.jobid,
+    Timestamp: req.body.timestamp,
+    UserID: "Kesha@gmail.com"
+  });
+  save.save().then(docs => {
+    console.log("Row Created : ", docs);
+    res.end("ok");
+  });
+});
+
+app.post("/login", function(request, response) {
+  console.log("in request login", request.body.data);
+  var sqlQuery =
+    "SELECT * FROM users WHERE username = '" + request.body.username + "';";
+  console.log(sqlQuery);
+
+  client.get(sqlQuery, function(error, result) {
+    console.log("INSIDE REDIS GET KEY");
+    if (error) {
+      console.log("REDIS GET ERROR.");
       res.json({
         status: "error",
         msg: "System Error, Try Again."
       });
     } else {
-      console.log("Inside else");
-      console.log(results);
-      response.json({
-        updatedList: results
-      });
+      if (result == null) {
+        console.log("INSIDE REDIS NO KEY FOUND");
+        kafka.make_request("linkedinlogin", request.body, function(
+          err,
+          results
+        ) {
+          console.log("in result");
+          console.log(results);
+          if (err) {
+            console.log("Inside err");
+            res.json({
+              status: "error",
+              msg: "System Error, Try Again."
+            });
+          } else {
+            console.log("Inside else");
+            console.log(results);
+            response.json({
+              updatedList: results
+            });
 
-      response.end();
+            response.end();
+          }
+        });
+      } else {
+        console.log("INSIDE REDIS KEY FOUND AND GETTING KEY");
+        console.log("KEY VALUE fOUND: ", result);
+        var data = { username: request.body.username };
+        var token = jwt.sign(data, config.secret, { expiresIn: 600000 });
+        console.log("token=", token);
+        const newToken = "Bearer " + token;
+        console.log("token=", newToken);
+        response.json({
+          updatedList: newToken
+        });
+      }
     }
   });
 });
+
 app.post("/register", function(request, response) {
   console.log("In signup method");
   kafka.make_request("linkedinsignup", request.body, function(err, results) {
@@ -229,7 +343,7 @@ app.get("/getRecruiterDashboardCity/:jobId", function(request, response) {
 });
 
 app.get("/getProfileViews", function(request, response) {
-  console.log("Profile Views");
+  console.log("Profile Views", request.query);
   kafka.make_request("get_profileviews", request.query, function(err, result) {
     console.log(result);
     if (err) {

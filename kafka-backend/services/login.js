@@ -37,22 +37,12 @@ function handle_request(msg, callback) {
         function(err, isMatch) {
           if (isMatch && !err) {
             // Create token if the password matched and no error was thrown
-            var token = jwt.sign(user, config.secret, {
-              expiresIn: 10080 // in seconds
-            });
+            var data = { username: msg.username };
+            var token = jwt.sign(data, config.secret, { expiresIn: 600000 });
             console.log("token=", token);
             const newToken = "Bearer " + token;
             console.log("token=", newToken);
             callback(null, newToken);
-
-            // var resData = {
-            //   authFlag: true,
-            //   username: msg.username,
-            //   firstname: res.firstname,
-            //   status: 200
-            // };
-            // console.log("success");
-            // callback(null, resData);
           } else {
             resData = {
               status: 400

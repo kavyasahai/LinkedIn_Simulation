@@ -79,3 +79,66 @@ export const getRecruiterDashboardCity = jobId => async dispatch => {
     };
   }
 };
+
+// export const getClicksPerJob = () => async dispatch => {
+//   try {
+//     setHeader();
+
+//     const res = await axios.get(`${ROOT_URL}/getClicksPerJob`, {
+//       params: {
+//         email: localStorage.getItem("email")
+//       }
+//     });
+//     dispatch({
+//       type: RECRUITER_DASHBOARD_JOB_CLICKS,
+//       payload: res.data
+//     });
+//   } catch (e) {
+//     return {
+//       type: RECRUITER_DASHBOARD_JOB_CLICKS,
+//       payload: e
+//     };
+//   }
+// };
+
+// export const getNumSavedJobs = () => async dispatch => {
+//   try {
+//     setHeader();
+
+//     const res = await axios.get(`${ROOT_URL}/getNumSavedJobs`, {
+//       params: {
+//         email: localStorage.getItem("email")
+//       }
+//     });
+//     dispatch({
+//       type: RECRUITER_NUM_SAVED_JOB,
+//       payload: res.data
+//     });
+//   } catch (e) {
+//     return {
+//       type: RECRUITER_NUM_SAVED_JOB,
+//       payload: e
+//     };
+//   }
+// };
+
+// export const getJobTrace = () => async dispatch => {
+//   try {
+//     setHeader();
+
+//     const res = await axios.get(`${ROOT_URL}/getJobTrace`, {
+//       params: {
+//         email: localStorage.getItem("email")
+//       }
+//     });
+//     dispatch({
+//       type: RECRUITER_TRACE_JOB,
+//       payload: res.data
+//     });
+//   } catch (e) {
+//     return {
+//       type: RECRUITER_TRACE_JOB,
+//       payload: e
+//     };
+//   }
+// };

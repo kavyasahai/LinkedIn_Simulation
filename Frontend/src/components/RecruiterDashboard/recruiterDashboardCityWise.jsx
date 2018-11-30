@@ -7,10 +7,11 @@ import {
   getRecruiterDashboardCity
 } from "../../actions/recruiterDashboardActions";
 import { connect } from "react-redux";
+import { getJWTUsername } from "../common/auth";
 
 class RecruiterDashboardCityWise extends Component {
   componentDidMount() {
-    var username = localStorage.getItem("email");
+    var username = getJWTUsername();
     this.props.getRecruiterJobs(username);
   }
   handleFilter1 = () => {
@@ -27,16 +28,15 @@ class RecruiterDashboardCityWise extends Component {
 
     var x = document.getElementById("displayChartsCity");
     x.style.display = "block";
-    // if (x.style.display === "none") {
-    //   x.style.display = "block";
-    // } else {
-    //   x.style.display = "none";
-    // }
   };
 
   render() {
     let jobs = this.props.recruiter_jobs;
-    let optionItems = jobs.map(job => <option key={job._id}>{job._id}</option>);
+    let optionItems = null;
+    if (jobs !== "Could not fetch job details.") {
+      optionItems =
+        jobs && jobs.map(job => <option key={job._id}>{job._id}</option>);
+    }
 
     var data = [
       [

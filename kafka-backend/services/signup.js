@@ -38,6 +38,7 @@ function handle_request(msg, callback) {
     lastname: msg.lastname
   });
 
+  console.log("USER+++++++", user);
   user.save().then(
     user => {
       console.log("Sign-up successful.");

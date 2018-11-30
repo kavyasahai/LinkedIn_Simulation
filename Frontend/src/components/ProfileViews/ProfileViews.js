@@ -51,15 +51,11 @@ class ProfileViews extends Component {
       allviews[datestring]++;
     });
 
-    console.log(allviews);
-
     const data = [["Day", "views"]];
 
     for (const [date, numviews] of Object.entries(allviews)) {
       data.push([date, numviews]);
     }
-
-    console.log("DS:", data);
 
     return (
       <React.Fragment>
