@@ -68,7 +68,6 @@ db.findUser = function(user, successCallback, failureCallback) {
           console.log("data from login in db", rows);
           console.log("INSIDE SQL USER FOUND AND MAKING KEY");
           console.log("STRINGIFIED ROWS:", JSON.stringify(rows[0]));
-          client.set(sqlQuery, JSON.stringify(rows[0]), redis.print);
           successCallback(rows[0]);
           console.log("insidesucces");
         } else {
