@@ -5,7 +5,8 @@ import supportingImage1 from "../../images/supportingImage1.png";
 import Modal from "react-responsive-modal";
 import supportingImage2 from "../../images/supportingImage2.png";
 import "../../css/jobDetails.css";
-
+import { getToken } from "../common/auth";
+import { Redirect } from "react-router";
 
 class JobDetails extends Component {
   constructor(props) {
@@ -29,8 +30,15 @@ class JobDetails extends Component {
     });
   }
   render() {
+    const token = getToken();
+
+    let redirectVar = null;
+    if (token === false) {
+      redirectVar = <Redirect to="/login" />;
+    }
     return (
       <div style={{ position: "relative", left: "0", top: "0" }} class="detail">
+        {redirectVar}
         <img
           src={supportingImage3}
           style={{ width: "100%", height: "250px" }}

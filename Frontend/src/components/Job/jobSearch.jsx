@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../../css/jobSearch.css";
-import "../common/auth"
+import "../common/auth";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -8,8 +8,9 @@ import Modal from "react-responsive-modal";
 import supportingImage4 from "../../images/supportingImage4.jpg";
 import supportingImage2 from "../../images/supportingImage2.png";
 import { searchJob, saveJob, applyJob } from "../../actions/jobActions";
-import Home from './jobFilter'
-import { getJWTUsername } from "../common/auth";
+import Home from "./jobFilter";
+import { getToken } from "../common/auth";
+import { Redirect } from "react-router";
 
 class JobSearch extends Component {
   constructor(props) {
@@ -57,11 +58,10 @@ class JobSearch extends Component {
     });
   };
   Search = e => {
-    console.log("Clicked")
+    console.log("Clicked");
     const data = {
       Job: this.state.Job,
-      Location: this.state.Location,
-      
+      Location: this.state.Location
     };
     console.log(data);
     this.props.searchJob(data, () => {
@@ -129,8 +129,15 @@ class JobSearch extends Component {
     let Details = this.state.properties1.map(property => {
       i = i + 1;
 
+      const token = getToken();
+
+      let redirectVar = null;
+      if (token === false) {
+        redirectVar = <Redirect to="/login" />;
+      }
       return (
         <div class="row">
+          {redirectVar}
           <div class="Jobs  row">
             <div class="col-1">
               <img src={imageView[i]} />
@@ -430,30 +437,28 @@ class JobSearch extends Component {
             <i class="fa fa-linkedin-square" />
           </div>
 
-            <div class="job">
+          <div class="job">
             <div class="row">
-            <div col="col-2" class="inputfield ">
-          
-            <input
-              style={{"background-color": "#e1e9ee"}}
-              type="text"
-              placeholder="Search"
-              onChange={this.SearchChangeHandler}
-            />
+              <div col="col-2" class="inputfield ">
+                <input
+                  style={{ "background-color": "#e1e9ee" }}
+                  type="text"
+                  placeholder="Search"
+                  onChange={this.SearchChangeHandler}
+                />
+              </div>
+
+              <div col="col-2" class="inputfield1 ">
+                <input
+                  style={{ "background-color": "#e1e9ee" }}
+                  type="text"
+                  placeholder="Job Location"
+                  onChange={this.LocationChangeHandler}
+                />
+              </div>
             </div>
-          
-            <div col="col-2" class="inputfield1 ">
-            <input
-             style={{"background-color": "#e1e9ee"}}
-              type="text"
-              placeholder="Job Location"
-              onChange={this.LocationChangeHandler}
-            />
-            </div>
-            
-           </div>
-            </div>
-         
+          </div>
+
           <button class="Button" onClick={this.Search}>
             Search
           </button>
@@ -463,7 +468,7 @@ class JobSearch extends Component {
           </div>
         </div>
         <div>
-         <Home/>
+          <Home />
         </div>
 
         <div>

@@ -3,12 +3,20 @@ import "../../css/recruiterDashboard.css";
 import Chart from "react-google-charts";
 import { connect } from "react-redux";
 import { getProfileViews } from "../../actions/profileViewsAction";
+import { getToken } from "../common/auth";
+import { Redirect } from "react-router";
 
 class ProfileViews extends Component {
   componentDidMount() {
     this.props.getProfileViews();
   }
   render() {
+    const token = getToken();
+    let redirectVar = null;
+    if (token === false) {
+      redirectVar = <Redirect to="/login" />;
+    }
+
     var week_start = new Date();
     week_start.setDate(week_start.getDate() - 7);
 
@@ -59,6 +67,7 @@ class ProfileViews extends Component {
 
     return (
       <React.Fragment>
+        {redirectVar}
         <div className="displayviews">
           <Chart
             chartType="AreaChart"

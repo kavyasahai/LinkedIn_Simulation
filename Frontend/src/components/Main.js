@@ -39,34 +39,38 @@ class Main extends Component {
               <Route path="/applicantdetails" component={ApplicantDetails} />
               <Route path="/school" component={UserSchoolData} />
               <Route path="/profilepicture" component={UserProfilePhoto} />
-              <Route
+              <PrivateRoute
                 path="/recruiterdashboardcitywise"
                 exact
                 component={RecruiterDashboardCityWise}
               />
-              <Route
+              <PrivateRoute
                 path="/recruiterdashboardtop10"
                 exact
                 component={RecruiterDashboardTop10}
               />
-              <Route
+              <PrivateRoute
                 path="/recruiterdashboardtop5"
                 exact
                 component={RecruiterDashboardTop5}
               />
-              <Route path="/home" exact component={Homepage} />
-              <Route
+              <PrivateRoute path="/home" exact component={Homepage} />
+              <PrivateRoute
                 path="/recruiterdashboardjobclicks"
                 exact
                 component={RecruiterDashboardJobClicks}
               />
 
-              <Route path="/profileviews" exact component={ProfileViews} />
+              <PrivateRoute
+                path="/profileviews"
+                exact
+                component={ProfileViews}
+              />
               <PrivateRoute path="/recruiter" component={Recruiter} />
-              <Route path="/recruiter/post-a-job" component={PostAJob} />
-              <Route path="/job-details" component={jobDetails} />
-              <Route path="/job-filter" component={jobFilter} />
-              <Route path="/job-search" component={jobSearch} />
+              <PrivateRoute path="/recruiter/post-a-job" component={PostAJob} />
+              <PrivateRoute path="/job-details" component={jobDetails} />
+              <PrivateRoute path="/job-filter" component={jobFilter} />
+              <PrivateRoute path="/job-search" component={jobSearch} />
 
               <Route path="/not-found" exact component={NotFound} />
               <Route path="/" exact component={Login} />

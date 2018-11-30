@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import "../../css/jobSearch.css";
+import { getToken } from "../common/auth";
+import { Redirect } from "react-router";
 
 class JobFilter extends Component {
   constructor(props) {
@@ -10,8 +12,15 @@ class JobFilter extends Component {
   }
 
   render() {
+    const token = getToken();
+
+    let redirectVar = null;
+    if (token === false) {
+      redirectVar = <Redirect to="/login" />;
+    }
     return (
       <div class="filer row">
+        {redirectVar}
         <div class="col-2">
           <li class=" nav-item dropdown ">
             <a
