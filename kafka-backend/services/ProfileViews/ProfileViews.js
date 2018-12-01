@@ -1,8 +1,7 @@
-var profileViews = require("../../../Backend/models/profileViews");
-require("../../../Backend/db/mongoose");
+var profileViews = require("../../models/profileViews");
+require("../../db/mongoose");
 
 function handle_request(msg, callback) {
- 
   profileViews
     .find({
       userID: msg.email

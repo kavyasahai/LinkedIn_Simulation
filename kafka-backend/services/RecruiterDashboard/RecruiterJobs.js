@@ -1,5 +1,5 @@
-var Job = require("../../../Backend/models/job");
-require("../../../Backend/db/mongoose");
+var Job = require("../../models/job");
+require("../../db/mongoose");
 
 function handle_request(msg, callback) {
   Job.find(

@@ -6,15 +6,13 @@ var cookieParser = require("cookie-parser");
 var cors = require("cors");
 app.set("view engine", "ejs");
 var mysql = require("mysql");
-var pool = require("./pool");
+
 const port = process.env.PORT || 3001;
 var passport = require("passport");
 var jwt = require("jsonwebtoken");
 var morgan = require("morgan");
 var requireAuth = passport.authenticate("jwt", { session: false });
-var crypt = require("./app/crypt");
-var db = require("./app/db");
-var config = require("../Backend/config/database");
+
 var jwt = require("jsonwebtoken");
 var redis = require("redis");
 var client = redis.createClient();
@@ -22,7 +20,7 @@ const multer = require("multer");
 
 app.use(morgan("dev"));
 var kafka = require("./kafka/client");
-require("./db/mongoose");
+// require("./db/mongoose");
 
 //console.log("here");
 //require('./app/routes')(app);
@@ -74,6 +72,7 @@ var postAJob = require("./routes/Recruiter/postAJob");
 var postedApplications = require("./routes/Recruiter/postedApplications");
 var profileViews = require("./routes/profileStats/profileViews");
 var clicksPerJob = require("./routes/profileStats/clicksPerJob");
+var connection = require("./routes/Chat/connection");
 app.use(register);
 app.use(login);
 app.use(professionalDetails);
@@ -89,6 +88,7 @@ app.use(postAJob);
 app.use(postedApplications);
 app.use(profileViews);
 app.use(clicksPerJob);
+app.use("/connection", connection);
 
 app.listen(3001);
 console.log("Server Listening on port 3001");

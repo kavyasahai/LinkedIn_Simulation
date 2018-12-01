@@ -1,5 +1,5 @@
-var { mongoose } = require("../../Backend/db/mongoose");
-var Job = require("../../Backend/models/job");
+var { mongoose } = require("../db/mongoose");
+var Job = require("../models/job");
 function handle_request(msg, callback) {
   console.log("Inside Search Request:", msg);
 

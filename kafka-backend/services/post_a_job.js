@@ -1,5 +1,5 @@
-var { Jobs } = require("../../Backend/models/job");
-var UserSchema = require("../../Backend/models/user");
+var { Jobs } = require("../models/job");
+var UserSchema = require("../models/user");
 
 function handle_request(msg, callback) {
   var newJobs = new Jobs(msg);

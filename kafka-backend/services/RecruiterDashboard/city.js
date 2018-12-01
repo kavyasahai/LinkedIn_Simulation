@@ -1,5 +1,5 @@
-var JobApplication = require("../../../Backend/models/jobApplication");
-require("../../../Backend/db/mongoose");
+var JobApplication = require("../../models/jobApplication");
+require("../../db/mongoose");
 
 function handle_request(msg, callback) {
   JobApplication.aggregate([
