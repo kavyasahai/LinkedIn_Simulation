@@ -15,6 +15,7 @@ var recruiterJobs = require("./services/RecruiterDashboard/recruiterJobs");
 var clicksperjob = require("./services/RecruiterDashboard/clicksperjob");
 var ProfileViews = require("./services/ProfileViews/ProfileViews");
 var jobSearch = require("./services/jobSearch.js");
+var Connection = require("./services/connection");
 
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -63,3 +64,4 @@ handleTopicRequest("posted_applications", posted_applications);
 handleTopicRequest("recruiterDashboardCity_topic", recruiterDashboardCity);
 handleTopicRequest("jobSearch_topic", jobSearch);
 handleTopicRequest("get_clicksperjob", clicksperjob);
+handleTopicRequest("connection", Connection);
