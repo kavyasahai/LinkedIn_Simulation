@@ -16,6 +16,8 @@ var clicksperjob = require("./services/RecruiterDashboard/clicksperjob");
 var ProfileViews = require("./services/ProfileViews/ProfileViews");
 var jobSearch = require("./services/jobSearch.js");
 var Connection = require("./services/connection");
+var Channel = require("./services/Chat/channel");
+var Message = require("./services/Chat/message");
 
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -65,3 +67,5 @@ handleTopicRequest("recruiterDashboardCity_topic", recruiterDashboardCity);
 handleTopicRequest("jobSearch_topic", jobSearch);
 handleTopicRequest("get_clicksperjob", clicksperjob);
 handleTopicRequest("connection", Connection);
+handleTopicRequest("channel", Channel);
+handleTopicRequest("message", Message);
