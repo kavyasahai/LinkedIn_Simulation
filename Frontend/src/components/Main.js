@@ -11,9 +11,9 @@ import PostSignUp from "./Applicant/postSignUp";
 import ApplicantDetails from "./Applicant/applicantDetails";
 import UserSchoolData from "./Applicant/userSchoolData";
 import UserProfilePhoto from "./Applicant/userProfilePhoto";
-import ProfileViews from "./ProfileViews/ProfileViews";
-import Recruiter from "./Recruiter/Recruiter";
-import PostAJob from "./Recruiter/PostAJob";
+import ProfileViews from "./ProfileViews/profileViews";
+import Recruiter from "./Recruiter/recruiter";
+import PostAJob from "./Recruiter/postAJob";
 import jobDetails from "./Job/jobDetails";
 import jobFilter from "./Job/jobFilter";
 import jobSearch from "./Job/jobSearch.jsx";
@@ -22,7 +22,7 @@ import jobApply from "./Job/jobApply";
 import network from "./Job/Connections";
 import connections from "./ProfileViews/AcceptReject";
 import { Provider } from "react-redux";
-import PrivateRoute from "./common/PrivateRoute";
+import PrivateRoute from "./common/privateRoute";
 
 import store from "../store";
 
@@ -41,9 +41,9 @@ class Main extends Component {
               <Route path="/applicantdetails" component={ApplicantDetails} />
               <Route path="/school" component={UserSchoolData} />
               <Route path="/profilepicture" component={UserProfilePhoto} />
-              <Route path="/network" component={network}/>
-              <Route path="/job-apply"  component={jobApply}/>
-              <Route path="/connections" component={connections}/>
+              <Route path="/network" component={network} />
+              <Route path="/job-apply" component={jobApply} />
+              <Route path="/connections" component={connections} />
               <PrivateRoute
                 path="/recruiterdashboardcitywise"
                 exact
