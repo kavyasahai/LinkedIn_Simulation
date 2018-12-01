@@ -6,6 +6,14 @@
     margin-left:20%;
     border: 0.5px gray solid
 }
+.connectionrequest
+{
+    width:  calc((576px * .5) + 264px);
+   max-height: 40vw;
+   background: white;
+   padding-top: 1vw;
+    border: 0.5px gray solid
+}
 .message{
     border:2px solid #0073b1;
 color: #0073b1;
@@ -13,4 +21,11 @@ width: 6vw;
 text-align: center;
 height: 2.5vw;
 
+}
+.ignore{
+    
+    color: gray;
+    width: 6vw;
+    text-align: center;
+    height: 2.5vw;
 }
