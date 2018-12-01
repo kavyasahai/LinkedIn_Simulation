@@ -1,0 +1,16 @@
+.connection
+{
+    width: calc((576px * .70833) + 384px);
+   max-height: 40vw;
+   background: white;
+    margin-left:20%;
+    border: 0.5px gray solid
+}
+.message{
+    border:2px solid #0073b1;
+color: #0073b1;
+width: 6vw;
+text-align: center;
+height: 2.5vw;
+
+}

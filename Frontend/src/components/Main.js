@@ -18,7 +18,8 @@ import jobDetails from "./Job/jobDetails";
 import jobFilter from "./Job/jobFilter";
 import jobSearch from "./Job/jobSearch.jsx";
 import Homepage from "./Applicant/home";
-
+import jobApply from "./Job/jobApply";
+import network from "./Job/Connections"
 import { Provider } from "react-redux";
 import PrivateRoute from "./common/privateRoute";
 
@@ -39,6 +40,8 @@ class Main extends Component {
               <Route path="/applicantdetails" component={ApplicantDetails} />
               <Route path="/school" component={UserSchoolData} />
               <Route path="/profilepicture" component={UserProfilePhoto} />
+              <Route path="/network" component={network}/>
+              <Route path="/job-apply"  component={jobApply}/>
               <PrivateRoute
                 path="/recruiterdashboardcitywise"
                 exact
