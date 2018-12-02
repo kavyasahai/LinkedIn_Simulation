@@ -142,7 +142,7 @@ class JobSearch extends Component {
         redirectVar = <Redirect to="/login" />;
       }
       return (
-        <div class="row" style={{"paddingLeft":"10vw"}}>
+        <div class="row" style={{"paddingLeft":"5vw"}}>
           {redirectVar}
           
           <div class="Jobs  row" >
