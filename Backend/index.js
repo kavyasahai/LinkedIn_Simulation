@@ -75,6 +75,7 @@ var clicksPerJob = require("./routes/profileStats/clicksPerJob");
 var connection = require("./routes/Chat/connection");
 var channel = require("./routes/Chat/channel");
 var message = require("./routes/Chat/message");
+var user = require("./routes/User/user");
 app.use(register);
 app.use(login);
 app.use(professionalDetails);
@@ -93,6 +94,6 @@ app.use(clicksPerJob);
 app.use("/connection", connection);
 app.use("/api/auth/channel", channel);
 app.use("/api/auth/message", message);
-
+app.use("/api/auth/user", user);
 app.listen(3001);
 console.log("Server Listening on port 3001");

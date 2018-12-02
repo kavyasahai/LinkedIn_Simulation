@@ -23,12 +23,21 @@ import network from "./Job/Connections";
 import connections from "./ProfileViews/AcceptReject";
 import { Provider } from "react-redux";
 import PrivateRoute from "./common/privateRoute";
-
+import Messaging from "../components/Chat/messenger";
+import ChatStore from "../chatstore";
 import store from "../store";
 
 //Create a Main Component
 class Main extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      chatstore: new ChatStore(this)
+    };
+  }
+
   render() {
+    const { chatstore } = this.state;
     return (
       <Provider store={store}>
         <BrowserRouter>
@@ -44,6 +53,11 @@ class Main extends Component {
               <Route path="/network" component={network} />
               <Route path="/job-apply" component={jobApply} />
               <Route path="/connections" component={connections} />
+              <Route
+                path="/messaging"
+                store={chatstore}
+                render={props => <Messaging {...props} store={chatstore} />}
+              />
               <PrivateRoute
                 path="/recruiterdashboardcitywise"
                 exact
