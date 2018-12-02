@@ -1,7 +1,8 @@
-import { POSTED_APPLICATIONS } from '../actions/types'
+import { POSTED_APPLICATIONS, POSTED_JOBS } from '../actions/types'
 
 const initialState = {
-  posted_applications: []
+  posted_applications: [],
+  posted_jobs: []
 }
 
 export default function (state = initialState, action) {
@@ -10,6 +11,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         posted_applications: []
+      }
+    case POSTED_JOBS:
+      return {
+        ...state,
+        posted_jobs: []
       }
     default:
       return state

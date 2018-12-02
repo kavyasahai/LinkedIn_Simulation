@@ -14,6 +14,7 @@ import UserProfilePhoto from "./Applicant/userProfilePhoto";
 import ProfileViews from "./ProfileViews/profileViews";
 import Recruiter from "./Recruiter/recruiter";
 import PostAJob from "./Recruiter/postAJob";
+import PostedJobs from "./Recruiter/postedJobs";
 import jobDetails from "./Job/jobDetails";
 import jobFilter from "./Job/jobFilter";
 import jobSearch from "./Job/jobSearch.jsx";
@@ -30,55 +31,56 @@ import store from "../store";
 class Main extends Component {
   render() {
     return (
-      <Provider store={store}>
+      <Provider store={ store }>
         <BrowserRouter>
           <div>
             <Switch>
-              {/*Render Different Component based on Route*/}
+              {/*Render Different Component based on Route*/ }
 
-              <Route path="/login" component={Login} />
-              <Route path="/postsignup" component={PostSignUp} />
-              <Route path="/applicantdetails" component={ApplicantDetails} />
-              <Route path="/school" component={UserSchoolData} />
-              <Route path="/profilepicture" component={UserProfilePhoto} />
-              <Route path="/network" component={network} />
-              <Route path="/job-apply" component={jobApply} />
-              <Route path="/connections" component={connections} />
+              <Route path="/login" component={ Login } />
+              <Route path="/postsignup" component={ PostSignUp } />
+              <Route path="/applicantdetails" component={ ApplicantDetails } />
+              <Route path="/school" component={ UserSchoolData } />
+              <Route path="/profilepicture" component={ UserProfilePhoto } />
+              <Route path="/network" component={ network } />
+              <Route path="/job-apply" component={ jobApply } />
+              <Route path="/connections" component={ connections } />
               <PrivateRoute
                 path="/recruiterdashboardcitywise"
                 exact
-                component={RecruiterDashboardCityWise}
+                component={ RecruiterDashboardCityWise }
               />
               <PrivateRoute
                 path="/recruiterdashboardtop10"
                 exact
-                component={RecruiterDashboardTop10}
+                component={ RecruiterDashboardTop10 }
               />
               <PrivateRoute
                 path="/recruiterdashboardtop5"
                 exact
-                component={RecruiterDashboardTop5}
+                component={ RecruiterDashboardTop5 }
               />
-              <PrivateRoute path="/home" exact component={Homepage} />
+              <PrivateRoute path="/home" exact component={ Homepage } />
               <PrivateRoute
                 path="/recruiterdashboardjobclicks"
                 exact
-                component={RecruiterDashboardJobClicks}
+                component={ RecruiterDashboardJobClicks }
               />
 
               <PrivateRoute
                 path="/profileviews"
                 exact
-                component={ProfileViews}
+                component={ ProfileViews }
               />
-              <PrivateRoute path="/recruiter" component={Recruiter} />
-              <PrivateRoute path="/recruiter/post-a-job" component={PostAJob} />
-              <PrivateRoute path="/job-details" component={jobDetails} />
-              <PrivateRoute path="/job-filter" component={jobFilter} />
-              <PrivateRoute path="/job-search" component={jobSearch} />
+              <PrivateRoute path="/recruiter" component={ Recruiter } />
+              <PrivateRoute path="/recruiter/post-a-job" component={ PostAJob } />
+              <PrivateRoute path="/recruiter/posted-jobs" component={ PostedJobs } />
+              <PrivateRoute path="/job-details" component={ jobDetails } />
+              <PrivateRoute path="/job-filter" component={ jobFilter } />
+              <PrivateRoute path="/job-search" component={ jobSearch } />
 
-              <Route path="/not-found" exact component={NotFound} />
-              <Route path="/" exact component={Login} />
+              <Route path="/not-found" exact component={ NotFound } />
+              <Route path="/" exact component={ Login } />
               <Redirect to="/not-found" />
             </Switch>
           </div>
