@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../../css/jobSearch.css";
-import "../common/auth";
+import {getJWTUsername} from  "../common/auth";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -90,7 +90,7 @@ class JobSearch extends Component {
     console.log("clicke");
     const data = {
       jobid: e,
-
+      Userid:getJWTUsername(),
       timestamp: new Date()
     };
     this.props.saveJob(data);
