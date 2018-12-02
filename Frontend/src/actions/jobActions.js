@@ -10,6 +10,7 @@ export const searchJob = data => async dispatch => {
     var email = getJWTUsername();
     setHeader();
     const res = await axios.post(`${ROOT_URL}/searchJob`, data);
+    console.log("search a job",res.data);
     dispatch({
       type: SEARCH_JOB,
       payload: res.data
