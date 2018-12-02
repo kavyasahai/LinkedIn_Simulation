@@ -9,6 +9,7 @@ import { throws } from "assert";
 import moment from "moment";
 import UserBar from "./userbar";
 import "../../css/chat/app.css";
+import Header from "../Header/header";
 
 class Messenger extends Component {
   constructor(props) {
@@ -147,7 +148,7 @@ class Messenger extends Component {
     };
     return (
       <div style={style} className="app-messenger">
-        <div className="header" />
+        <div className="header">{/* <Header /> */}</div>
         <div className="chatheader">
           <div className="left">
             {/* <button className="left-action">

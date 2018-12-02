@@ -26,7 +26,9 @@ class RecruiterDashboardCityWise extends Component {
 
   handleSelectJob = () => {
     var job_select = document.getElementById("dashboard_select");
-    var jobId = job_select.options[job_select.selectedIndex].value;
+    var jobId = job_select.options[job_select.selectedIndex]
+      ? job_select.options[job_select.selectedIndex].value
+      : "";
     this.props.getRecruiterDashboardCity(jobId);
 
     var x = document.getElementById("displayChartsCity");
