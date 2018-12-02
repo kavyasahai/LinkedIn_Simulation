@@ -12,12 +12,12 @@ export default class PostAJob extends React.Component {
       adminId: getJWTUsername(),
       jobId: uuid(),
       title: "",
-      jobDescription: "",
+      description: "",
       industry: "",
       employmentType: "",
       location: "",
       jobFunction: "",
-      numberOfApplications: 10
+      applicantsCount: 10
     };
   }
   handleChange = e => {
