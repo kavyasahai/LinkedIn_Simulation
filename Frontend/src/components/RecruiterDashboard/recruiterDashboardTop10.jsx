@@ -22,8 +22,7 @@ class RecruiterDashboardTop10 extends Component {
     this.props.history.push("/recruiterdashboardjobclicks");
   };
   render() {
-    console.log("props=", this.props.data_top10);
-    const data = [
+    var data = [
       [
         "Job",
         "January",
@@ -38,18 +37,81 @@ class RecruiterDashboardTop10 extends Component {
         "October",
         "November",
         "December"
-      ],
-      ["Job1", 1000, 400, 200, 1000, 400, 200, 1000, 400, 200, 1000, 400, 200],
-      ["Job2", 1170, 460, 250, 1170, 460, 250, 1170, 460, 250, 1170, 460, 250],
-      ["Job3", 660, 1120, 300, 660, 1120, 300, 660, 1120, 300, 660, 1120, 300],
-      ["Job4", 1030, 540, 350, 1030, 540, 350, 1030, 540, 350, 1030, 540, 350],
-      ["Job5", 1030, 540, 350, 1030, 540, 350, 1030, 540, 350, 1030, 540, 350],
-      ["Job6", 1030, 540, 350, 1030, 540, 350, 1030, 540, 350, 1030, 540, 350],
-      ["Job7", 1030, 540, 350, 1030, 540, 350, 1030, 540, 350, 1030, 540, 350],
-      ["Job8", 1030, 540, 350, 1030, 540, 350, 1030, 540, 350, 1030, 540, 350],
-      ["Job9", 1030, 540, 350, 1030, 540, 350, 1030, 540, 350, 1030, 540, 350],
-      ["Job10", 1030, 540, 350, 1030, 540, 350, 1030, 540, 350, 1030, 540, 350]
+      ]
     ];
+    for (var index = 0; index < this.props.data_top10.length; index++) {
+      var flag = false;
+      var rep_month = 0;
+      var rep_count = 0;
+      var rep_index = 0;
+      for (var jindex = 1; jindex < index; jindex++) {
+        if (
+          this.props.data_top10[index].jobId &&
+          this.props.data_top10[index].jobId == data[jindex][0]
+        ) {
+          flag = true;
+          rep_month = this.props.data_top10[index]._id.month;
+          rep_count = this.props.data_top10[index].count;
+          rep_index = jindex;
+          break;
+        }
+      }
+
+      var count = this.props.data_top10[index].count;
+      var month = this.props.data_top10[index]._id
+        ? this.props.data_top10[index]._id.month
+        : 0;
+
+      if (flag == false)
+        data[index + 1] = [
+          this.props.data_top10[index]._id
+            ? this.props.data_top10[index].jobId
+            : "",
+          month == 1 ? count : 0,
+          month == 2 ? count : 0,
+          month == 3 ? count : 0,
+          month == 4 ? count : 0,
+          month == 5 ? count : 0,
+          month == 6 ? count : 0,
+          month == 7 ? count : 0,
+          month == 8 ? count : 0,
+          month == 9 ? count : 0,
+          month == 10 ? count : 0,
+          month == 11 ? count : 0,
+          month == 12 ? count : 0
+        ];
+      else {
+        data[rep_index][rep_month] = rep_count;
+      }
+    }
+    console.log(data);
+    // const data = [
+    //   [
+    //     "Job",
+    //     "January",
+    //     "February",
+    //     "March",
+    //     "April",
+    //     "May",
+    //     "June",
+    //     "July",
+    //     "August",
+    //     "September",
+    //     "October",
+    //     "November",
+    //     "December"
+    //   ],
+    //   ["Job1", 1000, 400, 200, 1000, 400, 200, 1000, 400, 200, 1000, 400, 200],
+    //   ["Job2", 1170, 460, 250, 1170, 460, 250, 1170, 460, 250, 1170, 460, 250],
+    //   ["Job3", 660, 1120, 300, 660, 1120, 300, 660, 1120, 300, 660, 1120, 300],
+    //   ["Job4", 1030, 540, 350, 1030, 540, 350, 1030, 540, 350, 1030, 540, 350],
+    //   ["Job5", 1030, 540, 350, 1030, 540, 350, 1030, 540, 350, 1030, 540, 350],
+    //   ["Job6", 1030, 540, 350, 1030, 540, 350, 1030, 540, 350, 1030, 540, 350],
+    //   ["Job7", 1030, 540, 350, 1030, 540, 350, 1030, 540, 350, 1030, 540, 350],
+    //   ["Job8", 1030, 540, 350, 1030, 540, 350, 1030, 540, 350, 1030, 540, 350],
+    //   ["Job9", 1030, 540, 350, 1030, 540, 350, 1030, 540, 350, 1030, 540, 350],
+    //   ["Job10", 1030, 540, 350, 1030, 540, 350, 1030, 540, 350, 1030, 540, 350]
+    // ];
 
     return (
       <React.Fragment>

@@ -4,7 +4,7 @@ var kafka = require("../../kafka/client");
 var express = require("express");
 const router = express.Router();
 
-router.post("/getProfileViews", function(request, response) {
+router.get("/getProfileViews", function(request, response) {
   console.log("Profile Views", request.query);
   kafka.make_request("get_profileviews", request.query, function(err, result) {
     console.log(result);
