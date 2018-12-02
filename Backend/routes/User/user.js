@@ -84,27 +84,31 @@ router.get("/:userId", function(request, response) {
       response.end();
     }
   });
+});
 
-  //Search all channel that
-  // const userId = request.params.userId;
-  // if (userId) {
-  //   const query = { _id: userId };
-  //   User.findOne(query, function(err, user) {
-  //     if (err) {
-  //       response.status(400).json({
-  //         success: false,
-  //         message: "unable to retrieve user",
-  //         user: []
-  //       });
-  //     } else {
-  //       response.status(200).json({
-  //         success: true,
-  //         message: "Able to retrieve user",
-  //         user: user
-  //       });
-  //     }
-  //   });
-  // }
+router.get("/findBy/:email", function(request, response) {
+  var msg = {
+    messageType: "getUserProfileByEmail",
+    messageBody: {
+      email: request.params.email
+    }
+  };
+  kafka.make_request("user", msg, function(err, results) {
+    console.log("in result");
+    console.log(results);
+    if (err) {
+      console.log("Inside err");
+      response.status(401).json({
+        success: "false",
+        message: "System Error. Try Again."
+      });
+    } else {
+      console.log("Inside else");
+      if (results.success == true) response.status(200).json(results);
+      else response.status(400).json(results);
+      response.end();
+    }
+  });
 });
 
 module.exports = router;

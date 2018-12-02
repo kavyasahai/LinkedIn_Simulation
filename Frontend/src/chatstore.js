@@ -19,7 +19,7 @@ export default class Store {
   }
 
   async loadCurrentUser(userId) {
-    return await this.service.get("api/auth/user/" + userId);
+    return await this.service.get("api/auth/user/findBy/" + userId);
   }
   async loadChannels() {
     return await this.service.get(
@@ -37,7 +37,7 @@ export default class Store {
       //load current user
       if (!this.user) {
         const userResponse = await this.loadCurrentUser(
-          "5c03619180ea5cc82d376d6e"
+          localStorage.getItem("email")
         );
         this.user = _.get(userResponse, "data.user");
         this.user.isMe = true;

@@ -26,6 +26,30 @@ function handle_request(msg, callback) {
     }
   }
 
+  if (msg.messageType === "getUserProfileByEmail") {
+    console.log("Find all reservation from " + msg.messageBody.email);
+    const userId = msg.messageBody.email;
+    if (userId) {
+      const query = { email: userId };
+      User.findOne(query, function(err, user) {
+        if (err) {
+          callback(null, {
+            success: false,
+            message: "unable to retrieve user",
+            user: []
+          });
+        } else {
+          console.log("User found:" + JSON.stringify(user));
+          callback(null, {
+            success: true,
+            message: "User found",
+            user: user
+          });
+        }
+      });
+    }
+  }
+
   if (msg.messageType === "searchUser") {
     const keyword = msg.messageBody.search;
     const regex = new RegExp(keyword, "i");
