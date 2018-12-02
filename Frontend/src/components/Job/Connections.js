@@ -11,7 +11,7 @@ class network extends Component{
                 <div>
                 <Header/>
                 </div>
-                <div style={{"padding-top":"7vw"}}></div>
+                <div style={{"padding-top":"4vw"}}></div>
                 <div class="row">
                 <div class="connection" >
                     <div class="row">
