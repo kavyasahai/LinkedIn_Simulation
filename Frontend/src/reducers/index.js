@@ -5,6 +5,7 @@ import recruiterDashboardReducer from "./recruiterDashboardReducer";
 import getProfileViewsReducer from "./profileViewsReducer";
 import recruiterReducer from "./recruiterReducer";
 import jobReducer from "./jobReducer";
+import connectionsReducer from "./connectionsReducer";
 
 export default combineReducers({
   applicantLogin: applicantReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
   recruiterDashboard: recruiterDashboardReducer,
   getProfileViewsReducer: getProfileViewsReducer,
   recruiterReducer: recruiterReducer,
-  jobReducer: jobReducer
+  jobReducer: jobReducer,
+  connections: connectionsReducer
 });

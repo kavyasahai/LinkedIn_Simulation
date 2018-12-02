@@ -15,3 +15,4 @@ export const POSTED_JOBS = "POSTED_JOBS";
 export const SEARCH_JOB = "SEARCH_JOB";
 export const SAVE_JOB = "SAVE_JOB";
 export const APPLY_JOB = "APPLY_JOB";
+export const GET_ALL_CONNECTIONS = "GET_ALL_CONNECTIONS";

@@ -417,7 +417,7 @@ class Homepage extends Component {
                     lang="en"
                   >
                     <a
-                      href="/mynetwork/"
+                      href="/network"
                       data-alias="relationships"
                       data-link-to="mynetwork"
                       data-resource="voyagerCommunicationsTabBadges"
