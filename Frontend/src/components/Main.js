@@ -16,7 +16,6 @@ import Recruiter from "./Recruiter/Recruiter";
 import PostAJob from "./Recruiter/PostAJob";
 import PostedJobs from "./Recruiter/postedJobs";
 import jobDetails from "./Job/jobDetails";
-import jobFilter from "./Job/jobFilter";
 import jobSearch from "./Job/jobSearch.jsx";
 import Homepage from "./Applicant/home";
 import jobApply from "./Job/jobApply";
@@ -91,7 +90,6 @@ class Main extends Component {
                 component={PostedJobs}
               />
               <PrivateRoute path="/job-details" component={jobDetails} />
-              <PrivateRoute path="/job-filter" component={jobFilter} />
               <PrivateRoute path="/job-search" component={jobSearch} />
 
               <Route path="/not-found" exact component={NotFound} />
