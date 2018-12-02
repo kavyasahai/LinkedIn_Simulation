@@ -15,7 +15,10 @@ router.post("/searchJob", function(request, response) {
       });
     } else {
       
-      response.end(JSON.stringify(results));
+      response.json({
+        updatedList:results
+    });
+    response.end();
     }
   });
 });

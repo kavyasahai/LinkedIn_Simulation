@@ -19,7 +19,7 @@ class JobFilter extends Component {
       redirectVar = <Redirect to="/login" />;
     }
     return (
-      <div class="filer row">
+      <div class="filter row">
         {redirectVar}
         <div class="col-2">
           <li class=" nav-item dropdown ">
@@ -37,6 +37,28 @@ class JobFilter extends Component {
               <a class="dropdown-item">Companies</a>
               <a class="dropdown-item">Groups</a>
               <a class="dropdown-item">Schools</a>
+            </div>
+          </li>
+        </div>
+        <div class="col-2">
+          <li class=" dropdown ">
+            <a
+              class="  dropdown-toggle border"
+              id="navbardrop"
+              data-toggle="dropdown"
+            >
+              Jobs
+            </a>
+            <div class="dropdown-menu">
+            <a>People</a>
+              <input type="radio" checked="checked" name="radio" /> Past 24Hours{" "}
+              <br />
+              <input type="radio" checked="checked" name="radio" /> Past Week
+              <br />
+              <input type="radio" checked="checked" name="radio" /> Past Month
+              <br />
+              <input type="radio" checked="checked" name="radio" /> Any Time
+              <br />
             </div>
           </li>
         </div>
