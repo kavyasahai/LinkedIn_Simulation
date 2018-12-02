@@ -3,7 +3,7 @@
     width: calc((576px * .70833) + 384px);
    max-height: 40vw;
    background: white;
-    margin-left:10%;
+    margin-left:20%;
     border: 0.5px gray solid
 }
 .connectionrequest

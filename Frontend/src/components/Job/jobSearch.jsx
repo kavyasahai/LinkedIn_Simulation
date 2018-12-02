@@ -142,8 +142,7 @@ class JobSearch extends Component {
         redirectVar = <Redirect to="/login" />;
       }
       return (
-        <div class="row" style={{"paddingLeft":"5vw"}}
-        >
+        <div class="row" style={{"paddingLeft":"10vw"}}>
           {redirectVar}
           
           <div class="Jobs  row" >
@@ -464,78 +463,9 @@ class JobSearch extends Component {
           <button class="Button" onClick={this.Search}>
             Search
           </button>
-          <div class="row">
-           <div class="col-2">
-          <div class="go-inline">
-         <div>
-            <a href="/home">
-                <i  class="fa fa-home w3-jumbo"></i>
-            </a>
-        </div>
-        <div class="go-middle">
-            <a href="/home">
-                <span class="normal">Home</span>
-            </a>
-        </div>
-    </div> 
-    </div>
-    <div class="col-2">
-    <div class="go-inline">
-         <div>
-            <a href="/home">
-                <i  class="fa fa-user w3-jumbo"></i>
-            </a>
-        </div>
-        <div class="go-middle">
-            <a href="/home">
-                <span class="normal">User</span>
-            </a>
-        </div>
-    </div>
-    </div>
-    <div class="col-2">
-    <div class="go-inline">
-         <div>
-            <a href="/home">
-                <i  class="fa fa-briefcase w3-jumbo"></i>
-            </a>
-        </div>
-        <div class="go-middle">
-            <a href="/home">
-                <span class="normal">Jobs</span>
-            </a>
-        </div>
-    </div>
-    </div>
-    <div class="col-2">
-    <div class="go-inline">
-         <div>
-            <a href="/home">
-                <i  class="fa fa-bell-o w3-jumbo"></i>
-            </a>
-        </div>
-        <div class="go-middle">
-            <a href="/home">
-                <span class="normal" style={{"textAlign":"center"}}>Notifications</span>
-            </a>
-        </div>
-    </div>
-    </div>
-    <div class="col-2">
-    <div class="go-inline">
-         <div>
-            <a href="/home">
-                <i  class="fa fa-envelope w3-jumbo"></i>
-            </a>
-        </div>
-        <div class="go-middle">
-            <a href="/home">
-                <span class="normal">Messenging</span>
-            </a>
-        </div>
-    </div>
-
-          </div>
+          <div>
+            <i class="fa fa-home w3-jumbo" />
+            <i class="fa fa-user w3-jumbo" />
           </div>
         </div>
         <div>
