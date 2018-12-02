@@ -4,6 +4,7 @@
   border: 1px gray solid;
   height: auto;
   width: 50vw;
+  margin-top: 2vw;
 }
 .message {
   border: 2px solid #0073b1;
@@ -11,4 +12,16 @@
   width: 6vw;
   text-align: center;
   height: 2.5vw;
+}
+
+.acceptRejectConnection {
+  background: white;
+  margin-left: 15vw;
+  border: 1px gray solid;
+  height: auto;
+  width: 50vw;
+}
+
+.image5 {
+  margin-top: -20vw;
 }

@@ -21,7 +21,6 @@ import jobSearch from "./Job/jobSearch.jsx";
 import Homepage from "./Applicant/home";
 import jobApply from "./Job/jobApply";
 import network from "./Job/Connections";
-import connections from "./ProfileViews/AcceptReject";
 import { Provider } from "react-redux";
 import PrivateRoute from "./common/privateRoute";
 import Messaging from "../components/Chat/messenger";
@@ -53,7 +52,6 @@ class Main extends Component {
               <Route path="/profilepicture" component={UserProfilePhoto} />
               <Route path="/network" component={network} />
               <Route path="/job-apply" component={jobApply} />
-              <Route path="/connections" component={connections} />
               <Route
                 path="/messaging"
                 store={chatstore}
