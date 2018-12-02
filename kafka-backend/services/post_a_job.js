@@ -1,8 +1,24 @@
-var { Jobs } = require("../models/job");
+var Jobs = require("../models/job");
 var UserSchema = require("../models/user");
 
 function handle_request(msg, callback) {
-  var newJobs = new Jobs(msg);
+  // var newJobs = new Jobs(msg);
+  var newJobs = new Jobs({
+    title: msg.title,
+    description: msg.description,
+    industry: msg.industry,
+    employmentType: msg.employmentType,
+    location: msg.location,
+    jobFunction: msg.jobFunction,
+    applicantsCount: 0,
+    viewsCount: 0,
+    postedDateTime: msg.postedDateTime,
+    clicks: 0,
+    postedBy: msg.postedBy,
+    company: msg.company,
+    adminId: msg.adminId,
+    jobId: msg.jobId
+  });
   newJobs
     .save()
     .then(() => {
