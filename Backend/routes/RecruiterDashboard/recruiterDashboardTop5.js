@@ -4,10 +4,7 @@ var kafka = require("../../kafka/client");
 var express = require("express");
 const router = express.Router();
 
-router.post("/getRecruiterDashboardTop5/:username", function(
-  request,
-  response
-) {
+router.get("/getRecruiterDashboardTop5/:username", function(request, response) {
   console.log("Recruiter Dashboard Top 5 Post Request");
   kafka.make_request("recruiterDashboardTop5_topic", request.params, function(
     err,

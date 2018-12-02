@@ -4,15 +4,24 @@ require("../../db/mongoose");
 function handle_request(msg, callback) {
   JobApplication.aggregate([
     {
+      $project: {
+        _id: 1,
+        jobId: 1,
+        submittedTime: 1,
+        month: { $month: "$submittedTime" }
+      }
+    },
+    {
       $match: {
         submittedTime: {
           $ne: null
         }
+        // postedBy: msg.username
       }
     },
     {
       $group: {
-        _id: { jobId: "$jobId" },
+        _id: { jobId: "$jobId", month: "$month" },
         count: { $sum: 1 },
         jobId: { $first: "$jobId" }
       }
@@ -22,38 +31,7 @@ function handle_request(msg, callback) {
   ]).then(
     result => {
       if (result.length !== 0) {
-        //second query
-        console.log("result TOP 101 =====", result[0]._id.jobId);
-
-        var jobIdMonth = [];
-        for (var index = 0; index < result.length; index++) {
-          //  jobIds[index] = result[index]._id.jobId;
-
-          JobApplication.aggregate([
-            {
-              $match: {
-                submittedTime: {
-                  $ne: null
-                },
-                jobId: result[index]._id.jobId
-              }
-            },
-            {
-              $project: {
-                jobId: result[index]._id.jobId,
-                month: { $month: "$submittedTime" },
-                _id: 0
-              }
-            }
-          ]).then(result => {
-            if (result.length !== 0) {
-              console.log("result TOP 102 =====", result);
-              jobIdMonth.push(jobIdMonth, result);
-              // jobIdMonth += result;
-              console.log("ARRAY====", jobIdMonth);
-            }
-          });
-        }
+        callback(null, result);
       } else {
         callback(null, "There is no data");
       }

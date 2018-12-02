@@ -4,7 +4,7 @@ var kafka = require("../../kafka/client");
 var express = require("express");
 const router = express.Router();
 
-router.post("/recruiter/posted_applications", function(request, response) {
+router.get("/recruiter/posted_applications", function(request, response) {
   console.log("In posted applications");
   kafka.make_request("posted_applications", request.user.username, function(
     err,

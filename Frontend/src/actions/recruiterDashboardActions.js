@@ -10,12 +10,11 @@ import { setHeader } from "../components/common/auth";
 
 const ROOT_URL = "http://localhost:3001";
 
-export const getRecruiterDashboardTop10 = data => async dispatch => {
+export const getRecruiterDashboardTop10 = username => async dispatch => {
   try {
     setHeader();
-    const res = await axios.post(
-      `${ROOT_URL}/getRecruiterDashboardTop10`,
-      data
+    const res = await axios.get(
+      `${ROOT_URL}/getRecruiterDashboardTop10/${username}`
     );
     dispatch({
       type: RECRUITER_DASHBOARD_TOP10,

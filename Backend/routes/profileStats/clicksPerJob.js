@@ -4,7 +4,7 @@ var kafka = require("../../kafka/client");
 var express = require("express");
 const router = express.Router();
 
-router.post("/getClicksPerJob", function(request, response) {
+router.get("/getClicksPerJob", function(request, response) {
   console.log("Job Clicks: ", request.query);
   kafka.make_request("get_clicksperjob", request.query, function(err, result) {
     console.log(result);
