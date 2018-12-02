@@ -5,7 +5,7 @@
 .extendmenu{
   padding: 0 100px;
   background: #283e4a;
-  height: 52px;
+  height: 4vw;
   
 }
 
@@ -25,16 +25,13 @@
 }
 .inputfield1{
   padding-left: 10px;
-
- 
- 
   height: 34px;
   width: 50%
   
 }
 .fa{
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
 font-size: 30px;
 padding-top: 10px;
 margin-right: 10px;
@@ -43,7 +40,7 @@ color: white;
 }
 .fa-linkedin-square{
   font-size: 40px;
-   padding-top: 5px;
+   padding-top: 4px;
 margin-right: 10px;
    width: 40px;
    height: 40px;
@@ -120,3 +117,5 @@ img{
   border-style: inset;
   border-width: 1px;
 } 
+go-middle{ text-align:center;}
+go-inline { display:inline-block; vertical-align:top;}
