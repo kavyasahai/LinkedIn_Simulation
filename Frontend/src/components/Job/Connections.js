@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Header from "../Header/header";
+import Header from "../Header/head";
 import "../../css/connectionList.css";
 import supportingimage4 from "../../images/supportingImage4.jpg";
 import supportingimage5 from "../../images/supportingImage5.png";

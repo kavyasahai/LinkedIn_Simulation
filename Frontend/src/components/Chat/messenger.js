@@ -148,6 +148,7 @@ class Messenger extends Component {
     };
     return (
       <div style={style} className="app-messenger">
+        <Header />
         <div className="header">{/* <Header /> */}</div>
         <div className="chatheader">
           <div className="left">
