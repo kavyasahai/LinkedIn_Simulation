@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { getPostedJobs } from "../../actions/recruiterActions";
-import Recruiter from "./Recruiter";
+
 class PostedJobs extends React.Component {
   constructor(props) {
     super(props);
@@ -16,12 +16,12 @@ class PostedJobs extends React.Component {
       posted_jobs = this.props.posted_jobs.map(job => {
         return (
           <div>
-            <p>Job Title: {job.title}</p>
-            <p>Description: {job.description}</p>
-            <p>Industry: {job.industry}</p>
-            <p>Viewed: {job.viewsCount}</p>
-            <p>Company: {job.company}</p>
-            <p>Job ID: {job.jobId} </p>
+            <p>Job Title: { job.title }</p>
+            <p>Description: { job.description }</p>
+            <p>Industry: { job.industry }</p>
+            <p>Viewed: { job.viewsCount }</p>
+            <p>Company: { job.company }</p>
+            <p>Job ID: { job.jobId } </p>
             <hr />
           </div>
         );
@@ -32,7 +32,7 @@ class PostedJobs extends React.Component {
     return (
       <div>
         <h3>Posted Jobs</h3>
-        {posted_jobs}
+        { posted_jobs }
       </div>
     );
   }
@@ -45,4 +45,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { getPostedJobs }
-)(Recruiter);
+)(PostedJobs);
