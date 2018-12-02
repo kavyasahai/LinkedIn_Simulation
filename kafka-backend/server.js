@@ -9,6 +9,7 @@ var prodetails = require("./services/prodetails");
 var post_a_job = require("./services/post_a_job");
 var posted_applications = require("./services/posted_applications");
 var posted_jobs = require("./services/posted_jobs");
+var edit_job = require("./services/edit_job")
 var recruiterDashboardTop10 = require("./services/RecruiterDashboard/top10");
 var recruiterDashboardTop5 = require("./services/RecruiterDashboard/top5");
 var recruiterDashboardCity = require("./services/RecruiterDashboard/city");
@@ -66,6 +67,7 @@ handleTopicRequest("recruiterJobs_topic", recruiterJobs);
 handleTopicRequest("get_profileviews", ProfileViews);
 handleTopicRequest("posted_applications", posted_applications);
 handleTopicRequest("posted_jobs", posted_jobs);
+handleTopicRequest("edit_job", edit_job)
 handleTopicRequest("recruiterDashboardCity_topic", recruiterDashboardCity);
 handleTopicRequest("jobSearch_topic", jobSearch);
 handleTopicRequest("get_clicksperjob", clicksperjob);
