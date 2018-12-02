@@ -1186,14 +1186,6 @@ button {
   margin: 0em;
   font: 400 13.3333px Arial;
 }
-user agent stylesheet input,
-textarea,
-select,
-button,
-meter,
-progress {
-  -webkit-writing-mode: horizontal-tb !important;
-}
 user agent stylesheet button {
   -webkit-appearance: button;
 }
@@ -1509,14 +1501,6 @@ button {
   text-align: start;
   margin: 0em;
   font: 400 13.3333px Arial;
-}
-user agent stylesheet input,
-textarea,
-select,
-button,
-meter,
-progress {
-  -webkit-writing-mode: horizontal-tb !important;
 }
 user agent stylesheet button {
   -webkit-appearance: button;
@@ -2238,14 +2222,6 @@ button {
   text-align: start;
   margin: 0em;
   font: 400 13.3333px Arial;
-}
-user agent stylesheet input,
-textarea,
-select,
-button,
-meter,
-progress {
-  -webkit-writing-mode: horizontal-tb !important;
 }
 user agent stylesheet button {
   -webkit-appearance: button;
