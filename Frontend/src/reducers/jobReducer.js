@@ -1,7 +1,8 @@
 import { SEARCH_JOB } from "../actions/types";
 
 const initialState = {
-  search_job_results: []
+  search_job_results: [],
+  view:[]
 };
 
 export default function(state = initialState, action) {
@@ -11,7 +12,8 @@ export default function(state = initialState, action) {
       return {
         
         ...state,
-        search_job_results: action.payload.updatedList
+        search_job_results: action.payload.updatedList,
+        view :action.payload.updatedList[0]
         //  search: true
         // getProperty: false
       };

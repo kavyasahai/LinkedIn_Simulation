@@ -8,6 +8,8 @@ import supportingImage2 from "../../images/supportingImage2.png";
 import "../../css/jobDetails.css";
 import { getToken } from "../common/auth";
 import { Redirect } from "react-router";
+import { searchJob, saveJob, applyJob } from "../../actions/jobActions";
+import { connect } from "react-redux";
 
 class JobDetails extends Component {
   constructor(props) {
@@ -15,10 +17,24 @@ class JobDetails extends Component {
     super(props);
     //maintain the state required for this component
     this.state = {
-      open: false
+      open: false,
+      properties1:[]
     };
     this.openbox = this.openbox.bind(this);
     this.closebox = this.closebox.bind(this);
+  }
+  componentDidMount(){
+    const foo =this.props.location.state.job_id;
+    console.log("Foo",this.props.search_job_results);
+    var properties1 = this.props.search_job_results;
+    console.log(properties1);
+    var propertydetails = properties1.filter(function(property) {
+      return property._id == foo;
+    });
+    this.setState({
+      properties1:this.state.properties1.concat(propertydetails)
+    })
+
   }
   openbox() {
     window.location.href="http://localhost:3000/job-apply"
@@ -35,7 +51,8 @@ class JobDetails extends Component {
     if (token === false) {
       redirectVar = <Redirect to="/login" />;
     }
-    return (
+    
+    let Details1 =this.state.properties1.map(property =>{   return (
       <div style={{ position: "relative", left: "0", top: "0" }} class="detail">
         {redirectVar}
         <img
@@ -64,11 +81,11 @@ class JobDetails extends Component {
                 className="col-8 "
                 style={{ "padding-left": "20px", "padding-top": "10px" }}
               >
-                <li class="blue">InternShip</li>
+                <li class="blue">{property.title}</li>
                 <br />
-                Google
+                {property.company}
                 <br />
-                San JOse
+                 {property.location}
                 <br />
                 <button class="Button" onClick={this.Search}>
                   Save
@@ -304,6 +321,23 @@ class JobDetails extends Component {
         </div>
       </div>
     );
-  }
-}
-export default JobDetails;
+  });
+
+return(
+  <div>
+    {Details1}
+  </div>
+)}}
+const mapStateToProps = state => (
+ 
+  {
+  
+  search_job_results: state.jobReducer.search_job_results,
+  view: state.jobReducer.view
+});
+
+export default connect(
+  mapStateToProps,
+  { searchJob, saveJob, applyJob }
+)(JobDetails);
+

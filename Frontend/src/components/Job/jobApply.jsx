@@ -31,10 +31,14 @@ class JobSearch extends Component {
   
   }
 
+  componentDidMount(){
+    const foo =this.props.location.state;
+    console.log("Foo",foo);
 
+  }
   render() {
    
-
+console.log("Props",this.props.location.state);
     return (
       <div class="menu">
         <div class="extendmenu row">
@@ -59,7 +63,7 @@ class JobSearch extends Component {
             >
               <li class="blue">
                 <a target="_blank">
-                  <Link to="/Detail">Intern</Link>
+                  <Link to="/Detail">{this.props.location.state}</Link>
                 </a>
               </li>
               <br />

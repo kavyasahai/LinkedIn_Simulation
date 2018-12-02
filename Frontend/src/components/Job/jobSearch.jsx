@@ -37,6 +37,7 @@ class JobSearch extends Component {
     this.view = this.view.bind(this);
     this.sendApplication = this.sendApplication.bind(this);
   }
+
   openbox() {
     this.setState({
       open: true
@@ -108,7 +109,7 @@ class JobSearch extends Component {
   view = e => {
     
     console.log(e);
-    var properties1 = this.props.properties;
+    var properties1 = this.props.search_job_results;
     console.log(properties1);
     var propertydetails = properties1.filter(function(property) {
       return property._id == e;
@@ -128,7 +129,8 @@ class JobSearch extends Component {
     console.log(this.props.view);
 
     var i = -1;
-    var view1=this.state.view1;
+    
+   var  view=this.state.view1.concat(this.props.view);
     var imageView = this.state.imageView;
  
 
@@ -163,7 +165,7 @@ class JobSearch extends Component {
       );
     });
 
-    let Details1 = this.props.search_job_results.map(property => {
+    let Details1 =view.map(property => {
       return (
         <div class="Jobs" >
           <div class="row">
@@ -180,13 +182,18 @@ class JobSearch extends Component {
             >
               <li class="blue">
                 <a target="_blank">
-                  <Link to="/job-details">{property.title}</Link>
+                  <Link to={{
+                    pathname:"/job-details",
+                    state:{ job_id: property._id}
+                  }}
+                     
+                  >{property.title}</Link>
                 </a>
               </li>
               <br />
-              {property.Company}
+              {property.company}
               <br />
-              {property.Location}
+              {property.location}
               <br />
               <button
                 class="Button"
@@ -487,7 +494,7 @@ const mapStateToProps = state => (
   {
   
   search_job_results: state.jobReducer.search_job_results,
-  view: state.jobReducer.search_job_results[0]
+  view: state.jobReducer.view
 });
 
 export default connect(
