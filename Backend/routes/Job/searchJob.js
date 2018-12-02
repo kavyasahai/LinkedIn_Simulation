@@ -7,14 +7,18 @@ const router = express.Router();
 router.post("/searchJob", function(request, response) {
   console.log("Search Job Post Request");
   kafka.make_request("jobSearch_topic", request.body, function(err, results) {
-    console.log(results);
+    console.log("response from kafka",results);
     if (err) {
       response.json({
         status: "error",
         msg: "Error in retrieving data."
       });
     } else {
-      response.send(JSON.stringify(results));
+      
+      response.json({
+        updatedList:results
+    });
+    response.end();
     }
   });
 });

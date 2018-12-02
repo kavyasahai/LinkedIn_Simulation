@@ -1,12 +1,10 @@
-const passport = require("passport");
-var requireAuth = passport.authenticate("jwt", { session: false });
 var kafka = require("../../kafka/client");
 var express = require("express");
 const router = express.Router();
 
-router.get("/recruiter/posted_applications", function(request, response) {
-  console.log("In posted applications");
-  kafka.make_request("posted_applications", request.user.username, function(
+router.post("/recruiter/posted_jobs", function (request, response) {
+  console.log("In posted jobs");
+  kafka.make_request("posted_jobs", request.user.username, function (
     err,
     results
   ) {
@@ -27,7 +25,7 @@ router.get("/recruiter/posted_applications", function(request, response) {
       response.json({
         status: "OK",
         payload: results,
-        data: "get posted applications success"
+        data: "get posted jobs success"
       });
     }
   });

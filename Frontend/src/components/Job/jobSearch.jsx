@@ -65,9 +65,10 @@ class JobSearch extends Component {
     };
     console.log(data);
     this.props.searchJob(data, () => {
+      console.log(this.props.search_job_results);
       this.setState({
-        properties1: this.props.properties,
-        view1: this.state.view1.concat(this.props.properties[0])
+        properties1: this.props.search_job_results,
+        view1: this.state.view1.concat(this.props.search_job_results[0])
       });
       this.state.properties1.map(property => {
         console.log(property.Icon);
@@ -105,6 +106,7 @@ class JobSearch extends Component {
   };
 
   view = e => {
+    
     console.log(e);
     var properties1 = this.props.properties;
     console.log(properties1);
@@ -123,10 +125,14 @@ class JobSearch extends Component {
   };
 
   render() {
-    var i = -1;
-    var imageView = this.state.imageView;
+    console.log(this.props.view);
 
-    let Details = this.state.properties1.map(property => {
+    var i = -1;
+    var view1=this.state.view1;
+    var imageView = this.state.imageView;
+ 
+
+    let Details = this.props.search_job_results.map(property => {
       i = i + 1;
 
       const token = getToken();
@@ -136,35 +142,30 @@ class JobSearch extends Component {
         redirectVar = <Redirect to="/login" />;
       }
       return (
-        <div class="row">
+        <div class="row" style={{"paddingLeft":"10vw"}}>
           {redirectVar}
-          <div class="Jobs  row">
-            <div class="col-1">
-              <img src={imageView[i]} />
-            </div>
-            <div
-              class="col-11"
-              style={{ "padding-left": "30px", "padding-top": "10px" }}
-            >
-              <li class="blue" onClick={this.view.bind(this, property._id)}>
-                {property.Position}
-              </li>
-              <br />
-              {property.Company}
-              <br />
-              {property.Location}
-              <br />
-              {property.Details}
-              <br />
-            </div>
+          
+          <div class="Jobs  row" >
+               
+               <div class="col-1">
+              <img src={supportingImage2}></img> 
+              </div>
+                <div class="col-11"style={{"padding-left":'30px', "padding-top":"10px"}}>
+                      <li class="blue" onClick={this.view.bind(this,property._id)} >{property.title}</li><br>
+                      </br>
+                      {property.company}<br></br>
+                      {property.location}<br></br>
+                      {property.description}<br></br>
+                  
+                </div>
           </div>
-        </div>
+          </div>
       );
     });
 
-    let Details1 = this.state.view1.map(property => {
+    let Details1 = this.props.search_job_results.map(property => {
       return (
-        <div class="Jobs">
+        <div class="Jobs" >
           <div class="row">
             <div class="col-4">
               <img
@@ -179,7 +180,7 @@ class JobSearch extends Component {
             >
               <li class="blue">
                 <a target="_blank">
-                  <Link to="/Detail">{property.Position}</Link>
+                  <Link to="/job-details">{property.title}</Link>
                 </a>
               </li>
               <br />
@@ -474,16 +475,19 @@ class JobSearch extends Component {
         <div>
           <div class="row">
             <div class="col-6">{Details}</div>
-            <div class="col-6">{Details1}</div>
+            <div class="col-6">{Details1}</div> 
           </div>
         </div>
       </div>
     );
   }
 }
-const mapStateToProps = state => ({
+const mapStateToProps = state => (
+ 
+  {
+  
   search_job_results: state.jobReducer.search_job_results,
-  view: state.jobReducer.updatedList
+  view: state.jobReducer.search_job_results[0]
 });
 
 export default connect(

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import supportingImage3 from "../../images/supportingImage3.jpg";
 import supportingImage4 from "../../images/supportingImage4.jpg";
 import supportingImage1 from "../../images/supportingImage1.png";
+import homepagebckg from "../../images/homepagebckg.png";
 import Modal from "react-responsive-modal";
 import supportingImage2 from "../../images/supportingImage2.png";
 import "../../css/jobDetails.css";
@@ -20,9 +21,7 @@ class JobDetails extends Component {
     this.closebox = this.closebox.bind(this);
   }
   openbox() {
-    this.setState({
-      open: true
-    });
+    window.location.href="http://localhost:3000/job-apply"
   }
   closebox() {
     this.setState({
@@ -40,7 +39,7 @@ class JobDetails extends Component {
       <div style={{ position: "relative", left: "0", top: "0" }} class="detail">
         {redirectVar}
         <img
-          src={supportingImage3}
+          src={homepagebckg}
           style={{ width: "100%", height: "250px" }}
           class="image1"
         />
@@ -55,7 +54,7 @@ class JobDetails extends Component {
             <div class="row">
               <div class="col-4">
                 <img
-                  src={supportingImage4}
+                  src={supportingImage3}
                   style={{ width: "200px", height: "200px" }}
                   class="image2"
                 />
@@ -191,7 +190,7 @@ class JobDetails extends Component {
               </header>
               <div class="row">
                 <div>
-                  <img src={supportingImage3} />{" "}
+                  <img src={supportingImage4} />{" "}
                 </div>
                 <div class="col-4">
                   Aishwariya Bhatt <br />

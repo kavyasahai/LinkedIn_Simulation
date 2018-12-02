@@ -11,13 +11,13 @@ function handle_request(msg, callback){
     // var Location;
     if(msg.Job=='')
      {
-       Job="InternShip"
+       Job="Internship"
     }
      else{
      Job=msg.Job
     }
     jobdata.find({
-      Position: Job
+      title: Job
   
   
   }).then(docs=>{

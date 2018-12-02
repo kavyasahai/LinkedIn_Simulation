@@ -14,6 +14,7 @@ import UserProfilePhoto from "./Applicant/userProfilePhoto";
 import ProfileViews from "./ProfileViews/profileViews";
 import Recruiter from "./Recruiter/recruiter";
 import PostAJob from "./Recruiter/postAJob";
+import PostedJobs from "./Recruiter/postedJobs";
 import jobDetails from "./Job/jobDetails";
 import jobFilter from "./Job/jobFilter";
 import jobSearch from "./Job/jobSearch.jsx";
@@ -87,6 +88,10 @@ class Main extends Component {
               />
               <PrivateRoute path="/recruiter" component={Recruiter} />
               <PrivateRoute path="/recruiter/post-a-job" component={PostAJob} />
+              <PrivateRoute
+                path="/recruiter/posted-jobs"
+                component={PostedJobs}
+              />
               <PrivateRoute path="/job-details" component={jobDetails} />
               <PrivateRoute path="/job-filter" component={jobFilter} />
               <PrivateRoute path="/job-search" component={jobSearch} />
