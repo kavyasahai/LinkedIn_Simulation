@@ -15,6 +15,7 @@ import ProfileViews from "./ProfileViews/ProfileViews";
 import Recruiter from "./Recruiter/Recruiter";
 import PostAJob from "./Recruiter/PostAJob";
 import PostedJobs from "./Recruiter/postedJobs";
+import EditJob from "./Recruiter/editJob";
 import jobDetails from "./Job/jobDetails";
 import jobSearch from "./Job/jobSearch.jsx";
 import Homepage from "./Applicant/home";
@@ -25,6 +26,7 @@ import PrivateRoute from "./common/PrivateRoute";
 import Messaging from "../components/Chat/messenger";
 import ChatStore from "../chatstore";
 import store from "../store";
+import editJob from "./Recruiter/editJob";
 
 //Create a Main Component
 class Main extends Component {
@@ -38,62 +40,66 @@ class Main extends Component {
   render() {
     const { chatstore } = this.state;
     return (
-      <Provider store={store}>
+      <Provider store={ store }>
         <BrowserRouter>
           <div>
             <Switch>
-              {/*Render Different Component based on Route*/}
+              {/*Render Different Component based on Route*/ }
 
-              <Route path="/login" component={Login} />
-              <Route path="/postsignup" component={PostSignUp} />
-              <Route path="/applicantdetails" component={ApplicantDetails} />
-              <Route path="/school" component={UserSchoolData} />
-              <Route path="/profilepicture" component={UserProfilePhoto} />
-              <Route path="/network" component={network} />
-              <Route path="/job-apply" component={jobApply} />
+              <Route path="/login" component={ Login } />
+              <Route path="/postsignup" component={ PostSignUp } />
+              <Route path="/applicantdetails" component={ ApplicantDetails } />
+              <Route path="/school" component={ UserSchoolData } />
+              <Route path="/profilepicture" component={ UserProfilePhoto } />
+              <Route path="/network" component={ network } />
+              <Route path="/job-apply" component={ jobApply } />
               <Route
                 path="/messaging"
-                store={chatstore}
-                render={props => <Messaging {...props} store={chatstore} />}
+                store={ chatstore }
+                render={ props => <Messaging { ...props } store={ chatstore } /> }
               />
               <PrivateRoute
                 path="/recruiterdashboardcitywise"
                 exact
-                component={RecruiterDashboardCityWise}
+                component={ RecruiterDashboardCityWise }
               />
               <PrivateRoute
                 path="/recruiterdashboardtop10"
                 exact
-                component={RecruiterDashboardTop10}
+                component={ RecruiterDashboardTop10 }
               />
               <PrivateRoute
                 path="/recruiterdashboardtop5"
                 exact
-                component={RecruiterDashboardTop5}
+                component={ RecruiterDashboardTop5 }
               />
-              <PrivateRoute path="/home" exact component={Homepage} />
+              <PrivateRoute path="/home" exact component={ Homepage } />
               <PrivateRoute
                 path="/recruiterdashboardjobclicks"
                 exact
-                component={RecruiterDashboardJobClicks}
+                component={ RecruiterDashboardJobClicks }
               />
 
               <PrivateRoute
                 path="/profileviews"
                 exact
-                component={ProfileViews}
+                component={ ProfileViews }
               />
-              <PrivateRoute path="/recruiter" component={Recruiter} />
-              <PrivateRoute path="/recruiter/post-a-job" component={PostAJob} />
+              <PrivateRoute path="/recruiter" component={ Recruiter } />
+              <PrivateRoute path="/recruiter/post-a-job" component={ PostAJob } />
               <PrivateRoute
                 path="/recruiter/posted-jobs"
-                component={PostedJobs}
+                component={ PostedJobs }
               />
-              <PrivateRoute path="/job-details" component={jobDetails} />
-              <PrivateRoute path="/job-search" component={jobSearch} />
+              <PrivateRoute
+                path="/recruiter/edit-job/:id"
+                component={ editJob }
+              />
+              <PrivateRoute path="/job-details" component={ jobDetails } />
+              <PrivateRoute path="/job-search" component={ jobSearch } />
 
-              <Route path="/not-found" exact component={NotFound} />
-              <Route path="/" exact component={Login} />
+              <Route path="/not-found" exact component={ NotFound } />
+              <Route path="/" exact component={ Login } />
               <Redirect to="/not-found" />
             </Switch>
           </div>
