@@ -94,11 +94,11 @@ class JobFilter extends Component {
             </a>
 
             <div class="dropdown-menu">
-              <input type="radio" checked="checked" name="radio" /> In Your
+              <input type="radio" name="radio" /> In Your
               Network <br />
-              <input type="radio" checked="checked" name="radio" /> Easy Apply
+              <input type="radio"  name="radio" /> Easy Apply
               <br />
-              <input type="radio" checked="checked" name="radio" /> Under 10
+              <input type="radio"  name="radio" /> Under 10
               Applicants
               <br />
             </div>
