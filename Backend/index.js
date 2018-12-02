@@ -41,7 +41,7 @@ app.use(
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 //Allow Access Control
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader(
@@ -70,11 +70,13 @@ var recruiterJobs = require("./routes/RecruiterDashboard/recruiterJobs");
 var recruiterDashboardCity = require("./routes/RecruiterDashboard/recruiterDashboardCity");
 var postAJob = require("./routes/Recruiter/postAJob");
 var postedApplications = require("./routes/Recruiter/postedApplications");
+var postedJobs = require("./routes/Recruiter/postedJobs");
 var profileViews = require("./routes/profileStats/profileViews");
 var clicksPerJob = require("./routes/profileStats/clicksPerJob");
 var connection = require("./routes/Connections/connection");
 var channel = require("./routes/Chat/channel");
 var message = require("./routes/Chat/message");
+var user = require("./routes/User/user");
 app.use(register);
 app.use(login);
 app.use(professionalDetails);
@@ -88,11 +90,12 @@ app.use(recruiterJobs);
 app.use(recruiterDashboardCity);
 app.use(postAJob);
 app.use(postedApplications);
+app.use(postedJobs);
 app.use(profileViews);
 app.use(clicksPerJob);
 app.use("/connection", connection);
 app.use("/api/auth/channel", channel);
 app.use("/api/auth/message", message);
-
+app.use("/api/auth/user", user);
 app.listen(3001);
 console.log("Server Listening on port 3001");

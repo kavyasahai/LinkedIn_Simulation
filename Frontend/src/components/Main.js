@@ -14,6 +14,7 @@ import UserProfilePhoto from "./Applicant/userProfilePhoto";
 import ProfileViews from "./ProfileViews/profileViews";
 import Recruiter from "./Recruiter/recruiter";
 import PostAJob from "./Recruiter/postAJob";
+import PostedJobs from "./Recruiter/postedJobs";
 import jobDetails from "./Job/jobDetails";
 import jobFilter from "./Job/jobFilter";
 import jobSearch from "./Job/jobSearch.jsx";
@@ -23,12 +24,21 @@ import network from "./Job/Connections";
 import connections from "./ProfileViews/AcceptReject";
 import { Provider } from "react-redux";
 import PrivateRoute from "./common/privateRoute";
-
+import Messaging from "../components/Chat/messenger";
+import ChatStore from "../chatstore";
 import store from "../store";
 
 //Create a Main Component
 class Main extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      chatstore: new ChatStore(this)
+    };
+  }
+
   render() {
+    const { chatstore } = this.state;
     return (
       <Provider store={store}>
         <BrowserRouter>
@@ -44,6 +54,11 @@ class Main extends Component {
               <Route path="/network" component={network} />
               <Route path="/job-apply" component={jobApply} />
               <Route path="/connections" component={connections} />
+              <Route
+                path="/messaging"
+                store={chatstore}
+                render={props => <Messaging {...props} store={chatstore} />}
+              />
               <PrivateRoute
                 path="/recruiterdashboardcitywise"
                 exact
@@ -73,6 +88,10 @@ class Main extends Component {
               />
               <PrivateRoute path="/recruiter" component={Recruiter} />
               <PrivateRoute path="/recruiter/post-a-job" component={PostAJob} />
+              <PrivateRoute
+                path="/recruiter/posted-jobs"
+                component={PostedJobs}
+              />
               <PrivateRoute path="/job-details" component={jobDetails} />
               <PrivateRoute path="/job-filter" component={jobFilter} />
               <PrivateRoute path="/job-search" component={jobSearch} />
