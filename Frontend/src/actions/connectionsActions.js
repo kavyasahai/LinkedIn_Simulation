@@ -1,7 +1,6 @@
 import axios from "axios";
 import {
   GET_ALL_CONNECTIONS,
-  REMOVE_CONNECTION,
   ACCEPT_CONNECTION,
   REJECT_CONNECTION,
   GET_RECEIVED_CONNECTIONS
@@ -24,21 +23,6 @@ export const getAllConnections = username => async dispatch => {
       payload: e
     };
   }
-};
-export const removeConnection = username => async dispatch => {
-  // try {
-  //   setHeader();
-  //   const res = await axios.get(`${ROOT_URL}/connection/${username}`);
-  //   dispatch({
-  //     type: REMOVE_CONNECTION,
-  //     payload: res.data
-  //   });
-  // } catch (e) {
-  //   return {
-  //     type: REMOVE_CONNECTION,
-  //     payload: e
-  //   };
-  // }
 };
 
 export const acceptConnection = data => async dispatch => {

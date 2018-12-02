@@ -6,7 +6,6 @@ import supportingimage5 from "../../images/supportingImage5.png";
 import { getJWTUsername } from "../common/auth";
 import {
   getAllConnections,
-  removeConnection,
   acceptConnection,
   rejectConnection,
   getReceivedConnections
@@ -18,18 +17,14 @@ class network extends Component {
     this.props.history.push("/messaging");
   };
 
-  removeConnection = () => {
-    var username = getJWTUsername();
-    // this.props.removeConnection(username);
-  };
-
   accept = data => {
     var username = getJWTUsername();
     const connectionData = {
       connector: data.email,
       connectee: username
     };
-    this.props.acceptConnection(connectionData);
+    console.log(connectionData);
+    //this.props.acceptConnection(connectionData);
   };
 
   reject = data => {
@@ -57,7 +52,7 @@ class network extends Component {
         <div class="row">
           <div class="acceptRejectConnection">
             {this.props.allConnections.connection &&
-              this.props.allConnections.connection.acceptedConnections.map(
+              this.props.allConnections.connection.receivedConnections.map(
                 data => (
                   <div key={data.firstname}>
                     <div class="row">
@@ -156,12 +151,6 @@ class network extends Component {
                           Message
                         </button>
                       </div>
-                      <div class="col-2" style={{ paddingTop: "2vw" }}>
-                        <button class="message" onClick={this.removeConnection}>
-                          {" "}
-                          Remove connection
-                        </button>
-                      </div>
                     </div>
                     <hr />
                   </div>
@@ -191,7 +180,6 @@ export default connect(
   mapStateToProps,
   {
     getAllConnections,
-    removeConnection,
     acceptConnection,
     rejectConnection,
     getReceivedConnections
