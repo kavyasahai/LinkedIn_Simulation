@@ -72,7 +72,7 @@ var postAJob = require("./routes/Recruiter/postAJob");
 var postedApplications = require("./routes/Recruiter/postedApplications");
 var profileViews = require("./routes/profileStats/profileViews");
 var clicksPerJob = require("./routes/profileStats/clicksPerJob");
-var connection = require("./routes/Chat/connection");
+var connection = require("./routes/Connections/connection");
 var channel = require("./routes/Chat/channel");
 var message = require("./routes/Chat/message");
 app.use(register);
