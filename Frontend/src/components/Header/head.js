@@ -25,13 +25,14 @@ class Header extends Component {
           </div>
 
           <div class="header">
-            <div class="row">
+            {/* <div class="row1">
               <input
                 style={{ "background-color": "#e1e9ee" }}
                 type="text"
                 placeholder="Search"
+                className="search"
               />
-            </div>
+            </div> */}
           </div>
 
           <div class="row" style={{ paddingLeft: "5vw" }}>
@@ -151,9 +152,9 @@ class Header extends Component {
               </div>
             </div>
             <div class="col-2">
-              <div class="go.5-inline">
+              <div class="go-inline">
                 <div>
-                  <a href="/home">
+                  <a href="/messaging">
                     <i
                       class="fa fa-envelope w3-jumbo"
                       style={{

@@ -9,7 +9,7 @@ import { throws } from "assert";
 import moment from "moment";
 import UserBar from "./userbar";
 import "../../css/chat/app.css";
-import Header from "../Header/header";
+import Header from "../Header/head";
 
 class Messenger extends Component {
   constructor(props) {
