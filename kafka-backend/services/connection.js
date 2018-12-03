@@ -192,27 +192,31 @@ function handle_request(msg, callback) {
             //try to move from requested connection to acceptedconnection
             connection.receivedConnections = connection.receivedConnections.filter(
               (value, index) => {
-                if (connector === value._id) {
+                if (connector === value.email) {
                   //save connector information
                   ctorInfo = value;
                 }
-                return value._id !== connector;
+                return value.email !== connector;
               }
             );
             if (msg.messageType === "acceptconnection") {
               connection.acceptedConnections.push(ctorInfo);
             }
+            console.log("about to save:" + connection);
             connection.save((error, updatedConnection) => {
               if (error) {
+                console.log("tkaf1" + error);
                 callback(null, {
                   success: false,
                   message: "There is a system error.Please try again"
                 });
+              } else {
+                console.log("successfully saved");
+                callback(null, {
+                  success: true,
+                  message: "You successfully accept or reject the connection"
+                });
               }
-              callback(null, {
-                success: true,
-                message: "You successfully accept or reject the connection"
-              });
             });
           } else {
             callback(null, {

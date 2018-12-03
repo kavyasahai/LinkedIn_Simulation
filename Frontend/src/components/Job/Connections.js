@@ -24,7 +24,8 @@ class network extends Component {
       connectee: username
     };
     console.log(connectionData);
-    //this.props.acceptConnection(connectionData);
+    this.props.acceptConnection(connectionData);
+    window.location.reload();
   };
 
   reject = data => {

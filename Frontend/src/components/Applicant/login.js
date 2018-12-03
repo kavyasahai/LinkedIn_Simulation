@@ -112,7 +112,7 @@ class Login extends Component {
     else {
       var headers = new Headers();
       //prevent page from refresh
-      e.preventDefault();
+
       const data = {
         username: this.state.username,
         password: this.state.password,
@@ -121,7 +121,7 @@ class Login extends Component {
       };
       console.log("data in submit register", data);
       //set the with credentials to true
-      axios.defaults.withCredentials = true;
+
       // this.props.register(data);
       this.props.register(data, response => {
         console.log(response.data);
@@ -144,11 +144,6 @@ class Login extends Component {
       redirectVar = <Redirect to="/home" />;
     }
 
-    //redirect based on successful login
-    // let redirectVar = null;
-    // if(cookie.load('cookie')){
-    //     redirectVar = <Redirect to= "/home"/>
-    // }
     return (
       <div class="container">
         {redirectVar}

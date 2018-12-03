@@ -1,6 +1,9 @@
 // grab the things we need
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
+mongoose.plugin(schema => {
+  schema.options.usePushEach = true;
+});
 
 // create a schema
 var connectionSchema = new Schema({
