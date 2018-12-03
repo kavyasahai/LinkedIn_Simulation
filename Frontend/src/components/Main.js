@@ -30,6 +30,7 @@ import ConnectionRequests from "./Connections/ConnectionRequests";
 import PostAJob from "./Job/postAJob";
 import ViewPostedJobs from "./Recruiter/ViewPostedJobs";
 import EditJob from "./Job/jobEdit";
+import ViewSavedJob from "./Job/ViewSavedJobs";
 import ViewProfile from "./Applicant/viewprofile";
 
 //Create a Main Component
@@ -110,6 +111,7 @@ class Main extends Component {
               <PrivateRoute path="/job/edit" component={EditJob} />
               <PrivateRoute path="/job-details" component={jobDetails} />
               <PrivateRoute path="/job-search" component={jobSearch} />
+              <PrivateRoute path="/job-saved" component={ViewSavedJob}/>
 
               <Route path="/not-found" exact component={NotFound} />
               <Route path="/" exact component={Login} />

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import supportingImage4 from "../../images/supportingImage4.jpg";
+
+import { Link } from "react-router-dom";
 import "../../css/jobSearch.css";
 class Header extends Component {
   constructor(props) {
@@ -18,10 +20,10 @@ class Header extends Component {
       <div class="menu">
         <div class="extendmenu row">
           <div class="icon">
-            <a href="/home">
-              {" "}
+          <Link to="/login">
+             <a> {" "}
               <i class="fa fa-linkedin-square" />
-            </a>
+            </a></Link>
           </div>
 
           <div class="searchhead">

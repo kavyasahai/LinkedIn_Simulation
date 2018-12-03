@@ -35,6 +35,7 @@ class JobSearch extends Component {
       imageNumber: 0,
       hasApplied:false,
       imageView: [],
+      userdata:[],
       open: false
     };
     this.openbox = this.openbox.bind(this);
@@ -50,7 +51,8 @@ componentDidMount(){
   const data = {
     Job: this.state.Job,
     Location: this.state.Location,
-    email:getJWTUsername()
+    email:getJWTUsername(),
+    username:getJWTUsername()
   };
  this.props.searchJob(data, async() => {
     console.log(this.props.search_job_results);
@@ -73,11 +75,20 @@ componentDidMount(){
               });
           });
         });
-      this.props.getsavedJob(data,()=>{
+      this.props.getsavedJob(data,async()=>{
         this.setState({
           appliedjobs:this.state.appliedjobs.concat(this.props.savedjobs)
         })
       })
+      const res =  axios
+      .post("http://localhost:3001/getuserdata", data)
+      .then(response => {
+        console.log("Updated List", response.data.updatedList);
+        this.setState({
+          userdata: response.data.updatedList
+        });
+      });
+     
 
     }
   
@@ -140,7 +151,8 @@ componentDidMount(){
     })
     const data = {
       Job: this.state.Job,
-      Location: this.state.Location
+      Location: this.state.Location,
+      userid:getJWTUsername()
     };
     console.log(data);
     if( (this.state.Job=="") && (this.state.Location==""))
@@ -219,12 +231,18 @@ componentDidMount(){
 }
 else{
    console.log("else"); 
+   this.setState({
+    view1: propertydetails,
+    imageNumber: index1,
+  hasApplied:"false"
+  });
+
 }
     
   };
 
   render() {
-    console.log(this.state.hasApplied);
+    var userdata=this.state.userdata
 
     var i = -1;
 
@@ -430,7 +448,7 @@ else{
                     <img src={supportingImage4} />{" "}
                   </div>
                   <div class="col-4">
-                    Aishwariya Bhatt <br />
+                   {userdata.firstname}  <br />
                     Student <br />
                     San Jose
                   </div>
@@ -584,6 +602,14 @@ else{
           </button>
           <div>
             <i class="fa fa-home w3-jumbo" />
+            <div class="go-middle">
+                 <Link to="/job-saved">
+                 <a>
+                    <span class="normal">viewsavedjobs</span>
+                  </a>
+                  </Link>
+                </div>
+              
             <i class="fa fa-user w3-jumbo" />
           </div>
         </div>
