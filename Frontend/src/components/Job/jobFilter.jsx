@@ -51,13 +51,13 @@ class JobFilter extends Component {
             </a>
             <div class="dropdown-menu">
             <a>People</a>
-              <input type="radio" checked="checked" name="radio" /> Past 24Hours{" "}
+              <input type="radio"  name="radio" /> Past 24Hours{" "}
               <br />
-              <input type="radio" checked="checked" name="radio" /> Past Week
+              <input type="radio"  name="radio" /> Past Week
               <br />
-              <input type="radio" checked="checked" name="radio" /> Past Month
+              <input type="radio"  name="radio" /> Past Month
               <br />
-              <input type="radio" checked="checked" name="radio" /> Any Time
+              <input type="radio"  name="radio" /> Any Time
               <br />
             </div>
           </li>
@@ -72,13 +72,13 @@ class JobFilter extends Component {
               Date Posted
             </a>
             <div class="dropdown-menu">
-              <input type="radio" checked="checked" name="radio" /> Past 24Hours{" "}
+              <input type="radio"  name="radio" /> Past 24Hours{" "}
               <br />
-              <input type="radio" checked="checked" name="radio" /> Past Week
+              <input type="radio"  name="radio" /> Past Week
               <br />
-              <input type="radio" checked="checked" name="radio" /> Past Month
+              <input type="radio"  name="radio" /> Past Month
               <br />
-              <input type="radio" checked="checked" name="radio" /> Any Time
+              <input type="radio"  name="radio" /> Any Time
               <br />
             </div>
           </li>
