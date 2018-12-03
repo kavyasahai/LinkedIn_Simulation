@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../../css/jobSearch.css";
-import {getJWTUsername} from  "../common/auth";
+import { getJWTUsername } from "../common/auth";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -11,8 +11,43 @@ import { searchJob, saveJob, applyJob } from "../../actions/jobActions";
 import Home from "./jobFilter";
 import { getToken } from "../common/auth";
 import { Redirect } from "react-router";
+import request from "superagent";
+import Dropzone from "react-dropzone";
+
+const CLOUDINARY_UPLOAD_PRESET = "g4q2o6at";
+const CLOUDINARY_UPLOAD_URL =
+  "https://api.cloudinary.com/v1_1/ungcmpe273/upload";
 
 class JobSearch extends Component {
+  state = { uploadedFile: null };
+
+  handleResumeUpload(file) {
+    console.log("file=", file);
+    let upload = request
+      .post(CLOUDINARY_UPLOAD_URL)
+      .field("upload_preset", CLOUDINARY_UPLOAD_PRESET)
+      .field("file", file);
+
+    upload.end((err, response) => {
+      if (err) {
+        console.error(err);
+      }
+
+      if (response.body.secure_url !== "") {
+        // save to db
+        console.log("url=", response.body.secure_url);
+      }
+    });
+  }
+
+  onResumeDrop = files => {
+    this.setState({
+      uploadedFile: files[0]
+    });
+
+    this.handleResumeUpload(files[0]);
+  };
+
   constructor(props) {
     //Call the constrictor of Super class i.e The Component
     super(props);
@@ -90,7 +125,7 @@ class JobSearch extends Component {
     console.log("clicke");
     const data = {
       jobid: e,
-      Userid:getJWTUsername(),
+      Userid: getJWTUsername(),
       timestamp: new Date()
     };
     this.props.saveJob(data);
@@ -107,7 +142,6 @@ class JobSearch extends Component {
   };
 
   view = e => {
-    
     console.log(e);
     var properties1 = this.props.search_job_results;
     console.log(properties1);
@@ -129,10 +163,9 @@ class JobSearch extends Component {
     console.log(this.props.view);
 
     var i = -1;
-    
-   var  view=this.state.view1.concat(this.props.view);
+
+    var view = this.state.view1.concat(this.props.view);
     var imageView = this.state.imageView;
- 
 
     let Details = this.props.search_job_results.map(property => {
       i = i + 1;
@@ -144,30 +177,36 @@ class JobSearch extends Component {
         redirectVar = <Redirect to="/login" />;
       }
       return (
-        <div class="row" style={{"paddingLeft":"5vw"}}>
+        <div class="row" style={{ paddingLeft: "5vw" }}>
           {redirectVar}
-          
-          <div class="Jobs  row" >
-               
-               <div class="col-1">
-              <img src={supportingImage2}></img> 
-              </div>
-                <div class="col-11"style={{"padding-left":'30px', "padding-top":"10px"}}>
-                      <li class="blue" onClick={this.view.bind(this,property._id)} >{property.title}</li><br>
-                      </br>
-                      {property.company}<br></br>
-                      {property.location}<br></br>
-                      {property.description}<br></br>
-                  
-                </div>
+
+          <div class="Jobs  row">
+            <div class="col-1">
+              <img src={supportingImage2} />
+            </div>
+            <div
+              class="col-11"
+              style={{ "padding-left": "30px", "padding-top": "10px" }}
+            >
+              <li class="blue" onClick={this.view.bind(this, property._id)}>
+                {property.title}
+              </li>
+              <br />
+              {property.company}
+              <br />
+              {property.location}
+              <br />
+              {property.description}
+              <br />
+            </div>
           </div>
-          </div>
+        </div>
       );
     });
 
-    let Details1 =view.map(property => {
+    let Details1 = view.map(property => {
       return (
-        <div class="Jobs" >
+        <div class="Jobs">
           <div class="row">
             <div class="col-4">
               <img
@@ -182,12 +221,14 @@ class JobSearch extends Component {
             >
               <li class="blue">
                 <a target="_blank">
-                  <Link to={{
-                    pathname:"/job-details",
-                    state:{ job_id: property._id}
-                  }}
-                     
-                  >{property.title}</Link>
+                  <Link
+                    to={{
+                      pathname: "/job-details",
+                      state: { job_id: property._id }
+                    }}
+                  >
+                    {property.title}
+                  </Link>
                 </a>
               </li>
               <br />
@@ -370,7 +411,7 @@ class JobSearch extends Component {
                   </span>
                   Resume(Optional):
                   <br />
-                  <input
+                  {/* <input
                     type="submit"
                     value="Upload Resume"
                     onClick={this.closebox}
@@ -385,7 +426,14 @@ class JobSearch extends Component {
                       "text-align": "center",
                       cursor: "pointer"
                     }}
-                  />
+                  /> */}
+                  <Dropzone
+                    className="dropzone"
+                    multiple={false}
+                    onDrop={this.onResumeDrop.bind(this)}
+                  >
+                    <p>Drop a resume or click to select a file to upload.</p>
+                  </Dropzone>
                   <br />
                   Microsoft Word or PDF only (5MB)
                   <br /> <br />
@@ -482,17 +530,14 @@ class JobSearch extends Component {
         <div>
           <div class="row">
             <div class="col-6">{Details}</div>
-            <div class="col-6">{Details1}</div> 
+            <div class="col-6">{Details1}</div>
           </div>
         </div>
       </div>
     );
   }
 }
-const mapStateToProps = state => (
- 
-  {
-  
+const mapStateToProps = state => ({
   search_job_results: state.jobReducer.search_job_results,
   view: state.jobReducer.view
 });
