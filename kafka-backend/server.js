@@ -23,6 +23,11 @@ var Message = require("./services/Chat/message");
 var User = require("./services/user");
 var job_save = require("./services/Job/job_save");
 var job_apply = require("./services/Job/job_apply");
+var insertsummary=require("./services/insertsummary");
+var experienceinsert=require("./services/experienceinsert");
+var schoolinsert=require("./services/schoolinsert");
+var skillsinsert=require("./services/skillsinsert");
+var getuserdata = require("./services/getuserdata");
 
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -79,3 +84,8 @@ handleTopicRequest("message", Message);
 handleTopicRequest("user", User);
 handleTopicRequest("jobSave_topic", job_save);
 handleTopicRequest("jobApply_topic", job_apply);
+handleTopicRequest("summary", insertsummary);
+handleTopicRequest("experience", experienceinsert);
+handleTopicRequest("schoolinsert", schoolinsert);
+handleTopicRequest("skillsinsert", skillsinsert);
+handleTopicRequest("getuserdata", getuserdata);

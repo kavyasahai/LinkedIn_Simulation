@@ -30,6 +30,8 @@ import ConnectionRequests from "./Connections/ConnectionRequests";
 import PostAJob from "./Job/postAJob";
 import ViewPostedJobs from "./Recruiter/ViewPostedJobs";
 
+import ViewProfile from "./Applicant/viewprofile";
+
 //Create a Main Component
 class Main extends Component {
   constructor(props) {
@@ -51,6 +53,7 @@ class Main extends Component {
               <Route path="/login" component={Login} />
               <Route path="/postsignup" component={PostSignUp} />
               <Route path="/applicantdetails" component={ApplicantDetails} />
+              <Route path="/viewprofile" component={ViewProfile} />
               <Route path="/school" component={UserSchoolData} />
               <Route path="/profilepicture" component={UserProfilePhoto} />
               <PrivateRoute path="/network" component={network} />
