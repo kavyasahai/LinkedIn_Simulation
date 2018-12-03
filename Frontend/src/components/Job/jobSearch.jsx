@@ -25,7 +25,7 @@ class JobSearch extends Component {
       properties2: [],
       properties: [],
       imageNumber: 0,
-      hasApplied:false,
+
       imageView: [],
       open: false
     };
@@ -64,17 +64,9 @@ class JobSearch extends Component {
       Job: this.state.Job,
       Location: this.state.Location
     };
-    if(this.state.Job=="" && this.state.Location=="")
-    {
-      alert("Fileds cannot be empty");
-    }
     console.log(data);
     this.props.searchJob(data, () => {
       console.log(this.props.search_job_results);
-      if(this.props.search_job_results.length == 0){
-        alert("nt");
-      }
-      else{
       this.setState({
         properties1: this.props.search_job_results,
         view1: this.state.view1.concat(this.props.search_job_results[0])
@@ -91,9 +83,7 @@ class JobSearch extends Component {
             });
           });
       });
-    }
     });
-  
   };
 
   save = e => {
@@ -103,7 +93,6 @@ class JobSearch extends Component {
       Userid:getJWTUsername(),
       timestamp: new Date()
     };
-    console.log(data);
     this.props.saveJob(data);
   };
 
@@ -141,11 +130,11 @@ class JobSearch extends Component {
 
     var i = -1;
     
-  // var  view=this.state.view1.concat(this.props.view);
+   var  view=this.state.view1.concat(this.props.view);
     var imageView = this.state.imageView;
  
 
-    let Details = this.state.properties1.map(property => {
+    let Details = this.props.search_job_results.map(property => {
       i = i + 1;
 
       const token = getToken();
@@ -176,7 +165,7 @@ class JobSearch extends Component {
       );
     });
 
-    let Details1 =this.state.view1.map(property => {
+    let Details1 =view.map(property => {
       return (
         <div class="Jobs" >
           <div class="row">
@@ -212,7 +201,9 @@ class JobSearch extends Component {
               >
                 Save
               </button>
-              <button class="Button" onClick={this.openbox} disabled={this.state.hasApplied ? true : false}>Apply</button>
+              <button class="Button" onClick={this.openbox}>
+                Apply
+              </button>
             </div>
             <div class="row">
               <div
