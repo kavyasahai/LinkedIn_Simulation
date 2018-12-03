@@ -25,7 +25,6 @@ class network extends Component {
     };
     console.log(connectionData);
     this.props.acceptConnection(connectionData);
-    window.location.reload();
   };
 
   reject = data => {
@@ -34,7 +33,8 @@ class network extends Component {
       connector: data.email,
       connectee: username
     };
-    this.props.rejectConnection(username);
+    this.props.rejectConnection(connectionData);
+    window.location.reload();
   };
 
   componentDidMount() {
