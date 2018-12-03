@@ -123,12 +123,6 @@ class PostAJob extends Component {
                   Drop the company logo or click to select a file to upload.
                 </p>
               </Dropzone>
-              {/* <img
-                src={this.state.imageView}
-                width="300"
-                height="200"
-                alt="User has not uploaded anything yet"
-              /> */}
             </div>
           </div>
           <div className="job_body">
