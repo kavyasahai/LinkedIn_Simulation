@@ -1,4 +1,5 @@
 var Connection = require("../mongodb/connection");
+var User = require("../models/user");
 const { OrderedMap } = require("immutable");
 
 function handle_request(msg, callback) {
@@ -22,8 +23,8 @@ function handle_request(msg, callback) {
           var isAlreadyReceived = false;
           var isAlreadyConnected = false;
           if (connection !== null) {
-            connection.receivedConnections.map((connectorId, index) => {
-              if (connector === connectorId) {
+            connection.receivedConnections.map((ctor, index) => {
+              if (connector === ctor.email) {
                 isAlreadyReceived = true;
                 callback(null, {
                   success: false,
@@ -31,46 +32,66 @@ function handle_request(msg, callback) {
                 });
               }
             });
-            connection.acceptedConnections.map((connectorId, index) => {
-              isAlreadyConnected = true;
-              callback(null, {
-                success: false,
-                message: "You are already connected"
-              });
+            connection.acceptedConnections.map((ctor, index) => {
+              if (connector === ctor.email) {
+                isAlreadyConnected = true;
+                callback(null, {
+                  success: false,
+                  message: "You are already connected"
+                });
+              }
             });
 
             //try to save a connect
             if (!isAlreadyConnected && !isAlreadyReceived) {
-              connection.receivedConnections.push(connector);
-              connection.save((error, updatedConnection) => {
-                if (error) {
+              //find the connector info
+              User.findOne({ email: connector }, (err, ctor) => {
+                if (err) {
                   callback(null, {
                     success: false,
-                    message: "TThere is a system error.Please try again"
+                    message: "Connector is not found"
                   });
                 }
-                callback(null, {
-                  success: true,
-                  message: "You successfully request to connect"
+                connection.receivedConnections.push(ctor);
+                connection.save((error, updatedConnection) => {
+                  if (error) {
+                    callback(null, {
+                      success: false,
+                      message: "TThere is a system error.Please try again"
+                    });
+                  }
+                  callback(null, {
+                    success: true,
+                    message: "You successfully request to connect"
+                  });
                 });
               });
             }
           } else {
             //create a new connection
-            let newConnection = new Connection();
-            newConnection.userId = connectee;
-            newConnection.receivedConnections.push(connector);
-            newConnection.acceptedConnections = [];
-            newConnection.save((error, newconn) => {
-              if (error) {
+
+            User.findOne({ email: connector }, (err, ctor) => {
+              if (err) {
                 callback(null, {
                   success: false,
-                  message: "There is a system error.Please try again"
+                  message: "Connector is not found"
                 });
               }
-              callback(null, {
-                success: true,
-                message: "you are successfully to request connect"
+              let newConnection = new Connection();
+              newConnection.userId = connectee;
+              newConnection.receivedConnections.push(ctor);
+              newConnection.acceptedConnections = [];
+              newConnection.save((error, newconn) => {
+                if (error) {
+                  callback(null, {
+                    success: false,
+                    message: "There is a system error.Please try again"
+                  });
+                }
+                callback(null, {
+                  success: true,
+                  message: "you are successfully to request connect"
+                });
               });
             });
           }
@@ -166,16 +187,21 @@ function handle_request(msg, callback) {
         } else {
           console.log("Connectee found:" + JSON.stringify(connection));
           //load into requested connection and accepted connection
-
+          let ctorInfo = null;
           if (connection !== null) {
             //try to move from requested connection to acceptedconnection
             connection.receivedConnections = connection.receivedConnections.filter(
               (value, index) => {
-                return value !== connector;
+                if (connector === value._id) {
+                  //save connector information
+                  ctorInfo = value;
+                }
+                return value._id !== connector;
               }
             );
-            if (msg.messageType === "acceptconnection")
-              connection.acceptedConnections.push(connector);
+            if (msg.messageType === "acceptconnection") {
+              connection.acceptedConnections.push(ctorInfo);
+            }
             connection.save((error, updatedConnection) => {
               if (error) {
                 callback(null, {

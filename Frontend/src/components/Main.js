@@ -51,7 +51,7 @@ class Main extends Component {
               <Route path="/profilepicture" component={UserProfilePhoto} />
               <Route path="/network" component={network} />
               <Route path="/job-apply" component={jobApply} />
-              <Route
+              <PrivateRoute
                 path="/messaging"
                 store={chatstore}
                 render={props => <Messaging {...props} store={chatstore} />}
