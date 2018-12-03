@@ -24,6 +24,26 @@ export const searchJob = (data, callback) => async dispatch => {
     };
   }
 };
+export const getsavedJob = (data, callback) => async dispatch => {
+  try {
+    // var email = getJWTUsername();
+    //setHeader();
+    const res = await axios.post(`${ROOT_URL}/getsavejob`, data);
+    console.log(res.status);
+    console.log("search a job", res.data);
+    dispatch({
+      type: SEARCH_JOB,
+      payload: res.data
+    });
+    callback();
+  } catch (e) {
+    return {
+      type: SEARCH_JOB,
+      payload: e
+    };
+  }
+};
+
 
 export const saveJob = data => async dispatch => {
   try {

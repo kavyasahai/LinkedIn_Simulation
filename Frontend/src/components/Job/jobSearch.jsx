@@ -32,7 +32,7 @@ class JobSearch extends Component {
       properties2: [],
       properties: [],
       imageNumber: 0,
-
+      hasapplied:false,
       imageView: [],
       open: false
     };
@@ -45,6 +45,37 @@ class JobSearch extends Component {
     this.sendApplication = this.sendApplication.bind(this);
   }
   state = { uploadedFile: null };
+componentDidMount(){
+  const data = {
+    Job: this.state.Job,
+    Location: this.state.Location
+  };
+  this.props.searchJob(data, () => {
+    console.log(this.props.search_job_results);
+   
+  
+          this.setState({
+            properties1: this.props.search_job_results,
+            view1: this.state.view1.concat(this.props.search_job_results[0])
+          });
+          this.state.properties1.map(property => {
+            console.log(property.Icon);
+            axios
+              .post("http://localhost:3001/download/" + property.Icon)
+              .then(response => {
+                console.log("Imgae Res : ", response);
+                let imagePreview = "data:image/jpg;base64, " + response.data;
+                this.setState({
+                  imageView: this.state.imageView.concat(imagePreview)
+                });
+              });
+          });
+      
+  
+})
+}
+
+    
 
   handleResumeUpload(file) {
     console.log("file=", file);
@@ -97,6 +128,9 @@ class JobSearch extends Component {
   };
   Search = e => {
     console.log("Clicked");
+    this.setState({
+      view1:[]
+    })
     const data = {
       Job: this.state.Job,
       Location: this.state.Location
@@ -177,7 +211,7 @@ class JobSearch extends Component {
 
     var i = -1;
 
-    var view = this.state.view1.concat(this.props.view);
+   
     var imageView = this.state.imageView;
 
     let Details = this.state.properties1.map(property => {
