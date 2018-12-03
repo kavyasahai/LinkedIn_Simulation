@@ -2494,3 +2494,8 @@ pattern,
 foreignObject {
   overflow: hidden;
 }
+
+.container {
+  width: 100vw;
+  height: 100%;
+}
