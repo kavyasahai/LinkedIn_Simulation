@@ -2,13 +2,13 @@ var { mongoose } = require("../../db/mongoose");
 
 var job = require("../../models/job");
 
-var jobApplication = require("../../models/jobApplication");
+var jobApplication = require("../../models/job");
 function handle_request(msg, callback) {
   var count;
   console.log(msg);
   jobApplication.find(
     {
-      emailID: msg.email
+      postedBy: msg.email
     },
     function(err, doc) {
       if (err) {

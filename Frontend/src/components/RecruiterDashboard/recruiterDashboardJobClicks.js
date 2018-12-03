@@ -8,17 +8,26 @@ import { getJWTUsername } from "../common/auth";
 
 class recruiterDashboardJobClicks extends Component {
   componentDidMount() {
-    var username = getJWTUsername();
+    var username = "john.doe@gmail.com"; // getJWTUsername();
     this.props.getClicksPerJob(username);
   }
   handleFilter1 = () => {
     this.props.history.push("/recruiterdashboardtop10");
   };
+  handleFilter2 = () => {
+    this.props.history.push("/recruiterdashboardcitywise");
+  };
   handleFilter3 = () => {
     this.props.history.push("/recruiterdashboardtop5");
   };
-  handleFilter2 = () => {
-    this.props.history.push("/recruiterdashboardcitywise");
+  handleFilter4 = () => {
+    this.props.history.push("/recruiterdashboardjobclicks");
+  };
+  handleFilter5 = () => {
+    this.props.history.push("/recruiterdashboardjobsaves");
+  };
+  handleFilter6 = () => {
+    this.props.history.push("/recruiterdashboardtrace");
   };
 
   render() {
@@ -38,21 +47,29 @@ class recruiterDashboardJobClicks extends Component {
         <Header />
         <div className="sidebar_dashboard">
           <a href="#" onClick={this.handleFilter1}>
-            Top 10 job postings
-          </a>
-          <br /> <br /> <br />
-          <a href="#" onClick={this.handleFilter4}>
-            Number of clicks per job posting
+            <span className="active_link">Top 10 job postings</span>
           </a>
           <br /> <br /> <br />
           <a href="#" onClick={this.handleFilter2}>
             City-wise applications for a job posting
           </a>
           <br /> <br /> <br />
+          <a href="#" onClick={this.handleFilter3}>
+            Top 5 job postings with least number of applications
+          </a>
+          <br /> <br /> <br />
           <a href="#">
             <span className="active_link">
-              Top 5 job postings with least number of applications
+              Number of clicks per job posting
             </span>
+          </a>
+          <br /> <br /> <br />
+          <a href="#" onClick={this.handleFilter5}>
+            Number of Saved Jobs
+          </a>
+          <br /> <br /> <br />
+          <a href="#" onClick={this.handleFilter6}>
+            Trace Job
           </a>
         </div>
         <div className="displayCharts">

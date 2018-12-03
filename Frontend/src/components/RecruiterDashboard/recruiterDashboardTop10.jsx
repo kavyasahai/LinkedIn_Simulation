@@ -11,15 +11,23 @@ class RecruiterDashboardTop10 extends Component {
     var username = getJWTUsername();
     this.props.getRecruiterDashboardTop10(username);
   }
+  handleFilter1 = () => {
+    this.props.history.push("/recruiterdashboardtop10");
+  };
   handleFilter2 = () => {
     this.props.history.push("/recruiterdashboardcitywise");
   };
   handleFilter3 = () => {
     this.props.history.push("/recruiterdashboardtop5");
   };
-
   handleFilter4 = () => {
     this.props.history.push("/recruiterdashboardjobclicks");
+  };
+  handleFilter5 = () => {
+    this.props.history.push("/recruiterdashboardjobsaves");
+  };
+  handleFilter6 = () => {
+    this.props.history.push("/recruiterdashboardtrace");
   };
   render() {
     var data = [
@@ -121,16 +129,24 @@ class RecruiterDashboardTop10 extends Component {
             <span className="active_link">Top 10 job postings</span>
           </a>
           <br /> <br /> <br />
-          <a href="#" onClick={this.handleFilter4}>
-            Number of clicks per job posting
-          </a>
-          <br /> <br /> <br />
           <a href="#" onClick={this.handleFilter2}>
             City-wise applications for a job posting
           </a>
           <br /> <br /> <br />
           <a href="#" onClick={this.handleFilter3}>
             Top 5 job postings with least number of applications
+          </a>
+          <br /> <br /> <br />
+          <a href="#" onClick={this.handleFilter4}>
+            Number of clicks per job posting
+          </a>
+          <br /> <br /> <br />
+          <a href="#" onClick={this.handleFilter5}>
+            Number of Saved Jobs
+          </a>
+          <br /> <br /> <br />
+          <a href="#" onClick={this.handleFilter6}>
+            Trace Job
           </a>
         </div>
         <div className="displayCharts">

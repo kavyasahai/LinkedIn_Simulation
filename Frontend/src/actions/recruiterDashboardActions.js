@@ -4,7 +4,8 @@ import {
   RECRUITER_DASHBOARD_TOP5,
   GET_RECRUITER_JOBS,
   RECRUITER_DASHBOARD_CITY,
-  RECRUITER_DASHBOARD_JOB_CLICKS
+  RECRUITER_DASHBOARD_JOB_CLICKS,
+  RECRUITER_NUM_SAVED_JOB
 } from "./types";
 import { setHeader } from "../components/common/auth";
 
@@ -101,26 +102,26 @@ export const getClicksPerJob = username => async dispatch => {
   }
 };
 
-// export const getNumSavedJobs = username => async dispatch => {
-//   try {
-//     setHeader();
+export const getRecruiterSavedJobs = username => async dispatch => {
+  try {
+    setHeader();
 
-//     const res = await axios.get(`${ROOT_URL}/getNumSavedJobs`, {
-//       params: {
-//         email: username
-//       }
-//     });
-//     dispatch({
-//       type: RECRUITER_NUM_SAVED_JOB,
-//       payload: res.data
-//     });
-//   } catch (e) {
-//     return {
-//       type: RECRUITER_NUM_SAVED_JOB,
-//       payload: e
-//     };
-//   }
-// };
+    const res = await axios.get(`${ROOT_URL}/recruiterSavedJobs`, {
+      params: {
+        email: username
+      }
+    });
+    dispatch({
+      type: RECRUITER_NUM_SAVED_JOB,
+      payload: res.data
+    });
+  } catch (e) {
+    return {
+      type: RECRUITER_NUM_SAVED_JOB,
+      payload: e
+    };
+  }
+};
 
 // export const getJobTrace = username => async dispatch => {
 //   try {

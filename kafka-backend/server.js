@@ -29,7 +29,8 @@ var schoolinsert = require("./services/schoolinsert");
 var skillsinsert = require("./services/skillsinsert");
 var getuserdata = require("./services/getuserdata");
 var getJobById = require("./services/Job/getJobById");
-var getsavedjobs=require("./services/Job/getsavedjobs")
+var getsavedjobs = require("./services/Job/getsavedjobs");
+var recruiterSavedJobs = require("./services/RecruiterDashboard/recruiterSavedJobs");
 
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -92,4 +93,5 @@ handleTopicRequest("schoolinsert", schoolinsert);
 handleTopicRequest("skillsinsert", skillsinsert);
 handleTopicRequest("getuserdata", getuserdata);
 handleTopicRequest("getJobById_topic", getJobById);
-handleTopicRequest("getsavedjobs",getsavedjobs);
+handleTopicRequest("getsavedjobs", getsavedjobs);
+handleTopicRequest("recruiterSavedJobs", recruiterSavedJobs);

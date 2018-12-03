@@ -84,7 +84,7 @@ var schoolinsert = require("./routes/User/schoolinsert");
 var skillsinsert = require("./routes/User/skillsinsert");
 var getuserdata = require("./routes/User/getuserdata");
 var getJobById = require("./routes/Job/getJobById");
-var getsavejob=require("./routes/Job/getsavedjob");
+var getsavejob = require("./routes/Job/getsavedjob");
 app.use(getuserdata);
 app.use(experienceinsert);
 app.use(schoolinsert);

@@ -59,8 +59,8 @@ class Login extends Component {
     if (username == "") window.alert("Email cannot be empty.");
     else if (username.length > 30)
       window.alert("Email cannot be more than 30 characters long.");
-    else if (!/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(username))
-      window.alert("Email should be a valid email-address.");
+    // else if (!/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(username))
+    //   window.alert("Email should be a valid email-address.");
     else if (password == "") window.alert("Password cannot be empty.");
     else if (password.length > 20 || password.length < 6)
       window.alert("Password should be between 6-20 characters");
@@ -104,8 +104,8 @@ class Login extends Component {
     else if (username == "") window.alert("Email cannot be empty.");
     else if (username.length > 30)
       window.alert("Email cannot be more than 30 characters long.");
-    else if (!/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(username))
-      window.alert("Email should be a valid email-address.");
+    // else if (!/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(username))
+    //   window.alert("Email should be a valid email-address.");
     else if (password == "") window.alert("Password cannot be empty.");
     else if (password.length > 20 || password.length < 6)
       window.alert("Password should be between 6-20 characters");
@@ -161,7 +161,7 @@ class Login extends Component {
                 <div class="login-form">
                   <label for="login-email">Email</label>
                   <input
-                    type="text"
+                    type="email"
                     class="login-email"
                     placeholder="Email"
                     onChange={this.usernameChangeHandler}

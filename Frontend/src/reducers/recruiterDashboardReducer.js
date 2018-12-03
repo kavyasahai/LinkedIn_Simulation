@@ -3,7 +3,8 @@ import {
   RECRUITER_DASHBOARD_TOP5,
   GET_RECRUITER_JOBS,
   RECRUITER_DASHBOARD_CITY,
-  RECRUITER_DASHBOARD_JOB_CLICKS
+  RECRUITER_DASHBOARD_JOB_CLICKS,
+  RECRUITER_NUM_SAVED_JOB
 } from "../actions/types";
 
 const initialState = {
@@ -44,11 +45,11 @@ export default function(state = initialState, action) {
         ...state,
         data_jobclicks: action.payload
       };
-    // case RECRUITER_NUM_SAVED_JOB:
-    //   return {
-    //     ...state,
-    //     data_savedjobs: action.payload
-    //   };
+    case RECRUITER_NUM_SAVED_JOB:
+      return {
+        ...state,
+        data_jobsaves: action.payload
+      };
     // case RECRUITER_TRACE_JOB:
     //   return {
     //     ...state,

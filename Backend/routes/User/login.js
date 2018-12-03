@@ -39,7 +39,8 @@ router.post("/login", function(request, response) {
             });
           } else {
             console.log("Inside else");
-            console.log(results);
+            console.log("KAF LOGIN RES:", results);
+            client.set(sqlQuery, results);
             response.json({
               updatedList: results
             });
@@ -50,13 +51,13 @@ router.post("/login", function(request, response) {
       } else {
         console.log("INSIDE REDIS KEY FOUND AND GETTING KEY");
         console.log("KEY VALUE fOUND: ", result);
-        var data = { username: request.body.username };
-        var token = jwt.sign(data, config.secret, { expiresIn: 600000 });
-        console.log("token=", token);
-        const newToken = "Bearer " + token;
-        console.log("token=", newToken);
+        // var data = { username: request.body.username };
+        // var token = jwt.sign(data, config.secret, { expiresIn: 600000 });
+        // console.log("token=", token);
+        // const newToken = "Bearer " + token;
+        // console.log("token=", newToken);
         response.json({
-          updatedList: newToken
+          updatedList: result
         });
       }
     }

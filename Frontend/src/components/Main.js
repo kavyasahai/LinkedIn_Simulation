@@ -5,6 +5,8 @@ import RecruiterDashboardCityWise from "./RecruiterDashboard/recruiterDashboardC
 import RecruiterDashboardTop10 from "./RecruiterDashboard/recruiterDashboardTop10";
 import RecruiterDashboardTop5 from "./RecruiterDashboard/recruiterDashboardTop5";
 import RecruiterDashboardJobClicks from "./RecruiterDashboard/recruiterDashboardJobClicks";
+import RecruiterDashboardJobSaves from "./RecruiterDashboard/recruiterDashboardSavedJobs";
+import RecruiterDashboardTrace from "./RecruiterDashboard/recruiterDashboardTraceJob";
 
 import Login from "./Applicant/login";
 import PostSignUp from "./Applicant/postSignUp";
@@ -82,6 +84,16 @@ class Main extends Component {
                 path="/recruiterdashboardjobclicks"
                 exact
                 component={RecruiterDashboardJobClicks}
+              />
+              <PrivateRoute
+                path="/recruiterdashboardjobsaves"
+                exact
+                component={RecruiterDashboardJobSaves}
+              />
+              <PrivateRoute
+                path="/recruiterdashboardtrace"
+                exact
+                component={RecruiterDashboardTrace}
               />
 
               <PrivateRoute
