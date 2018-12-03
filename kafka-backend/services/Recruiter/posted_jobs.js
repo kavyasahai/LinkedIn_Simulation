@@ -2,7 +2,7 @@ var Jobs = require("../../models/job");
 
 function handle_request(msg, callback) {
   var username = msg.username;
-  Jobs.find({ postedBy: username }, { _id: 0 })
+  Jobs.find({ postedBy: username })
     .then(res => {
       callback(null, res);
     })
