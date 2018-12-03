@@ -1,15 +1,13 @@
 import {
   GET_ALL_CONNECTIONS,
   ACCEPT_CONNECTION,
-  REJECT_CONNECTION,
-  GET_RECEIVED_CONNECTIONS
+  REJECT_CONNECTION
 } from "../actions/types";
 
 const initialState = {
   allConnections: [],
   acceptConnection: [],
-  rejectConnection: [],
-  receivedConnections: []
+  rejectConnection: []
 };
 
 export default function(state = initialState, action) {
@@ -28,11 +26,6 @@ export default function(state = initialState, action) {
       return {
         ...state,
         rejectConnection: action.payload
-      };
-    case GET_RECEIVED_CONNECTIONS:
-      return {
-        ...state,
-        receivedConnections: action.payload
       };
 
     default:

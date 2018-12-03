@@ -4,7 +4,7 @@
   border: 1px gray solid;
   height: auto;
   width: 50vw;
-  margin-top: 2vw;
+  margin-top: -3vw;
 }
 .message {
   border: 2px solid #0073b1;
@@ -20,8 +20,9 @@
   border: 1px gray solid;
   height: auto;
   width: 50vw;
+  margin-top: -3vw;
 }
 
 .image5 {
-  margin-top: -10vw;
+  margin-top: -5vw;
 }

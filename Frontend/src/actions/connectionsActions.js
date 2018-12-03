@@ -2,8 +2,7 @@ import axios from "axios";
 import {
   GET_ALL_CONNECTIONS,
   ACCEPT_CONNECTION,
-  REJECT_CONNECTION,
-  GET_RECEIVED_CONNECTIONS
+  REJECT_CONNECTION
 } from "./types";
 import { setHeader } from "../components/common/auth";
 
@@ -54,20 +53,4 @@ export const rejectConnection = data => async dispatch => {
       payload: e
     };
   }
-};
-
-export const getReceivedConnections = data => async dispatch => {
-  // try {
-  //   setHeader();
-  //   const res = await axios.post(`${ROOT_URL}/connection`, data);
-  //   dispatch({
-  //     type: GET_RECEIVED_CONNECTIONS,
-  //     payload: res.data
-  //   });
-  // } catch (e) {
-  //   return {
-  //     type: GET_RECEIVED_CONNECTIONS,
-  //     payload: e
-  //   };
-  // }
 };

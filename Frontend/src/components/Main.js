@@ -20,13 +20,14 @@ import jobDetails from "./Job/jobDetails";
 import jobSearch from "./Job/jobSearch.jsx";
 import Homepage from "./Applicant/home";
 import jobApply from "./Job/jobApply";
-import network from "./Job/Connections";
+import network from "./Connections/Network";
 import { Provider } from "react-redux";
 import PrivateRoute from "./common/PrivateRoute";
 import Messaging from "../components/Chat/messenger";
 import ChatStore from "../chatstore";
 import store from "../store";
 import editJob from "./Recruiter/editJob";
+import ConnectionRequests from "./Connections/ConnectionRequests";
 
 //Create a Main Component
 class Main extends Component {
@@ -51,8 +52,9 @@ class Main extends Component {
               <Route path="/applicantdetails" component={ApplicantDetails} />
               <Route path="/school" component={UserSchoolData} />
               <Route path="/profilepicture" component={UserProfilePhoto} />
-              <Route path="/network" component={network} />
-              <Route path="/job-apply" component={jobApply} />
+              <PrivateRoute path="/network" component={network} />
+              <PrivateRoute path="/myrequests" component={ConnectionRequests} />
+              <PrivateRoute path="/job-apply" component={jobApply} />
               <Route
                 path="/messaging"
                 store={chatstore}
