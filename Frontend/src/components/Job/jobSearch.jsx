@@ -189,9 +189,7 @@ componentDidMount(){
 
   save = e => {
     console.log(e);
-    var jobdetails = this.state.properties1.filter(function(property) {
-      return property._id == e._id;
-    });
+   
     const data = {
       jobid: e._id,
       Userid: getJWTUsername(),
