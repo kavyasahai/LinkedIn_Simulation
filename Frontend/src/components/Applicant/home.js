@@ -354,9 +354,7 @@ class Homepage extends Component {
                     >
                       {" "}
                       <span class="svg-icon-wrap">
-                        <span class="visually-hidden">
-                          See connections (152)
-                        </span>
+                        <span class="visually-hidden">See connections</span>
                         <li-icon
                           aria-hidden="true"
                           type="people-icon"
