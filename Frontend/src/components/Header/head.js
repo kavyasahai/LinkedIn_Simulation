@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import supportingImage4 from "../../images/supportingImage4.jpg";
+// import supportingImage4 from "../../images/supportingImage4.jpg";
 import "../../css/jobSearch.css";
 class Header extends Component {
   constructor(props) {
@@ -177,7 +177,7 @@ class Header extends Component {
               </a>
             </li>
           </div>
-          <img src={supportingImage4} class="dropdown dropdown-toggle">
+          {/* <img src={supportingImage4} class="dropdown dropdown-toggle">
             <div class="dropdown-menu">
               <a class="dropdown-item" href="/">
                 Saved Jobs
@@ -186,7 +186,7 @@ class Header extends Component {
                 Applied Jobs
               </a>
             </div>
-          </img>
+          </img> */}
         </div>
       </div>
     );
