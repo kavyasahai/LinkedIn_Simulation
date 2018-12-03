@@ -111,7 +111,7 @@ class Header extends Component {
                       <a class="dropdown-item" href="/job/new">
                         Post Job
                       </a>
-                      <a class="dropdown-item" href="/myrequests">
+                      <a class="dropdown-item" href="/job/posted-jobs">
                         View Posted Jobs
                       </a>
                       <a class="dropdown-item" href="/recruiterdashboardtop10">
@@ -177,7 +177,6 @@ class Header extends Component {
               </a>
             </li>
           </div>
-          
         </div>
       </div>
     );

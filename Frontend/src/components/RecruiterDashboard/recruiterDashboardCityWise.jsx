@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Chart from "react-google-charts";
 import "../../css/recruiterDashboard.css";
-import Header from "../Header/header";
+import Header from "../Header/head";
 import {
   getRecruiterJobs,
   getRecruiterDashboardCity

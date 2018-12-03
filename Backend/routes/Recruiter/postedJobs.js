@@ -2,12 +2,9 @@ var kafka = require("../../kafka/client");
 var express = require("express");
 const router = express.Router();
 
-router.post("/recruiter/posted_jobs", function (request, response) {
+router.get("/recruiter/posted_jobs/:username", function(request, response) {
   console.log("In posted jobs");
-  kafka.make_request("posted_jobs", request.user.username, function (
-    err,
-    results
-  ) {
+  kafka.make_request("posted_jobs", request.params, function(err, results) {
     console.log("in results");
     console.log(results);
     if (err) {

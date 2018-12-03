@@ -1,6 +1,6 @@
 .connection {
   background: white;
-  margin-left: 65vw;
+  margin-left: 15vw;
   border: 1px gray solid;
   height: auto;
   width: 50vw;
@@ -15,14 +15,14 @@
 
 .acceptRejectConnection {
   background: white;
-  margin-left: 65vw;
+  margin-left: 15vw;
   border: 1px gray solid;
   height: auto;
   width: 50vw;
 }
 
 .connectionData .row {
-  width: 50vw;
+  width: 49vw;
   margin-left: 0vw;
   height: 8vw;
   background: white;

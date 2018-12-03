@@ -3,7 +3,7 @@ import "../../css/recruiterDashboard.css";
 import Chart from "react-google-charts";
 import { connect } from "react-redux";
 import { getClicksPerJob } from "../../actions/recruiterDashboardActions";
-import Header from "../Header/header";
+import Header from "../Header/head";
 import { getJWTUsername } from "../common/auth";
 
 class recruiterDashboardJobClicks extends Component {

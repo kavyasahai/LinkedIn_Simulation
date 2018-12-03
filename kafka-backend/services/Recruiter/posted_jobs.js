@@ -1,8 +1,8 @@
-var { Jobs } = require("../../models/job");
+var Jobs = require("../../models/job");
 
 function handle_request(msg, callback) {
-  var username = msg;
-  Jobs.find({ adminId: username }, { _id: 0 })
+  var username = msg.username;
+  Jobs.find({ postedBy: username }, { _id: 0 })
     .then(res => {
       callback(null, res);
     })

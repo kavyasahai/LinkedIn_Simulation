@@ -23,35 +23,35 @@ export const getPostedApplications = () => dispatch => {
     });
 };
 
-export const getPostedJobs = () => dispatch => {
+export const getPostedJobs = username => async dispatch => {
+  try {
+    const res = await axios.get(
+      `${ROOT_URL}/recruiter/posted_jobs/${username}`
+    );
+    dispatch({
+      type: POSTED_JOBS,
+      payload: res.data
+    });
+  } catch (e) {
+    return {
+      type: POSTED_JOBS,
+      payload: e
+    };
+  }
+};
+
+export const editJob = state => {
   axios
-    .get({
-      method: "get",
-      url: ROOT_URL + "/recruiter/posted_jobs",
+    .post({
+      method: "post",
+      url: ROOT_URL + "/recruiter/edit_job",
       headers: {
         Authorization: getToken()
       }
     })
     .then(res => {
-      if (res.data.status === "OK") {
-        dispatch({
-          type: POSTED_JOBS,
-          payload: res.data.payload
-        });
+      if (res.data.status == "OK") {
+        alert("Job updated");
       }
     });
 };
-
-export const editJob = state => {
-  axios.post({
-    method: "post",
-    url: ROOT_URL + "/recruiter/edit_job",
-    headers: {
-      Authorization: getToken()
-    }
-  }).then(res => {
-    if (res.data.status == "OK") {
-      alert("Job updated")
-    }
-  })
-}
