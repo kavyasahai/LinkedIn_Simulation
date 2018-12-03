@@ -172,12 +172,31 @@ class Header extends Component {
                 </div>
               </div>
             </div>
-
-            <li>
-              <a href="/login" onClick={this.clear} className="logout">
-                LogOut
-              </a>
-            </li>
+            <div class="go-middle">
+                  <li
+                    class="blue"
+                    class="nav-item dropdown"
+                    style={{ opacity: "unset", padding: 0 }}
+                  >
+                    <a
+                      class=" dropdown-toggle"
+                      id="navbardrop"
+                      data-toggle="dropdown"
+                    >
+                      <span class="normal">My Jobs</span>{" "}
+                    </a>
+                    <div class="dropdown-menu">
+                     <li> <a class="dropdown-item" href="/login" onClick={this.clear}>
+                        Log Out
+                      </a></li>
+                      <a class="dropdown-item" href="/job/posted-jobs">
+                        Delete Your Account
+                      </a>
+                     
+                     
+                    </div>
+                  </li>
+            </div> 
           </div>
         </div>
       </div>

@@ -17,28 +17,88 @@ class JobSearch extends Component {
     super(props);
     //maintain the state required for this component
     this.state = {
-      Job: "",
-      Location: "",
-      properties1: [],
-      view1: [],
-      properties2: [],
-      properties: [],
+      firstname:"",
+      lastname:"",
+      address:"",
+      email:"",
       imageNumber: 0,
-
+   selectedOption:"",
       imageView: [],
       open: false
     };
+    this.FirstnameChangeHandler = this.FirstnameChangeHandler.bind(this);
+    this.LastnameChangeHandler = this.LastnameChangeHandler.bind(this);
+    this.EmailChangeHandler=this.EmailChangeHandler.bind(this);
+    this.AddressChangeHandler=this.AddressChangeHandler.bind(this);
+    this.TextChangeHandler=this.TextChangeHandler.bind(this);
+    this.handleOptionChange=this.handleOptionChange.bind(this);
+    this.handleOptionChange1=this.handleOptionChange1.bind(this);
+    this.handleOptionChange2=this.handleOptionChange2.bind(this);
+    this.Submit=this.Submit.bind(this);
   
   }
-
+FirstnameChangeHandler = e => {
+    this.setState({
+      firstname: e.target.value
+    });
+  };
+  LastnameChangeHandler= e => {
+    this.setState({
+      Job: e.target.value
+    });
+  };
+  EmailChangeHandler= e => {
+    this.setState({
+      Job: e.target.value
+    });
+  };
+  AddressChangeHandler= e => {
+    this.setState({
+      Job: e.target.value
+    });
+  };
+  TextChangeHandler= e => {
+    this.setState({
+      Job: e.target.value
+    });
+  };
+  handleOptionChange= (e)=>{
+    if(e.target.value=="on"){
+    console.log(e.target.value)
+    this.setState({
+      selectedOption:"Yes"
+    });}
+  }
+  handleOptionChange1= (e)=>{
+    if(e.target.value=="on"){
+    console.log(e.target.value)
+    this.setState({
+      selectedOption:"Yes"
+    });}
+  }
+  handleOptionChange2= (e)=>{
+    if(e.target.value=="on"){
+    console.log(e.target.value)
+    this.setState({
+      selectedOption:"Yes"
+    });}
+  }
   componentDidMount(){
     const foo =this.props.location.state;
     console.log("Foo",foo);
 
   }
+
+  Submit=e=>{
+    const data={
+      firstname:this.state.firstname
+    }
+    console.log(data);
+    //this.props.applyJob(data);
+  }
   render() {
    
-console.log("Props",this.props.location.state);
+console.log("Props",this.state.handleOptionChange);
     return (
       <div class="menu">
         <div class="extendmenu row">
@@ -92,43 +152,44 @@ console.log("Props",this.props.location.state);
                 </div>
               </div>
     <div class="alignment">
-    First Name:  <div col="col-2" class="inputfield ">
+    First Name:  <div col="col-2" class="inputfield1 ">
           
           <input
             style={{"background-color": "#e1e9ee","font-size":"0.8rem"}}
             type="text"
             placeholder="Search"
-            onChange={this.SearchChangeHandler}
+            onChange={this.FirstnameChangeHandler}
           />
           </div>
     Last Name:
-    <div col="col-2" class="inputfield ">
+    <div col="col-2" class="inputfield1 ">
           
           <input
             style={{"background-color": "#e1e9ee","font-size":"0.8rem"}}
             type="text"
             placeholder="Search"
-            onChange={this.SearchChangeHandler}
+            onChange={this.LastnameChangeHandler}
           />
           </div>
     Email:
-    <div col="col-2" class="inputfield ">
+    <div col="col-2" class="inputfield1 ">
           
           <input
             style={{"background-color": "#e1e9ee","font-size":"0.8rem"}}
             type="text"
             placeholder="Search"
-            onChange={this.SearchChangeHandler}
+            onChange={this.EmailChangeHandler
+            }
           />
           </div>
     Address:
-    <div col="col-2" class="inputfield ">
+    <div col="col-2" class="inputfield1 ">
           
           <input
             style={{"background-color": "#e1e9ee","font-size":"0.8rem"}}
             type="text"
             placeholder="Search"
-            onChange={this.SearchChangeHandler}
+            onChange={this.AddressChangeHandler}
           />
           </div>
          
@@ -146,7 +207,7 @@ console.log("Props",this.props.location.state);
             style={{"background-color": "#e1e9ee", "width":"35vw","height":"7vw"}}
             type="textarea"
             placeholder="Search"
-            onChange={this.SearchChangeHandler}
+            onChange={this.TextChangeHandler}
           />
           </div>
 <br></br>
@@ -158,9 +219,9 @@ console.log("Props",this.props.location.state);
     <div>
         Are you Physically Challenged
         <br></br>
-        <input type="radio" name="radio" /> Yes{" "}
+        <input type="radio" name="radio"  onChange={this.handleOptionChange}/> Yes{" "}
               <br />
-              <input type="radio" name="radio" /> No
+              <input type="radio" name="radio"  onChange={this.handleOptionChange1} /> No
               <br />
     </div>
     <br/>
@@ -169,7 +230,7 @@ console.log("Props",this.props.location.state);
     <div>
         Are you legally authorized to work in the united states?
         <br></br>
-        <input type="radio" name="radio" /> Yes{" "}
+        <input type="radio" name="radio" value="Yes" onChange={this.handleOptionChange1} /> Yes{" "}
               <br />
               <input type="radio" name="radio" /> No
               <br />
@@ -182,7 +243,7 @@ console.log("Props",this.props.location.state);
     </div>
     <br/>
     <div class="alignment">
-    <button class="Button" onClick={this.Search}>
+    <button class="Button" onClick={this.Submit}>
             Submit Application
           </button>
     </div>

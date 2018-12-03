@@ -40,28 +40,7 @@ class JobFilter extends Component {
             </div>
           </li>
         </div>
-        <div class="col-2">
-          <li class=" dropdown ">
-            <a
-              class="  dropdown-toggle border"
-              id="navbardrop"
-              data-toggle="dropdown"
-            >
-              Jobs
-            </a>
-            <div class="dropdown-menu">
-            <a>People</a>
-              <input type="radio"  name="radio" /> Past 24Hours{" "}
-              <br />
-              <input type="radio"  name="radio" /> Past Week
-              <br />
-              <input type="radio"  name="radio" /> Past Month
-              <br />
-              <input type="radio"  name="radio" /> Any Time
-              <br />
-            </div>
-          </li>
-        </div>
+       
         <div class="col-2">
           <li class=" dropdown ">
             <a
@@ -151,9 +130,7 @@ class JobFilter extends Component {
             </div>
           </li>
         </div>
-        <div class="col-2">
-          <li>All Filters</li>
-        </div>
+    
       </div>
     );
   }
