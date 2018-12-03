@@ -154,10 +154,10 @@ artdeco-typeahead-deprecated-input
 }
 input[type="checkbox"],
 input[type="radio"] {
-  pointer-events: none;
-  opacity: 0;
-  margin: 16px 2px 0 0;
-  position: absolute;
+  /* pointer-events: none; */
+  opacity: unset;
+  /* margin: 16px 2px 0 0;
+  position: absolute; */
 }
 .dropbtn {
   background-color: #4caf50;

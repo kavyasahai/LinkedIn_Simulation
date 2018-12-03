@@ -114,13 +114,13 @@ class JobFilter extends Component {
               Company{" "}
             </a>
             <div class="dropdown-menu">
-              <input type="radio" checked="checked" name="radio" /> Google{" "}
+              <input type="radio" name="radio" /> Google{" "}
               <br />
-              <input type="radio" checked="checked" name="radio" /> Facebook
+              <input type="radio"  name="radio" /> Facebook
               <br />
-              <input type="radio" checked="checked" name="radio" /> IBM
+              <input type="radio" name="radio" /> IBM
               <br />
-              <input type="radio" checked="checked" name="radio" /> Netflix
+              <input type="radio"  name="radio" /> Netflix
               <br />
             </div>
           </li>
@@ -134,17 +134,17 @@ class JobFilter extends Component {
             >
               Experience Level
             </a>
-            <div class="dropdown-menu">
-              <input type="radio" checked="checked" name="radio" /> Internship{" "}
+            <div class="dropdown-menu" >
+              <input type="radio"  name="radio" /> Internship{" "}
               <br />
-              <input type="radio" checked="checked" name="radio" /> Entry Level
+              <input type="radio" name="radio" /> Entry Level
               <br />
-              <input type="radio" checked="checked" name="radio" /> Aassociate
+              <input type="radio"  name="radio" /> Aassociate
               <br />
-              <input type="radio" checked="checked" name="radio" /> Mid-Senior
+              <input type="radio"  name="radio" /> Mid-Senior
               Level
               <br />
-              <input type="radio" checked="checked" name="radio" /> Director
+              <input type="radio"  name="radio" /> Director
               <br />
               <input type="radio" name="radio" /> Executive
               <br />
