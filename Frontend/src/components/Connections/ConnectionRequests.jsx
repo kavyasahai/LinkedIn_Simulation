@@ -63,63 +63,65 @@ class ConnectionRequests extends Component {
           <div style={{ "padding-top": "7vw" }} />
           <div class="row">
             <div class="acceptRejectConnection">
-              {this.props.allConnections.connection &&
-                this.props.allConnections.connection.receivedConnections.map(
-                  data => (
-                    <div key={data.firstname}>
-                      <div class="row">
-                        <div class="col-2">
-                          <img
-                            src={supportingimage4}
-                            style={{
-                              width: "7vw",
-                              height: "7vw",
-                              "border-radius": "50%"
-                            }}
-                          />
-                        </div>
+              <div className="connectionData">
+                {this.props.allConnections.connection &&
+                  this.props.allConnections.connection.receivedConnections.map(
+                    data => (
+                      <div key={data.firstname}>
+                        <div class="row">
+                          <div class="col-2">
+                            <img
+                              src={supportingimage4}
+                              style={{
+                                width: "7vw",
+                                height: "7vw",
+                                "border-radius": "50%"
+                              }}
+                            />
+                          </div>
 
-                        <div class="col-6" style={{ paddingTop: "2vw" }}>
-                          <b>
-                            {data.firstname} {data.lastname}
-                          </b>
-                          <br />
-                          <div>
-                            <p style={{ "font-size": "0.6rem" }}>
-                              {data.jobTitle} | {data.companyName}
-                            </p>
-                            <p style={{ "font-size": "0.6rem" }}>
+                          <div class="col-6" style={{ paddingTop: "2vw" }}>
+                            <b>
+                              {data.firstname} {data.lastname}
+                            </b>
+                            <br />
+                            <div>
+                              <p style={{ "font-size": "0.6rem" }}>
+                                {data.jobTitle} | {data.companyName}
+                              </p>
+                              <p style={{ "font-size": "0.6rem" }}>
+                                {" "}
+                                Connected 5 days ago
+                              </p>
+                            </div>
+                          </div>
+                          <div
+                            class="col-2"
+                            style={{ float: "right", paddingTop: "2vw" }}
+                          >
+                            <button
+                              class="message"
+                              onClick={() => this.accept(data)}
+                            >
                               {" "}
-                              Connected 5 days ago
-                            </p>
+                              Accept
+                            </button>
+                          </div>
+                          <div class="col-2" style={{ paddingTop: "2vw" }}>
+                            <button
+                              class="message"
+                              onClick={() => this.reject(data)}
+                            >
+                              {" "}
+                              Reject
+                            </button>
                           </div>
                         </div>
-                        <div
-                          class="col-2"
-                          style={{ float: "right", paddingTop: "2vw" }}
-                        >
-                          <button
-                            class="message"
-                            onClick={() => this.accept(data)}
-                          >
-                            {" "}
-                            Accept
-                          </button>
-                        </div>
-                        <div class="col-2" style={{ paddingTop: "2vw" }}>
-                          <button
-                            class="message"
-                            onClick={() => this.reject(data)}
-                          >
-                            {" "}
-                            Reject
-                          </button>
-                        </div>
+                        <hr />
                       </div>
-                      <hr />
-                    </div>
-                  )
-                )}
+                    )
+                  )}
+              </div>
             </div>
 
             <div className="image5">

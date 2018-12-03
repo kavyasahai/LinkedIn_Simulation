@@ -10,7 +10,6 @@ class Header extends Component {
   }
   clear() {
     localStorage.clear();
-    // window.location.href = "http://localhost:3000/login";
     this.props.history.push("/login");
   }
   render() {
@@ -18,7 +17,10 @@ class Header extends Component {
       <div class="menu">
         <div class="extendmenu row">
           <div class="icon">
-            <i class="fa fa-linkedin-square" />
+            <a href="/home">
+              {" "}
+              <i class="fa fa-linkedin-square" />
+            </a>
           </div>
 
           <div class="job">
@@ -37,7 +39,7 @@ class Header extends Component {
           <div class="row">
             <div class="col-2">
               <div class="go-inline">
-                <div>
+                <div className="home">
                   <a href="/home">
                     <i class="fa fa-home w3-jumbo" />
                   </a>
@@ -52,7 +54,7 @@ class Header extends Component {
             <div class="col-2">
               <div class="go-inline">
                 <div>
-                  <a href="/home">
+                  <a href="/network">
                     <i class="fa fa-user w3-jumbo" />
                   </a>
                 </div>
@@ -63,14 +65,17 @@ class Header extends Component {
                     style={{ opacity: "unset" }}
                   >
                     <a
-                      class="nav-link dropdown-toggle"
+                      class="nav-link dropdown-toggle normal blue"
                       id="navbardrop"
                       data-toggle="dropdown"
                     >
-                      My Network{" "}
+                      <span class="normal">Network</span>
                     </a>
                     <div class="dropdown-menu">
-                      <a class="dropdown-item" href="/">
+                      <a class="dropdown-item" href="/network">
+                        My Network
+                      </a>
+                      <a class="dropdown-item" href="/myrequests">
                         MyRequests
                       </a>
                     </div>
@@ -81,17 +86,39 @@ class Header extends Component {
             <div class="col-2">
               <div class="go-inline">
                 <div>
-                  <a href="/home">
+                  <a href="/job/new">
                     <i class="fa fa-briefcase w3-jumbo" />
                   </a>
                 </div>
                 <div class="go-middle">
-                  <a href="/home">
-                    <span class="normal">Jobs</span>
-                  </a>
+                  <li
+                    class="blue"
+                    class="nav-item dropdown"
+                    style={{ opacity: "unset" }}
+                  >
+                    <a
+                      class="nav-link dropdown-toggle normal blue"
+                      id="navbardrop"
+                      data-toggle="dropdown"
+                    >
+                      <span class="normal">Jobs</span>
+                    </a>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="/job/new">
+                        Post Job
+                      </a>
+                      <a class="dropdown-item" href="/myrequests">
+                        View Posted Jobs
+                      </a>
+                      <a class="dropdown-item" href="/recruiterdashboardtop10">
+                        My Dashboard
+                      </a>
+                    </div>
+                  </li>
                 </div>
               </div>
             </div>
+
             <div class="col-2">
               <div class="go-inline">
                 <div>
@@ -116,14 +143,15 @@ class Header extends Component {
                   </a>
                 </div>
                 <div class="go-middle">
-                  <a href="/home">
+                  <a href="/messaging">
                     <span class="normal">Messaging</span>
                   </a>
                 </div>
               </div>
             </div>
+
             <li>
-              <a href="/login" onClick={this.clear}>
+              <a href="/login" onClick={this.clear} className="logout">
                 LogOut
               </a>
             </li>

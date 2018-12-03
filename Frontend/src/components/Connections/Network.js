@@ -57,53 +57,55 @@ class network extends Component {
           <div style={{ "padding-top": "7vw" }} />
           <div class="row">
             <div class="connection">
-              {this.props.allConnections.connection &&
-                this.props.allConnections.connection.acceptedConnections.map(
-                  data => (
-                    <div key={data ? data.firstname : ""}>
-                      <div class="row">
-                        <div class="col-2">
-                          <img
-                            src={supportingimage4}
-                            style={{
-                              width: "7vw",
-                              height: "7vw",
-                              "border-radius": "50%"
-                            }}
-                          />
-                        </div>
+              <div className="connectionData">
+                {this.props.allConnections.connection &&
+                  this.props.allConnections.connection.acceptedConnections.map(
+                    data => (
+                      <div key={data ? data.firstname : ""}>
+                        <div class="row">
+                          <div class="col-2">
+                            <img
+                              src={supportingimage4}
+                              style={{
+                                width: "7vw",
+                                height: "7vw",
+                                "border-radius": "50%"
+                              }}
+                            />
+                          </div>
 
-                        <div class="col-6" style={{ paddingTop: "2vw" }}>
-                          <b>
-                            {data ? data.firstname : ""}{" "}
-                            {data ? data.lastname : ""}
-                          </b>
-                          <br />
-                          <div>
-                            <p style={{ "font-size": "0.6rem" }}>
-                              {data ? data.jobTitle : ""} |{" "}
-                              {data ? data.companyName : ""}
-                            </p>
-                            <p style={{ "font-size": "0.6rem" }}>
+                          <div class="col-6" style={{ paddingTop: "2vw" }}>
+                            <b>
+                              {data ? data.firstname : ""}{" "}
+                              {data ? data.lastname : ""}
+                            </b>
+                            <br />
+                            <div>
+                              <p style={{ "font-size": "0.6rem" }}>
+                                {data ? data.jobTitle : ""} |{" "}
+                                {data ? data.companyName : ""}
+                              </p>
+                              <p style={{ "font-size": "0.6rem" }}>
+                                {" "}
+                                Connected 5 days ago
+                              </p>
+                            </div>
+                          </div>
+                          <div
+                            class="col-2"
+                            style={{ float: "right", paddingTop: "2vw" }}
+                          >
+                            <button class="message" onClick={this.sendMessage}>
                               {" "}
-                              Connected 5 days ago
-                            </p>
+                              Message
+                            </button>
                           </div>
                         </div>
-                        <div
-                          class="col-2"
-                          style={{ float: "right", paddingTop: "2vw" }}
-                        >
-                          <button class="message" onClick={this.sendMessage}>
-                            {" "}
-                            Message
-                          </button>
-                        </div>
+                        <hr />
                       </div>
-                      <hr />
-                    </div>
-                  )
-                )}
+                    )
+                  )}
+              </div>
             </div>
             <div className="image5">
               <img
