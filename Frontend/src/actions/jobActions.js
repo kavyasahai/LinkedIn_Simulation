@@ -1,5 +1,12 @@
 import axios from "axios";
-import { SEARCH_JOB, APPLY_JOB, SAVE_JOB, POST_A_JOB } from "./types";
+import {
+  SEARCH_JOB,
+  APPLY_JOB,
+  SAVE_JOB,
+  POST_A_JOB,
+  EDIT_JOB,
+  GET_JOB_BY_ID
+} from "./types";
 import { setHeader } from "../components/common/auth";
 import { getJWTUsername } from "../components/common/auth";
 
@@ -70,6 +77,38 @@ export const postAJob = data => async dispatch => {
   } catch (e) {
     return {
       type: POST_A_JOB,
+      payload: e
+    };
+  }
+};
+
+export const editJob = data => async dispatch => {
+  try {
+    setHeader();
+    const res = await axios.post(`${ROOT_URL}/recruiter/edit-job`, data);
+    dispatch({
+      type: EDIT_JOB,
+      payload: res.data
+    });
+  } catch (e) {
+    return {
+      type: EDIT_JOB,
+      payload: e
+    };
+  }
+};
+
+export const getJobById = jobId => async dispatch => {
+  try {
+    setHeader();
+    const res = await axios.get(`${ROOT_URL}/getPropertyById/${jobId}`);
+    dispatch({
+      type: GET_JOB_BY_ID,
+      payload: res.data
+    });
+  } catch (e) {
+    return {
+      type: GET_JOB_BY_ID,
       payload: e
     };
   }

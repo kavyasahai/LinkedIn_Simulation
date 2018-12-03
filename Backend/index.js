@@ -41,7 +41,7 @@ app.use(
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 //Allow Access Control
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader(
@@ -78,11 +78,12 @@ var connection = require("./routes/Connections/connection");
 var channel = require("./routes/Chat/channel");
 var message = require("./routes/Chat/message");
 var user = require("./routes/User/user");
-var insertsummary=require("./routes/User/summaryinsert");
-var experienceinsert=require("./routes/User/experienceinsert");
-var schoolinsert=require("./routes/User/schoolinsert");
-var skillsinsert=require("./routes/User/skillsinsert");
-var getuserdata=require("./routes/User/getuserdata");
+var insertsummary = require("./routes/User/summaryinsert");
+var experienceinsert = require("./routes/User/experienceinsert");
+var schoolinsert = require("./routes/User/schoolinsert");
+var skillsinsert = require("./routes/User/skillsinsert");
+var getuserdata = require("./routes/User/getuserdata");
+var getJobById = require("./routes/Job/getJobById");
 app.use(getuserdata);
 app.use(experienceinsert);
 app.use(schoolinsert);
@@ -105,6 +106,7 @@ app.use(postedJobs);
 app.use(editJob);
 app.use(profileViews);
 app.use(clicksPerJob);
+app.use(getJobById);
 app.use("/connection", connection);
 app.use("/api/auth/channel", channel);
 app.use("/api/auth/message", message);

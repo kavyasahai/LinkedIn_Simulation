@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Header from "../Header/head";
 import "../../css/connectionList.css";
-import supportingimage4 from "../../images/supportingImage4.jpg";
 import supportingimage5 from "../../images/supportingImage5.png";
 import { getJWTUsername } from "../common/auth";
 import { getPostedJobs } from "../../actions/recruiterActions";
@@ -44,7 +43,7 @@ class ViewPostedJobs extends Component {
                         <div class="col-6" style={{ paddingTop: "2vw" }}>
                           <Link
                             to={{
-                              pathname: "/viewdashboardproperty",
+                              pathname: "/job/edit",
                               state: {
                                 jobId: data._id
                               }

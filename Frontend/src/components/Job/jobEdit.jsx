@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import Header from "../Header/head";
-import { postAJob } from "../../actions/jobActions";
+import { editJob, getJobById } from "../../actions/jobActions";
 import { getJWTUsername } from "../common/auth";
 import "../../css/postAJob.css";
 
@@ -13,8 +13,12 @@ const CLOUDINARY_UPLOAD_PRESET = "g4q2o6at";
 const CLOUDINARY_UPLOAD_URL =
   "https://api.cloudinary.com/v1_1/ungcmpe273/upload";
 
-class PostAJob extends Component {
+class EditJob extends Component {
   state = { companyLogo: "" };
+
+  componentDidMount() {
+    this.props.getJobById(this.props.location.state.jobId);
+  }
 
   handleImageUpload(file) {
     let upload = request
@@ -30,7 +34,7 @@ class PostAJob extends Component {
       if (response.body.secure_url !== "") {
         this.setState({ companyLogo: response.body.secure_url });
         window.alert("Image uploaded successfully!");
-        console.log("url=", response.body.secure_url);
+        // console.log("url=", response.body.secure_url);
       } else {
         window.alert("There was an error in uploading the image!");
       }
@@ -90,13 +94,14 @@ class PostAJob extends Component {
     values.postedDateTime = new Date();
     values.postedBy = username;
     values.logo = this.state.companyLogo;
-    console.log(values);
+    values.jobId = this.props.location.state.jobId;
 
     if (values.employmentType == null) values.employmentType = "Full-time";
+    console.log(values);
 
-    this.props.postAJob(values);
+    this.props.editJob(values);
     window.location.reload();
-    window.alert("Job posted successfully!");
+    window.alert("Job edited successfully!");
   }
 
   render() {
@@ -235,16 +240,31 @@ function validate(values) {
   return errors;
 }
 
-const mapStateToProps = state => ({
-  newJob: state.jobReducer.newJob
-});
+// const mapStateToProps = state => ({
+//   newJob: state.jobReducer.newJob
+// });
 
-export default reduxForm({
+// export default reduxForm({
+//   validate,
+//   form: "jobForm"
+// })(
+//   connect(
+//     mapStateToProps,
+//     { editJob }
+//   )(EditJob)
+// );
+
+EditJob = reduxForm({
   validate,
-  form: "jobForm"
-})(
-  connect(
-    mapStateToProps,
-    { postAJob }
-  )(PostAJob)
-);
+  form: "editJobForm"
+})(EditJob);
+
+EditJob = connect(
+  state => ({
+    job_edit: state.jobReducer.job_edit[0],
+    initialValues: state.jobReducer.job_edit[0]
+  }),
+  { editJob, getJobById }
+)(EditJob);
+
+export default EditJob;
