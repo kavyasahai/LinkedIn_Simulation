@@ -5,7 +5,8 @@ import {
   SAVE_JOB,
   POST_A_JOB,
   EDIT_JOB,
-  GET_JOB_BY_ID
+  GET_JOB_BY_ID,
+  GET_SAVED_JOB
 } from "./types";
 import { setHeader } from "../components/common/auth";
 import { getJWTUsername } from "../components/common/auth";
@@ -31,6 +32,7 @@ export const searchJob = (data, callback) => async dispatch => {
     };
   }
 };
+
 export const getsavedJob = (data, callback) => async dispatch => {
   try {
     // var email = getJWTUsername();
@@ -39,13 +41,13 @@ export const getsavedJob = (data, callback) => async dispatch => {
     console.log(res.status);
     console.log("search a job", res.data);
     dispatch({
-      type: SEARCH_JOB,
+      type: GET_SAVED_JOB,
       payload: res.data
     });
     callback();
   } catch (e) {
     return {
-      type: SEARCH_JOB,
+      type: GET_SAVED_JOB,
       payload: e
     };
   }

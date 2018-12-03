@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import Modal from "react-responsive-modal";
 import supportingImage4 from "../../images/supportingImage4.jpg";
 import supportingImage2 from "../../images/supportingImage2.png";
-import { searchJob, saveJob, applyJob } from "../../actions/jobActions";
+import { searchJob, saveJob, applyJob,getsavedJob } from "../../actions/jobActions";
 import Home from "./jobFilter";
 import { getToken } from "../common/auth";
 import { Redirect } from "react-router";
@@ -31,8 +31,9 @@ class JobSearch extends Component {
       view1: [],
       properties2: [],
       properties: [],
+      appliedjobs:[],
       imageNumber: 0,
-      hasapplied:false,
+      hasApplied:false,
       imageView: [],
       open: false
     };
@@ -48,9 +49,10 @@ class JobSearch extends Component {
 componentDidMount(){
   const data = {
     Job: this.state.Job,
-    Location: this.state.Location
+    Location: this.state.Location,
+    email:getJWTUsername()
   };
-  this.props.searchJob(data, () => {
+ this.props.searchJob(data, async() => {
     console.log(this.props.search_job_results);
    
   
@@ -70,10 +72,15 @@ componentDidMount(){
                 });
               });
           });
-      
+        });
+      this.props.getsavedJob(data,()=>{
+        this.setState({
+          appliedjobs:this.state.appliedjobs.concat(this.props.savedjobs)
+        })
+      })
+
+    }
   
-})
-}
 
     
 
@@ -191,23 +198,33 @@ componentDidMount(){
   view = e => {
     console.log(e);
     var properties1 = this.props.search_job_results;
+    var savedjobs1=this.props.savedjobs;
     console.log(properties1);
     var propertydetails = properties1.filter(function(property) {
       return property._id == e;
     });
-    var index = properties1.findIndex(function(item) {
-      return item._id == e;
+    var index1 = savedjobs1.findIndex(function(item) {
+      return item.jobID == e;
     });
-    console.log(index);
+    console.log(index1);
+   
+  if(index1 != -1)
+{
+  this.setState({
+    view1: propertydetails,
+    imageNumber: index1,
+  hasApplied:"true"
+  });
 
-    this.setState({
-      view1: propertydetails,
-      imageNumber: index
-    });
+}
+else{
+   console.log("else"); 
+}
+    
   };
 
   render() {
-    console.log(this.props.view);
+    console.log(this.state.hasApplied);
 
     var i = -1;
 
@@ -289,7 +306,7 @@ componentDidMount(){
               >
                 Save
               </button>
-              <button class="Button" onClick={this.openbox}>
+              <button class="Button" onClick={this.openbox} disabled={this.state.hasApplied ? true : false}>
                 Apply
               </button>
             </div>
@@ -586,10 +603,11 @@ componentDidMount(){
 }
 const mapStateToProps = state => ({
   search_job_results: state.jobReducer.search_job_results,
-  view: state.jobReducer.view
+  view: state.jobReducer.view,
+  savedjobs:state.jobReducer.savejob
 });
 
 export default connect(
   mapStateToProps,
-  { searchJob, saveJob, applyJob }
+  { searchJob, saveJob, applyJob,getsavedJob }
 )(JobSearch);

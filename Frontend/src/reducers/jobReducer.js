@@ -2,18 +2,20 @@ import {
   SEARCH_JOB,
   POST_A_JOB,
   EDIT_JOB,
-  GET_JOB_BY_ID
+  GET_JOB_BY_ID,
+  GET_SAVED_JOB
 } from "../actions/types";
 
 const initialState = {
   search_job_results: [],
   view: [],
   newJob: [],
-  job_edit: []
+  job_edit: [],
+  savejob:[]
 };
 
 export default function(state = initialState, action) {
-  console.log(action.payload);
+  console.log("actionpayload",action.payload);
   switch (action.type) {
     case SEARCH_JOB:
       return {
@@ -36,8 +38,14 @@ export default function(state = initialState, action) {
         ...state,
         job_edit: action.payload
       };
+    case GET_SAVED_JOB:
+      return {
+        ...state,
+        savejob: action.payload.savedjobs,
+      };
 
     default:
       return state;
   }
+  
 }

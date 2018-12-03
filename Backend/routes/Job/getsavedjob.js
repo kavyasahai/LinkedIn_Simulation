@@ -6,8 +6,8 @@ const router = express.Router();
 
 router.post("/getsavejob", function(request, response) {
   console.log("Saved Jobs");
-  kafka.make_request("jobApply_topic", request.body, function(err, results) {
-    console.log("response from kafka",results);
+  kafka.make_request("getsavedjobs", request.body, function(err, results) {
+    console.log("response from kafka for savedjobs",results);
     if (err) {
       response.json({
         status: "error",
@@ -16,21 +16,12 @@ router.post("/getsavejob", function(request, response) {
     } else {
       
       response.json({
-        updatedList:results
+        savedjobs:results
     });
     response.end();
     }
   });
-  // console.log(request.body);
-  // var save = new Applyjob({
-  //   JobID: req.body.jobid,
-  //   Timestamp: req.body.timestamp,
-  //   UserID: "Kesha@gmail.com"
-  // });
-  // save.save().then(docs => {
-  //   console.log("Row Created : ", docs);
-  //   response.end("ok");
-  // });
+ 
 });
 
 module.exports = router;
