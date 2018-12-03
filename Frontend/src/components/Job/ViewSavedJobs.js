@@ -68,7 +68,7 @@ import axios from "axios";
                     style={{ "padding-left": "30px", "padding-top": "10px" }}
                   >
                     <li class="blue" >
-                      {property.title}
+                      {property.emailID}
                     </li>
                     <br />
                     {property.company}

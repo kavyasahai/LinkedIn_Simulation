@@ -188,12 +188,19 @@ componentDidMount(){
   };
 
   save = e => {
-    console.log("clicke");
+    console.log(e);
+    var jobdetails = this.state.properties1.filter(function(property) {
+      return property._id == e._id;
+    });
     const data = {
-      jobid: e,
+      jobid: e._id,
       Userid: getJWTUsername(),
-      timestamp: new Date()
-    };
+      timestamp: new Date(),
+      firstname:this.state.userdata.firstname,
+      lastname:this.state.userdata.lastname,
+      postedBy: e.postedBy
+    }
+    console.log("save data",data);
     this.props.saveJob(data);
   };
 
@@ -320,7 +327,7 @@ else{
               <br />
               <button
                 class="Button"
-                onClick={this.save.bind(this, property._id)}
+                onClick={this.save.bind(this, property)}
               >
                 Save
               </button>
