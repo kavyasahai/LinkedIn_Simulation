@@ -7,7 +7,7 @@ const router = express.Router();
 router.post("/searchJob", function(request, response) {
   console.log("Search Job Post Request");
   kafka.make_request("jobSearch_topic", request.body, function(err, results) {
-    console.log("response from kafka",results);
+    console.log("response from kafka saved",results);
     if (err) {
       response.json({
         status: "error",
@@ -18,7 +18,7 @@ router.post("/searchJob", function(request, response) {
       response.json({
         updatedList:results
     });
-    response.end();
+   response.end();
     }
   });
 });

@@ -4,7 +4,7 @@ require("../db/mongoose");
 function handle_request(msg, callback)
 {
   console.log("msg======", msg); 
-  Users.find({
+  Users.findOne({
     email:msg.username
     },
     function(err,result)
