@@ -48,7 +48,7 @@ module.exports = router;
 //   console.log("Row Created : ", docs);
 //   response.end("ok");
 // });
-// //   job.findOneAnd=new Update({
+// //   job.findOneAndUpdate({
 // //     jobId:request.body.JobID
 // //     //UserName:msg.earlier
 

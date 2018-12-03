@@ -19,6 +19,31 @@ const CLOUDINARY_UPLOAD_URL =
   "https://api.cloudinary.com/v1_1/ungcmpe273/upload";
 
 class JobSearch extends Component {
+
+  constructor(props) {
+    //Call the constrictor of Super class i.e The Component
+    super(props);
+    //maintain the state required for this component
+    this.state = {
+      Job: "",
+      Location: "",
+      properties1: [],
+      view1: [],
+      properties2: [],
+      properties: [],
+      imageNumber: 0,
+
+      imageView: [],
+      open: false
+    };
+    this.openbox = this.openbox.bind(this);
+    this.closebox = this.closebox.bind(this);
+    this.SearchChangeHandler = this.SearchChangeHandler.bind(this);
+    this.LocationChangeHandler = this.LocationChangeHandler.bind(this);
+    this.Search = this.Search.bind(this);
+    this.view = this.view.bind(this);
+    this.sendApplication = this.sendApplication.bind(this);
+  }
   state = { uploadedFile: null };
 
   handleResumeUpload(file) {
@@ -48,30 +73,7 @@ class JobSearch extends Component {
     this.handleResumeUpload(files[0]);
   };
 
-  constructor(props) {
-    //Call the constrictor of Super class i.e The Component
-    super(props);
-    //maintain the state required for this component
-    this.state = {
-      Job: "",
-      Location: "",
-      properties1: [],
-      view1: [],
-      properties2: [],
-      properties: [],
-      imageNumber: 0,
-
-      imageView: [],
-      open: false
-    };
-    this.openbox = this.openbox.bind(this);
-    this.closebox = this.closebox.bind(this);
-    this.SearchChangeHandler = this.SearchChangeHandler.bind(this);
-    this.LocationChangeHandler = this.LocationChangeHandler.bind(this);
-    this.Search = this.Search.bind(this);
-    this.view = this.view.bind(this);
-    this.sendApplication = this.sendApplication.bind(this);
-  }
+  
 
   openbox() {
     this.setState({
@@ -100,25 +102,36 @@ class JobSearch extends Component {
       Location: this.state.Location
     };
     console.log(data);
-    this.props.searchJob(data, () => {
-      console.log(this.props.search_job_results);
-      this.setState({
-        properties1: this.props.search_job_results,
-        view1: this.state.view1.concat(this.props.search_job_results[0])
-      });
-      this.state.properties1.map(property => {
-        console.log(property.Icon);
-        axios
-          .post("http://localhost:3001/download/" + property.Icon)
-          .then(response => {
-            console.log("Imgae Res : ", response);
-            let imagePreview = "data:image/jpg;base64, " + response.data;
-            this.setState({
-              imageView: this.state.imageView.concat(imagePreview)
-            });
-          });
-      });
-    });
+    if( (this.state.Job=="") && (this.state.Location==""))
+    {
+      alert("Fileds cannot be empty");
+    }
+    else{
+            this.props.searchJob(data, () => {
+            console.log(this.props.search_job_results);
+            if(this.props.search_job_results.length == 0){
+              alert("No Jobs Available Try again");
+            }
+            else{
+                  this.setState({
+                    properties1: this.props.search_job_results,
+                    view1: this.state.view1.concat(this.props.search_job_results[0])
+                  });
+                  this.state.properties1.map(property => {
+                    console.log(property.Icon);
+                    axios
+                      .post("http://localhost:3001/download/" + property.Icon)
+                      .then(response => {
+                        console.log("Imgae Res : ", response);
+                        let imagePreview = "data:image/jpg;base64, " + response.data;
+                        this.setState({
+                          imageView: this.state.imageView.concat(imagePreview)
+                        });
+                      });
+                  });
+          }
+        });
+  }
   };
 
   save = e => {
@@ -133,7 +146,7 @@ class JobSearch extends Component {
 
   sendApplication = e => {
     const data = {
-      email: "Kesha@gmail.com",
+      email: getJWTUsername(),
       jobid: e,
       timestamp: new Date()
     };
@@ -167,7 +180,7 @@ class JobSearch extends Component {
     var view = this.state.view1.concat(this.props.view);
     var imageView = this.state.imageView;
 
-    let Details = this.props.search_job_results.map(property => {
+    let Details = this.state.properties1.map(property => {
       i = i + 1;
 
       const token = getToken();
@@ -204,7 +217,7 @@ class JobSearch extends Component {
       );
     });
 
-    let Details1 = view.map(property => {
+    let Details1 = this.state.view1.map(property => {
       return (
         <div class="Jobs">
           <div class="row">

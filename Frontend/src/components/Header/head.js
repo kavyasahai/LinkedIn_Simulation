@@ -1,6 +1,21 @@
 import React, { Component } from "react";
 import "../../css/jobSearch.css";
 class Header extends Component {
+  constructor(props) {
+    //Call the constrictor of Super class i.e The Component
+    super(props);
+    //maintain the state required for this component
+    this.state = {
+     
+    };
+    this.clear = this.clear.bind(this);
+
+ 
+  }
+  clear(){
+    localStorage.clear();
+    window.location.href="http://localhost:3000/login"
+  }
   render() {
     return (
       <div class="menu">
@@ -95,6 +110,7 @@ class Header extends Component {
                 </div>
               </div>
             </div>
+            <li><a href="/login" onClick={this.clear}>LogOut</a></li>
           </div>
         </div>
       </div>

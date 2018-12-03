@@ -7,7 +7,8 @@ function handle_request(msg, callback) {
     console.log(msg);
     var Job =new job({
       submitted:"no",
-      emailID:"aish@gmail.com"
+      emailID:msg.Userid,
+      jobID:msg.jobid
     });
 
     Job.save().then(docs => {
