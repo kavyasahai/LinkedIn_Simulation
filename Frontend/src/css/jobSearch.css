@@ -20,15 +20,13 @@ li {
   height: 4vw;
 }
 
-.job {
+.Searchfields{
   padding-top: 10px;
   padding-left: 3vw;
 }
 .inputfield {
   height: 4vw;
-  width: 100%;
-  margin-left: -30vw;
-  margin-top: -2vw;
+ 
 }
 .inputfield1 {
   padding-left: 10px;

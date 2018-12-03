@@ -506,7 +506,7 @@ class JobSearch extends Component {
             <i class="fa fa-linkedin-square" />
           </div>
 
-          <div class="job">
+          <div class="Searchfields">
             <div class="row">
               <div col="col-2" class="inputfield ">
                 <input
