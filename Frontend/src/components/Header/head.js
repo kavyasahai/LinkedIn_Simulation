@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import supportingImage4 from "../../images/supportingImage4.jpg";
+import supportingImage4 from "../../images/supportingImage4.jpg";
 import "../../css/jobSearch.css";
 class Header extends Component {
   constructor(props) {
@@ -24,15 +24,14 @@ class Header extends Component {
             </a>
           </div>
 
-          <div class="header">
-            {/* <div class="row1">
+          <div class="searchhead">
+            <div class="row">
               <input
                 style={{ "background-color": "#e1e9ee" }}
                 type="text"
                 placeholder="Search"
-                className="search"
               />
-            </div> */}
+            </div>
           </div>
 
           <div class="row" style={{ paddingLeft: "5vw" }}>
@@ -151,10 +150,10 @@ class Header extends Component {
                 </div>
               </div>
             </div>
-            <div class="col-2">
+            <div class="col-2.5">
               <div class="go-inline">
                 <div>
-                  <a href="/messaging">
+                  <a href="/home">
                     <i
                       class="fa fa-envelope w3-jumbo"
                       style={{
@@ -178,16 +177,7 @@ class Header extends Component {
               </a>
             </li>
           </div>
-          {/* <img src={supportingImage4} class="dropdown dropdown-toggle">
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="/">
-                Saved Jobs
-              </a>
-              <a class="dropdown-item" href="/">
-                Applied Jobs
-              </a>
-            </div>
-          </img> */}
+          
         </div>
       </div>
     );
