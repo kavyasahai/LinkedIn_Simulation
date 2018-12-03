@@ -122,10 +122,20 @@ class Login extends Component {
       console.log("data in submit register", data);
       //set the with credentials to true
       axios.defaults.withCredentials = true;
-      this.props.register(data);
-      localStorage.setItem("signup", this.state.username);
+      // this.props.register(data);
+      this.props.register(data, response => {
+        console.log(response.data);
+        if (response.data === "Could not sign-up") {
+          window.alert("Username already exists.");
+        } else {
+          window.alert("Signed-up successfully!");
+          localStorage.setItem("signup", this.state.username);
+          this.props.history.push("/postsignup");
+        }
+      });
     }
   };
+
   render() {
     const token = getToken();
 
@@ -133,9 +143,7 @@ class Login extends Component {
     if (token === true) {
       redirectVar = <Redirect to="/home" />;
     }
-    if (this.props.inserted) {
-      redirectVar = <Redirect to="/postsignup" />;
-    }
+
     //redirect based on successful login
     // let redirectVar = null;
     // if(cookie.load('cookie')){
