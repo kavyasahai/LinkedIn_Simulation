@@ -1,10 +1,9 @@
 .connection {
   background: white;
-  margin-left: 15vw;
+  margin-left: 65vw;
   border: 1px gray solid;
   height: auto;
   width: 50vw;
-  margin-top: -3vw;
 }
 .message {
   border: 2px solid #0073b1;
@@ -16,18 +15,15 @@
 
 .acceptRejectConnection {
   background: white;
-  margin-left: 15vw;
+  margin-left: 65vw;
   border: 1px gray solid;
   height: auto;
   width: 50vw;
-  margin-top: -3vw;
-}
-
-.image5 {
-  margin-top: -5vw;
 }
 
 .connectionData .row {
   width: 50vw;
   margin-left: 0vw;
+  height: 8vw;
+  background: white;
 }
