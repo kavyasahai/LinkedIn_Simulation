@@ -17,7 +17,8 @@ function handle_request(msg, callback) {
     postedBy: msg.postedBy,
     company: msg.company,
     adminId: msg.adminId,
-    jobId: msg.jobId
+    jobId: msg.jobId,
+    logo: msg.logo
   });
   newJobs
     .save()

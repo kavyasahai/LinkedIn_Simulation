@@ -6,16 +6,11 @@ class Header extends Component {
     //Call the constrictor of Super class i.e The Component
     super(props);
     //maintain the state required for this component
-    this.state = {
-     
-    };
+    this.state = {};
     this.clear = this.clear.bind(this);
-
- 
   }
-  clear(){
+  clear() {
     localStorage.clear();
- 
     // window.location.href = "http://localhost:3000/login";
     this.props.history.push("/login");
   }
@@ -62,17 +57,24 @@ class Header extends Component {
                   </a>
                 </div>
                 <div class="go-middle">
-                
-                <li class="blue" class="nav-item dropdown" style={{"opacity":"unset","padding":0}}>
-                             <a class=" dropdown-toggle"  id="navbardrop" data-toggle="dropdown">
-                             <span class="normal">My Network</span>     </a>
-                              <div class="dropdown-menu">
-                               
-                                <a class="dropdown-item" href="/">MyRequests</a>
-                                            
-                                            </div>
-                                            </li>
-                 
+                  <li
+                    class="blue"
+                    class="nav-item dropdown"
+                    style={{ opacity: "unset" }}
+                  >
+                    <a
+                      class="nav-link dropdown-toggle"
+                      id="navbardrop"
+                      data-toggle="dropdown"
+                    >
+                      My Network{" "}
+                    </a>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="/">
+                        MyRequests
+                      </a>
+                    </div>
+                  </li>
                 </div>
               </div>
             </div>
@@ -127,7 +129,11 @@ class Header extends Component {
                 </div>
               </div>
             </div>
-          
+            <li>
+              <a href="/login" onClick={this.clear}>
+                LogOut
+              </a>
+            </li>
           </div>
           <img src={supportingImage4}  class="dropdown dropdown-toggle">
           <div class="dropdown-menu">
