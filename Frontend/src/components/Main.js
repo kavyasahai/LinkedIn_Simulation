@@ -13,7 +13,6 @@ import UserSchoolData from "./Applicant/userSchoolData";
 import UserProfilePhoto from "./Applicant/userProfilePhoto";
 import ProfileViews from "./ProfileViews/ProfileViews";
 import Recruiter from "./Recruiter/Recruiter";
-import PostAJob from "./Recruiter/PostAJob";
 import PostedJobs from "./Recruiter/postedJobs";
 import EditJob from "./Recruiter/editJob";
 import jobDetails from "./Job/jobDetails";
@@ -28,6 +27,7 @@ import ChatStore from "../chatstore";
 import store from "../store";
 import editJob from "./Recruiter/editJob";
 import ConnectionRequests from "./Connections/ConnectionRequests";
+import PostAJob from "./Job/postAJob";
 
 //Create a Main Component
 class Main extends Component {
@@ -88,7 +88,7 @@ class Main extends Component {
                 component={ProfileViews}
               />
               <PrivateRoute path="/recruiter" component={Recruiter} />
-              <PrivateRoute path="/recruiter/post-a-job" component={PostAJob} />
+              <PrivateRoute path="/job/new" component={PostAJob} />
               <PrivateRoute
                 path="/recruiter/posted-jobs"
                 component={PostedJobs}

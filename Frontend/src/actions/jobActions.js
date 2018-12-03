@@ -1,22 +1,22 @@
 import axios from "axios";
-import { SEARCH_JOB, APPLY_JOB, SAVE_JOB } from "./types";
+import { SEARCH_JOB, APPLY_JOB, SAVE_JOB, POST_A_JOB } from "./types";
 import { setHeader } from "../components/common/auth";
 import { getJWTUsername } from "../components/common/auth";
 
 const ROOT_URL = "http://localhost:3001";
 
-export const searchJob =(data,callback) => async dispatch => {
+export const searchJob = (data, callback) => async dispatch => {
   try {
-   // var email = getJWTUsername();
+    // var email = getJWTUsername();
     //setHeader();
     const res = await axios.post(`${ROOT_URL}/searchJob`, data);
     console.log(res.status);
-    console.log("search a job",res.data);
+    console.log("search a job", res.data);
     dispatch({
       type: SEARCH_JOB,
       payload: res.data
     });
-    callback()
+    callback();
   } catch (e) {
     return {
       type: SEARCH_JOB,
@@ -54,6 +54,22 @@ export const applyJob = data => async dispatch => {
   } catch (e) {
     return {
       type: APPLY_JOB,
+      payload: e
+    };
+  }
+};
+
+export const postAJob = data => async dispatch => {
+  try {
+    setHeader();
+    const res = await axios.post(`${ROOT_URL}/recruiter/post-a-job`, data);
+    dispatch({
+      type: POST_A_JOB,
+      payload: res.data
+    });
+  } catch (e) {
+    return {
+      type: POST_A_JOB,
       payload: e
     };
   }

@@ -14,7 +14,8 @@ const jobdataSchema = new mongoose.Schema({
   postedBy: String,
   company: String,
   adminId: String,
-  jobId: String
+  jobId: String,
+  logo: String
 });
 
 module.exports = mongoose.model("job", jobdataSchema, "job");
