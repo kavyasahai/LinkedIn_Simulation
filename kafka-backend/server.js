@@ -2,27 +2,27 @@ var connection = new require("./kafka/Connection");
 //topics files
 //var signin = require('./services/signin.js');
 
-var login = require("./services/login");
-var signup = require("./services/signup");
-var location = require("./services/location");
-var prodetails = require("./services/prodetails");
-var post_a_job = require("./services/post_a_job");
-var posted_applications = require("./services/posted_applications");
-var posted_jobs = require("./services/posted_jobs");
-var edit_job = require("./services/edit_job")
+var login = require("./services/User/login");
+var signup = require("./services/User/signup");
+var location = require("./services/User/location");
+var prodetails = require("./services/User/prodetails");
+var post_a_job = require("./services/Recruiter/post_a_job");
+var posted_applications = require("./services/Recruiter/posted_applications");
+var posted_jobs = require("./services/Recruiter/posted_jobs");
+var edit_job = require("./services/Recruiter/edit_job");
 var recruiterDashboardTop10 = require("./services/RecruiterDashboard/top10");
 var recruiterDashboardTop5 = require("./services/RecruiterDashboard/top5");
 var recruiterDashboardCity = require("./services/RecruiterDashboard/city");
 var recruiterJobs = require("./services/RecruiterDashboard/recruiterJobs");
-var clicksperjob = require("./services/RecruiterDashboard/clicksperjob");
-var ProfileViews = require("./services/ProfileViews/ProfileViews");
-var jobSearch = require("./services/jobSearch.js");
+var clicksperjob = require("./services/profileStats/clicksperjob");
+var ProfileViews = require("./services/profileStats/ProfileViews");
+var jobSearch = require("./services/Job/jobSearch.js");
 var Connection = require("./services/connection");
 var Channel = require("./services/Chat/channel");
 var Message = require("./services/Chat/message");
 var User = require("./services/user");
-var job_save = require("./services/job_save");
-var job_apply=require("./services/job_apply");
+var job_save = require("./services/Job/job_save");
+var job_apply = require("./services/Job/job_apply");
 
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -30,13 +30,13 @@ function handleTopicRequest(topic_name, fname) {
   var producer = connection.getProducer();
   console.log("server is running ");
 
-  consumer.on("message", function (message) {
+  consumer.on("message", function(message) {
     console.log("Message kafka....", message);
     console.log("message received for " + topic_name + " ", fname);
     console.log(JSON.stringify(message.value));
     var data = JSON.parse(message.value);
 
-    fname.handle_request(data.data, function (err, res) {
+    fname.handle_request(data.data, function(err, res) {
       console.log("after handle" + res);
       var payloads = [
         {
@@ -48,7 +48,7 @@ function handleTopicRequest(topic_name, fname) {
           partition: 0
         }
       ];
-      producer.send(payloads, function (err, data) {
+      producer.send(payloads, function(err, data) {
         console.log(data);
       });
       return;
@@ -69,7 +69,7 @@ handleTopicRequest("recruiterJobs_topic", recruiterJobs);
 handleTopicRequest("get_profileviews", ProfileViews);
 handleTopicRequest("posted_applications", posted_applications);
 handleTopicRequest("posted_jobs", posted_jobs);
-handleTopicRequest("edit_job", edit_job)
+handleTopicRequest("edit_job", edit_job);
 handleTopicRequest("recruiterDashboardCity_topic", recruiterDashboardCity);
 handleTopicRequest("jobSearch_topic", jobSearch);
 handleTopicRequest("get_clicksperjob", clicksperjob);
@@ -77,5 +77,5 @@ handleTopicRequest("connection", Connection);
 handleTopicRequest("channel", Channel);
 handleTopicRequest("message", Message);
 handleTopicRequest("user", User);
-handleTopicRequest("jobSave_topic",job_save);
-handleTopicRequest("jobApply_topic",job_apply);
+handleTopicRequest("jobSave_topic", job_save);
+handleTopicRequest("jobApply_topic", job_apply);

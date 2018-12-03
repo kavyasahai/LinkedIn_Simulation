@@ -1,5 +1,5 @@
-var Users = require("../models/user");
-require("../db/mongoose");
+var Users = require("../../models/user");
+require("../../db/mongoose");
 
 function handle_request(msg, callback) {
   Users.update(

@@ -1,7 +1,7 @@
-var db = require("../app/db");
-var pool = require("../pool");
-var Users = require("../models/user");
-require("../db/mongoose");
+var db = require("../../app/db");
+var pool = require("../../pool");
+var Users = require("../../models/user");
+require("../../db/mongoose");
 
 function handle_request(msg, callback) {
   var newUser = {

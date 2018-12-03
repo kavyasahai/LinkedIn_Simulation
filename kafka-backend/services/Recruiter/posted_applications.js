@@ -1,5 +1,5 @@
-var { Jobs } = require("../models/job");
-var jobApplication = require("../models/jobApplication");
+var { Jobs } = require("../../models/job");
+var jobApplication = require("../../models/jobApplication");
 
 function handle_request(msg, callback) {
   var username = msg;
