@@ -5,7 +5,7 @@ import { getJWTUsername } from "../components/common/auth";
 
 const ROOT_URL = "http://localhost:3001";
 
-export const searchJob = data => async dispatch => {
+export const searchJob = (data,callback) => async dispatch => {
   try {
    // var email = getJWTUsername();
     //setHeader();
@@ -16,6 +16,7 @@ export const searchJob = data => async dispatch => {
       type: SEARCH_JOB,
       payload: res.data
     });
+    callback()
   } catch (e) {
     return {
       type: SEARCH_JOB,

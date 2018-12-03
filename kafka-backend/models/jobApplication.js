@@ -6,6 +6,7 @@ const jobApplicationSchema = new mongoose.Schema({
   firstname: String,
   lastname: String,
   city: String,
+  address: String,
   pointOfInformation: String,
   questions: Array,
   disabilityQuestion: Array,
