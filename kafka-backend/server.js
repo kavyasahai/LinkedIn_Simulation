@@ -21,6 +21,7 @@ var Connection = require("./services/connection");
 var Channel = require("./services/Chat/channel");
 var Message = require("./services/Chat/message");
 var User = require("./services/user");
+var job_save = require("./services/job_save");
 
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -75,3 +76,4 @@ handleTopicRequest("connection", Connection);
 handleTopicRequest("channel", Channel);
 handleTopicRequest("message", Message);
 handleTopicRequest("user", User);
+handleTopicRequest("jobSave_topic",job_save);

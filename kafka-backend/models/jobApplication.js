@@ -9,7 +9,7 @@ const jobApplicationSchema = new mongoose.Schema({
   pointOfInformation: String,
   questions: Array,
   disabilityQuestion: Array,
-  submitted: Boolean,
+  submitted: String,
   savedTime: Date,
   submittedTime: Date,
   clickTime: Date,

@@ -5,16 +5,69 @@ var express = require("express");
 const router = express.Router();
 
 router.post("/saveJob", function(request, response) {
-  console.log(req.body);
-  var save = new savejob({
-    JobID: req.body.jobid,
-    Timestamp: req.body.timestamp,
-    UserID: "Kesha@gmail.com"
+  console.log("Search Job Post Request");
+  kafka.make_request("jobSave_topic", request.body, function(err, results) {
+    console.log("response from kafka",results);
+    if (err) {
+      response.json({
+        status: "error",
+        msg: "Error in retrieving data."
+      });
+    } else {
+      
+      response.json({
+        updatedList:results
+    });
+    response.end();
+    }
   });
-  save.save().then(docs => {
-    console.log("Row Created : ", docs);
-    res.end("ok");
-  });
+});
+
+module.exports = router;
+
+
+
+
+
+
+
+
+
+var { mongoose } = require("../../../kafka-backend/db/mongoose");
+
+var job=require('../../../kafka-backend/models/jobApplication')
+
+router.post("/saveJob", function(request, response) {
+  console.log(request.body);
+var Job =new job({
+  submitted:"no",
+  emailID:"aish@gmail.com"
+});
+
+Job.save().then(docs => {
+  console.log("Row Created : ", docs);
+  response.end("ok");
+});
+//   job.findOneAnd=new Update({
+//     jobId:request.body.JobID
+//     //UserName:msg.earlier
+
+// },
+// {$set:
+//     {
+//      submitted:"no"
+
+//     }
+// },function(err,doc){
+//     if (err){
+
+//     }        
+//     else{
+//     console.log("Docs",doc);
+//    response.send("OK");
+//    }
+// }
+// );
 });
 
 module.exports = router;
