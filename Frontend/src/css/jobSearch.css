@@ -8,7 +8,7 @@ ul {
 
 li {
   opacity: unset;
-  color: black;
+  color: #665ed0;
 }
 .menu {
   width: 100%;
@@ -38,9 +38,11 @@ li {
 .fa {
   width: 40px;
   height: 40px;
+
   font-size: 30px;
   padding-top: 10px;
-  margin-right: 10px;
+  margin-right: 3vw;
+
   border: white;
   color: white;
 }
@@ -128,4 +130,10 @@ img {
 
 .row {
   margin-left: -5vw;
+}
+
+.header {
+  width: 13vw;
+  margin-left: 2vw;
+  margin-top: 1vw;
 }
