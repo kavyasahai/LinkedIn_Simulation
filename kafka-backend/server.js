@@ -22,6 +22,7 @@ var Channel = require("./services/Chat/channel");
 var Message = require("./services/Chat/message");
 var User = require("./services/user");
 var job_save = require("./services/job_save");
+var job_apply=require("./services/job_apply");
 
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -77,3 +78,4 @@ handleTopicRequest("channel", Channel);
 handleTopicRequest("message", Message);
 handleTopicRequest("user", User);
 handleTopicRequest("jobSave_topic",job_save);
+handleTopicRequest("jobApply_topic",job_apply);

@@ -5,7 +5,7 @@ var express = require("express");
 const router = express.Router();
 
 router.post("/saveJob", function(request, response) {
-  console.log("Search Job Post Request");
+  console.log("Save Job Post Request");
   kafka.make_request("jobSave_topic", request.body, function(err, results) {
     console.log("response from kafka",results);
     if (err) {
@@ -33,41 +33,40 @@ module.exports = router;
 
 
 
-var { mongoose } = require("../../../kafka-backend/db/mongoose");
+// var { mongoose } = require("../../../kafka-backend/db/mongoose");
 
-var job=require('../../../kafka-backend/models/jobApplication')
+// var job=require('../../../kafka-backend/models/jobApplication')
 
-router.post("/saveJob", function(request, response) {
-  console.log(request.body);
-var Job =new job({
-  submitted:"no",
-  emailID:"aish@gmail.com"
-});
+// router.post("/saveJob", function(request, response) {
+//   console.log(request.body);
+// var Job =new job({
+//   submitted:"no",
+//   emailID:"aish@gmail.com"
+// });
 
-Job.save().then(docs => {
-  console.log("Row Created : ", docs);
-  response.end("ok");
-});
-//   job.findOneAnd=new Update({
-//     jobId:request.body.JobID
-//     //UserName:msg.earlier
+// Job.save().then(docs => {
+//   console.log("Row Created : ", docs);
+//   response.end("ok");
+// });
+// //   job.findOneAnd=new Update({
+// //     jobId:request.body.JobID
+// //     //UserName:msg.earlier
 
-// },
-// {$set:
-//     {
-//      submitted:"no"
+// // },
+// // {$set:
+// //     {
+// //      submitted:"no"
 
-//     }
-// },function(err,doc){
-//     if (err){
+// //     }
+// // },function(err,doc){
+// //     if (err){
 
-//     }        
-//     else{
-//     console.log("Docs",doc);
-//    response.send("OK");
-//    }
-// }
-// );
-});
+// //     }        
+// //     else{
+// //     console.log("Docs",doc);
+// //    response.send("OK");
+// //    }
+// // }
+// // );
 
 module.exports = router;
