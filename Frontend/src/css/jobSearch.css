@@ -1,3 +1,18 @@
+
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: inline;
+  overflow: hidden;
+ 
+}
+
+li {
+ opacity: unset;
+  color: black;
+}
 .menu{
   width: 100%;
   height: 48px;

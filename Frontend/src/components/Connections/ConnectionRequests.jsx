@@ -10,7 +10,7 @@ import {
   rejectConnection
 } from "../../actions/connectionsActions";
 import { connect } from "react-redux";
-import { If, Else } from "react-if";
+//import { If, Else } from "react-if";
 
 class ConnectionRequests extends Component {
   sendMessage = () => {

@@ -10,7 +10,7 @@ import { getToken } from "../common/auth";
 import { Redirect } from "react-router";
 import { searchJob, saveJob, applyJob } from "../../actions/jobActions";
 import { connect } from "react-redux";
-
+import Home from "../Header/head";
 class JobDetails extends Component {
   constructor(props) {
     //Call the constrictor of Super class i.e The Component
@@ -337,7 +337,11 @@ class JobDetails extends Component {
       );
     });
 
-    return <div>{Details1}</div>;
+    return <div>
+      <div>
+        <Home></Home>
+      </div>
+    {Details1}</div>;
   }
 }
 const mapStateToProps = state => ({

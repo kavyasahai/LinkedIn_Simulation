@@ -60,9 +60,17 @@ class Header extends Component {
                   </a>
                 </div>
                 <div class="go-middle">
-                  <a href="/home">
-                    <span class="normal">User</span>
-                  </a>
+                
+                <li class="blue" class="nav-item dropdown" style={{"opacity":"unset"}}>
+                             <a class="nav-link dropdown-toggle"  id="navbardrop" data-toggle="dropdown">
+                               My Network   </a>
+                              <div class="dropdown-menu">
+                               
+                                <a class="dropdown-item" href="/">MyRequests</a>
+                                            
+                                            </div>
+                                            </li>
+                 
                 </div>
               </div>
             </div>
