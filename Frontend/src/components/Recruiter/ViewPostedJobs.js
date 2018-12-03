@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import Header from "../Header/head";
 import "../../css/connectionList.css";
-import supportingimage4 from "../../images/supportingImage4.jpg";
 import supportingimage5 from "../../images/supportingImage5.png";
 import { getJWTUsername } from "../common/auth";
 import { getPostedJobs } from "../../actions/recruiterActions";
 import { connect } from "react-redux";
 //import { If, Else } from "react-if";
+import { Link } from "react-router-dom";
 
 class ViewPostedJobs extends Component {
   componentDidMount() {
@@ -34,18 +34,29 @@ class ViewPostedJobs extends Component {
           </div>
           <div style={{ "padding-top": "7vw" }} />
           <div class="row">
-            <div class="acceptRejectConnection">
-              <div className="connectionData">
+            <div class="postedJobs">
+              <div className="jobData">
                 {this.props.posted_jobs.payload &&
                   this.props.posted_jobs.payload.map(data => (
                     <div key={data.firstname}>
                       <div class="row">
                         <div class="col-6" style={{ paddingTop: "2vw" }}>
-                          <b>{data.title}</b>, <b>{data.company}</b>,{" "}
-                          <b>{data.location}</b>
+                          <Link
+                            to={{
+                              pathname: "/job/edit",
+                              state: {
+                                jobId: data._id
+                              }
+                            }}
+                          >
+                            <h1>
+                              {data.title}, {data.company}, {data.location}
+                            </h1>
+                          </Link>
+
                           <br />
                           <div>
-                            <p style={{ "font-size": "0.6rem" }}>
+                            <p style={{ "font-size": "2rem" }}>
                               {data.description}
                             </p>
                           </div>

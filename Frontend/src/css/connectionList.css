@@ -27,3 +27,19 @@
   height: 8vw;
   background: white;
 }
+
+.postedJobs {
+  background: white;
+  margin-left: 15vw;
+  border: 1px gray solid;
+  height: auto;
+  width: 50vw;
+  font-size: 1.5vw;
+}
+
+.jobData .row {
+  width: 49vw;
+  margin-left: 0vw;
+  height: auto;
+  background: white;
+}

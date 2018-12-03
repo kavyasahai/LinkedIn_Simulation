@@ -1,9 +1,15 @@
-import { SEARCH_JOB, POST_A_JOB } from "../actions/types";
+import {
+  SEARCH_JOB,
+  POST_A_JOB,
+  EDIT_JOB,
+  GET_JOB_BY_ID
+} from "../actions/types";
 
 const initialState = {
   search_job_results: [],
   view: [],
-  newJob: []
+  newJob: [],
+  job_edit: []
 };
 
 export default function(state = initialState, action) {
@@ -19,6 +25,16 @@ export default function(state = initialState, action) {
       return {
         ...state,
         newJob: action.payload
+      };
+    case EDIT_JOB:
+      return {
+        ...state,
+        newJob: action.payload
+      };
+    case GET_JOB_BY_ID:
+      return {
+        ...state,
+        job_edit: action.payload
       };
 
     default:

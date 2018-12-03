@@ -1,7 +1,7 @@
 var Jobs = require("../../models/job");
 
 function handle_request(msg, callback) {
-  Jobs.findOneAndUpdate({ jobId: msg.jobId }, msg)
+  Jobs.findOneAndUpdate({ _id: msg._id }, msg)
     .then(() => callback(null, msg))
     .catch(err => callback(err.errmsg), []);
 }
