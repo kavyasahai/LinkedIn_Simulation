@@ -5,7 +5,7 @@ var express = require("express");
 const router = express.Router();
 
 router.post("/applyJob", function(request, response) {
-  console.log(req.body);
+  console.log(request.body);
   var save = new Applyjob({
     JobID: req.body.jobid,
     Timestamp: req.body.timestamp,
@@ -13,7 +13,7 @@ router.post("/applyJob", function(request, response) {
   });
   save.save().then(docs => {
     console.log("Row Created : ", docs);
-    res.end("ok");
+    response.end("ok");
   });
 });
 
