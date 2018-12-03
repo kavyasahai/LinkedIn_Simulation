@@ -71,6 +71,7 @@ var recruiterDashboardCity = require("./routes/RecruiterDashboard/recruiterDashb
 var postAJob = require("./routes/Recruiter/postAJob");
 var postedApplications = require("./routes/Recruiter/postedApplications");
 var postedJobs = require("./routes/Recruiter/postedJobs");
+var editJob = require("./routes/Recruiter/editJob");
 var profileViews = require("./routes/profileStats/profileViews");
 var clicksPerJob = require("./routes/profileStats/clicksPerJob");
 var connection = require("./routes/Connections/connection");
@@ -91,6 +92,7 @@ app.use(recruiterDashboardCity);
 app.use(postAJob);
 app.use(postedApplications);
 app.use(postedJobs);
+app.use(editJob);
 app.use(profileViews);
 app.use(clicksPerJob);
 app.use("/connection", connection);

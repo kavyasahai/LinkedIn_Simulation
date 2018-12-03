@@ -41,3 +41,17 @@ export const getPostedJobs = () => dispatch => {
       }
     });
 };
+
+export const editJob = state => {
+  axios.post({
+    method: "post",
+    url: ROOT_URL + "/recruiter/edit_job",
+    headers: {
+      Authorization: getToken()
+    }
+  }).then(res => {
+    if (res.data.status == "OK") {
+      alert("Job updated")
+    }
+  })
+}

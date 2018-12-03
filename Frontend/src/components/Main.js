@@ -15,6 +15,7 @@ import ProfileViews from "./ProfileViews/ProfileViews";
 import Recruiter from "./Recruiter/Recruiter";
 import PostAJob from "./Recruiter/PostAJob";
 import PostedJobs from "./Recruiter/postedJobs";
+import EditJob from "./Recruiter/editJob";
 import jobDetails from "./Job/jobDetails";
 import jobSearch from "./Job/jobSearch.jsx";
 import Homepage from "./Applicant/home";
@@ -25,6 +26,7 @@ import PrivateRoute from "./common/PrivateRoute";
 import Messaging from "../components/Chat/messenger";
 import ChatStore from "../chatstore";
 import store from "../store";
+import editJob from "./Recruiter/editJob";
 
 //Create a Main Component
 class Main extends Component {
@@ -51,7 +53,7 @@ class Main extends Component {
               <Route path="/profilepicture" component={UserProfilePhoto} />
               <Route path="/network" component={network} />
               <Route path="/job-apply" component={jobApply} />
-              <PrivateRoute
+              <Route
                 path="/messaging"
                 store={chatstore}
                 render={props => <Messaging {...props} store={chatstore} />}
@@ -88,6 +90,10 @@ class Main extends Component {
               <PrivateRoute
                 path="/recruiter/posted-jobs"
                 component={PostedJobs}
+              />
+              <PrivateRoute
+                path="/recruiter/edit-job/:id"
+                component={editJob}
               />
               <PrivateRoute path="/job-details" component={jobDetails} />
               <PrivateRoute path="/job-search" component={jobSearch} />

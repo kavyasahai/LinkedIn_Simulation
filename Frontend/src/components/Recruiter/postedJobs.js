@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom"
 import { connect } from "react-redux";
 import { getPostedJobs } from "../../actions/recruiterActions";
 
@@ -21,7 +22,7 @@ class PostedJobs extends React.Component {
             <p>Industry: { job.industry }</p>
             <p>Viewed: { job.viewsCount }</p>
             <p>Company: { job.company }</p>
-            <p>Job ID: { job.jobId } </p>
+            <Link to={ `/recruiter/edit-job/${job.jobId}` }>Edit</Link>
             <hr />
           </div>
         );
