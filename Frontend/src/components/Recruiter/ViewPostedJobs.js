@@ -72,7 +72,7 @@ class ViewPostedJobs extends Component {
 
                           <br />
                           <div>
-                            <p style={{ "font-size": "2rem" }}>
+                            <p style={{ "font-size": "1rem" }}>
                               {data.description}
                             </p>
                           </div>
