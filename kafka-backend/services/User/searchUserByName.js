@@ -6,7 +6,8 @@ function handle_request(msg, callback) {
   console.log("MSG++++", msg);
   User.find(
     {
-      firstname: msg.name
+      firstname: msg.name,
+      email: { $ne: msg.username }
     },
     function(err, doc) {
       if (err) {

@@ -221,12 +221,12 @@ export const addResume = (url, username) => async dispatch => {
   }
 };
 
-export const searchUser = name => async dispatch => {
+export const searchUser = values => async dispatch => {
   try {
     setHeader();
-    console.log("name", name);
+    console.log("values", values);
     const res = await axios.get(
-      `${ROOT_URL}/searchUserByName/${name.userName}`
+      `${ROOT_URL}/searchUserByName/${values.userName}/${values.username}`
     );
     dispatch({
       type: SEARCH_USER_BY_NAME,

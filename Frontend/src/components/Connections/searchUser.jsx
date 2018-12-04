@@ -16,6 +16,8 @@ class SearchUser extends Component {
   };
 
   onSubmit(values) {
+    var username = getJWTUsername();
+    values.username = username;
     this.props.searchUser(values);
   }
 
