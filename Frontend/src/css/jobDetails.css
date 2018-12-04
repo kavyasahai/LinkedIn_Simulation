@@ -7,7 +7,7 @@ body {
   position: relative;
 }
 .over {
-  top: 200px;
+  top: 150px;
   left: 200px;
   width: 750px;
   position: absolute;
@@ -16,7 +16,7 @@ body {
   background: white;
 }
 .over1 {
-  top: 410px;
+  top: 370px;
   left: 200px;
   width: 750px;
   position: absolute;

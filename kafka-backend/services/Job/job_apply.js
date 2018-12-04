@@ -12,6 +12,14 @@ function handle_request(msg, callback) {
     url:msg.url,
     firstname:msg.firstname,
     lastname:msg.lastname,
+    timestamp:msg.timestamp,
+    city:msg.city,
+    state:msg.state,
+    pointOfInformation:msg.pointOfInformation,
+    url:msg.url,
+    timestamp:new Date()
+
+    
     
     
   });

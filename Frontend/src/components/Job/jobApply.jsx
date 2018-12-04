@@ -29,6 +29,7 @@ class JobSearch extends Component {
       city:"",
       email:"",
       imageNumber: 0,
+      text:"",
    selectedOption:"",
    jobdetails:[],
       imageView: [],
@@ -112,7 +113,7 @@ FirstnameChangeHandler = e => {
   };
   TextChangeHandler= e => {
     this.setState({
-      Job: e.target.value
+      text: e.target.value
     });
   };
  
@@ -160,10 +161,20 @@ this.props.getJobById(this.props.match.params.id);
       email:this.state.email,
       state:this.state.state,
       city:this.state.city,
-      url:this.state.url
+      url:this.state.url,
+      pointOfInformation:this.state.text,
+      disabilityquestion:this.state.value,
+      diversityquestion1:this.state.value1,
+      diversityquestion2:this.state.value2,
+      timestamp:new Date()
+
     }
     console.log(data);
-    //this.props.applyJob(data);
+    this.props.applyJob(data,()=>{
+      alert("Applied for job");
+      window.location.href="/job-applied"
+      });
+    
   }
   render() {
  
@@ -174,7 +185,7 @@ console.log(edit);
       <div class="menu">
         <div class="extendmenu row">
           <div class="icon">
-            <i class="fa fa-linkedin-square" />
+          <a href="/home" > <i class="fa fa-linkedin-square" /></a>
           </div>
           <h5 style={{"color":"white"}}>   Linkedin Apply</h5>
      </div>
@@ -270,7 +281,7 @@ console.log(edit);
           <input
             style={{"background-color": "#e1e9ee","font-size":"0.8rem"}}
             type="text"
-            placeholder="Se"
+            placeholder="Search"
             onChange={this.CityChangeHandler}
           />
           </div>
@@ -290,7 +301,7 @@ console.log(edit);
     <div col="col-2" class="inputfield ">
           
           <input
-            style={{"background-color": "#e1e9ee", "width":"35vw","height":"7vw"}}
+            style={{"background-color": "#e1e9ee", "width":"35vw","height":"5vw"}}
             type="textarea"
             placeholder="Search"
             onChange={this.TextChangeHandler}

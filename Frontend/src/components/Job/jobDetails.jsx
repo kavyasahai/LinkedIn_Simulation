@@ -57,7 +57,7 @@ class JobDetails extends Component {
     let Details1 = this.state.properties1.map(property => {
       return (
         <div
-          style={{ position: "relative", left: "0", top: "0" }}
+          style={{ position: "relative", left: "0", top: "0.8vw" }}
           class="detail"
         >
           {redirectVar}
@@ -80,7 +80,7 @@ class JobDetails extends Component {
               <div class="row">
                 <div class="col-4">
                   <img
-                    src={supportingImage3}
+                    src={property.logo}
                     style={{ width: "200px", height: "200px" }}
                     class="image2"
                   />

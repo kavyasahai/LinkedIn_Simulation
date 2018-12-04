@@ -4,14 +4,17 @@ function handle_request(msg, callback) {
   console.log("Inside Search Request:", msg);
 
   var Job;
-  // var Location;
+  var Location;
   if (msg.Job == "") {
-    Job = "Internship";
+    Job = "Internship",
+    Location="UnitedStates"
   } else {
     Job = msg.Job;
+    Location=msg.Location
   }
   jobdata.find({
-      title: Job
+      title: Job,
+      location:Location
     })
     .then(
       docs => {
