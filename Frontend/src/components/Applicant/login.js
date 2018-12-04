@@ -76,9 +76,10 @@ class Login extends Component {
       //set the with credentials to true
       axios.defaults.withCredentials = true;
       this.props.login(data, response => {
-        if (response.data.updatedList.status == "400") {
+        console.log(response.data);
+        if (response.data.status === "error") {
           window.alert("Username and/or Password is incorrect.");
-        } else if (response.data.updatedList !== "Bearer ") {
+        } else if (response.data !== "Bearer ") {
           console.log("Login successful.");
           const token = response.data.updatedList;
           localStorage.setItem("username", token);
@@ -122,17 +123,16 @@ class Login extends Component {
       console.log("data in submit register", data);
       //set the with credentials to true
       axios.defaults.withCredentials = true;
-      this.props.register(
-        data,response => {
-          console.log(response.data);
-          if (response.data === "Could not sign-up") {
-            window.alert("Username already exists.");
-          } else {
-            window.alert("Signed-up successfully!");
-            localStorage.setItem("signup", this.state.username);
-            this.props.history.push("/postsignup");
-          }
-        })
+      this.props.register(data, response => {
+        console.log(response.data);
+        if (response.data === "Could not sign-up") {
+          window.alert("Username already exists.");
+        } else {
+          window.alert("Signed-up successfully!");
+          localStorage.setItem("signup", this.state.username);
+          this.props.history.push("/postsignup");
+        }
+      });
       // this.props.register(data);
 
       // localStorage.setItem("signup", this.state.username);
