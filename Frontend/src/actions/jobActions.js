@@ -92,7 +92,7 @@ export const saveJob = (data, callback) => async dispatch => {
   }
 };
 
-export const applyJob = (data,callback) => async dispatch => {
+export const applyJob = (data, callback) => async dispatch => {
   try {
     var email = getJWTUsername();
     setHeader();
@@ -142,7 +142,7 @@ export const editJob = data => async dispatch => {
   }
 };
 
-export const getJobById = (jobId,callback) => async dispatch => {
+export const getJobById = (jobId, callback) => async dispatch => {
   try {
     setHeader();
     const res = await axios.get(`${ROOT_URL}/getPropertyById/${jobId}`);

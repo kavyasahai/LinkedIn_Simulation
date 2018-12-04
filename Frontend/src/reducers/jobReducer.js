@@ -53,6 +53,7 @@ export default function(state = initialState, action) {
         appliedjob: action.payload.appliedjobs
       };
     case VIEW_JOB_APPLICATIONS:
+      console.log("payload=", action.payload);
       return {
         ...state,
         jobApplications: action.payload
