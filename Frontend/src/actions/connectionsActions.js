@@ -2,7 +2,8 @@ import axios from "axios";
 import {
   GET_ALL_CONNECTIONS,
   ACCEPT_CONNECTION,
-  REJECT_CONNECTION
+  REJECT_CONNECTION,
+  SEND_CONNECTION_REQUEST
 } from "./types";
 import { setHeader } from "../components/common/auth";
 
@@ -55,3 +56,21 @@ export const rejectConnection = data => async dispatch => {
     };
   }
 };
+
+export function sendConnectionRequest(data, callback) {
+  try {
+    const request = axios
+      .post(`${ROOT_URL}/connection`, data)
+      .then(res => callback(res));
+
+    return {
+      type: SEND_CONNECTION_REQUEST,
+      payload: request
+    };
+  } catch (e) {
+    return {
+      type: SEND_CONNECTION_REQUEST,
+      payload: e
+    };
+  }
+}

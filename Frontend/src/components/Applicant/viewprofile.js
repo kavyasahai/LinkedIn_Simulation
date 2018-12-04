@@ -5,13 +5,14 @@ import cookie from "react-cookies";
 import { Redirect } from "react-router";
 import { connect } from "react-redux";
 import { getJWTUsername } from "../common/auth";
+import { sendConnectionRequest } from "../../actions/connectionsActions";
 
 import Header from "../Header/head";
 import { DropdownMenu, MenuItem } from "react-bootstrap-dropdown-menu";
 // import { getMaxListeners } from 'cluster';
 
 //Define a Login Component
-class Homepage extends Component {
+class ViewProfile extends Component {
   //call the constructor method
   constructor(props) {
     //Call the constrictor of Super class i.e The Component
@@ -43,8 +44,24 @@ class Homepage extends Component {
       });
   }
 
+  sendRequest = data => {
+    var username = getJWTUsername();
+    const connectionData = {
+      connector: username,
+      connectee: data.email
+    };
+    console.log(connectionData);
+
+    this.props.sendConnectionRequest(connectionData, response => {
+      if (response.data.message === "you are successfully to request connect") {
+        window.alert("Request sent successfully");
+      } else {
+        window.alert("You have already sent a request to this person.");
+      }
+    });
+  };
+
   render() {
-    console.log(this.state.userdata);
     if (this.state.userdata == null) {
       return (
         <React.Fragment>
@@ -242,7 +259,14 @@ class Homepage extends Component {
                             id="ember1116"
                             class="pe-hub-section mb2 ember-view"
                           >
-                            <button class="dropbtn">Connect</button>
+                            <button
+                              class="dropbtn"
+                              onClick={() =>
+                                this.sendRequest(this.state.userdata)
+                              }
+                            >
+                              Connect
+                            </button>
                           </section>
 
                           <span
@@ -411,12 +435,19 @@ class Homepage extends Component {
   }
 }
 const mapStateToProps = state => {
-  console.log(state);
   return {
     username: state.username,
     summaryinserted: state.summaryinserted,
-    userdata: state.userdata
+    userdata: state.userdata,
+    newConnection: state.connections.newConnection
   };
 };
-export default Homepage;
+
 // export default connect(mapStateToProps,{summaryinsert,experienceinsert,schoolinsert,skillsinsert})(Homepage);
+
+export default connect(
+  mapStateToProps,
+  {
+    sendConnectionRequest
+  }
+)(ViewProfile);

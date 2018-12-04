@@ -147,33 +147,10 @@ export function login(data, callback) {
   }
 }
 
-// export function register(data, callback) {
-//   try {
-//     setHeader();
-
-//     const request = axios
-//       .post(`${ROOT_URL}/register`, data)
-//       .then(res => callback(res));
-
-//     return {
-//       type: APPLICANT_SIGNUP,
-//       payload: request.data
-//     };
-//   } catch (e) {
-//     return {
-//       type: APPLICANT_SIGNUP,
-//       payload: e
-//     };
-//   }
-// }
-
-
-
 export function register(data, callback) {
   try {
-   
     const request = axios
-      .post(`${ROOT_URL}/register`,data)
+      .post(`${ROOT_URL}/register`, data)
       .then(res => callback(res));
 
     return {
