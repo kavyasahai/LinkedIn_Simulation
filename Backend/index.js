@@ -92,6 +92,8 @@ var deleteaccount = require("./routes/User/deleteuser");
 var getappliedjobs = require("./routes/Job/getappliedjob");
 var signupschool = require("./routes/User/signupschool");
 var addPhoto = require("./routes/User/addPhoto");
+var postprofileView = require("./routes/profileStats/postProfileView");
+
 app.use(signupschool);
 app.use(getuserdata);
 app.use(experienceinsert);
@@ -104,6 +106,7 @@ app.use(professionalDetails);
 app.use(location);
 app.use(saveJob);
 app.use(searchJob);
+app.use(postprofileView);
 app.use(applyJob);
 app.use(recruiterDashboardTop10);
 app.use(recruiterDashboardTop5);

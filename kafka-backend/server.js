@@ -35,6 +35,7 @@ var recruiterSavedJobs = require("./services/RecruiterDashboard/recruiterSavedJo
 var recruiterTraceJobs = require("./services/RecruiterDashboard/recruiterTraceJob");
 var signupschool = require("./services/signupschool");
 var addPhoto = require("./services/User/addPhoto");
+var postProfileView = require("./services/profileStats/postProfileView");
 
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -103,3 +104,4 @@ handleTopicRequest("getappliedjobs", getappliedjobs);
 handleTopicRequest("recruiterSavedJobs", recruiterSavedJobs);
 handleTopicRequest("recruiterTraceJobs", recruiterTraceJobs);
 handleTopicRequest("addProfilePhoto_topic", addPhoto);
+handleTopicRequest("postProfileView", postProfileView);

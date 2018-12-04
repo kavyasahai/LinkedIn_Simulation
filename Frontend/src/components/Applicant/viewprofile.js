@@ -32,6 +32,7 @@ class ViewProfile extends Component {
     const data = {
       username: username
     };
+    const viewerUsername = getJWTUsername();
     //set the with credentials to true
     axios.defaults.withCredentials = true;
     const res = await axios
@@ -41,6 +42,15 @@ class ViewProfile extends Component {
         this.setState({
           userdata: response.data.updatedList
         });
+      });
+    const data2 = {
+      profileUsername: username,
+      viewerUsername: viewerUsername
+    };
+    axios
+      .post("http://localhost:3001/postProfileView", data2)
+      .then(response => {
+        console.log("View Sent");
       });
   }
 
