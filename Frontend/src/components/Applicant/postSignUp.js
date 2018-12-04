@@ -16,8 +16,8 @@ class PostSignUp extends Component {
     this.state = {
       country: "",
       zipcode: "",
-      userstate:"",
-      city:""
+      userstate: "",
+      city: ""
     };
     //Bind the handlers to this class
     this.countryChangeHandler = this.countryChangeHandler.bind(this);
@@ -54,7 +54,11 @@ class PostSignUp extends Component {
   };
 
   submitLogin = e => {
-    if (this.state.country == "") this.setState({ country: "us" });
+    var country = this.state.country;
+    if (this.state.country == "") {
+      country = "us";
+      this.setState({ country: "us" });
+    }
 
     var zipcode = this.state.zipcode;
     if (zipcode == "") window.alert("Postal code cannot be empty.");
@@ -66,12 +70,13 @@ class PostSignUp extends Component {
       //prevent page from refresh
       e.preventDefault();
       const data = {
-        country: this.state.country,
+        country: country,
         zipcode: this.state.zipcode,
-        city:this.state.city,
-        userstate:this.state.userstate,
+        city: this.state.city,
+        userstate: this.state.userstate,
         username: localStorage.getItem("signup")
       };
+      console.log(data);
       //set the with credentials to true
       axios.defaults.withCredentials = true;
       console.log("post sign up data", data);
@@ -489,31 +494,31 @@ class PostSignUp extends Component {
                             </div>
 
                             <div id="ember297" class="ember-view">
-                            <div
-                              id="ember298"
-                              class="onboarding-profile-form-field onboarding-profile-location__field-container pt3 pb2 ember-view"
-                            >
-                              <label
-                                class="onboarding-profile-form-field__label t-14 t-black--light t-normal mt0 truncate "
-                                for="location-postal"
-                              >
-                                State
-                              </label>
-
-                              <input
-                                maxlength="10"
-                                class="onboarding-input onboarding-profile-location__postal-field ember-text-field ember-view"
-                                type="text"
-                                placeholder="State"
-                                onChange={this.stateChangeHandler}
-                              />
-
                               <div
-                                id="ember300"
-                                class="onboarding-profile-error-container ember-view"
-                              />
+                                id="ember298"
+                                class="onboarding-profile-form-field onboarding-profile-location__field-container pt3 pb2 ember-view"
+                              >
+                                <label
+                                  class="onboarding-profile-form-field__label t-14 t-black--light t-normal mt0 truncate "
+                                  for="location-postal"
+                                >
+                                  State
+                                </label>
+
+                                <input
+                                  maxlength="10"
+                                  class="onboarding-input onboarding-profile-location__postal-field ember-text-field ember-view"
+                                  type="text"
+                                  placeholder="State"
+                                  onChange={this.stateChangeHandler}
+                                />
+
+                                <div
+                                  id="ember300"
+                                  class="onboarding-profile-error-container ember-view"
+                                />
+                              </div>
                             </div>
-                          </div>
 
                             <div id="ember297" class="ember-view">
                               <div

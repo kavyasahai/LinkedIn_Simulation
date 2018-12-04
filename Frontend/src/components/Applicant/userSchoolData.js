@@ -56,7 +56,7 @@ class UserSchoolData extends Component {
       startyear: this.state.startyear,
       endyear: this.state.endyear
     };
-    //set the with credentials to true
+    console.log(data);
     axios.defaults.withCredentials = true;
     this.props.signupschool(data);
     localStorage.clear();
@@ -344,12 +344,12 @@ class UserSchoolData extends Component {
                                           data-control-name="profile_edu_end_year"
                                           id="onboarding-profile-edu-end-year"
                                           class="onboarding-input ember-view"
+                                          onChange={this.endyearChangeHandler}
                                         >
                                           {" "}
                                           <option
                                             value="End Year"
                                             placeholder="End Year"
-                                            onChange={this.endyearChangeHandler}
                                           >
                                             -
                                           </option>
