@@ -31,16 +31,16 @@ class recruiterDashboardJobSaves extends Component {
   };
 
   render() {
-    console.log("PROPS: ", this.props.data_jobclicks);
+    console.log("PROPS: ", this.props.data_jobsaves);
 
     const data = [["Job Posting", "Clicks"]];
 
-    this.props.data_jobclicks &&
-      this.props.data_jobclicks.forEach(job => {
-        data.push([job.title + " at " + job.company, parseInt(job.clicks)]);
-      });
+    // this.props.data_jobclicks &&
+    //   this.props.data_jobclicks.forEach(job => {
+    //     data.push([job.title + " at " + job.company, parseInt(job.clicks)]);
+    //   });
 
-    console.log("DATA", data);
+    // console.log("DATA", data);
 
     return (
       <React.Fragment>
