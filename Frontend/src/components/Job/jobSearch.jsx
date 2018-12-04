@@ -482,7 +482,7 @@ else{
                     Email:
                     <input
                       type="text"
-                      placeholder="EmailAddress"
+                      placeholder={userdata.firstname}
                       onChange={this.propertyTopic}
                       style={{
                         "margin-bottom": "10px",
@@ -496,24 +496,7 @@ else{
                       }}
                     />
                   </span>
-                  <span style={{ display: "block" }}>
-                    Phone Number:{" "}
-                    <input
-                      type="text"
-                      placeholder="PhoneNumber"
-                      onChange={this.propertyTopic}
-                      style={{
-                        "margin-bottom": "10px",
-                        width: "100%",
-                        height: "44px",
-                        padding: "9px 14px",
-                        "font-size": "10px",
-                        "border-radius": "0px",
-                        "line-height": "1.33",
-                        "margin-top": "16px"
-                      }}
-                    />
-                  </span>
+             
                   Resume(Optional):
                   <br />
                   {/* <input
@@ -633,7 +616,7 @@ else{
                   </Link>
                 </div>
               
-            <i class="fa fa-user w3-jumbo" />
+           
           </div>
         </div>
         <div>

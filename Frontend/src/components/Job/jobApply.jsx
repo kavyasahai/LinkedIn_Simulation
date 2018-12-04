@@ -19,7 +19,8 @@ class JobSearch extends Component {
     this.state = {
       firstname:"",
       lastname:"",
-      address:"",
+      state:"",
+      city:"",
       email:"",
       imageNumber: 0,
    selectedOption:"",
@@ -36,8 +37,9 @@ class JobSearch extends Component {
     this.FirstnameChangeHandler = this.FirstnameChangeHandler.bind(this);
     this.LastnameChangeHandler = this.LastnameChangeHandler.bind(this);
     this.EmailChangeHandler=this.EmailChangeHandler.bind(this);
-    this.AddressChangeHandler=this.AddressChangeHandler.bind(this);
+    this.StateChangeHandler=this.StateChangeHandler.bind(this);
     this.TextChangeHandler=this.TextChangeHandler.bind(this);
+    this.CityChangeHandler=this.CityChangeHandler.bind(this);
        this.Submit=this.Submit.bind(this);
   
   }
@@ -48,17 +50,22 @@ FirstnameChangeHandler = e => {
   };
   LastnameChangeHandler= e => {
     this.setState({
-      Job: e.target.value
+     lastname:e.target.value
     });
   };
   EmailChangeHandler= e => {
     this.setState({
-      Job: e.target.value
+      email:e.target.value
     });
   };
-  AddressChangeHandler= e => {
+  StateChangeHandler= e => {
     this.setState({
-      Job: e.target.value
+     state:e.target.value
+    });
+  };
+  CityChangeHandler= e => {
+    this.setState({
+      city: e.target.value
     });
   };
   TextChangeHandler= e => {
@@ -178,14 +185,24 @@ console.log("Props",this.state.handleOptionChange);
             }
           />
           </div>
-    Address:
+    State:
     <div col="col-2" class="inputfield1 ">
           
           <input
             style={{"background-color": "#e1e9ee","font-size":"0.8rem"}}
             type="text"
             placeholder="Search"
-            onChange={this.AddressChangeHandler}
+            onChange={this.StateChangeHandler}
+          />
+          </div>
+    City:
+    <div col="col-2" class="inputfield1 ">
+          
+          <input
+            style={{"background-color": "#e1e9ee","font-size":"0.8rem"}}
+            type="text"
+            placeholder="Se"
+            onChange={this.CityChangeHandler}
           />
           </div>
          
