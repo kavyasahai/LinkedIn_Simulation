@@ -16,8 +16,7 @@ function handle_request(msg, callback) {
         console.log(err);
       } else {
         console.log("Docs", doc);
-        
-          console.log("null");
+      callback(null,doc);
         }
       }
     

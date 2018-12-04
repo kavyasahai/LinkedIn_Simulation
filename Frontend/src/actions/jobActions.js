@@ -57,7 +57,7 @@ export const getAppliedJob = (data, callback) => async dispatch => {
   try {
     // var email = getJWTUsername();
     //setHeader();
-    const res = await axios.post(`${ROOT_URL}/getsavejob`, data);
+    const res = await axios.post(`${ROOT_URL}/getappliedjob`, data);
     console.log(res.status);
     console.log("search a job", res.data);
     dispatch({

@@ -16,7 +16,7 @@ router.post("/getappliedjob", function(request, response) {
     } else {
       
       response.json({
-        savedjobs:results
+        appliedjobs:results
     });
     response.end();
     }

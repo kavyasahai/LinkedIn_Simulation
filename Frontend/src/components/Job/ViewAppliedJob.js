@@ -26,12 +26,10 @@ import axios from "axios";
             email:getJWTUsername(),
             username:getJWTUsername()
           };
-         this.props.getsavedJob(data,()=>{
-           
-         this.setState({
-            properties1:this.props.savedjobs
-        })
-          })
+         this.props.getAppliedJob(data,()=>{
+           console.log("Applied");
+      
+          });
       
 
           // var jobdetails = this.props.savedjobs.filter(function(property) {
