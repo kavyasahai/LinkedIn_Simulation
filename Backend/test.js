@@ -8,8 +8,8 @@ var server = supertest.agent("http://localhost:3001");
 //Get Request all trips
 it("should validate traveler with given credentials", function(done) {
     server
-      .post("/fetchpropid")
-      .send({"propid": "ObjectId('5bd3b37c1ddad83c8cdc6de5')"})
+      .post("/locationdata")
+      .send({"country": "United States","state":"California","city":"San Jose","zipcode":"95112"})
       
       .expect(200)
       .end(function(err, res) {
