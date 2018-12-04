@@ -5,63 +5,9 @@ import { getSignupToken } from "../common/auth";
 
 //Define a Login Component
 class UserProfilePhoto extends Component {
-  //call the constructor method
-  constructor(props) {
-    //Call the constrictor of Super class i.e The Component
-    super(props);
-    //maintain the state required for this component
-    // this.state = {
-    //     firstname : "",
-    //     lastname:"",
-    //     username:"",
-    //     password : ""
-    // }
-    //Bind the handlers to this class
-    // this.firstnameChangeHandler = this.firstnameChangeHandler.bind(this);
-    // this.lastnameChangeHandler = this.lastnameChangeHandler.bind(this);
-    //  this.usernameChangeHandler = this.usernameChangeHandler.bind(this);
-    // this.passwordChangeHandler = this.passwordChangeHandler.bind(this);
-    // this.submitLogin = this.submitLogin.bind(this);
-  }
-  //Call the Will Mount to set the auth Flag to false
-  componentWillMount() {}
-  //username change handler to update state variable with the text entered by the user
-  // firstnameChangeHandler = (e) => {
-  //     this.setState({
-  //         firstname : e.target.value
-  //     })
-  // }
-
-  // lastnameChangeHandler = (e) => {
-  //     this.setState({
-  //         lastname : e.target.value
-  //     })
-  // }
-
-  // usernameChangeHandler = (e) => {
-  //     this.setState({
-  //         username : e.target.value
-  //     })
-  // }
-  // // //password change handler to update state variable with the text entered by the user
-  // passwordChangeHandler = (e) => {
-  //     this.setState({
-  //         password : e.target.value
-  //     })
-  // }
-  // // //submit Login handler to send a request to the node backend
-  // submitLogin = (e) => {
-  //     var headers = new Headers();
-  //     //prevent page from refresh
-  //     e.preventDefault();
-  //     const data = {
-  //         email:this.state.username,
-  //         password : this.state.password
-  //     }
-  //     //set the with credentials to true
-  //     axios.defaults.withCredentials = true;
-  //     this.props.onSubmitHandle(data);
-  // }
+  handleSkip = () => {
+    this.props.history.push("/school");
+  };
   render() {
     const signupStatus = getSignupToken();
 
@@ -69,15 +15,7 @@ class UserProfilePhoto extends Component {
     if (signupStatus === false) {
       redirectVar = <Redirect to="/login" />;
     }
-    // let redirect = null;
-    // if(this.props.authFlag){
-    //     redirect = <Redirect to= "/homepage"/>
-    // }
-    //redirect based on successful login
-    // let redirectVar = null;
-    // if(cookie.load('cookie')){
-    //     redirectVar = <Redirect to= "/home"/>
-    // }
+
     return (
       <div class="container">
         {redirectVar}
@@ -221,6 +159,7 @@ class UserProfilePhoto extends Component {
                           Add photo
                         </label>
                         <button
+                          onClick={this.handleSkip}
                           data-control-name="skip"
                           id="ember535"
                           class="onboarding-widget__cta onboarding-photo__skip-button button-tertiary-small-muted mt4 ember-view"
