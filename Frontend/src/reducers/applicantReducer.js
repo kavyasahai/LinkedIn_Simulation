@@ -9,7 +9,8 @@ import {
   APPLICANT_SKILLSINSERT_DATA,
   APPLICANT_GETUSER_DATA,
   SIGNUPSCHOOL,
-  ADD_PROFILE_PICTURE
+  ADD_PROFILE_PICTURE,
+  ADD_USER_RESUME
 } from "../actions/types";
 
 const initialState = {
@@ -25,7 +26,8 @@ const initialState = {
   getuserdata: false,
   userdata: [],
   signupschool: false,
-  url: ""
+  url: "",
+  resume: ""
 };
 
 export default function(state = initialState, action) {
@@ -93,6 +95,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         url: action.payload
+      };
+    case ADD_USER_RESUME:
+      return {
+        ...state,
+        resume: action.payload
       };
 
     default:

@@ -11,7 +11,7 @@ const UserSchema = new mongoose.Schema({
   education: Array,
   skills: Array,
   profileSummary: String,
-  headline:String,
+  headline: String,
   projects: Array,
   isRecruiter: Boolean,
   phoneNumber: String,
@@ -22,7 +22,8 @@ const UserSchema = new mongoose.Schema({
   school: String,
   startyear: String,
   endyear: String,
-  photo: String
+  photo: String,
+  resume: String
 });
 
 module.exports = mongoose.model("users", UserSchema);

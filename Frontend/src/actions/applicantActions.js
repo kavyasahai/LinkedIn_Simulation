@@ -10,7 +10,8 @@ import {
   APPLICANT_SKILLSINSERT_DATA,
   APPLICANT_GETUSER_DATA,
   SIGNUPSCHOOL,
-  ADD_PROFILE_PICTURE
+  ADD_PROFILE_PICTURE,
+  ADD_USER_RESUME
 } from "./types";
 import { setHeader } from "../components/common/auth";
 
@@ -197,6 +198,23 @@ export const addPhoto = (url, username) => async dispatch => {
   } catch (e) {
     return {
       type: ADD_PROFILE_PICTURE,
+      payload: e
+    };
+  }
+};
+export const addResume = (url, username) => async dispatch => {
+  try {
+    setHeader();
+    const res = await axios.post(`${ROOT_URL}/addProfileResume/${username}`, {
+      url1: url
+    });
+    dispatch({
+      type: ADD_USER_RESUME,
+      payload: res.data
+    });
+  } catch (e) {
+    return {
+      type: ADD_USER_RESUME,
       payload: e
     };
   }

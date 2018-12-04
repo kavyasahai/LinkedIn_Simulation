@@ -12,8 +12,8 @@ import { skillsinsert } from "../../actions/applicantActions";
 import Head from "../Header/head";
 import { Link } from "react-router-dom";
 import { DropdownMenu, MenuItem } from "react-bootstrap-dropdown-menu";
-import { addPhoto } from "../../actions/applicantActions";
-
+import { addPhoto, addResume } from "../../actions/applicantActions";
+import { If } from "react-if";
 import request from "superagent";
 import Dropzone from "react-dropzone";
 const CLOUDINARY_UPLOAD_PRESET = "g4q2o6at";
@@ -147,6 +147,35 @@ class Homepage extends Component {
     });
 
     this.handleImageUpload(files[0]);
+  };
+
+  handleResumeUpload(file) {
+    console.log("file=", file);
+    let upload = request
+      .post(CLOUDINARY_UPLOAD_URL)
+      .field("upload_preset", CLOUDINARY_UPLOAD_PRESET)
+      .field("file", file);
+
+    upload.end((err, response) => {
+      if (err) {
+        console.error(err);
+      }
+
+      if (response.body.secure_url !== "") {
+        // save to db
+        console.log("resume=", response.body.secure_url);
+        this.props.addResume(response.body.secure_url, getJWTUsername());
+        window.location.reload();
+      }
+    });
+  }
+
+  onResumeDrop = files => {
+    this.setState({
+      uploadedFile: files[0]
+    });
+
+    this.handleResumeUpload(files[0]);
   };
 
   firstnameChangeHandler = e => {
@@ -793,6 +822,9 @@ class Homepage extends Component {
                   >
                     Edit
                   </button>
+                  <br />
+                  Resume:
+                  <a href={this.state.userdata.resume}>Download Resume</a>
                   <p>
                     {this.state.userdata ? this.state.userdata.headline : ""}
                   </p>
@@ -2158,7 +2190,14 @@ class Homepage extends Component {
                   <label for="a11y-ember3230" class="visually-hidden">
                     Resume
                   </label>
-                  <input class="ember-text-field ember-view" type="file" />
+                  {/* <input class="ember-text-field ember-view" type="file" /> */}
+                  <Dropzone
+                    className="dropzone"
+                    multiple={false}
+                    onDrop={this.onResumeDrop.bind(this)}
+                  >
+                    <p>Drop a resume or click to select a file to upload.</p>
+                  </Dropzone>
                 </div>
               </div>
               <div class="modal-footer">
@@ -2325,5 +2364,12 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { summaryinsert, experienceinsert, schoolinsert, skillsinsert, addPhoto }
+  {
+    summaryinsert,
+    experienceinsert,
+    schoolinsert,
+    skillsinsert,
+    addPhoto,
+    addResume
+  }
 )(Homepage);

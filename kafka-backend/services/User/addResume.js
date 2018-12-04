@@ -6,7 +6,7 @@ function handle_request(msg, callback) {
     { email: msg.params.username },
     {
       $set: {
-        photo: msg.body.url1
+        resume: msg.body.url1
       }
     },
     function(err, result) {
