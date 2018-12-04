@@ -25,10 +25,14 @@ class JobSearch extends Component {
    selectedOption:"",
       imageView: [],
       value:"",
+      value1:"",
+      value2:"",
       open: false
     };
     
     this.handleChange = this.handleChange.bind(this);
+    this.handleChange1=this.handleChange1.bind(this);
+    this.handleChange2=this.handleChange2.bind(this);
     this.FirstnameChangeHandler = this.FirstnameChangeHandler.bind(this);
     this.LastnameChangeHandler = this.LastnameChangeHandler.bind(this);
     this.EmailChangeHandler=this.EmailChangeHandler.bind(this);
@@ -66,6 +70,14 @@ FirstnameChangeHandler = e => {
   handleChange(event) {
         
     this.setState({value: event.target.value});
+}
+handleChange1(event) {
+        
+  this.setState({value1: event.target.value});
+}
+handleChange2(event) {
+        
+  this.setState({value2: event.target.value});
 }
   componentDidMount(){
     const foo =this.props.location.state;
@@ -201,12 +213,12 @@ console.log("Props",this.state.handleOptionChange);
     Disability Question:
     <br/>
     <div class="form-group floating-label not-empty">
-                                        <placeholder>Property type</placeholder>
+                                        <placeholder>Are you Disable?</placeholder>
                                             <div class="FormSelect__wrapper">
-                                                <select value={this.state.value} onChange={this.handleChange} aria-label="Property type" name="propertyType" class="form-control FormSelect__select">
+                                                <select value={this.state.value} onChange={this.handleChange} aria-label="Property type" name="propertyType" class="form-control FormSelect__select" style={{"width":"50%"}}>
                                                     <option value=""></option>
-                                                    <option value="apartment">Apartment</option>
-                                                    <option value="barn">Barn</option>
+                                                    <option value="Yes">Yes</option>
+                                                    <option value="No">NO</option>
                                                 
                                                     <i aria-hidden="true" class="icon-chevron-down FormSelect__chevron"></i>
                                                     </select>
@@ -217,18 +229,34 @@ console.log("Props",this.state.handleOptionChange);
     Diversity  and  Sponsership Questions
     <br/>
     <div>
-        Are you legally authorized to work in the united states?
+        
         <br></br>
-        <input type="radio" name="radio" value="Yes" onChange={this.handleOptionChange1} /> Yes{" "}
-              <br />
-              <input type="radio" name="radio" /> No
-              <br />
-        Will you now, or in the future, require sponsorship for employment visa status (e.g. H-1B visa status)? 
+        <div class="form-group floating-label not-empty">
+                                        <placeholder>Are you legally authorized to work in the united states?</placeholder>
+                                            <div class="FormSelect__wrapper">
+                                                <select value={this.state.value1} onChange={this.handleChange1} aria-label="Property type" name="propertyType" class="form-control FormSelect__select" style={{"width":"50%"}}>
+                                                    <option value=""></option>
+                                                    <option value="Yes">Yes</option>
+                                                    <option value="No">NO</option>
+                                                
+                                                    <i aria-hidden="true" class="icon-chevron-down FormSelect__chevron"></i>
+                                                    </select>
+                                                </div>
+                                            </div>
+
         <br></br>
-        <input type="radio" name="radio" /> Yes{" "}
-              <br />
-              <input type="radio" name="radio" /> No
-              <br />
+        <div class="form-group floating-label not-empty">
+                                        <placeholder> Will you now, or in the future, require sponsorship for employment visa status (e.g. H-1B visa status)? </placeholder>
+                                            <div class="FormSelect__wrapper">
+                                                <select value={this.state.value2} onChange={this.handleChange2} aria-label="Property type" name="propertyType" class="form-control FormSelect__select" style={{"width":"50%"}}>
+                                                    <option value=""></option>
+                                                    <option value="Yes">Yes</option>
+                                                    <option value="No">NO</option>
+                                                
+                                                    <i aria-hidden="true" class="icon-chevron-down FormSelect__chevron"></i>
+                                                    </select>
+                                                </div>
+                                            </div>
     </div>
     <br/>
     <div class="alignment">
