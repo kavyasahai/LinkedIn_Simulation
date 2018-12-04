@@ -7,19 +7,23 @@ import { connect } from "react-redux";
 import Modal from "react-responsive-modal";
 import supportingImage4 from "../../images/supportingImage4.jpg";
 import supportingImage2 from "../../images/supportingImage2.png";
-import { searchJob, saveJob, applyJob,getsavedJob } from "../../actions/jobActions";
+import {
+  searchJob,
+  saveJob,
+  applyJob,
+  getsavedJob
+} from "../../actions/jobActions";
 import Home from "./jobFilter";
 import { getToken } from "../common/auth";
 import { Redirect } from "react-router";
 import request from "superagent";
 import Dropzone from "react-dropzone";
-
+var clicks = {};
 const CLOUDINARY_UPLOAD_PRESET = "g4q2o6at";
 const CLOUDINARY_UPLOAD_URL =
   "https://api.cloudinary.com/v1_1/ungcmpe273/upload";
 
 class JobSearch extends Component {
-
   constructor(props) {
     //Call the constrictor of Super class i.e The Component
     super(props);
@@ -31,13 +35,14 @@ class JobSearch extends Component {
       view1: [],
       properties2: [],
       properties: [],
-      appliedjobs:[],
+      appliedjobs: [],
       imageNumber: 0,
-      hasApplied:"",
+      hasApplied: "",
       imageView: [],
-      userdata:[],
-      url:"",
-      open: false
+      userdata: [],
+      url: "",
+      open: false,
+      clicks: {}
     };
     this.openbox = this.openbox.bind(this);
     this.closebox = this.closebox.bind(this);
@@ -46,42 +51,43 @@ class JobSearch extends Component {
     this.Search = this.Search.bind(this);
     this.view = this.view.bind(this);
     this.sendApplication = this.sendApplication.bind(this);
+    this.componentCleanup = this.componentCleanup.bind(this);
   }
   state = { uploadedFile: null };
-componentDidMount(){
-  const data = {
-    Job: this.state.Job,
-    Location: this.state.Location,
-    email:getJWTUsername(),
-    username:getJWTUsername()
-  };
- this.props.searchJob(data, async() => {
-    console.log(this.props.search_job_results);
-   
-  
-          this.setState({
-            properties1: this.props.search_job_results,
-            view1: this.state.view1.concat(this.props.search_job_results[0])
-          });
-          // this.state.properties1.map(property => {
-          //   console.log(property.Icon);
-          //   // axios
-          //   //   .post("http://localhost:3001/download/" + property.Icon)
-          //   //   .then(response => {
-          //   //     console.log("Imgae Res : ", response);
-          //   //     let imagePreview = "data:image/jpg;base64, " + response.data;
-          //   //     this.setState({
-          //   //       imageView: this.state.imageView.concat(imagePreview)
-          //   //     });
-          //   //   });
-          // });
-        });
-      this.props.getsavedJob(data,async()=>{
-        this.setState({
-          appliedjobs:this.state.appliedjobs.concat(this.props.savedjobs)
-        })
-      })
-      const res =  axios
+  componentDidMount() {
+    window.addEventListener("beforeunload", this.componentCleanup);
+    const data = {
+      Job: this.state.Job,
+      Location: this.state.Location,
+      email: getJWTUsername(),
+      username: getJWTUsername()
+    };
+    this.props.searchJob(data, async () => {
+      console.log(this.props.search_job_results);
+
+      this.setState({
+        properties1: this.props.search_job_results,
+        view1: this.state.view1.concat(this.props.search_job_results[0])
+      });
+      // this.state.properties1.map(property => {
+      //   console.log(property.Icon);
+      //   // axios
+      //   //   .post("http://localhost:3001/download/" + property.Icon)
+      //   //   .then(response => {
+      //   //     console.log("Imgae Res : ", response);
+      //   //     let imagePreview = "data:image/jpg;base64, " + response.data;
+      //   //     this.setState({
+      //   //       imageView: this.state.imageView.concat(imagePreview)
+      //   //     });
+      //   //   });
+      // });
+    });
+    this.props.getsavedJob(data, async () => {
+      this.setState({
+        appliedjobs: this.state.appliedjobs.concat(this.props.savedjobs)
+      });
+    });
+    const res = axios
       .post("http://localhost:3001/getuserdata", data)
       .then(response => {
         console.log("Updated List", response.data.updatedList);
@@ -89,12 +95,22 @@ componentDidMount(){
           userdata: response.data.updatedList
         });
       });
-     
+  }
 
-    }
-  
+  componentCleanup() {
+    // this will hold the cleanup code
+    // whatever you want to do when the component is unmounted or page refreshes
+    console.log("IN COMPPP CLEANUPP");
+    const data = { clicks: this.state.clicks };
+    axios.post("http://localhost:3001/postjobclicks", data).then(response => {
+      console.log("Clicks Posted");
+    });
+  }
 
-    
+  componentWillUnmount() {
+    this.componentCleanup();
+    window.removeEventListener("beforeunload", this.componentCleanup);
+  }
 
   handleResumeUpload(file) {
     console.log("file=", file);
@@ -112,8 +128,8 @@ componentDidMount(){
         // save to db
         console.log("url=", response.body.secure_url);
         this.setState({
-          url:response.body.secure_url
-        })
+          url: response.body.secure_url
+        });
       }
     });
   }
@@ -125,8 +141,6 @@ componentDidMount(){
 
     this.handleResumeUpload(files[0]);
   };
-
-  
 
   openbox() {
     this.setState({
@@ -151,61 +165,57 @@ componentDidMount(){
   Search = e => {
     console.log("Clicked");
     this.setState({
-      view1:[]
-    })
+      view1: []
+    });
     const data = {
       Job: this.state.Job,
       Location: this.state.Location,
-      userid:getJWTUsername()
+      userid: getJWTUsername()
     };
     console.log(data);
-    if( (this.state.Job=="") && (this.state.Location==""))
-    {
+    if (this.state.Job == "" && this.state.Location == "") {
       alert("Fileds cannot be empty");
+    } else {
+      this.props.searchJob(data, () => {
+        console.log(this.props.search_job_results);
+        if (this.props.search_job_results.length == 0) {
+          alert("No Jobs Available Try again");
+        } else {
+          this.setState({
+            properties1: this.props.search_job_results,
+            view1: this.state.view1.concat(this.props.search_job_results[0])
+          });
+          // this.state.properties1.map(property => {
+
+          //   axios
+          //     .post("http://localhost:3001/download/" + property.Icon)
+          //     .then(response => {
+          //       console.log("Imgae Res : ", response);
+          //       let imagePreview = "data:image/jpg;base64, " + response.data;
+          //       this.setState({
+          //         imageView: this.state.imageView.concat(imagePreview)
+          //       });
+          //     });
+          // });
+        }
+      });
     }
-    else{
-            this.props.searchJob(data, () => {
-            console.log(this.props.search_job_results);
-            if(this.props.search_job_results.length == 0){
-              alert("No Jobs Available Try again");
-            }
-            else{
-                  this.setState({
-                    properties1: this.props.search_job_results,
-                    view1: this.state.view1.concat(this.props.search_job_results[0])
-                  });
-                  // this.state.properties1.map(property => {
-                 
-                  //   axios
-                  //     .post("http://localhost:3001/download/" + property.Icon)
-                  //     .then(response => {
-                  //       console.log("Imgae Res : ", response);
-                  //       let imagePreview = "data:image/jpg;base64, " + response.data;
-                  //       this.setState({
-                  //         imageView: this.state.imageView.concat(imagePreview)
-                  //       });
-                  //     });
-                  // });
-          }
-        });
-  }
   };
 
   save = e => {
     console.log(e);
-   
+
     const data = {
       jobid: e._id,
       Userid: getJWTUsername(),
       timestamp: new Date(),
-      firstname:this.state.userdata.firstname,
-      lastname:this.state.userdata.lastname,
+      firstname: this.state.userdata.firstname,
+      lastname: this.state.userdata.lastname,
       postedBy: e.postedBy
-    }
-    console.log("save data",data);
-    this.props.saveJob(data,() =>{
+    };
+    console.log("save data", data);
+    this.props.saveJob(data, () => {
       alert("saved a job");
-
     });
   };
 
@@ -213,24 +223,28 @@ componentDidMount(){
     const data = {
       email: getJWTUsername(),
       jobid: e._id,
-      timestamp:new Date(),
-      firstname:this.state.userdata.firstname,
-      lastname:this.state.userdata.lastname,
-      url:this.state.url
-
-      
+      timestamp: new Date(),
+      firstname: this.state.userdata.firstname,
+      lastname: this.state.userdata.lastname,
+      url: this.state.url
     };
     console.log(data);
-    this.props.applyJob(data,()=>{
+    this.props.applyJob(data, () => {
       alert("Applied for job");
-    window.location.href="/job-applied"
+      window.location.href = "/job-applied";
     });
   };
 
   view = e => {
     console.log(e);
+    if (clicks[e]) clicks[e]++;
+    else clicks[e] = 1;
+    this.setState({
+      clicks: clicks
+    });
+    console.log("CLLLL:", clicks);
     var properties1 = this.props.search_job_results;
-    var savedjobs1=this.props.savedjobs;
+    var savedjobs1 = this.props.savedjobs;
     console.log(properties1);
     var propertydetails = properties1.filter(function(property) {
       return property._id == e;
@@ -239,37 +253,36 @@ componentDidMount(){
       return item.jobID == e;
     });
     console.log(index1);
-   
-  if(index1 != -1)
-{
-  this.setState({
-    view1: propertydetails,
-    imageNumber: index1,
-  hasApplied:true
-  });
 
-}
-else{
- 
-   this.setState({
-    view1: propertydetails,
-    imageNumber: index1,
-  hasApplied:false
-
-  });
-  console.log(this.state.hasApplied); 
-
-}
-    
+    if (index1 != -1) {
+      this.setState({
+        view1: propertydetails,
+        imageNumber: index1,
+        hasApplied: true
+      });
+    } else {
+      this.setState({
+        view1: propertydetails,
+        imageNumber: index1,
+        hasApplied: false
+      });
+      console.log(this.state.hasApplied);
+    }
   };
 
   render() {
-    var userdata=this.state.userdata
+    // window.onbeforeunload = function(){
+    //   console.log("IN WILL UNMOUNTTTTTT");
+    //   const data = { clicks: this.state.clicks };
+    //   axios.post("http://localhost:3001/postjobclicks", data).then(response => {
+    //     console.log("Clicks Posted");
+    //   });
+    // };
+    var userdata = this.state.userdata;
 
     var i = -1;
 
-   
-  console.log(this.props.savedjobs);
+    console.log(this.props.savedjobs);
 
     let Details = this.state.properties1.map(property => {
       i = i + 1;
@@ -347,7 +360,7 @@ else{
               >
                 Save
               </button>
-              <button class="Button" onClick={this.openbox} >
+              <button class="Button" onClick={this.openbox}>
                 Apply
               </button>
             </div>
@@ -471,7 +484,7 @@ else{
                     <img src={userdata.photo} />{" "}
                   </div>
                   <div class="col-4">
-                   {userdata.firstname}  <br />
+                    {userdata.firstname} <br />
                     Student <br />
                     San Jose
                   </div>
@@ -496,7 +509,6 @@ else{
                       }}
                     />
                   </span>
-             
                   Resume(Optional):
                   <br />
                   {/* <input
@@ -578,7 +590,10 @@ else{
       <div class="menu">
         <div class="extendmenu row">
           <div class="icon">
-          <a href="/home">  <i class="fa fa-linkedin-square" /></a>
+            <a href="/home">
+              {" "}
+              <i class="fa fa-linkedin-square" />
+            </a>
           </div>
 
           <div class="Searchfields">
@@ -609,14 +624,12 @@ else{
           <div>
             <i class="fa fa-home w3-jumbo" />
             <div class="go-middle">
-                 <Link to="/job-saved">
-                 <a>
-                    <span class="normal">viewsavedjobs</span>
-                  </a>
-                  </Link>
-                </div>
-              
-           
+              <Link to="/job-saved">
+                <a>
+                  <span class="normal">viewsavedjobs</span>
+                </a>
+              </Link>
+            </div>
           </div>
         </div>
         <div>
@@ -636,10 +649,10 @@ else{
 const mapStateToProps = state => ({
   search_job_results: state.jobReducer.search_job_results,
   view: state.jobReducer.view,
-  savedjobs:state.jobReducer.savejob
+  savedjobs: state.jobReducer.savejob
 });
 
 export default connect(
   mapStateToProps,
-  { searchJob, saveJob, applyJob,getsavedJob }
+  { searchJob, saveJob, applyJob, getsavedJob }
 )(JobSearch);

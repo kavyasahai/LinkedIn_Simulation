@@ -10,7 +10,7 @@ const jobdataSchema = new mongoose.Schema({
   applicantsCount: String,
   viewsCount: String,
   postedDateTime: Date,
-  clicks: String,
+  clicks: Number,
   postedBy: String,
   company: String,
   adminId: String,
