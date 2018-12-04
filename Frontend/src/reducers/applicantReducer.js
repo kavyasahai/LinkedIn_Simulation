@@ -7,7 +7,8 @@ import {
   APPLICANT_EXPERIENCEINSERT_DATA,
   APPLICANT_SCHOOLINSERT_DATA,
   APPLICANT_SKILLSINSERT_DATA,
-  APPLICANT_GETUSER_DATA
+  APPLICANT_GETUSER_DATA,
+  SIGNUPSCHOOL
 } from "../actions/types";
 
 const initialState = {
@@ -21,7 +22,8 @@ const initialState = {
   skillsinserted: false,
   experienceinserted: false,
   getuserdata: false,
-  userdata: []
+  userdata: [],
+  signupschool:false
 };
 
 export default function(state = initialState, action) {
@@ -72,6 +74,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         details: true
+      };
+
+      case SIGNUPSCHOOL:
+      return {
+        ...state,
+        signupschool: true
       };
 
     case APPLICANT_SIGNUP:

@@ -54,7 +54,7 @@ class ApplicantDetails extends Component {
       const data = {
         jobTitle: this.state.jobtitle,
         company: this.state.company,
-        username: this.props.username
+        username:localStorage.getItem("signup")
       };
       //set the with credentials to true
       axios.defaults.withCredentials = true;
