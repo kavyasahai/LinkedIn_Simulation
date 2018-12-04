@@ -98,6 +98,7 @@ var editeducation = require("./routes/User/editeducation");
 app.use(editeducation);
 var searchUserByName = require("./routes/User/searchUserByName");
 var getJobApplications = require("./routes/Job/getJobApplications");
+var postjobclicks = require("./routes/Job/postjobclicks");
 app.use(signupschool);
 app.use(editskills);
 app.use(getuserdata);
@@ -130,6 +131,7 @@ app.use("/connection", connection);
 app.use("/api/auth/channel", channel);
 app.use("/api/auth/message", message);
 app.use("/api/auth/user", user);
+app.use(postjobclicks);
 
 app.use(deleteaccount);
 app.use(getappliedjobs);
