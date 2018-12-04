@@ -5,16 +5,31 @@ import supportingimage5 from "../../images/supportingImage5.png";
 import { getJWTUsername } from "../common/auth";
 import { getPostedJobs } from "../../actions/recruiterActions";
 import { connect } from "react-redux";
-//import { If, Else } from "react-if";
 import { Link } from "react-router-dom";
+import Pagination from "../common/pagination";
+import { paginate } from "../utils/paginate";
 
 class ViewPostedJobs extends Component {
+  state = {
+    currentPage: 1,
+    pageSize: 5,
+    imageView: []
+  };
   componentDidMount() {
     var username = getJWTUsername();
     this.props.getPostedJobs(username);
   }
 
+  handlePageChange = page => {
+    this.setState({ currentPage: page });
+  };
+
   render() {
+    const paginatedData = paginate(
+      this.props.posted_jobs.payload ? this.props.posted_jobs.payload : "",
+      this.state.currentPage,
+      this.state.pageSize
+    );
     console.log(this.props.posted_jobs.payload);
     if (
       this.props.posted_jobs.payload &&
@@ -36,11 +51,12 @@ class ViewPostedJobs extends Component {
           <div class="row">
             <div class="postedJobs">
               <div className="jobData">
-                {this.props.posted_jobs.payload &&
-                  this.props.posted_jobs.payload.map(data => (
-                    <div key={data.firstname}>
-                      <div class="row">
-                        <div class="col-6" style={{ paddingTop: "2vw" }}>
+                {paginatedData.map(data => (
+                  <div key={data.firstname}>
+                    <div class="row">
+                      <div class="col-6" style={{ paddingTop: "2vw" }}>
+                        <img src={data.logo} />
+                        <div className="jobDetails">
                           <Link
                             to={{
                               pathname: "/job/edit",
@@ -60,11 +76,26 @@ class ViewPostedJobs extends Component {
                               {data.description}
                             </p>
                           </div>
+                          <button>
+                            {" "}
+                            <Link
+                              to={{
+                                pathname: "/job/applications",
+                                state: {
+                                  jobId: data._id
+                                }
+                              }}
+                            >
+                              View Applications
+                            </Link>
+                          </button>
                         </div>
                       </div>
-                      <hr />
                     </div>
-                  ))}
+
+                    <hr />
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -74,6 +105,18 @@ class ViewPostedJobs extends Component {
                 style={{ width: "25vw", height: "30vw" }}
               />
             </div>
+          </div>
+          <div className="general_pagination">
+            <Pagination
+              itemsCount={
+                this.props.posted_jobs.payload
+                  ? this.props.posted_jobs.payload.length
+                  : ""
+              }
+              pageSize={this.state.pageSize}
+              onPageChange={this.handlePageChange}
+              currentPage={this.state.currentPage}
+            />
           </div>
         </div>
       );

@@ -1,14 +1,16 @@
-var Users = require("../models/user");
-require("../db/mongoose");
+var Users = require("../../models/user");
+require("../../db/mongoose");
 
 function handle_request(msg, callback) {
-  console.log("msg======", msg);
+  console.log("MSG+++++", msg.params.username);
+  console.log("MSG+++++", msg.body);
   Users.update(
-    { email: msg.username },
-    { $set: { 
-        headline:msg.headline,
-        profileSummary:msg.summary,
-        } },
+    { email: msg.params.username },
+    {
+      $set: {
+        photo: msg.body.url1
+      }
+    },
     function(err, result) {
       if (err) {
         callback(err, "Error");
@@ -19,5 +21,4 @@ function handle_request(msg, callback) {
     }
   );
 }
-
 exports.handle_request = handle_request;

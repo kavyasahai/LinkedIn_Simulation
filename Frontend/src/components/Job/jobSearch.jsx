@@ -33,9 +33,10 @@ class JobSearch extends Component {
       properties: [],
       appliedjobs:[],
       imageNumber: 0,
-      hasApplied:false,
+      hasApplied:"",
       imageView: [],
       userdata:[],
+      url:"",
       open: false
     };
     this.openbox = this.openbox.bind(this);
@@ -62,18 +63,18 @@ componentDidMount(){
             properties1: this.props.search_job_results,
             view1: this.state.view1.concat(this.props.search_job_results[0])
           });
-          this.state.properties1.map(property => {
-            console.log(property.Icon);
-            axios
-              .post("http://localhost:3001/download/" + property.Icon)
-              .then(response => {
-                console.log("Imgae Res : ", response);
-                let imagePreview = "data:image/jpg;base64, " + response.data;
-                this.setState({
-                  imageView: this.state.imageView.concat(imagePreview)
-                });
-              });
-          });
+          // this.state.properties1.map(property => {
+          //   console.log(property.Icon);
+          //   // axios
+          //   //   .post("http://localhost:3001/download/" + property.Icon)
+          //   //   .then(response => {
+          //   //     console.log("Imgae Res : ", response);
+          //   //     let imagePreview = "data:image/jpg;base64, " + response.data;
+          //   //     this.setState({
+          //   //       imageView: this.state.imageView.concat(imagePreview)
+          //   //     });
+          //   //   });
+          // });
         });
       this.props.getsavedJob(data,async()=>{
         this.setState({
@@ -110,6 +111,9 @@ componentDidMount(){
       if (response.body.secure_url !== "") {
         // save to db
         console.log("url=", response.body.secure_url);
+        this.setState({
+          url:response.body.secure_url
+        })
       }
     });
   }
@@ -170,18 +174,18 @@ componentDidMount(){
                     properties1: this.props.search_job_results,
                     view1: this.state.view1.concat(this.props.search_job_results[0])
                   });
-                  this.state.properties1.map(property => {
-                    console.log(property.Icon);
-                    axios
-                      .post("http://localhost:3001/download/" + property.Icon)
-                      .then(response => {
-                        console.log("Imgae Res : ", response);
-                        let imagePreview = "data:image/jpg;base64, " + response.data;
-                        this.setState({
-                          imageView: this.state.imageView.concat(imagePreview)
-                        });
-                      });
-                  });
+                  // this.state.properties1.map(property => {
+                 
+                  //   axios
+                  //     .post("http://localhost:3001/download/" + property.Icon)
+                  //     .then(response => {
+                  //       console.log("Imgae Res : ", response);
+                  //       let imagePreview = "data:image/jpg;base64, " + response.data;
+                  //       this.setState({
+                  //         imageView: this.state.imageView.concat(imagePreview)
+                  //       });
+                  //     });
+                  // });
           }
         });
   }
@@ -212,12 +216,15 @@ componentDidMount(){
       timestamp:new Date(),
       firstname:this.state.userdata.firstname,
       lastname:this.state.userdata.lastname,
-      url:"http"
+      url:this.state.url
 
       
     };
     console.log(data);
-    this.props.applyJob(data);
+    this.props.applyJob(data,()=>{
+      alert("Applied for job");
+    window.location.href="/job-applied"
+    });
   };
 
   view = e => {
@@ -238,17 +245,19 @@ componentDidMount(){
   this.setState({
     view1: propertydetails,
     imageNumber: index1,
-  hasApplied:"true"
+  hasApplied:true
   });
 
 }
 else{
-   console.log("else"); 
+ 
    this.setState({
     view1: propertydetails,
     imageNumber: index1,
-  hasApplied:"false"
+  hasApplied:false
+
   });
+  console.log(this.state.hasApplied); 
 
 }
     
@@ -260,7 +269,7 @@ else{
     var i = -1;
 
    
-    var imageView = this.state.imageView;
+  console.log(this.props.savedjobs);
 
     let Details = this.state.properties1.map(property => {
       i = i + 1;
@@ -277,7 +286,7 @@ else{
 
           <div class="Jobs  row">
             <div class="col-1">
-              <img src={supportingImage2} />
+              <img src={property.logo} />
             </div>
             <div
               class="col-11"
@@ -305,7 +314,7 @@ else{
           <div class="row">
             <div class="col-4">
               <img
-                src={imageView[this.state.imageNumber]}
+                src={property.logo}
                 style={{ width: "200px", height: "150px" }}
               />
             </div>
@@ -454,12 +463,12 @@ else{
               >
                 <header class="modal-header">
                   <h2 style={{ color: "rgba(0,0,0,.75)" }}>
-                    Apply To {property.Company}
+                    Apply To {property.company}
                   </h2>
                 </header>
                 <div class="row">
                   <div>
-                    <img src={supportingImage4} />{" "}
+                    <img src={userdata.photo} />{" "}
                   </div>
                   <div class="col-4">
                    {userdata.firstname}  <br />
@@ -473,7 +482,7 @@ else{
                     Email:
                     <input
                       type="text"
-                      placeholder="EmailAddress"
+                      placeholder={userdata.email}
                       onChange={this.propertyTopic}
                       style={{
                         "margin-bottom": "10px",
@@ -487,24 +496,7 @@ else{
                       }}
                     />
                   </span>
-                  <span style={{ display: "block" }}>
-                    Phone Number:{" "}
-                    <input
-                      type="text"
-                      placeholder="PhoneNumber"
-                      onChange={this.propertyTopic}
-                      style={{
-                        "margin-bottom": "10px",
-                        width: "100%",
-                        height: "44px",
-                        padding: "9px 14px",
-                        "font-size": "10px",
-                        "border-radius": "0px",
-                        "line-height": "1.33",
-                        "margin-top": "16px"
-                      }}
-                    />
-                  </span>
+             
                   Resume(Optional):
                   <br />
                   {/* <input
@@ -586,7 +578,7 @@ else{
       <div class="menu">
         <div class="extendmenu row">
           <div class="icon">
-            <i class="fa fa-linkedin-square" />
+          <a href="/home">  <i class="fa fa-linkedin-square" /></a>
           </div>
 
           <div class="Searchfields">
@@ -624,7 +616,7 @@ else{
                   </Link>
                 </div>
               
-            <i class="fa fa-user w3-jumbo" />
+           
           </div>
         </div>
         <div>

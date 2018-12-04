@@ -32,6 +32,8 @@ import ViewPostedJobs from "./Recruiter/ViewPostedJobs";
 import EditJob from "./Job/jobEdit";
 import ViewSavedJob from "./Job/ViewSavedJobs";
 import ViewProfile from "./Applicant/viewprofile";
+import ViewAppliedJob from "./Job/ViewAppliedJob";
+import ViewJobApplications from "./Recruiter/ViewJobApplications";
 
 //Create a Main Component
 class Main extends Component {
@@ -59,7 +61,10 @@ class Main extends Component {
               <Route path="/profilepicture" component={UserProfilePhoto} />
               <PrivateRoute path="/network" component={network} />
               <PrivateRoute path="/myrequests" component={ConnectionRequests} />
-              <PrivateRoute path="/job-apply" component={jobApply} />
+              {/* <PrivateRoute path="/job-apply" component={jobApply} /> */}
+<Route path="/job-apply:id" component={jobApply}
+//  render={(props)=>(<jobApply {...props}/>)}
+ />
               <Route
                 path="/messaging"
                 store={chatstore}
@@ -112,6 +117,14 @@ class Main extends Component {
               <PrivateRoute path="/job-details" component={jobDetails} />
               <PrivateRoute path="/job-search" component={jobSearch} />
               <PrivateRoute path="/job-saved" component={ViewSavedJob} />
+<<<<<<< HEAD
+=======
+              <PrivateRoute
+                path="/job/applications"
+                component={ViewJobApplications}
+              />
+              <PrivateRoute path="/job-applied" component={ViewAppliedJob} />
+>>>>>>> acdae6d8d84fdf72dec723eb80a2f6d8eb0be1e3
 
               <Route path="/not-found" exact component={NotFound} />
               <Route path="/" exact component={Login} />

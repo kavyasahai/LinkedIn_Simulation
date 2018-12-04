@@ -68,11 +68,17 @@ db.findUser = function(user, successCallback, failureCallback) {
           console.log("data from login in db", rows);
           console.log("INSIDE SQL USER FOUND AND MAKING KEY");
           console.log("STRINGIFIED ROWS:", JSON.stringify(rows[0]));
+          const data={
+            data:rows[0],
+            statuscode:200
+
+
+          }
           successCallback(rows[0]);
           console.log("insidesucces");
         } else {
           console.log("INSIDE SQL NO USER FOUND");
-          failureCallback("User not found.");
+          successCallback("ok");
           console.log("Wrong arf");
         }
       });

@@ -54,12 +54,13 @@ class ApplicantDetails extends Component {
       const data = {
         jobTitle: this.state.jobtitle,
         company: this.state.company,
-        username: this.props.username
+        username: localStorage.getItem("signup")
       };
       //set the with credentials to true
       axios.defaults.withCredentials = true;
       console.log("post details data", data);
       this.props.proDetails(data);
+      this.props.history.push("/profilepicture");
     }
   };
 
@@ -70,9 +71,7 @@ class ApplicantDetails extends Component {
     if (signupStatus === false) {
       redirectVar = <Redirect to="/login" />;
     }
-    if (this.props.details) {
-      redirectVar = <Redirect to="/school" />;
-    }
+
     //redirect based on successful login
     // let redirectVar = null;
     // if(cookie.load('cookie')){

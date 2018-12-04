@@ -13,11 +13,11 @@ router.post("/login", function(request, response) {
   console.log(sqlQuery);
 
   kafka.make_request("linkedinlogin", request.body, function(err, results) {
-    console.log("in result");
+    console.log("in linkedinlogin");
     console.log(results);
-    if (err) {
+    if (results.status == 400) {
       console.log("Inside err");
-      res.json({
+      response.json({
         status: "error",
         msg: "System Error, Try Again."
       });

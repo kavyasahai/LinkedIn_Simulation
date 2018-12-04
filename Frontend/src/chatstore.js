@@ -21,6 +21,10 @@ export default class Store {
   async loadCurrentUser(userId) {
     return await this.service.get("api/auth/user/findBy/" + userId);
   }
+
+  async loadUser(userId) {
+    return await this.service.get("api/auth/user/" + userId);
+  }
   async loadChannels() {
     return await this.service.get(
       "api/auth/channel/" + _.get(this.user, "_id")
@@ -66,13 +70,13 @@ export default class Store {
         _.get(channel, "members", []).forEach(async memberId => {
           newChannel.members = newChannel.members.set(memberId, true);
           //load each member into memory
-          const userResponse = await this.loadCurrentUser(memberId);
+          const userResponse = await this.loadUser(memberId);
           this.users = this.users.set(
             memberId,
             _.get(userResponse, "data.user")
           );
           this.users = this.users.set(_.get(this.user, "_id"), this.user);
-          const eachMemberResponse = await this.loadCurrentUser(memberId);
+          const eachMemberResponse = await this.loadUser(memberId);
           const eachMember = _.get(eachMemberResponse, "data.user");
           this.update();
           this.users = this.users.set(memberId, eachMember);

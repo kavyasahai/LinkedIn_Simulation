@@ -10,8 +10,7 @@ function handle_request(msg, callback) {
   } else {
     Job = msg.Job;
   }
-  jobdata
-    .find({
+  jobdata.find({
       title: Job
     })
     .then(

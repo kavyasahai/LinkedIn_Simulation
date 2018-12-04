@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import supportingImage4 from "../../images/supportingImage4.jpg";
-
+import axios from "axios";
 import { Link } from "react-router-dom";
 import "../../css/jobSearch.css";
+import { getJWTUsername } from "../common/auth";
 class Header extends Component {
   constructor(props) {
     //Call the constrictor of Super class i.e The Component
@@ -15,15 +16,32 @@ class Header extends Component {
     localStorage.clear();
     this.props.history.push("/login");
   }
+  delete(){
+    const data={
+      username:getJWTUsername()
+    }
+    console.log(data);
+    axios
+      .post("http://localhost:3001/delete", data)
+      .then(response => {
+        alert("Sorry to see you going u can active ur account by again logging in :)"); 
+
+       window.location.href="http://localhost:3000/login";
+       localStorage.clear();
+       
+      });
+  }
   render() {
     return (
       <div class="menu">
         <div class="extendmenu row">
           <div class="icon">
-          <Link to="/login">
-             <a> {" "}
-              <i class="fa fa-linkedin-square" />
-            </a></Link>
+            <Link to="/login">
+              <a>
+                {" "}
+                <i class="fa fa-linkedin-square" />
+              </a>
+            </Link>
           </div>
 
           <div class="searchhead">
@@ -100,7 +118,7 @@ class Header extends Component {
                   <li
                     class="blue"
                     class="nav-item dropdown"
-                    style={{ opacity: "unset", padding: 0 }}
+                    style={{ opacity: "unset", padding: 0,height:0 }}
                   >
                     <a
                       class=" dropdown-toggle"
@@ -122,8 +140,11 @@ class Header extends Component {
                       <a class="dropdown-item" href="/job-saved">
                         Saved Jobs
                       </a>
-                      <a class="dropdown-item" href="/">
+                      <a class="dropdown-item" href="/job-applied">
                         Applied Jobs
+                      </a>
+                      <a class="dropdown-item" href="/job-search">
+                          Search A Job
                       </a>
                     </div>
                   </li>
@@ -155,7 +176,7 @@ class Header extends Component {
             <div class="col-2.5">
               <div class="go-inline">
                 <div>
-                  <a href="/messenging">
+                  <a href="/messaging">
                     <i
                       class="fa fa-envelope w3-jumbo"
                       style={{
@@ -173,30 +194,31 @@ class Header extends Component {
               </div>
             </div>
             <div class="go-middle">
-                  <li
-                    class="blue"
-                    class="nav-item dropdown"
-                    style={{ opacity: "unset", padding: 0 }}
-                  >
-                    <a
-                      class=" dropdown-toggle"
-                      id="navbardrop"
-                      data-toggle="dropdown"
-                    >
-                      <span class="normal"></span>Logout{" "}
+              <li
+                class="blue"
+                class="nav-item dropdown"
+                style={{ opacity: "unset", padding: 0 }}
+              >
+                <a
+                  class=" dropdown-toggle"
+                  id="navbardrop"
+                  data-toggle="dropdown"
+                >
+                  <span class="normal" />Logout{" "}
+                </a>
+                <div class="dropdown-menu">
+                  <li>
+                    {" "}
+                    <a class="dropdown-item" href="/login" onClick={this.clear}>
+                      Logout
                     </a>
-                    <div class="dropdown-menu">
-                     <li> <a class="dropdown-item" href="/login" onClick={this.clear}>
-                        Logout
-                      </a></li>
-                      <a class="dropdown-item" href="/job/posted-jobs">
-                      Delete Your Account
-                      </a>
-                     
-                     
-                    </div>
                   </li>
-            </div> 
+                  <a class="dropdown-item"  onClick={this.delete}>
+                    Delete Your Account
+                  </a>
+                </div>
+              </li>
+            </div>
           </div>
         </div>
       </div>

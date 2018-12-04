@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import HomeHeader from "../Header/head";
-import { searchJob, saveJob, applyJob,getsavedJob,getJobById  } from "../../actions/jobActions";
+import { searchJob, saveJob, applyJob,getsavedJob,getAppliedJob,getJobById } from "../../actions/jobActions";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { getToken } from "../common/auth";
@@ -14,41 +14,43 @@ import axios from "axios";
         super(props);
         //maintain the state required for this component
         this.state = {
-      
-          properties1: [],
-          jobdetails:[]
+        properties1:[],
+          jobdetails: [],
+          jobdetails1:[]
         };
-       
+ 
       }
 
      componentDidMount(){
+     
         const data = {
          
             email:getJWTUsername(),
             username:getJWTUsername()
           };
-         this.props.getsavedJob(data,()=>{
-           if(this.props.savedjobs.length == 0){
-             alert("No saved Jobs Please Apply")
-           }
+          
+         this.props.getAppliedJob(data,()=>{
+          
+          if(this.props.appliedjobs.length == 0){
+            alert("You Dont have any Applied jobs")
+          }
            else{
-          this.props.savedjobs.map(property=>{
+          this.props.appliedjobs.map(property=>{
              
-            this.props.getJobById(property.jobID,()=>{
-              console.log(this.props.job_edit);
-                this.setState({ jobdetails:this.state.jobdetails.concat(this.props.job_edit)})
-            })
-          
-          });
-        }
-       });
-          
-        
-
+                this.props.getJobById(property.jobID,()=>{
+                  console.log(this.props.job_edit);
+                    this.setState({ jobdetails:this.state.jobdetails.concat(this.props.job_edit)})
+                })
+              
+              });
          
-     }
+           }
+          });
+          
+          }
+          
     render(){
-    
+        console.log(this.state.jobdetails);
         var i = -1;
         let Details = this.state.jobdetails.map(property => {
             i = i + 1;
@@ -81,10 +83,6 @@ import axios from "axios";
                     <br />
                     {property.description}
                     <br />
-                    
-                  </div>
-                  <div style={{"paddingTop":"10px"}}>
-                    <button >Apply</button>
                   </div>
                 </div>
               </div>
@@ -112,11 +110,11 @@ import axios from "axios";
 const mapStateToProps = state => ({
     search_job_results: state.jobReducer.search_job_results,
     view: state.jobReducer.view,
-    savedjobs:state.jobReducer.savejob,
+    appliedjobs:state.jobReducer.appliedjob,
     job_edit:state.jobReducer.job_edit
   });
   
   export default connect(
     mapStateToProps,
-    { searchJob, saveJob, applyJob,getsavedJob,getJobById  }
+    { searchJob, saveJob, applyJob,getsavedJob,getAppliedJob,getJobById }
   )(Jobsaved);

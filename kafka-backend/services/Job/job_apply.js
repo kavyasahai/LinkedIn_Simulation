@@ -9,7 +9,10 @@ function handle_request(msg, callback) {
     submitted: "yes",
     emailID: msg.email,
     jobID: msg.jobid,
-    url:msg.url
+    url:msg.url,
+    firstname:msg.firstname,
+    lastname:msg.lastname,
+    
     
   });
   console.log(msg);
@@ -36,6 +39,20 @@ function handle_request(msg, callback) {
             }
           );
           console.log("null");
+        }
+        else{
+                  jobApplication.update(
+                    {  jobID: msg.jobid,
+                      emailID: msg.email },
+                    { $set: { submitted:"yes", submitttedTime:msg.timestamp} },
+                    function(err, result) {
+                      if (err) {
+                        callback(err, "Error");
+                      } else {
+                        callback(null, result);
+                      }
+                    }
+                  );
         }
       }
     }

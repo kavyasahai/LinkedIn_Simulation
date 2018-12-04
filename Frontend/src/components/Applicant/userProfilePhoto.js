@@ -2,66 +2,55 @@ import React, { Component } from "react";
 import "../../css/userProfilePhoto.css";
 import { Redirect } from "react-router";
 import { getSignupToken } from "../common/auth";
+import request from "superagent";
+import Dropzone from "react-dropzone";
+import { addPhoto } from "../../actions/applicantActions";
+import { connect } from "react-redux";
+
+const CLOUDINARY_UPLOAD_PRESET = "g4q2o6at";
+const CLOUDINARY_UPLOAD_URL =
+  "https://api.cloudinary.com/v1_1/ungcmpe273/upload";
 
 //Define a Login Component
 class UserProfilePhoto extends Component {
-  //call the constructor method
-  constructor(props) {
-    //Call the constrictor of Super class i.e The Component
-    super(props);
-    //maintain the state required for this component
-    // this.state = {
-    //     firstname : "",
-    //     lastname:"",
-    //     username:"",
-    //     password : ""
-    // }
-    //Bind the handlers to this class
-    // this.firstnameChangeHandler = this.firstnameChangeHandler.bind(this);
-    // this.lastnameChangeHandler = this.lastnameChangeHandler.bind(this);
-    //  this.usernameChangeHandler = this.usernameChangeHandler.bind(this);
-    // this.passwordChangeHandler = this.passwordChangeHandler.bind(this);
-    // this.submitLogin = this.submitLogin.bind(this);
+  handleSkip = () => {
+    this.props.history.push("/school");
+  };
+
+  handleImageUpload(file) {
+    let upload = request
+      .post(CLOUDINARY_UPLOAD_URL)
+      .field("upload_preset", CLOUDINARY_UPLOAD_PRESET)
+      .field("file", file);
+
+    upload.end((err, response) => {
+      if (err) {
+        console.error(err);
+      }
+
+      if (response.body.secure_url !== "") {
+        this.setState({ companyLogo: response.body.secure_url });
+        window.alert("Image uploaded successfully!");
+        console.log("url=", response.body.secure_url);
+        this.props.addPhoto(
+          response.body.secure_url,
+          localStorage.getItem("signup")
+        );
+        this.props.history.push("/school");
+      } else {
+        window.alert("There was an error in uploading the image!");
+      }
+    });
   }
-  //Call the Will Mount to set the auth Flag to false
-  componentWillMount() {}
-  //username change handler to update state variable with the text entered by the user
-  // firstnameChangeHandler = (e) => {
-  //     this.setState({
-  //         firstname : e.target.value
-  //     })
-  // }
 
-  // lastnameChangeHandler = (e) => {
-  //     this.setState({
-  //         lastname : e.target.value
-  //     })
-  // }
+  onImageDrop = files => {
+    this.setState({
+      uploadedFile: files[0]
+    });
 
-  // usernameChangeHandler = (e) => {
-  //     this.setState({
-  //         username : e.target.value
-  //     })
-  // }
-  // // //password change handler to update state variable with the text entered by the user
-  // passwordChangeHandler = (e) => {
-  //     this.setState({
-  //         password : e.target.value
-  //     })
-  // }
-  // // //submit Login handler to send a request to the node backend
-  // submitLogin = (e) => {
-  //     var headers = new Headers();
-  //     //prevent page from refresh
-  //     e.preventDefault();
-  //     const data = {
-  //         email:this.state.username,
-  //         password : this.state.password
-  //     }
-  //     //set the with credentials to true
-  //     axios.defaults.withCredentials = true;
-  //     this.props.onSubmitHandle(data);
-  // }
+    this.handleImageUpload(files[0]);
+  };
+
   render() {
     const signupStatus = getSignupToken();
 
@@ -69,15 +58,7 @@ class UserProfilePhoto extends Component {
     if (signupStatus === false) {
       redirectVar = <Redirect to="/login" />;
     }
-    // let redirect = null;
-    // if(this.props.authFlag){
-    //     redirect = <Redirect to= "/homepage"/>
-    // }
-    //redirect based on successful login
-    // let redirectVar = null;
-    // if(cookie.load('cookie')){
-    //     redirectVar = <Redirect to= "/home"/>
-    // }
+
     return (
       <div class="container">
         {redirectVar}
@@ -193,9 +174,6 @@ class UserProfilePhoto extends Component {
 
                     <div class="onboarding-photo__card-body text-align-center">
                       <div class="onboarding-photo__card-information mt4">
-                        <h1 class="onboarding-photo__card-name t-24 t-black t-light">
-                          Kesha Shah
-                        </h1>
                         <h2 class="onboarding-photo__card-headline t-16 t-black t-normal mt1">
                           --
                         </h2>
@@ -205,12 +183,23 @@ class UserProfilePhoto extends Component {
                       </div>
 
                       <div class="onboarding-photo__card-actions text-align-center mt6">
-                        <input
+                        {/* <input
                           id="onboarding-photo__add-button-input"
                           class="onboarding-photo__add-input"
                           accept="image/*"
                           type="file"
-                        />
+                        /> */}
+                        <Dropzone
+                          className="dropzone"
+                          multiple={false}
+                          accept="image/*"
+                          onDrop={this.onImageDrop.bind(this)}
+                        >
+                          <p>
+                            Drop the company logo or click to select a file to
+                            upload.
+                          </p>
+                        </Dropzone>
                         <label
                           data-control-name="choose_file"
                           for="onboarding-photo__add-button-input"
@@ -221,6 +210,7 @@ class UserProfilePhoto extends Component {
                           Add photo
                         </label>
                         <button
+                          onClick={this.handleSkip}
                           data-control-name="skip"
                           id="ember535"
                           class="onboarding-widget__cta onboarding-photo__skip-button button-tertiary-small-muted mt4 ember-view"
@@ -259,5 +249,14 @@ class UserProfilePhoto extends Component {
 //         }
 //     }
 // }
-export default UserProfilePhoto;
+
 // export default connect(mapStateToProps,mapDispatchStateToProps)(SignupLogin;
+
+const mapStateToProps = state => ({
+  url: state.applicantLogin.url
+});
+
+export default connect(
+  mapStateToProps,
+  { addPhoto }
+)(UserProfilePhoto);

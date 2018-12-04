@@ -5,7 +5,7 @@ function handle_request(msg, callback) {
   console.log("msg======", msg);
   Users.update(
     { email: msg.username },
-    { $set: { skills: msg.skills,
+    { $push: { skills: msg.skills,
          } },
     function(err, result) {
       if (err) {
