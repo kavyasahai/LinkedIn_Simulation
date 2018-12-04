@@ -66,7 +66,7 @@ class network extends Component {
                         <div class="row">
                           <div class="col-2">
                             <img
-                              src={supportingimage4}
+                              src={data.photo}
                               style={{
                                 width: "7vw",
                                 height: "7vw",

@@ -147,8 +147,10 @@ artdeco-typeahead-deprecated-input
 }
 .homesummary {
   position: absolute;
-  margin-left: 3vw;
-  margin-top: 59vw;
+  margin-top: 50vw;
+  border: 1px solid red;
+  width: 80vw;
+  margin-left: -10vw;
 }
 .pe-form-time-period__date-field {
   display: flex;
