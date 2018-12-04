@@ -148,7 +148,6 @@ artdeco-typeahead-deprecated-input
 .homesummary {
   position: absolute;
   margin-top: 50vw;
-  border: 1px solid red;
   width: 80vw;
   margin-left: -10vw;
 }
