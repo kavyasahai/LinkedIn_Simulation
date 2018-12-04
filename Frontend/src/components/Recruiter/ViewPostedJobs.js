@@ -55,27 +55,31 @@ class ViewPostedJobs extends Component {
                   <div key={data.firstname}>
                     <div class="row">
                       <div class="col-6" style={{ paddingTop: "2vw" }}>
-                        <Link
-                          to={{
-                            pathname: "/job/edit",
-                            state: {
-                              jobId: data._id
-                            }
-                          }}
-                        >
-                          <h1>
-                            {data.title}, {data.company}, {data.location}
-                          </h1>
-                        </Link>
+                        <img src={data.logo} />
+                        <div className="jobDetails">
+                          <Link
+                            to={{
+                              pathname: "/job/edit",
+                              state: {
+                                jobId: data._id
+                              }
+                            }}
+                          >
+                            <h1>
+                              {data.title}, {data.company}, {data.location}
+                            </h1>
+                          </Link>
 
-                        <br />
-                        <div>
-                          <p style={{ "font-size": "2rem" }}>
-                            {data.description}
-                          </p>
+                          <br />
+                          <div>
+                            <p style={{ "font-size": "2rem" }}>
+                              {data.description}
+                            </p>
+                          </div>
                         </div>
                       </div>
                     </div>
+
                     <hr />
                   </div>
                 ))}

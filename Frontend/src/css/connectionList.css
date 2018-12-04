@@ -40,6 +40,18 @@
 .jobData .row {
   width: 49vw;
   margin-left: 0vw;
-  height: auto;
+  height: 15vw;
   background: white;
+}
+
+.jobData img {
+  border: 1px solid black;
+  height: 10vw;
+  width: 10vw;
+}
+
+.jobDetails {
+  margin-top: -10vw;
+  margin-left: 11vw;
+  width: 35vw;
 }
