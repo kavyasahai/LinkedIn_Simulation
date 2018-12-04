@@ -3,8 +3,7 @@ var pool = require("../../pool");
 var Users = require("../../models/user");
 require("../../db/mongoose");
 
-function handle_request(msg, callback)
- {
+function handle_request(msg, callback) {
   var newUser = {
     username: msg.username,
     password: msg.password,
@@ -31,7 +30,7 @@ function handle_request(msg, callback)
         },
         err => {
           console.log("Could not sign-up");
-          callback(null, "Coulf not sign up");
+          callback(null, []);
         }
       );
     },
