@@ -1,6 +1,7 @@
 import { OrderedMap } from "immutable";
 import _ from "lodash";
 import Service from "./service";
+var auth = require("./components/common/auth");
 
 export default class Store {
   constructor(appComponent) {
@@ -40,9 +41,8 @@ export default class Store {
     try {
       //load current user
       if (!this.user) {
-        const userResponse = await this.loadCurrentUser(
-          localStorage.getItem("email")
-        );
+        const email = auth.getJWTUsername(localStorage.getItem("username"));
+        const userResponse = await this.loadCurrentUser(email);
         this.user = _.get(userResponse, "data.user");
         this.user.isMe = true;
         this.users = this.users.set(_.get(this.user, "_id"), this.user);
