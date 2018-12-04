@@ -9,7 +9,8 @@ import {
   APPLICANT_SCHOOLINSERT_DATA,
   APPLICANT_SKILLSINSERT_DATA,
   APPLICANT_GETUSER_DATA,
-  SIGNUPSCHOOL
+  SIGNUPSCHOOL,
+  ADD_PROFILE_PICTURE
 } from "./types";
 import { setHeader } from "../components/common/auth";
 
@@ -144,6 +145,7 @@ export const signupschool = data => async dispatch => {
     };
   }
 };
+
 export function login(data, callback) {
   try {
     setHeader();
@@ -181,3 +183,21 @@ export function register(data, callback) {
     };
   }
 }
+
+export const addPhoto = (url, username) => async dispatch => {
+  try {
+    setHeader();
+    const res = await axios.post(`${ROOT_URL}/addProfilePhoto/${username}`, {
+      url1: url
+    });
+    dispatch({
+      type: ADD_PROFILE_PICTURE,
+      payload: res.data
+    });
+  } catch (e) {
+    return {
+      type: ADD_PROFILE_PICTURE,
+      payload: e
+    };
+  }
+};

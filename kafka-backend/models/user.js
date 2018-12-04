@@ -18,9 +18,10 @@ const UserSchema = new mongoose.Schema({
   companyName: String,
   country: String,
   jobTitle: String,
-  school:String,
-  startyear:String,
-  endyear:String
+  school: String,
+  startyear: String,
+  endyear: String,
+  photo: String
 });
 
 module.exports = mongoose.model("users", UserSchema);

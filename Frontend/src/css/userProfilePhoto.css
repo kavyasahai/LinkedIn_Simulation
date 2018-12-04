@@ -444,8 +444,10 @@ p {
   color: rgba(0, 0, 0, 0.9);
 }
 .onboarding-photo__card-actions {
-  width: 368px;
+  width: auto;
   margin-top: 40px;
+}
+.onboarding-photo__card {
 }
 .text-align-center {
   text-align: center;

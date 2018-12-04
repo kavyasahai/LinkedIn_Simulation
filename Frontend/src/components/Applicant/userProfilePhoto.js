@@ -2,12 +2,55 @@ import React, { Component } from "react";
 import "../../css/userProfilePhoto.css";
 import { Redirect } from "react-router";
 import { getSignupToken } from "../common/auth";
+import request from "superagent";
+import Dropzone from "react-dropzone";
+import { addPhoto } from "../../actions/applicantActions";
+import { connect } from "react-redux";
+
+const CLOUDINARY_UPLOAD_PRESET = "g4q2o6at";
+const CLOUDINARY_UPLOAD_URL =
+  "https://api.cloudinary.com/v1_1/ungcmpe273/upload";
 
 //Define a Login Component
 class UserProfilePhoto extends Component {
   handleSkip = () => {
     this.props.history.push("/school");
   };
+
+  handleImageUpload(file) {
+    let upload = request
+      .post(CLOUDINARY_UPLOAD_URL)
+      .field("upload_preset", CLOUDINARY_UPLOAD_PRESET)
+      .field("file", file);
+
+    upload.end((err, response) => {
+      if (err) {
+        console.error(err);
+      }
+
+      if (response.body.secure_url !== "") {
+        this.setState({ companyLogo: response.body.secure_url });
+        window.alert("Image uploaded successfully!");
+        console.log("url=", response.body.secure_url);
+        this.props.addPhoto(
+          response.body.secure_url,
+          localStorage.getItem("signup")
+        );
+        this.props.history.push("/school");
+      } else {
+        window.alert("There was an error in uploading the image!");
+      }
+    });
+  }
+
+  onImageDrop = files => {
+    this.setState({
+      uploadedFile: files[0]
+    });
+
+    this.handleImageUpload(files[0]);
+  };
+
   render() {
     const signupStatus = getSignupToken();
 
@@ -131,9 +174,6 @@ class UserProfilePhoto extends Component {
 
                     <div class="onboarding-photo__card-body text-align-center">
                       <div class="onboarding-photo__card-information mt4">
-                        <h1 class="onboarding-photo__card-name t-24 t-black t-light">
-                          Kesha Shah
-                        </h1>
                         <h2 class="onboarding-photo__card-headline t-16 t-black t-normal mt1">
                           --
                         </h2>
@@ -143,12 +183,23 @@ class UserProfilePhoto extends Component {
                       </div>
 
                       <div class="onboarding-photo__card-actions text-align-center mt6">
-                        <input
+                        {/* <input
                           id="onboarding-photo__add-button-input"
                           class="onboarding-photo__add-input"
                           accept="image/*"
                           type="file"
-                        />
+                        /> */}
+                        <Dropzone
+                          className="dropzone"
+                          multiple={false}
+                          accept="image/*"
+                          onDrop={this.onImageDrop.bind(this)}
+                        >
+                          <p>
+                            Drop the company logo or click to select a file to
+                            upload.
+                          </p>
+                        </Dropzone>
                         <label
                           data-control-name="choose_file"
                           for="onboarding-photo__add-button-input"
@@ -198,5 +249,14 @@ class UserProfilePhoto extends Component {
 //         }
 //     }
 // }
-export default UserProfilePhoto;
+
 // export default connect(mapStateToProps,mapDispatchStateToProps)(SignupLogin;
+
+const mapStateToProps = state => ({
+  url: state.applicantLogin.url
+});
+
+export default connect(
+  mapStateToProps,
+  { addPhoto }
+)(UserProfilePhoto);

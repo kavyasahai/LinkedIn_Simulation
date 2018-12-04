@@ -8,7 +8,8 @@ import {
   APPLICANT_SCHOOLINSERT_DATA,
   APPLICANT_SKILLSINSERT_DATA,
   APPLICANT_GETUSER_DATA,
-  SIGNUPSCHOOL
+  SIGNUPSCHOOL,
+  ADD_PROFILE_PICTURE
 } from "../actions/types";
 
 const initialState = {
@@ -23,7 +24,8 @@ const initialState = {
   experienceinserted: false,
   getuserdata: false,
   userdata: [],
-  signupschool:false
+  signupschool: false,
+  url: ""
 };
 
 export default function(state = initialState, action) {
@@ -76,18 +78,21 @@ export default function(state = initialState, action) {
         details: true
       };
 
-      case SIGNUPSCHOOL:
+    case SIGNUPSCHOOL:
       return {
         ...state,
         signupschool: true
       };
 
     case APPLICANT_SIGNUP:
-      console.log("payload", action.payload);
       return {
         ...state,
-        username: action.payload,
-        
+        username: action.payload
+      };
+    case ADD_PROFILE_PICTURE:
+      return {
+        ...state,
+        url: action.payload
       };
 
     default:
