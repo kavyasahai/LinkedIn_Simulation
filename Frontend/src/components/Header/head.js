@@ -119,7 +119,7 @@ class Header extends Component {
                       <a class="dropdown-item" href="/recruiterdashboardtop10">
                         My Dashboard
                       </a>
-                      <a class="dropdown-item" href="/">
+                      <a class="dropdown-item" href="/job-saved">
                         Saved Jobs
                       </a>
                       <a class="dropdown-item" href="/">
