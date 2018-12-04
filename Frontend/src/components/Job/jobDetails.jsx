@@ -39,7 +39,7 @@ class JobDetails extends Component {
   }
   apply=e=>{
         console.log(e.jobId);
-      this.props.history.push(`/job-apply:${e.jobId}`)
+      this.props.history.push(`/job-apply${e.jobId}`)
   }
   closebox() {
     this.setState({

@@ -8,7 +8,7 @@ import { getJWTUsername } from "../common/auth";
 import Modal from "react-responsive-modal";
 import supportingImage4 from "../../images/supportingImage4.jpg";
 import supportingImage2 from "../../images/supportingImage2.png";
-import { searchJob, saveJob, applyJob } from "../../actions/jobActions";
+import { searchJob, saveJob, applyJob,getJobById } from "../../actions/jobActions";
 import Home from './jobFilter'
 
 
@@ -25,6 +25,7 @@ class JobSearch extends Component {
       email:"",
       imageNumber: 0,
    selectedOption:"",
+   jobdetails:[],
       imageView: [],
       value:"",
       value1:"",
@@ -94,15 +95,23 @@ handleChange2(event) {
     const data={
       username:getJWTUsername()
     }
+    var properties1 = this.props.search_job_results;
+    console.log("IDDDD:",properties1);
+    console.log(this.props.match.params.id);
+this.props.getJobById(this.props.match.params.id);
+  
     const res =  axios
     .post("http://localhost:3001/getuserdata", data)
     .then(response => {
       console.log("Updated List", response.data.updatedList);
       this.setState({
-        userdata: response.data.updatedList
+        userdata: response.data.updatedList,
+   
       });
     });
-console.log("IDDDD:",this.props.match.params.id)
+  
+  
+
   }
 
   Submit=e=>{
@@ -113,8 +122,10 @@ console.log("IDDDD:",this.props.match.params.id)
     //this.props.applyJob(data);
   }
   render() {
-   console.log(this.state.userdata)
-
+ 
+console.log(this.props.job_edit ? this.props.job_edit[0] :"abc");
+var edit=this.props ? this.props.job_edit :""
+console.log(edit);
     return (
       <div class="menu">
         <div class="extendmenu row">
@@ -128,7 +139,7 @@ console.log("IDDDD:",this.props.match.params.id)
           <div class="row" >
             <div class="col-1">
               <img
-                src={this.state.userdata.photo}
+                src={this.props.job_edit ? this.props.job_edit[0] ? this.props.job_edit[0].logo : "" :""}
                 style={{ width: "100px", height: "100px" }}
               />
             </div>
@@ -139,7 +150,7 @@ console.log("IDDDD:",this.props.match.params.id)
             >
               <li class="blue">
                 <a target="_blank">
-                  <Link to="/Detail">{this.props.location.state}</Link>
+                  <Link to="/Detail"></Link>
                 </a>
               </li>
               <br />
@@ -159,10 +170,10 @@ console.log("IDDDD:",this.props.match.params.id)
      
      <br></br>
                 <div>
-                   <img src={supportingImage2} style={{"border-radius":"50%", "width":"6vw","height":"4vw"}} />{" "}
+                   <img src={this.state.userdata.photo} style={{"border-radius":"50%", "width":"6vw","height":"4vw"}} />{" "}
                 </div>
                 <div class="col-4">
-                  Aishwariya Bhatt <br />
+                  {this.state.userdata.firstname}<br />
                   Student <br />
                   San Jose
                 </div>
@@ -302,10 +313,11 @@ console.log("IDDDD:",this.props.match.params.id)
 }
 const mapStateToProps = state => ({
   search_job_results: state.jobReducer.search_job_results,
-  view: state.jobReducer.updatedList
+  view: state.jobReducer.updatedList,
+  job_edit:state.jobReducer.job_edit
 });
 
 export default connect(
   mapStateToProps,
-  { searchJob, saveJob, applyJob }
+  { searchJob, saveJob, applyJob,getJobById }
 )(JobSearch);
