@@ -20,10 +20,12 @@ class Header extends Component {
       <div class="menu">
         <div class="extendmenu row">
           <div class="icon">
-          <Link to="/login">
-             <a> {" "}
-              <i class="fa fa-linkedin-square" />
-            </a></Link>
+            <Link to="/login">
+              <a>
+                {" "}
+                <i class="fa fa-linkedin-square" />
+              </a>
+            </Link>
           </div>
 
           <div class="searchhead">
@@ -155,7 +157,7 @@ class Header extends Component {
             <div class="col-2.5">
               <div class="go-inline">
                 <div>
-                  <a href="/messenging">
+                  <a href="/messaging">
                     <i
                       class="fa fa-envelope w3-jumbo"
                       style={{
@@ -173,30 +175,31 @@ class Header extends Component {
               </div>
             </div>
             <div class="go-middle">
-                  <li
-                    class="blue"
-                    class="nav-item dropdown"
-                    style={{ opacity: "unset", padding: 0 }}
-                  >
-                    <a
-                      class=" dropdown-toggle"
-                      id="navbardrop"
-                      data-toggle="dropdown"
-                    >
-                      <span class="normal"></span>Logout{" "}
+              <li
+                class="blue"
+                class="nav-item dropdown"
+                style={{ opacity: "unset", padding: 0 }}
+              >
+                <a
+                  class=" dropdown-toggle"
+                  id="navbardrop"
+                  data-toggle="dropdown"
+                >
+                  <span class="normal" />Logout{" "}
+                </a>
+                <div class="dropdown-menu">
+                  <li>
+                    {" "}
+                    <a class="dropdown-item" href="/login" onClick={this.clear}>
+                      Logout
                     </a>
-                    <div class="dropdown-menu">
-                     <li> <a class="dropdown-item" href="/login" onClick={this.clear}>
-                        Logout
-                      </a></li>
-                      <a class="dropdown-item" href="/job/posted-jobs">
-                      Delete Your Account
-                      </a>
-                     
-                     
-                    </div>
                   </li>
-            </div> 
+                  <a class="dropdown-item" href="/job/posted-jobs">
+                    Delete Your Account
+                  </a>
+                </div>
+              </li>
+            </div>
           </div>
         </div>
       </div>

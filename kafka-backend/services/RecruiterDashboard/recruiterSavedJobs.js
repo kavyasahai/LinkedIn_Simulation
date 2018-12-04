@@ -1,12 +1,13 @@
 var { mongoose } = require("../../db/mongoose");
 
+var jobApp = require("../../models/jobApplication");
+
 var job = require("../../models/job");
 
-var jobApplication = require("../../models/job");
 function handle_request(msg, callback) {
   var count;
   console.log(msg);
-  jobApplication.find(
+  job.find(
     {
       postedBy: msg.email
     },
@@ -18,8 +19,30 @@ function handle_request(msg, callback) {
         if (doc == null) {
           console.log(null);
           callback(null, null);
+          docs.map(doc => {
+            jobApp.find(
+              {
+                jobID: doc._id,
+                submitted: "no"
+              },
+              function(err, saves) {
+                if (err) {
+                  console.log(err);
+                  // callback(null, null);
+                } else {
+                  console.log("Docs", saves);
+                  if (saves == null) {
+                    console.log(null);
+                    // callback(null, null);
+                  } else {
+                    console.log(saves);
+                    // callback(null, saves);
+                  }
+                }
+              }
+            );
+          });
         }
-        callback(null, doc);
       }
     }
   );

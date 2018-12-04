@@ -8,7 +8,7 @@ import { getJWTUsername } from "../common/auth";
 
 class recruiterDashboardJobClicks extends Component {
   componentDidMount() {
-    var username = "john.doe@gmail.com"; // getJWTUsername();
+    var username = getJWTUsername();
     this.props.getClicksPerJob(username);
   }
   handleFilter1 = () => {
