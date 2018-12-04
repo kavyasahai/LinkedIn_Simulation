@@ -25,7 +25,7 @@ router.post("/", function(request, response) {
     } else {
       console.log("Inside else");
       if (results.success == true) response.status(200).json(results);
-      else response.status(400).json(results);
+      else response.status(200).json(results);
       response.end();
     }
   });
