@@ -4,8 +4,9 @@ var Users = require("../../models/user");
 require("../../db/mongoose");
 
 function handle_request(msg, callback) {
+  var username=msg.username.toLowerCase();
   var newUser = {
-    username: msg.username,
+    username: username,
     password: msg.password,
     firstname: msg.firstname,
     lastname: msg.lastname
@@ -33,7 +34,7 @@ function handle_request(msg, callback) {
 
   //save user details in MongoDB
   var user = new Users({
-    email: msg.username,
+    email: username,
     firstname: msg.firstname,
     lastname: msg.lastname
   });
