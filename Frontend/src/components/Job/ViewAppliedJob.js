@@ -18,7 +18,7 @@ import axios from "axios";
           jobdetails: [],
           jobdetails1:[]
         };
-       this.get=this.get.bind(this);
+ 
       }
 
      componentDidMount(){
@@ -31,7 +31,11 @@ import axios from "axios";
           
          this.props.getAppliedJob(data,()=>{
           
-           this.props.appliedjobs.map(property=>{
+          if(this.props.appliedjobs.length == 0){
+            alert("You Dont have any Applied jobs")
+          }
+           else{
+          this.props.appliedjobs.map(property=>{
              
                 this.props.getJobById(property.jobID,()=>{
                   console.log(this.props.job_edit);
@@ -40,31 +44,11 @@ import axios from "axios";
               
               });
          
-           });
-
-           this.setState({
-              jobdetails1:this.state.jobdetails
-           })
-             //this.props.getJobById(this.props.appliedjobs.jobID);
-
+           }
+          });
           
-      
-     
-      
-        //this.props.getJobById(this.state.jobdetails.jobID);
-
+          }
           
-      
-
-          // var jobdetails = this.props.savedjobs.filter(function(property) {
-          //   return property._id == ""
-          // });
-
-         
-     }
-     get(){
-       console.log("Ok");
-     }
     render(){
         console.log(this.state.jobdetails);
         var i = -1;
@@ -83,7 +67,7 @@ import axios from "axios";
       
                 <div class="Jobs  row" style={{"maxWidth":"50%"}}>
                   <div class="col-1">
-                    <img src={supportingImage2} />
+                    <img src={property.logo} />
                   </div>
                   <div
                     class="col-6"

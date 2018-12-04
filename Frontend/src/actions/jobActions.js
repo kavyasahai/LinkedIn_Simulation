@@ -92,7 +92,7 @@ export const saveJob = (data,callback) => async dispatch => {
   }
 };
 
-export const applyJob = data => async dispatch => {
+export const applyJob = (data,callback) => async dispatch => {
   try {
     var email = getJWTUsername();
     setHeader();
@@ -101,6 +101,7 @@ export const applyJob = data => async dispatch => {
       type: APPLY_JOB,
       payload: res.data
     });
+    callback();
   } catch (e) {
     return {
       type: APPLY_JOB,

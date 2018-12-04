@@ -33,9 +33,10 @@ class JobSearch extends Component {
       properties: [],
       appliedjobs:[],
       imageNumber: 0,
-      hasApplied:false,
+      hasApplied:"",
       imageView: [],
       userdata:[],
+      url:"",
       open: false
     };
     this.openbox = this.openbox.bind(this);
@@ -110,6 +111,9 @@ componentDidMount(){
       if (response.body.secure_url !== "") {
         // save to db
         console.log("url=", response.body.secure_url);
+        this.setState({
+          url:response.body.secure_url
+        })
       }
     });
   }
@@ -212,12 +216,15 @@ componentDidMount(){
       timestamp:new Date(),
       firstname:this.state.userdata.firstname,
       lastname:this.state.userdata.lastname,
-      url:"http"
+      url:this.state.url
 
       
     };
     console.log(data);
-    this.props.applyJob(data);
+    this.props.applyJob(data,()=>{
+      alert("Applied for job");
+     {this.closebox}
+    });
   };
 
   view = e => {
@@ -238,17 +245,19 @@ componentDidMount(){
   this.setState({
     view1: propertydetails,
     imageNumber: index1,
-  hasApplied:"true"
+  hasApplied:true
   });
 
 }
 else{
-   console.log("else"); 
+ 
    this.setState({
     view1: propertydetails,
     imageNumber: index1,
-  hasApplied:"false"
+  hasApplied:false
+
   });
+  console.log(this.state.hasApplied); 
 
 }
     
@@ -260,7 +269,7 @@ else{
     var i = -1;
 
    
-    var imageView = this.state.imageView;
+  console.log(this.props.savedjobs);
 
     let Details = this.state.properties1.map(property => {
       i = i + 1;
@@ -586,7 +595,7 @@ else{
       <div class="menu">
         <div class="extendmenu row">
           <div class="icon">
-            <i class="fa fa-linkedin-square" />
+          <a href="/home">  <i class="fa fa-linkedin-square" /></a>
           </div>
 
           <div class="Searchfields">

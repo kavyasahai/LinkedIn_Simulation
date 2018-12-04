@@ -9,7 +9,8 @@ function handle_request(msg, callback) {
   jobApplication.find(
     {
     
-      emailID: msg.email
+      emailID: msg.email,
+      submitted:"yes"
     },
     function(err, doc) {
       if (err) {

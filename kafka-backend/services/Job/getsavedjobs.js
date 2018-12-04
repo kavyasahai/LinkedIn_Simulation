@@ -8,7 +8,8 @@ function handle_request(msg, callback) {
   console.log(msg);
   jobApplication.find(
     {
-      emailID: msg.email
+      emailID: msg.email,
+      submitted:"no"
     },
     function(err, doc) {
       if (err) {

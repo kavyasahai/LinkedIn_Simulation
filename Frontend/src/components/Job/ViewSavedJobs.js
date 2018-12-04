@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import HomeHeader from "../Header/head";
-import { searchJob, saveJob, applyJob,getsavedJob } from "../../actions/jobActions";
+import { searchJob, saveJob, applyJob,getsavedJob,getJobById  } from "../../actions/jobActions";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { getToken } from "../common/auth";
@@ -15,7 +15,8 @@ import axios from "axios";
         //maintain the state required for this component
         this.state = {
       
-          properties1: []
+          properties1: [],
+          jobdetails:[]
         };
        
       }
@@ -27,30 +28,29 @@ import axios from "axios";
             username:getJWTUsername()
           };
          this.props.getsavedJob(data,()=>{
-           
-         this.setState({
-            properties1:this.props.savedjobs
-        })
-          })
-          const res =  axios
-          .post("http://localhost:3001/getuserdata", data)
-          .then(response => {
-            console.log("Updated List", response.data.updatedList);
-            // this.setState({
-            //   userdata: response.data.updatedList
-            // });
+           if(this.props.savedjobs.length == 0){
+             alert("No saved Jobs Please Apply")
+           }
+           else{
+          this.props.savedjobs.map(property=>{
+             
+            this.props.getJobById(property.jobID,()=>{
+              console.log(this.props.job_edit);
+                this.setState({ jobdetails:this.state.jobdetails.concat(this.props.job_edit)})
+            })
+          
           });
-
-          var jobdetails = this.props.savedjobs.filter(function(property) {
-            return property._id == ""
-          });
+        }
+       });
+          
+        
 
          
      }
     render(){
-        console.log(this.state.properties1)
+    
         var i = -1;
-        let Details = this.state.properties1.map(property => {
+        let Details = this.state.jobdetails.map(property => {
             i = i + 1;
       
             const token = getToken();
@@ -65,14 +65,14 @@ import axios from "axios";
       
                 <div class="Jobs  row" style={{"maxWidth":"50%"}}>
                   <div class="col-1">
-                    <img src={supportingImage2} />
+                    <img src={property.logo} />
                   </div>
                   <div
                     class="col-6"
                     style={{ "padding-left": "30px", "padding-top": "10px" }}
                   >
                     <li class="blue" >
-                      {property.emailID}
+                      {property.title}
                     </li>
                     <br />
                     {property.postedBy}
@@ -81,6 +81,10 @@ import axios from "axios";
                     <br />
                     {property.description}
                     <br />
+                    
+                  </div>
+                  <div style={{"paddingTop":"10px"}}>
+                    <button >Apply</button>
                   </div>
                 </div>
               </div>
@@ -108,10 +112,11 @@ import axios from "axios";
 const mapStateToProps = state => ({
     search_job_results: state.jobReducer.search_job_results,
     view: state.jobReducer.view,
-    savedjobs:state.jobReducer.savejob
+    savedjobs:state.jobReducer.savejob,
+    job_edit:state.jobReducer.job_edit
   });
   
   export default connect(
     mapStateToProps,
-    { searchJob, saveJob, applyJob,getsavedJob }
+    { searchJob, saveJob, applyJob,getsavedJob,getJobById  }
   )(Jobsaved);

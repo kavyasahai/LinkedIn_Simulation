@@ -118,7 +118,7 @@ class Header extends Component {
                   <li
                     class="blue"
                     class="nav-item dropdown"
-                    style={{ opacity: "unset", padding: 0 }}
+                    style={{ opacity: "unset", padding: 0,height:0 }}
                   >
                     <a
                       class=" dropdown-toggle"
@@ -142,6 +142,9 @@ class Header extends Component {
                       </a>
                       <a class="dropdown-item" href="/job-applied">
                         Applied Jobs
+                      </a>
+                      <a class="dropdown-item" href="/job-search">
+                          Search A Job
                       </a>
                     </div>
                   </li>
