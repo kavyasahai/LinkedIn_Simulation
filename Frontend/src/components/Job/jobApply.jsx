@@ -10,7 +10,12 @@ import supportingImage4 from "../../images/supportingImage4.jpg";
 import supportingImage2 from "../../images/supportingImage2.png";
 import { searchJob, saveJob, applyJob,getJobById } from "../../actions/jobActions";
 import Home from './jobFilter'
+import request from "superagent";
+import Dropzone from "react-dropzone";
 
+const CLOUDINARY_UPLOAD_PRESET = "g4q2o6at";
+const CLOUDINARY_UPLOAD_URL =
+  "https://api.cloudinary.com/v1_1/ungcmpe273/upload";
 
 class JobSearch extends Component {
   constructor(props) {
@@ -46,6 +51,40 @@ class JobSearch extends Component {
        this.Submit=this.Submit.bind(this);
   
   }
+  state = { uploadedFile: null };
+  handleResumeUpload(file) {
+    console.log("file=", file);
+    let upload = request
+      .post(CLOUDINARY_UPLOAD_URL)
+      .field("upload_preset", CLOUDINARY_UPLOAD_PRESET)
+      .field("file", file);
+
+    upload.end((err, response) => {
+      if (err) {
+        console.error(err);
+      }
+
+      if (response.body.secure_url !== "") {
+        // save to db
+        console.log("url=", response.body.secure_url);
+        this.setState({
+          url:response.body.secure_url
+        })
+      }
+    });
+  }
+
+  onResumeDrop = files => {
+    this.setState({
+      uploadedFile: files[0]
+    });
+
+    this.handleResumeUpload(files[0]);
+  };
+
+  
+
+  
 FirstnameChangeHandler = e => {
     this.setState({
       firstname: e.target.value
@@ -116,7 +155,12 @@ this.props.getJobById(this.props.match.params.id);
 
   Submit=e=>{
     const data={
-      firstname:this.state.firstname
+      firstname:this.state.firstname,
+      lastname:this.state.lastname,
+      email:this.state.email,
+      state:this.state.state,
+      city:this.state.city,
+      url:this.state.url
     }
     console.log(data);
     //this.props.applyJob(data);
@@ -154,10 +198,11 @@ console.log(edit);
                 </a>
               </li>
               <br />
-              {/* {this.state.property.company} */}
+              {this.props.job_edit ? this.props.job_edit[0] ? this.props.job_edit[0].title : "" :""}
               <br />
-              {/* {property.location} */}
+              {this.props.job_edit ? this.props.job_edit[0] ? this.props.job_edit[0].company : "" :""}
               <br />
+              {this.props.job_edit ? this.props.job_edit[0] ? this.props.job_edit[0].location : "" :""}
               </div>
               </div>
      </div>
@@ -232,9 +277,13 @@ console.log(edit);
          
     Upload Your Resume:
 <br></br>
-    <button class="Button" onClick={this.upload}>
-            Upload Resume
-          </button>
+<Dropzone
+                    className="dropzone"
+                    multiple={false}
+                    onDrop={this.onResumeDrop.bind(this)}
+                  >
+                    <p>Drop a resume or click to select a file to upload.</p>
+                  </Dropzone>
           <br></br>
           <br></br>
     How did your hear about us:
