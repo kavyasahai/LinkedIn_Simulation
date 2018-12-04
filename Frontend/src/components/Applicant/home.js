@@ -10,7 +10,7 @@ import { experienceinsert } from "../../actions/applicantActions";
 import { schoolinsert } from "../../actions/applicantActions";
 import { skillsinsert } from "../../actions/applicantActions";
 import Head from "../Header/head";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { DropdownMenu, MenuItem } from "react-bootstrap-dropdown-menu";
 // import { getMaxListeners } from 'cluster';
 
@@ -47,7 +47,7 @@ class Homepage extends Component {
       schooltoyear: "",
       skills: "",
       userdata: "",
-      newHeadline:""
+      newHeadline: ""
     };
     //Bind the handlers to this class
     this.firstnameChangeHandler = this.firstnameChangeHandler.bind(this);
@@ -103,8 +103,8 @@ class Homepage extends Component {
         console.log("Updated List", response.data.updatedList);
         this.setState({
           userdata: response.data.updatedList,
-          headline:response.data.updatedList.headline,
-          summary:response.data.updatedList.profileSummary
+          headline: response.data.updatedList.headline,
+          summary: response.data.updatedList.profileSummary
         });
       });
     console.log(this.state.userdata);
@@ -371,49 +371,44 @@ class Homepage extends Component {
                 >
                   <div class="pv-top-card-section__profile-photo-container pv-top-card-v2-section__profile-photo-container">
                     <div class="pv-top-card-section__photo-wrapper pv-top-card-v2-section__photo-wrapper">
-                      <div
-                        id="ember1109"
-                        class="pv-top-card-section__edit-photo pv-top-card-v2-section__edit-photo profile-photo-edit ember-view"
+                      {" "}
+                      <button
+                        data-control-name="edit_profile_photo"
+                        class="profile-photo-edit__edit-btn"
+                        data-ember-action=""
+                        data-ember-action-1110="1110"
                       >
-                        {" "}
-                        <button
-                          data-control-name="edit_profile_photo"
-                          class="profile-photo-edit__edit-btn"
-                          data-ember-action=""
-                          data-ember-action-1110="1110"
-                        >
-                          {/* <img
-                            src="https://media.licdn.com/dms/image/C5603AQHVVPM_Y5GT8w/profile-displayphoto-shrink_200_200/0?e=1548892800&amp;v=beta&amp;t=ft0HBIT7DODYrcap2naj-e5JB_NqcRwEBFO5eLAPZ0U"
-                            class="profile-photo-edit__preview"
-                            alt="Edit photo"
-                            height="128"
-                            width="128"
-                          /> */}
-                          <span class="profile-photo-edit__edit-icon svg-icon-wrap">
-                            <li-icon
-                              aria-hidden="true"
-                              type="pencil-icon"
-                              size="small"
+                        <img
+                          src={this.state.userdata.photo}
+                          class="profile-photo-edit__preview"
+                          alt="Edit photo"
+                          height="128"
+                          width="128"
+                        />
+                        <span class="profile-photo-edit__edit-icon svg-icon-wrap">
+                          <li-icon
+                            aria-hidden="true"
+                            type="pencil-icon"
+                            size="small"
+                          >
+                            <svg
+                              viewBox="0 0 24 24"
+                              width="24px"
+                              height="24px"
+                              x="0"
+                              y="0"
+                              preserveAspectRatio="xMinYMin meet"
+                              class="artdeco-icon"
+                              focusable="false"
                             >
-                              <svg
-                                viewBox="0 0 24 24"
-                                width="24px"
-                                height="24px"
-                                x="0"
-                                y="0"
-                                preserveAspectRatio="xMinYMin meet"
-                                class="artdeco-icon"
-                                focusable="false"
-                              >
-                                <path
-                                  d="M14.71,4L12,1.29a1,1,0,0,0-1.41,0L3,8.85,1,15l6.15-2,7.55-7.55A1,1,0,0,0,15,4.71,1,1,0,0,0,14.71,4Zm-8.84,7.6-1.5-1.5L9.42,5.07l1.5,1.5Zm5.72-5.72-1.5-1.5,1.17-1.17,1.5,1.5Z"
-                                  class="small-icon"
-                                />
-                              </svg>
-                            </li-icon>
-                          </span>
-                        </button>
-                      </div>
+                              <path
+                                d="M14.71,4L12,1.29a1,1,0,0,0-1.41,0L3,8.85,1,15l6.15-2,7.55-7.55A1,1,0,0,0,15,4.71,1,1,0,0,0,14.71,4Zm-8.84,7.6-1.5-1.5L9.42,5.07l1.5,1.5Zm5.72-5.72-1.5-1.5,1.17-1.17,1.5,1.5Z"
+                                class="small-icon"
+                              />
+                            </svg>
+                          </li-icon>
+                        </span>
+                      </button>
                     </div>
                   </div>
 
@@ -627,7 +622,7 @@ class Homepage extends Component {
                           </li-icon>
                         </span>
                         <span class="pv-top-card-v2-section__entity-name pv-top-card-v2-section__connections ml2 t-33 t-black t-bold">
-                         <Link to="/network"> See connections </Link>
+                          <Link to="/network"> See connections </Link>
                         </span>
                       </a>
                     </div>
@@ -736,36 +731,42 @@ class Homepage extends Component {
               </div>
             </div>
 
-
             <div class="homesummary">
-            <section class="pv-profile-section pv-top-card-section artdeco-container-card ember-view">
-            <h3>Summary</h3>
-            <div>
-            <button class="summarybutton" data-toggle="modal" data-target="#editsummary">Edit</button>
-              <p>{this.state.userdata
-                ? this.state.userdata.headline
-                : ""}</p>
-              <p>{this.state.userdata
-                ? this.state.userdata.profileSummary
-                : ""}</p>
+              <section class="pv-profile-section pv-top-card-section artdeco-container-card ember-view">
+                <h3>Summary</h3>
+                <div>
+                  <button
+                    class="summarybutton"
+                    data-toggle="modal"
+                    data-target="#editsummary"
+                  >
+                    Edit
+                  </button>
+                  <p>
+                    {this.state.userdata ? this.state.userdata.headline : ""}
+                  </p>
+                  <p>
+                    {this.state.userdata
+                      ? this.state.userdata.profileSummary
+                      : ""}
+                  </p>
+                </div>
+              </section>
+              <section class="pv-profile-section pv-top-card-section artdeco-container-card ember-view">
+                <h3>Skills</h3>
+                <div>
+                  {this.state.userdata ? this.state.userdata.skills : ""}
+                </div>
+              </section>
+              <section class="pv-profile-section pv-top-card-section artdeco-container-card ember-view">
+                <h3>Experience</h3>
+                <div>{experiencedata}</div>
+              </section>
+              <section class="pv-profile-section pv-top-card-section artdeco-container-card ember-view">
+                <h3>Education</h3>
+                <div>{education}</div>
+              </section>
             </div>
-          </section>
-          <section class="pv-profile-section pv-top-card-section artdeco-container-card ember-view">
-            <h3>Skills</h3>
-            <div>
-              {this.state.userdata ? this.state.userdata.skills : ""}
-            </div>
-          </section>
-          <section class="pv-profile-section pv-top-card-section artdeco-container-card ember-view">
-            <h3>Experience</h3>
-            <div>{experiencedata}</div>
-          </section>
-          <section class="pv-profile-section pv-top-card-section artdeco-container-card ember-view">
-            <h3>Education</h3>
-            <div>{education}</div>
-          </section>
-            </div>
-
 
             <div class="sidebarad">
               <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
@@ -2188,61 +2189,63 @@ class Homepage extends Component {
             </div>
           </div>
         </div>
-   
+
         <div id="editsummary" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">
-                &times;
-              </button>
-              <h4 class="modal-title">Edit Intro</h4>
-            </div>
-            <div class="modal-body">
-              <div class="pe-s-multi-field" />
-
-              <div
-                class="pe-form-field pe-top-card-form__headline-field floating-label  "
-                data-form-elem-focus="true"
-              >
-                <label
-                  for="topcard-headline"
-                  class="pe-form-field__label label-text required"
-                >
-                  Headline
-                </label>
-
-                <textarea
-                  name="headline"
-                  id="topcard-headline"
-                  class="pe-top-card-form__headline-text ember-text-area pe-form-field__textarea ember-view" value={this.state.headline}
-                  onChange={this.headlineChangeHandler}
-                />
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                  &times;
+                </button>
+                <h4 class="modal-title">Edit Intro</h4>
               </div>
-              <div
-                id="ember3332"
-                class="pe-form-field pe-top-card-form__location-picker ember-view"
-              >
+              <div class="modal-body">
                 <div class="pe-s-multi-field" />
-              </div>
 
-              <div class="pe-form-field summary-field floating-label  ">
-                <label
-                  for="topcard-summary"
-                  class="pe-form-field__label label-text"
+                <div
+                  class="pe-form-field pe-top-card-form__headline-field floating-label  "
+                  data-form-elem-focus="true"
                 >
-                  Summary
-                </label>
+                  <label
+                    for="topcard-headline"
+                    class="pe-form-field__label label-text required"
+                  >
+                    Headline
+                  </label>
 
-                <textarea
-                  name="summary"
-                  id="topcard-summary"
-                  class="ember-text-area pe-form-field__textarea ember-view" value={this.state.summary}
-                  onChange={this.summaryChangeHandler}
-                />
+                  <textarea
+                    name="headline"
+                    id="topcard-headline"
+                    class="pe-top-card-form__headline-text ember-text-area pe-form-field__textarea ember-view"
+                    value={this.state.headline}
+                    onChange={this.headlineChangeHandler}
+                  />
+                </div>
+                <div
+                  id="ember3332"
+                  class="pe-form-field pe-top-card-form__location-picker ember-view"
+                >
+                  <div class="pe-s-multi-field" />
+                </div>
+
+                <div class="pe-form-field summary-field floating-label  ">
+                  <label
+                    for="topcard-summary"
+                    class="pe-form-field__label label-text"
+                  >
+                    Summary
+                  </label>
+
+                  <textarea
+                    name="summary"
+                    id="topcard-summary"
+                    class="ember-text-area pe-form-field__textarea ember-view"
+                    value={this.state.summary}
+                    onChange={this.summaryChangeHandler}
+                  />
+                </div>
               </div>
-            </div>
-            <div class="modal-footer">
+              <div class="modal-footer">
                 <button
                   type="button"
                   class="btn btn-primary"
@@ -2252,12 +2255,10 @@ class Homepage extends Component {
                   Save
                 </button>
               </div>
+            </div>
           </div>
         </div>
       </div>
- 
-
-        </div>
     );
   }
 }
