@@ -19,7 +19,7 @@ function handle_request(msg, callback) {
       console.log("user created");
       //save user details in MongoDB
       var user = new Users({
-        email: username,
+        email: username.toLowerCase(),
         firstname: msg.firstname,
         lastname: msg.lastname
       });
