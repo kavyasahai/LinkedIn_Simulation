@@ -8,7 +8,7 @@ export function getToken() {
 }
 
 export function getJWTUsername() {
-  const token = localStorage.getItem("username");
+  const token = localStorage.getItem("email");
   // return jwt_decode(token).username;
   return token;
 }
