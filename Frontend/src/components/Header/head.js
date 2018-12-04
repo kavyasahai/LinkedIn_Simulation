@@ -79,7 +79,7 @@ class Header extends Component {
                         My Network
                       </a>
                       <a class="dropdown-item" href="/myrequests">
-                        MyRequests
+                        My Requests
                       </a>
                     </div>
                   </li>
@@ -155,7 +155,7 @@ class Header extends Component {
             <div class="col-2.5">
               <div class="go-inline">
                 <div>
-                  <a href="/home">
+                  <a href="/messenging">
                     <i
                       class="fa fa-envelope w3-jumbo"
                       style={{
@@ -183,14 +183,14 @@ class Header extends Component {
                       id="navbardrop"
                       data-toggle="dropdown"
                     >
-                      <span class="normal">My Jobs</span>{" "}
+                      <span class="normal"></span>Logout{" "}
                     </a>
                     <div class="dropdown-menu">
                      <li> <a class="dropdown-item" href="/login" onClick={this.clear}>
-                        Log Out
+                        Logout
                       </a></li>
                       <a class="dropdown-item" href="/job/posted-jobs">
-                        Delete Your Account
+                      Delete Your Account
                       </a>
                      
                      
