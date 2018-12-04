@@ -41,7 +41,8 @@ var editskills = require("./services/editskills");
 var editeducation = require("./services/editeducation");
 var searchUserByName = require("./services/User/searchUserByName");
 var getJobApplications = require("./services/Job/getJobApplications");
-var getJobApplications = require("./services/Job/getJobApplications");
+var postjobclicks = require("./services/profileStats/postJobClicks");
+
 
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -117,4 +118,4 @@ handleTopicRequest("editeducation", editeducation);
 handleTopicRequest("getJobApplications_topic", getJobApplications);
 
 handleTopicRequest("searchUserByName_topic", searchUserByName);
-handleTopicRequest("getJobApplications_topic", getJobApplications);
+handleTopicRequest("postjobclicks", postjobclicks);
