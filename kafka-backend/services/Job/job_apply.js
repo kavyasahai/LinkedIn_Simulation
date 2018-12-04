@@ -27,7 +27,7 @@ function handle_request(msg, callback) {
   jobApplication.findOne(
     {
       jobID: msg.jobid,
-      emailID: msg.email
+      emailID:msg.userid
     },
     function(err, doc) {
       if (err) {
@@ -49,9 +49,11 @@ function handle_request(msg, callback) {
           console.log("null");
         }
         else{
+           console.log("else");
                   jobApplication.update(
                     {  jobID: msg.jobid,
-                      emailID: msg.email },
+                       emailID:msg.userid
+                       },
                     { $set: { submitted:"yes", submitttedTime:msg.timestamp} },
                     function(err, result) {
                       if (err) {

@@ -87,7 +87,7 @@ var getJobById = require("./routes/Job/getJobById");
 var getsavejob = require("./routes/Job/getsavedjob");
 var recruiterSavedJobs = require("./routes/RecruiterDashboard/recruiterSavedJobs");
 var recruiterTraceJobs = require("./routes/RecruiterDashboard/recruiterDashboardTraceJob");
-
+var postjobclicks=require("./routes/Job/postjobclicks");
 var deleteaccount = require("./routes/User/deleteuser");
 var getappliedjobs = require("./routes/Job/getappliedjob");
 var signupschool = require("./routes/User/signupschool");
@@ -126,6 +126,7 @@ app.use(getJobById);
 app.use(getsavejob);
 app.use(recruiterSavedJobs);
 app.use(recruiterTraceJobs);
+app.use(postjobclicks);
 app.use("/connection", connection);
 app.use("/api/auth/channel", channel);
 app.use("/api/auth/message", message);

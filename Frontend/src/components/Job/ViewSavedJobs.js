@@ -75,7 +75,7 @@ import axios from "axios";
                       {property.title}
                     </li>
                     <br />
-                    {property.postedBy}
+                    Posted BY: {property.postedBy}
                     <br />
                     {property.location}
                     <br />

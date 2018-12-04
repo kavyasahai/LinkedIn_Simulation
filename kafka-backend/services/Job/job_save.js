@@ -9,7 +9,7 @@ function handle_request(msg, callback) {
     jobID: msg.jobid,
     savedTime:msg.timestamp,
     postedBy:msg.postedBy,
-    firstname:msg.firsrname,
+    firstname:msg.firstname,
     lastname:msg.lastname
   });
 

@@ -166,7 +166,9 @@ this.props.getJobById(this.props.match.params.id);
       disabilityquestion:this.state.value,
       diversityquestion1:this.state.value1,
       diversityquestion2:this.state.value2,
-      timestamp:new Date()
+      timestamp:new Date(),
+      userid:getJWTUsername(),
+      jobid:this.props.match.params.id
 
     }
     console.log(data);
