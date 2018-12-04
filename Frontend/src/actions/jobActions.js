@@ -141,7 +141,7 @@ export const editJob = data => async dispatch => {
   }
 };
 
-export const getJobById = jobId => async dispatch => {
+export const getJobById = (jobId,callback) => async dispatch => {
   try {
     setHeader();
     const res = await axios.get(`${ROOT_URL}/getPropertyById/${jobId}`);
@@ -149,6 +149,7 @@ export const getJobById = jobId => async dispatch => {
       type: GET_JOB_BY_ID,
       payload: res.data
     });
+    callback();
   } catch (e) {
     return {
       type: GET_JOB_BY_ID,

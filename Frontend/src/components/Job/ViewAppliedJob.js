@@ -15,31 +15,42 @@ import axios from "axios";
         //maintain the state required for this component
         this.state = {
         properties1:[],
-          jobdetails: []
+          jobdetails: [],
+          jobdetails1:[]
         };
-       
+       this.get=this.get.bind(this);
       }
 
      componentDidMount(){
+     
         const data = {
          
             email:getJWTUsername(),
             username:getJWTUsername()
           };
+          
          this.props.getAppliedJob(data,()=>{
-           console.log(this.props.appliedjobs.jobID);
+          
            this.props.appliedjobs.map(property=>{
-            this.props.getJobById(property.jobID);
+             
+                this.props.getJobById(property.jobID,()=>{
+                  console.log(this.props.job_edit);
+                    this.setState({ jobdetails:this.state.jobdetails.concat(this.props.job_edit)})
+                })
+              
+              });
+         
            });
-             //this.props.getJobById(this.props.appliedjobs.jobID);
 
            this.setState({
-            jobdetails: this.props.appliedjobs
+              jobdetails1:this.state.jobdetails
+           })
+             //this.props.getJobById(this.props.appliedjobs.jobID);
 
-           });
+          
       
-          });
-          console.log(this.props.appliedjobs);
+     
+      
         //this.props.getJobById(this.state.jobdetails.jobID);
 
           
@@ -51,10 +62,13 @@ import axios from "axios";
 
          
      }
+     get(){
+       console.log("Ok");
+     }
     render(){
-        console.log(this.props.job_edit)
+        console.log(this.state.jobdetails);
         var i = -1;
-        let Details = this.state.properties1.map(property => {
+        let Details = this.state.jobdetails.map(property => {
             i = i + 1;
       
             const token = getToken();
@@ -76,7 +90,7 @@ import axios from "axios";
                     style={{ "padding-left": "30px", "padding-top": "10px" }}
                   >
                     <li class="blue" >
-                      {property.emailID}
+                      {property.title}
                     </li>
                     <br />
                     {property.postedBy}
