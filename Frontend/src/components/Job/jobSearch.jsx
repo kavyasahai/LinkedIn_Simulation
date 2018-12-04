@@ -170,18 +170,18 @@ componentDidMount(){
                     properties1: this.props.search_job_results,
                     view1: this.state.view1.concat(this.props.search_job_results[0])
                   });
-                  this.state.properties1.map(property => {
-                    console.log(property.Icon);
-                    axios
-                      .post("http://localhost:3001/download/" + property.Icon)
-                      .then(response => {
-                        console.log("Imgae Res : ", response);
-                        let imagePreview = "data:image/jpg;base64, " + response.data;
-                        this.setState({
-                          imageView: this.state.imageView.concat(imagePreview)
-                        });
-                      });
-                  });
+                  // this.state.properties1.map(property => {
+                 
+                  //   axios
+                  //     .post("http://localhost:3001/download/" + property.Icon)
+                  //     .then(response => {
+                  //       console.log("Imgae Res : ", response);
+                  //       let imagePreview = "data:image/jpg;base64, " + response.data;
+                  //       this.setState({
+                  //         imageView: this.state.imageView.concat(imagePreview)
+                  //       });
+                  //     });
+                  // });
           }
         });
   }
@@ -305,7 +305,7 @@ else{
           <div class="row">
             <div class="col-4">
               <img
-                src={imageView[this.state.imageNumber]}
+                src={property.logo}
                 style={{ width: "200px", height: "150px" }}
               />
             </div>

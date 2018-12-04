@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import HomeHeader from "../Header/head";
-import { searchJob, saveJob, applyJob,getsavedJob } from "../../actions/jobActions";
+import { searchJob, saveJob, applyJob,getsavedJob,getAppliedJob } from "../../actions/jobActions";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { getToken } from "../common/auth";
@@ -32,18 +32,11 @@ import axios from "axios";
             properties1:this.props.savedjobs
         })
           })
-          const res =  axios
-          .post("http://localhost:3001/getuserdata", data)
-          .then(response => {
-            console.log("Updated List", response.data.updatedList);
-            // this.setState({
-            //   userdata: response.data.updatedList
-            // });
-          });
+      
 
-          var jobdetails = this.props.savedjobs.filter(function(property) {
-            return property._id == ""
-          });
+          // var jobdetails = this.props.savedjobs.filter(function(property) {
+          //   return property._id == ""
+          // });
 
          
      }
@@ -113,5 +106,5 @@ const mapStateToProps = state => ({
   
   export default connect(
     mapStateToProps,
-    { searchJob, saveJob, applyJob,getsavedJob }
+    { searchJob, saveJob, applyJob,getsavedJob,getAppliedJob }
   )(Jobsaved);

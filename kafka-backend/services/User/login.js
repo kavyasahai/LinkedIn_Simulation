@@ -11,18 +11,20 @@ function handle_request(msg, callback) {
       password: msg.password
     },
     function(res) {
-      console.log("db response", res);
+      // console.log("db response", res);
+      console.log("res1====",res)
       if (res == "User not found.") {
         resData = {
           status: 400
         };
         console.log("response value null");
         callback(null, resData);
-      } else {
+      } 
+      else {
         var user = {
           username: res.Username
         };
-      }
+      
       var passwordHash;
       console.log("Password is" + msg.password);
       console.log(res.password);
@@ -60,7 +62,8 @@ function handle_request(msg, callback) {
           callback(null, resData);
         }
       );
-    },
+    }
+  },
     function(err) {
       resData = {
         status: 400

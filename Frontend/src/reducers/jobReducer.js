@@ -3,7 +3,8 @@ import {
   POST_A_JOB,
   EDIT_JOB,
   GET_JOB_BY_ID,
-  GET_SAVED_JOB
+  GET_SAVED_JOB,
+  GET_APPLIED_JOB
 } from "../actions/types";
 
 const initialState = {
@@ -11,7 +12,8 @@ const initialState = {
   view: [],
   newJob: [],
   job_edit: [],
-  savejob:[]
+  savejob:[],
+  appliedjob:[]
 };
 
 export default function(state = initialState, action) {
@@ -42,6 +44,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         savejob: action.payload.savedjobs,
+      };
+    case GET_APPLIED_JOB:
+      return {
+        ...state,
+        appliedjob: action.payload.appliedjob,
       };
 
     default:

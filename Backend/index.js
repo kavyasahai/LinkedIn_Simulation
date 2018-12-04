@@ -87,6 +87,7 @@ var getJobById = require("./routes/Job/getJobById");
 var getsavejob = require("./routes/Job/getsavedjob");
 var recruiterSavedJobs = require("./routes/RecruiterDashboard/recruiterSavedJobs");
 var deleteaccount=require("./routes/User/deleteuser");
+var getappliedjobs=require("./routes/Job/getappliedjob");
 app.use(getuserdata);
 app.use(experienceinsert);
 app.use(schoolinsert);
@@ -116,6 +117,8 @@ app.use("/connection", connection);
 app.use("/api/auth/channel", channel);
 app.use("/api/auth/message", message);
 app.use("/api/auth/user", user);
-app.listen(3001);
+
 app.use(deleteaccount);
+app.use(getappliedjobs);
+app.listen(3001);
 console.log("Server Listening on port 3001");

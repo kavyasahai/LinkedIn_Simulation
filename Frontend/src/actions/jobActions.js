@@ -6,7 +6,8 @@ import {
   POST_A_JOB,
   EDIT_JOB,
   GET_JOB_BY_ID,
-  GET_SAVED_JOB
+  GET_SAVED_JOB,
+  GET_APPLIED_JOB
 } from "./types";
 import { setHeader } from "../components/common/auth";
 import { getJWTUsername } from "../components/common/auth";
@@ -42,6 +43,25 @@ export const getsavedJob = (data, callback) => async dispatch => {
     console.log("search a job", res.data);
     dispatch({
       type: GET_SAVED_JOB,
+      payload: res.data
+    });
+    callback();
+  } catch (e) {
+    return {
+      type: GET_SAVED_JOB,
+      payload: e
+    };
+  }
+};
+export const getAppliedJob = (data, callback) => async dispatch => {
+  try {
+    // var email = getJWTUsername();
+    //setHeader();
+    const res = await axios.post(`${ROOT_URL}/getsavejob`, data);
+    console.log(res.status);
+    console.log("search a job", res.data);
+    dispatch({
+      type: GET_APPLIED_JOB,
       payload: res.data
     });
     callback();
