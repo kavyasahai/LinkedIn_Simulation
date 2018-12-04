@@ -6,7 +6,7 @@ var jobApplication = require("../../models/jobApplication");
 function handle_request(msg, callback) {
 
   console.log(msg);
-  jobApplication.findOne(
+  jobApplication.find(
     {
     
       emailID: msg.email

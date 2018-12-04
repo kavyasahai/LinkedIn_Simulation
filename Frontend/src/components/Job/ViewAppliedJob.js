@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import HomeHeader from "../Header/head";
-import { searchJob, saveJob, applyJob,getsavedJob,getAppliedJob } from "../../actions/jobActions";
+import { searchJob, saveJob, applyJob,getsavedJob,getAppliedJob,getJobById } from "../../actions/jobActions";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { getToken } from "../common/auth";
@@ -14,8 +14,8 @@ import axios from "axios";
         super(props);
         //maintain the state required for this component
         this.state = {
-      
-          properties1: []
+        properties1:[],
+          jobdetails: []
         };
        
       }
@@ -27,9 +27,22 @@ import axios from "axios";
             username:getJWTUsername()
           };
          this.props.getAppliedJob(data,()=>{
-           console.log("Applied");
+           console.log(this.props.appliedjobs.jobID);
+           this.props.appliedjobs.map(property=>{
+            this.props.getJobById(property.jobID);
+           });
+             //this.props.getJobById(this.props.appliedjobs.jobID);
+
+           this.setState({
+            jobdetails: this.props.appliedjobs
+
+           });
       
           });
+          console.log(this.props.appliedjobs);
+        //this.props.getJobById(this.state.jobdetails.jobID);
+
+          
       
 
           // var jobdetails = this.props.savedjobs.filter(function(property) {
@@ -39,7 +52,7 @@ import axios from "axios";
          
      }
     render(){
-        console.log(this.state.properties1)
+        console.log(this.props.job_edit)
         var i = -1;
         let Details = this.state.properties1.map(property => {
             i = i + 1;
@@ -99,10 +112,11 @@ import axios from "axios";
 const mapStateToProps = state => ({
     search_job_results: state.jobReducer.search_job_results,
     view: state.jobReducer.view,
-    savedjobs:state.jobReducer.savejob
+    appliedjobs:state.jobReducer.appliedjob,
+    job_edit:state.jobReducer.job_edit
   });
   
   export default connect(
     mapStateToProps,
-    { searchJob, saveJob, applyJob,getsavedJob,getAppliedJob }
+    { searchJob, saveJob, applyJob,getsavedJob,getAppliedJob,getJobById }
   )(Jobsaved);

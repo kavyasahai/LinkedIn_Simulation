@@ -48,7 +48,7 @@ export default function(state = initialState, action) {
     case GET_APPLIED_JOB:
       return {
         ...state,
-        appliedjob: action.payload.appliedjob,
+        appliedjob: action.payload.appliedjobs,
       };
 
     default:
