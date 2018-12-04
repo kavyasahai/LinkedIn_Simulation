@@ -824,31 +824,9 @@ class Homepage extends Component {
                     class="pv-view-public-profile-section__button pv-profile-info-section-button__button ember-view"
                   >
                     {" "}
-                    <span class="t-33 t-black--light t-bold">
-                      Edit public profile &amp; URL
-                    </span>
+                   
                   </a>
-                  <li-icon
-                    aria-hidden="true"
-                    type="question-pebble-icon"
-                    size="small"
-                  >
-                    <svg
-                      viewBox="0 0 24 24"
-                      width="24px"
-                      height="24px"
-                      x="0"
-                      y="0"
-                      preserveAspectRatio="xMinYMin meet"
-                      class="artdeco-icon"
-                      focusable="false"
-                    >
-                      <path
-                        d="M7,10h2v2H7V10zM15,8c0,3.9-3.1,7-7,7s-7-3.1-7-7c0-3.9,3.1-7,7-7S15,4.1,15,8zM13.2,8c0-2.9-2.3-5.2-5.2-5.2S2.8,5.1,2.8,8c0,2.9,2.3,5.2,5.2,5.2S13.2,10.9,13.2,8zM8.5,4h-1C6.1,4,5,5.1,5,6.5V7h1.9V5.9h2.3v1.3H8c-0.6,0-1,0.4-1,1V9h1.5C9.9,9,11,7.9,11,6.5C11,5.1,9.9,4,8.5,4z"
-                        class="small-icon"
-                      />
-                    </svg>
-                  </li-icon>
+                
                 </div>
 
                 <hr class="divider mt4 mb4" />
@@ -863,31 +841,9 @@ class Homepage extends Component {
                     class="pv-add-secondary-language-section__button pv-profile-info-section-button__button ember-view"
                   >
                     {" "}
-                    <span class="t-33 t-black--light t-bold">
-                      Add profile in another language
-                    </span>
+                   
                   </a>
-                  <li-icon
-                    aria-hidden="true"
-                    type="question-pebble-icon"
-                    size="small"
-                  >
-                    <svg
-                      viewBox="0 0 24 24"
-                      width="24px"
-                      height="24px"
-                      x="0"
-                      y="0"
-                      preserveAspectRatio="xMinYMin meet"
-                      class="artdeco-icon"
-                      focusable="false"
-                    >
-                      <path
-                        d="M7,10h2v2H7V10zM15,8c0,3.9-3.1,7-7,7s-7-3.1-7-7c0-3.9,3.1-7,7-7S15,4.1,15,8zM13.2,8c0-2.9-2.3-5.2-5.2-5.2S2.8,5.1,2.8,8c0,2.9,2.3,5.2,5.2,5.2S13.2,10.9,13.2,8zM8.5,4h-1C6.1,4,5,5.1,5,6.5V7h1.9V5.9h2.3v1.3H8c-0.6,0-1,0.4-1,1V9h1.5C9.9,9,11,7.9,11,6.5C11,5.1,9.9,4,8.5,4z"
-                        class="small-icon"
-                      />
-                    </svg>
-                  </li-icon>
+                
                   <div
                     id="ember8844"
                     class="pv-add-secondary-language-section__button-icon pv-profile-info-section-button__button-icon ember-view"
