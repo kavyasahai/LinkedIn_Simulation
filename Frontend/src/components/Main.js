@@ -62,9 +62,11 @@ class Main extends Component {
               <PrivateRoute path="/network" component={network} />
               <PrivateRoute path="/myrequests" component={ConnectionRequests} />
               {/* <PrivateRoute path="/job-apply" component={jobApply} /> */}
-<Route path="/job-apply:id" component={jobApply}
-//  render={(props)=>(<jobApply {...props}/>)}
- />
+              <Route
+                path="/job-apply:id"
+                component={jobApply}
+                //  render={(props)=>(<jobApply {...props}/>)}
+              />
               <Route
                 path="/messaging"
                 store={chatstore}
@@ -117,14 +119,11 @@ class Main extends Component {
               <PrivateRoute path="/job-details" component={jobDetails} />
               <PrivateRoute path="/job-search" component={jobSearch} />
               <PrivateRoute path="/job-saved" component={ViewSavedJob} />
-<<<<<<< HEAD
-=======
               <PrivateRoute
                 path="/job/applications"
                 component={ViewJobApplications}
               />
               <PrivateRoute path="/job-applied" component={ViewAppliedJob} />
->>>>>>> acdae6d8d84fdf72dec723eb80a2f6d8eb0be1e3
 
               <Route path="/not-found" exact component={NotFound} />
               <Route path="/" exact component={Login} />
