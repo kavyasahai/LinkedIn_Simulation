@@ -11,6 +11,7 @@ import {
 } from "../../actions/connectionsActions";
 import { connect } from "react-redux";
 //import { If, Else } from "react-if";
+import { Link } from "react-router-dom";
 
 class ConnectionRequests extends Component {
   sendMessage = () => {
@@ -81,9 +82,19 @@ class ConnectionRequests extends Component {
                           </div>
 
                           <div class="col-6" style={{ paddingTop: "2vw" }}>
-                            <b>
-                              {data.firstname} {data.lastname}
-                            </b>
+                            <Link
+                              to={{
+                                pathname: "/viewprofile",
+                                state: {
+                                  username: data.email
+                                }
+                              }}
+                            >
+                              <b>
+                                {data ? data.firstname : ""}{" "}
+                                {data ? data.lastname : ""}
+                              </b>
+                            </Link>
                             <br />
                             <div>
                               <p style={{ "font-size": "0.6rem" }}>

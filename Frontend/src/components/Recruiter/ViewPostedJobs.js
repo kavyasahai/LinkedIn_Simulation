@@ -5,7 +5,6 @@ import supportingimage5 from "../../images/supportingImage5.png";
 import { getJWTUsername } from "../common/auth";
 import { getPostedJobs } from "../../actions/recruiterActions";
 import { connect } from "react-redux";
-//import { If, Else } from "react-if";
 import { Link } from "react-router-dom";
 
 class ViewPostedJobs extends Component {

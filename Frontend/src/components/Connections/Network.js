@@ -6,6 +6,7 @@ import supportingimage5 from "../../images/supportingImage5.png";
 import { getJWTUsername } from "../common/auth";
 import { getAllConnections } from "../../actions/connectionsActions";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 class network extends Component {
   sendMessage = () => {
@@ -38,10 +39,6 @@ class network extends Component {
   }
 
   render() {
-    console.log(
-      this.props.allConnections.connection &&
-        this.props.allConnections.connection.acceptedConnections.length === 0
-    );
     if (
       this.props.allConnections.connection &&
       this.props.allConnections.connection.acceptedConnections.length === 0
@@ -79,10 +76,19 @@ class network extends Component {
                           </div>
 
                           <div class="col-6" style={{ paddingTop: "2vw" }}>
-                            <b>
-                              {data ? data.firstname : ""}{" "}
-                              {data ? data.lastname : ""}
-                            </b>
+                            <Link
+                              to={{
+                                pathname: "/viewprofile",
+                                state: {
+                                  username: data.email
+                                }
+                              }}
+                            >
+                              <b>
+                                {data ? data.firstname : ""}{" "}
+                                {data ? data.lastname : ""}
+                              </b>
+                            </Link>
                             <br />
                             <div>
                               <p style={{ "font-size": "0.6rem" }}>
