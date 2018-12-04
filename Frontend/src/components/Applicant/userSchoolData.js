@@ -4,6 +4,7 @@ import { getSignupToken } from "../common/auth";
 import { Redirect } from "react-router";
 import axios from "axios";
 import { connect } from "react-redux";
+import {signupschool} from "../../actions/applicantActions";
 
 //Define a Login Component
 class UserSchoolData extends Component {
@@ -46,23 +47,32 @@ endyearChangeHandler = (e) => {
 
 submitSchool = (e) => {
   var headers = new Headers();
+  console.log("in submit school method");
   //prevent page from refresh
   e.preventDefault();
   const data = {
-      username:"kesha@gmail.com",
+      username:localStorage.getItem("signup"),
       school:this.state.school,
       startyear : this.state.startyear,
       endyear:this.state.endyear
   }
   //set the with credentials to true
   axios.defaults.withCredentials = true;
-  this.props.onSubmitSchool(data);
+  this.props.signupschool(data);
 }
 
   render() {
     // const signupStatus = getSignupToken();
 
     let redirectVar = null;
+    if (this.props.signupschool) {
+      redirectVar = <Redirect to="/profilepicture" />;
+    }
+
+    // if(this.props.signupschool)
+    // {
+    //   redirectVar =  <Redirect to="/photo" />;
+    // }
     // if (signupStatus === false) {
     //   redirectVar = <Redirect to="/login" />;
     // }
@@ -359,16 +369,6 @@ const mapStateToProps = state =>{
   }
 }
 
-const mapDispatchStateToProps = dispatch => {
-  return {
-    onSubmitSchool : (data) => {
-          axios.post('http://localhost:3001/signupschool', data)
-              .then((response) => {
-                  console.log(response.data);
-                  dispatch({type: 'SIGNUPSCHOOL',payload : response.data.updatedList,statusCode : response.status})
-          });
-      }
-  }
-}
 
-export default connect(mapStateToProps,mapDispatchStateToProps)(UserSchoolData);
+
+export default connect(mapStateToProps,{signupschool})(UserSchoolData);

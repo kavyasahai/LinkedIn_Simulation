@@ -76,6 +76,19 @@ class ViewPostedJobs extends Component {
                               {data.description}
                             </p>
                           </div>
+                          <button>
+                            {" "}
+                            <Link
+                              to={{
+                                pathname: "/job/applications",
+                                state: {
+                                  jobId: data._id
+                                }
+                              }}
+                            >
+                              View Applications
+                            </Link>
+                          </button>
                         </div>
                       </div>
                     </div>

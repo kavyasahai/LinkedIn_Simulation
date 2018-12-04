@@ -145,6 +145,12 @@ artdeco-typeahead-deprecated-input
 .pe-form-time-period__start-date {
   width: calc(50% - 4px);
 }
+.homesummary
+{
+  position:absolute;
+  margin-left:3vw;
+  margin-top:59vw;
+}
 .pe-form-time-period__date-field {
   display: flex;
   flex-direction: column;

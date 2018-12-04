@@ -15,13 +15,15 @@ class PostSignUp extends Component {
     //maintain the state required for this component
     this.state = {
       country: "",
-      zipcode: ""
+      zipcode: "",
+      userstate:"",
+      city:""
     };
     //Bind the handlers to this class
     this.countryChangeHandler = this.countryChangeHandler.bind(this);
     this.zipcodeChangeHandler = this.zipcodeChangeHandler.bind(this);
-    //  this.usernameChangeHandler = this.usernameChangeHandler.bind(this);
-    // this.passwordChangeHandler = this.passwordChangeHandler.bind(this);
+    this.stateChangeHandler = this.stateChangeHandler.bind(this);
+    this.cityChangeHandler = this.cityChangeHandler.bind(this);
     this.submitLogin = this.submitLogin.bind(this);
   }
   //Call the Will Mount to set the auth Flag to false
@@ -36,6 +38,18 @@ class PostSignUp extends Component {
   zipcodeChangeHandler = e => {
     this.setState({
       zipcode: e.target.value
+    });
+  };
+
+  stateChangeHandler = e => {
+    this.setState({
+      userstate: e.target.value
+    });
+  };
+
+  cityChangeHandler = e => {
+    this.setState({
+      city: e.target.value
     });
   };
 
@@ -54,7 +68,9 @@ class PostSignUp extends Component {
       const data = {
         country: this.state.country,
         zipcode: this.state.zipcode,
-        username: this.props.username
+        city:this.state.city,
+        userstate:this.state.userstate,
+        username: localStorage.getItem("signup")
       };
       //set the with credentials to true
       axios.defaults.withCredentials = true;
@@ -64,11 +80,11 @@ class PostSignUp extends Component {
   };
 
   render() {
-    const signupStatus = getSignupToken();
+    // const signupStatus = getSignupToken();
     let redirectVar = null;
-    if (signupStatus === false) {
-      redirectVar = <Redirect to="/login" />;
-    }
+    // if (signupStatus === false) {
+    //   redirectVar = <Redirect to="/login" />;
+    // }
     // if(this.props.authFlag){
     //     redirect = <Redirect to= "/homepage"/>
     // }
@@ -444,6 +460,60 @@ class PostSignUp extends Component {
                                 />
                               </div>
                             </div>
+
+                            <div id="ember297" class="ember-view">
+                              <div
+                                id="ember298"
+                                class="onboarding-profile-form-field onboarding-profile-location__field-container pt3 pb2 ember-view"
+                              >
+                                <label
+                                  class="onboarding-profile-form-field__label t-14 t-black--light t-normal mt0 truncate "
+                                  for="location-postal"
+                                >
+                                  City
+                                </label>
+
+                                <input
+                                  maxlength="10"
+                                  class="onboarding-input onboarding-profile-location__postal-field ember-text-field ember-view"
+                                  type="text"
+                                  placeholder="City"
+                                  onChange={this.cityChangeHandler}
+                                />
+
+                                <div
+                                  id="ember300"
+                                  class="onboarding-profile-error-container ember-view"
+                                />
+                              </div>
+                            </div>
+
+                            <div id="ember297" class="ember-view">
+                            <div
+                              id="ember298"
+                              class="onboarding-profile-form-field onboarding-profile-location__field-container pt3 pb2 ember-view"
+                            >
+                              <label
+                                class="onboarding-profile-form-field__label t-14 t-black--light t-normal mt0 truncate "
+                                for="location-postal"
+                              >
+                                State
+                              </label>
+
+                              <input
+                                maxlength="10"
+                                class="onboarding-input onboarding-profile-location__postal-field ember-text-field ember-view"
+                                type="text"
+                                placeholder="State"
+                                onChange={this.stateChangeHandler}
+                              />
+
+                              <div
+                                id="ember300"
+                                class="onboarding-profile-error-container ember-view"
+                              />
+                            </div>
+                          </div>
 
                             <div id="ember297" class="ember-view">
                               <div

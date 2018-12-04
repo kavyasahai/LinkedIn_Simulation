@@ -10,6 +10,7 @@ import { experienceinsert } from "../../actions/applicantActions";
 import { schoolinsert } from "../../actions/applicantActions";
 import { skillsinsert } from "../../actions/applicantActions";
 import Head from "../Header/head";
+import { Link } from 'react-router-dom';
 import { DropdownMenu, MenuItem } from "react-bootstrap-dropdown-menu";
 // import { getMaxListeners } from 'cluster';
 
@@ -314,10 +315,35 @@ class Homepage extends Component {
   render() {
     console.log(this.state.userdata ? this.state.userdata.firstname : "");
     // const {userdetails}=this.state.userdata[0] ? this.state.userdata[0].firstname:"";
-    let experience =
-      this.state.userdata[0] &&
-      this.state.userdata[0].experience.map(userdetail => {
-        <p>{userdetail.title}</p>;
+    let experiencedata =
+      this.state.userdata.experience &&
+      this.state.userdata.experience.map(userdetail => {
+        return (
+          <div>
+            <p>{userdetail.title}</p>
+            <p>{userdetail.company}</p>
+            <p>{userdetail.location}</p>
+            <p>{userdetail.from}</p>
+            <p> </p>
+            <p>{userdetail.to}</p>
+            <p>{userdetail.desc}</p>
+            <p>{userdetail.industry}</p>
+          </div>
+        );
+      });
+    let education =
+      this.state.userdata.education &&
+      this.state.userdata.education.map(userdetail => {
+        return (
+          <div>
+            <p>{userdetail.school}</p>
+            <p>{userdetail.degree}</p>
+            <p>{userdetail.field}</p>
+            <p>{userdetail.grade}</p>
+            <p>{userdetail.fromyear}</p>
+            <p>{userdetail.toyear}</p>
+          </div>
+        );
       });
     return (
       <div class="container">
@@ -570,7 +596,7 @@ class Homepage extends Component {
                         {" "}
                         <span class="svg-icon-wrap">
                           <span class="visually-hidden">
-                            See connections (152)
+                            <Link to="/network">See connections</Link>
                           </span>
                           <li-icon
                             aria-hidden="true"
@@ -596,7 +622,7 @@ class Homepage extends Component {
                           </li-icon>
                         </span>
                         <span class="pv-top-card-v2-section__entity-name pv-top-card-v2-section__connections ml2 t-33 t-black t-bold">
-                          See connections (152)
+                         <Link to="/network"> See connections </Link>
                         </span>
                       </a>
                     </div>
@@ -704,6 +730,33 @@ class Homepage extends Component {
                 </div>
               </div>
             </div>
+
+
+            <div class="homesummary">
+            <section class="pv-profile-section pv-top-card-section artdeco-container-card ember-view">
+            <h3>Summary</h3>
+            <div>
+              {this.state.userdata
+                ? this.state.userdata.profileSummary
+                : ""}
+            </div>
+          </section>
+          <section class="pv-profile-section pv-top-card-section artdeco-container-card ember-view">
+            <h3>Skills</h3>
+            <div>
+              {this.state.userdata ? this.state.userdata.skills : ""}
+            </div>
+          </section>
+          <section class="pv-profile-section pv-top-card-section artdeco-container-card ember-view">
+            <h3>Experience</h3>
+            <div>{experiencedata}</div>
+          </section>
+          <section class="pv-profile-section pv-top-card-section artdeco-container-card ember-view">
+            <h3>Education</h3>
+            <div>{education}</div>
+          </section>
+            </div>
+
 
             <div class="sidebarad">
               <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
