@@ -5,14 +5,10 @@ function handle_request(msg, callback) {
   console.log("msg======", msg);
   Users.update(
     { email: msg.username },
-    { $set: { firstname: msg.firstname,
-         lastname: msg.lastname,
+    { $set: { 
         headline:msg.headline,
-        country:msg.country,
-        zipcode:msg.zipcode,
-        location:msg.location,
-        summary:msg.summary,
-        industry:msg.industry } },
+        profileSummary:msg.summary,
+        } },
     function(err, result) {
       if (err) {
         callback(err, "Error");

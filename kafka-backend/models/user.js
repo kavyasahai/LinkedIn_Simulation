@@ -11,6 +11,7 @@ const UserSchema = new mongoose.Schema({
   education: Array,
   skills: Array,
   profileSummary: String,
+  headline:String,
   projects: Array,
   isRecruiter: Boolean,
   phoneNumber: String,

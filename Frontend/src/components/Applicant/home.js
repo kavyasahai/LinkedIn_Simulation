@@ -46,7 +46,8 @@ class Homepage extends Component {
       schoolfromyear: "",
       schooltoyear: "",
       skills: "",
-      userdata: ""
+      userdata: "",
+      newHeadline:""
     };
     //Bind the handlers to this class
     this.firstnameChangeHandler = this.firstnameChangeHandler.bind(this);
@@ -90,7 +91,7 @@ class Homepage extends Component {
     var headers = new Headers();
     //prevent page from refresh
     // e.preventDefault();
-    const username = "sheena@gmail.com";
+    const username = "john.doe@gmail.com";
     const data = {
       username: username
     };
@@ -101,10 +102,13 @@ class Homepage extends Component {
       .then(response => {
         console.log("Updated List", response.data.updatedList);
         this.setState({
-          userdata: response.data.updatedList
+          userdata: response.data.updatedList,
+          headline:response.data.updatedList.headline,
+          summary:response.data.updatedList.profileSummary
         });
       });
     console.log(this.state.userdata);
+    // document.getElementById("topcard-headline").text=this.state.headline
   }
 
   firstnameChangeHandler = e => {
@@ -142,7 +146,7 @@ class Homepage extends Component {
   };
   summaryChangeHandler = e => {
     this.setState({
-      skills: e.target.value
+      summary: e.target.value
     });
   };
 
@@ -246,7 +250,7 @@ class Homepage extends Component {
     console.log("in submit summary method");
     //prevent page from refresh
     e.preventDefault();
-    const username = "sheena@gmail.com";
+    const username = "john.doe@gmail.com";
     const data = {
       username: username,
       headline: this.state.headline,
@@ -255,6 +259,7 @@ class Homepage extends Component {
     //set the with credentials to true
     axios.defaults.withCredentials = true;
     this.props.summaryinsert(data);
+    window.location.reload();
   };
 
   submitExperience = e => {
@@ -736,9 +741,13 @@ class Homepage extends Component {
             <section class="pv-profile-section pv-top-card-section artdeco-container-card ember-view">
             <h3>Summary</h3>
             <div>
-              {this.state.userdata
+            <button class="summarybutton" data-toggle="modal" data-target="#editsummary">Edit</button>
+              <p>{this.state.userdata
+                ? this.state.userdata.headline
+                : ""}</p>
+              <p>{this.state.userdata
                 ? this.state.userdata.profileSummary
-                : ""}
+                : ""}</p>
             </div>
           </section>
           <section class="pv-profile-section pv-top-card-section artdeco-container-card ember-view">
@@ -2171,15 +2180,84 @@ class Homepage extends Component {
                   type="button"
                   class="btn btn-primary"
                   data-dismiss="modal"
-                  onCLick={this.submitSummary}
+                  onClick={this.submitSummary}
                 >
-                  Save
+                  Add
                 </button>
               </div>
             </div>
           </div>
         </div>
+   
+        <div id="editsummary" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">
+                &times;
+              </button>
+              <h4 class="modal-title">Edit Intro</h4>
+            </div>
+            <div class="modal-body">
+              <div class="pe-s-multi-field" />
+
+              <div
+                class="pe-form-field pe-top-card-form__headline-field floating-label  "
+                data-form-elem-focus="true"
+              >
+                <label
+                  for="topcard-headline"
+                  class="pe-form-field__label label-text required"
+                >
+                  Headline
+                </label>
+
+                <textarea
+                  name="headline"
+                  id="topcard-headline"
+                  class="pe-top-card-form__headline-text ember-text-area pe-form-field__textarea ember-view" value={this.state.headline}
+                  onChange={this.headlineChangeHandler}
+                />
+              </div>
+              <div
+                id="ember3332"
+                class="pe-form-field pe-top-card-form__location-picker ember-view"
+              >
+                <div class="pe-s-multi-field" />
+              </div>
+
+              <div class="pe-form-field summary-field floating-label  ">
+                <label
+                  for="topcard-summary"
+                  class="pe-form-field__label label-text"
+                >
+                  Summary
+                </label>
+
+                <textarea
+                  name="summary"
+                  id="topcard-summary"
+                  class="ember-text-area pe-form-field__textarea ember-view" value={this.state.summary}
+                  onChange={this.summaryChangeHandler}
+                />
+              </div>
+            </div>
+            <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-dismiss="modal"
+                  onClick={this.submitSummary}
+                >
+                  Save
+                </button>
+              </div>
+          </div>
+        </div>
       </div>
+ 
+
+        </div>
     );
   }
 }
