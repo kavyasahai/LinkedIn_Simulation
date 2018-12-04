@@ -110,10 +110,7 @@ handleTopicRequest("recruiterTraceJobs", recruiterTraceJobs);
 handleTopicRequest("addProfilePhoto_topic", addPhoto);
 handleTopicRequest("postProfileView", postProfileView);
 handleTopicRequest("addProfileResume_topic", addResume);
-<<<<<<< HEAD
 handleTopicRequest("skillsedit", editskills);
 handleTopicRequest("editeducation", editeducation);
 
-=======
 handleTopicRequest("searchUserByName_topic", searchUserByName);
->>>>>>> 5546c901e021e641f724ea660cce2256b8abd87e
