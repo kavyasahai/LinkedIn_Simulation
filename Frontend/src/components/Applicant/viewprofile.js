@@ -132,49 +132,43 @@ class ViewProfile extends Component {
                 >
                   <div class="pv-top-card-section__profile-photo-container pv-top-card-v2-section__profile-photo-container">
                     <div class="pv-top-card-section__photo-wrapper pv-top-card-v2-section__photo-wrapper">
-                      <div
-                        id="ember1109"
-                        class="pv-top-card-section__edit-photo pv-top-card-v2-section__edit-photo profile-photo-edit ember-view"
+                      <button
+                        data-control-name="edit_profile_photo"
+                        class="profile-photo-edit__edit-btn"
+                        data-ember-action=""
+                        data-ember-action-1110="1110"
                       >
-                        {" "}
-                        <button
-                          data-control-name="edit_profile_photo"
-                          class="profile-photo-edit__edit-btn"
-                          data-ember-action=""
-                          data-ember-action-1110="1110"
-                        >
-                          {/* <img
-                            src="https://media.licdn.com/dms/image/C5603AQHVVPM_Y5GT8w/profile-displayphoto-shrink_200_200/0?e=1548892800&amp;v=beta&amp;t=ft0HBIT7DODYrcap2naj-e5JB_NqcRwEBFO5eLAPZ0U"
-                            class="profile-photo-edit__preview"
-                            alt="Edit photo"
-                            height="128"
-                            width="128"
-                          /> */}
-                          <span class="profile-photo-edit__edit-icon svg-icon-wrap">
-                            <li-icon
-                              aria-hidden="true"
-                              type="pencil-icon"
-                              size="small"
+                        <img
+                          src={this.state.userdata.photo}
+                          class="profile-photo-edit__preview"
+                          alt="Edit photo"
+                          height="200"
+                          width="200"
+                        />
+                        <span class="profile-photo-edit__edit-icon svg-icon-wrap">
+                          <li-icon
+                            aria-hidden="true"
+                            type="pencil-icon"
+                            size="small"
+                          >
+                            <svg
+                              viewBox="0 0 24 24"
+                              width="24px"
+                              height="24px"
+                              x="0"
+                              y="0"
+                              preserveAspectRatio="xMinYMin meet"
+                              class="artdeco-icon"
+                              focusable="false"
                             >
-                              <svg
-                                viewBox="0 0 24 24"
-                                width="24px"
-                                height="24px"
-                                x="0"
-                                y="0"
-                                preserveAspectRatio="xMinYMin meet"
-                                class="artdeco-icon"
-                                focusable="false"
-                              >
-                                <path
-                                  d="M14.71,4L12,1.29a1,1,0,0,0-1.41,0L3,8.85,1,15l6.15-2,7.55-7.55A1,1,0,0,0,15,4.71,1,1,0,0,0,14.71,4Zm-8.84,7.6-1.5-1.5L9.42,5.07l1.5,1.5Zm5.72-5.72-1.5-1.5,1.17-1.17,1.5,1.5Z"
-                                  class="small-icon"
-                                />
-                              </svg>
-                            </li-icon>
-                          </span>
-                        </button>
-                      </div>
+                              <path
+                                d="M14.71,4L12,1.29a1,1,0,0,0-1.41,0L3,8.85,1,15l6.15-2,7.55-7.55A1,1,0,0,0,15,4.71,1,1,0,0,0,14.71,4Zm-8.84,7.6-1.5-1.5L9.42,5.07l1.5,1.5Zm5.72-5.72-1.5-1.5,1.17-1.17,1.5,1.5Z"
+                                class="small-icon"
+                              />
+                            </svg>
+                          </li-icon>
+                        </span>
+                      </button>
                     </div>
                   </div>
 
