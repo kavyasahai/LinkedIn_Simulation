@@ -8,7 +8,8 @@ import {
   APPLICANT_EXPERIENCEINSERT_DATA,
   APPLICANT_SCHOOLINSERT_DATA,
   APPLICANT_SKILLSINSERT_DATA,
-  APPLICANT_GETUSER_DATA
+  APPLICANT_GETUSER_DATA,
+  SIGNUPSCHOOL
 } from "./types";
 import { setHeader } from "../components/common/auth";
 
@@ -127,6 +128,22 @@ export const locationData = data => async dispatch => {
   }
 };
 
+export const signupschool = data => async dispatch => {
+  try {
+    setHeader();
+    const res = await axios.post(`${ROOT_URL}/signupschool`, data);
+    dispatch({
+      type: SIGNUPSCHOOL,
+      payload: res.data.updatedList,
+      statusCode: res.status
+    });
+  } catch (e) {
+    return {
+      type: SIGNUPSCHOOL,
+      payload: e
+    };
+  }
+};
 export function login(data, callback) {
   try {
     setHeader();

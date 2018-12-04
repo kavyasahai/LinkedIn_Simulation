@@ -29,10 +29,10 @@ var schoolinsert = require("./services/schoolinsert");
 var skillsinsert = require("./services/skillsinsert");
 var getuserdata = require("./services/getuserdata");
 var getJobById = require("./services/Job/getJobById");
-var getJobApplications = require("./services/Job/getJobApplications");
 var getsavedjobs = require("./services/Job/getsavedjobs");
-var getappliedjobs = require("./services/Job/job_applied");
+var getappliedjobs=require("./services/Job/job_applied");
 var recruiterSavedJobs = require("./services/RecruiterDashboard/recruiterSavedJobs");
+var signupschool=require("./services/signupschool");
 
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -69,6 +69,7 @@ function handleTopicRequest(topic_name, fname) {
 //first argument is topic name
 //second argument is a function that will handle this topic request
 handleTopicRequest("linkedinlogin", login);
+handleTopicRequest("signupschool",signupschool);
 handleTopicRequest("linkedinsignup", signup);
 handleTopicRequest("linkedinloc", location);
 handleTopicRequest("linkedinprodetails", prodetails);
@@ -96,6 +97,5 @@ handleTopicRequest("skillsinsert", skillsinsert);
 handleTopicRequest("getuserdata", getuserdata);
 handleTopicRequest("getJobById_topic", getJobById);
 handleTopicRequest("getsavedjobs", getsavedjobs);
-handleTopicRequest("getappliedjobs", getappliedjobs);
+handleTopicRequest("getappliedjobs",getappliedjobs);
 handleTopicRequest("recruiterSavedJobs", recruiterSavedJobs);
-handleTopicRequest("getJobApplications_topic", getJobApplications);

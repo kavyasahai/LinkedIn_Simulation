@@ -18,7 +18,9 @@ const UserSchema = new mongoose.Schema({
   companyName: String,
   country: String,
   jobTitle: String,
-  photo: String
+  school:String,
+  startyear:String,
+  endyear:String
 });
 
 module.exports = mongoose.model("users", UserSchema);
