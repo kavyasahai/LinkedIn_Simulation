@@ -24,17 +24,17 @@ class JobSearch extends Component {
       imageNumber: 0,
    selectedOption:"",
       imageView: [],
+      value:"",
       open: false
     };
+    
+    this.handleChange = this.handleChange.bind(this);
     this.FirstnameChangeHandler = this.FirstnameChangeHandler.bind(this);
     this.LastnameChangeHandler = this.LastnameChangeHandler.bind(this);
     this.EmailChangeHandler=this.EmailChangeHandler.bind(this);
     this.AddressChangeHandler=this.AddressChangeHandler.bind(this);
     this.TextChangeHandler=this.TextChangeHandler.bind(this);
-    this.handleOptionChange=this.handleOptionChange.bind(this);
-    this.handleOptionChange1=this.handleOptionChange1.bind(this);
-    this.handleOptionChange2=this.handleOptionChange2.bind(this);
-    this.Submit=this.Submit.bind(this);
+       this.Submit=this.Submit.bind(this);
   
   }
 FirstnameChangeHandler = e => {
@@ -62,27 +62,11 @@ FirstnameChangeHandler = e => {
       Job: e.target.value
     });
   };
-  handleOptionChange= (e)=>{
-    if(e.target.value=="on"){
-    console.log(e.target.value)
-    this.setState({
-      selectedOption:"Yes"
-    });}
-  }
-  handleOptionChange1= (e)=>{
-    if(e.target.value=="on"){
-    console.log(e.target.value)
-    this.setState({
-      selectedOption:"Yes"
-    });}
-  }
-  handleOptionChange2= (e)=>{
-    if(e.target.value=="on"){
-    console.log(e.target.value)
-    this.setState({
-      selectedOption:"Yes"
-    });}
-  }
+ 
+  handleChange(event) {
+        
+    this.setState({value: event.target.value});
+}
   componentDidMount(){
     const foo =this.props.location.state;
     console.log("Foo",foo);
@@ -216,14 +200,19 @@ console.log("Props",this.state.handleOptionChange);
 <br></br>
     Disability Question:
     <br/>
-    <div>
-        Are you Physically Challenged
-        <br></br>
-        <input type="radio" name="radio"  onChange={this.handleOptionChange}/> Yes{" "}
-              <br />
-              <input type="radio" name="radio"  onChange={this.handleOptionChange1} /> No
-              <br />
-    </div>
+    <div class="form-group floating-label not-empty">
+                                        <placeholder>Property type</placeholder>
+                                            <div class="FormSelect__wrapper">
+                                                <select value={this.state.value} onChange={this.handleChange} aria-label="Property type" name="propertyType" class="form-control FormSelect__select">
+                                                    <option value=""></option>
+                                                    <option value="apartment">Apartment</option>
+                                                    <option value="barn">Barn</option>
+                                                
+                                                    <i aria-hidden="true" class="icon-chevron-down FormSelect__chevron"></i>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        
     <br/>
     Diversity  and  Sponsership Questions
     <br/>
