@@ -25,6 +25,7 @@ db.createUser = function(user, successCallback, failureCallback) {
     console.log(sqlQuery);
     pool.getConnection(function(err, con) {
       if (err) {
+        console.log("Error path");
         res.writeHead(400, {
           "Content-Type": "text/plain"
         });
