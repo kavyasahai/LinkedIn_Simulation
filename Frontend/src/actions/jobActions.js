@@ -7,7 +7,8 @@ import {
   EDIT_JOB,
   GET_JOB_BY_ID,
   GET_SAVED_JOB,
-  GET_APPLIED_JOB
+  GET_APPLIED_JOB,
+  VIEW_JOB_APPLICATIONS
 } from "./types";
 import { setHeader } from "../components/common/auth";
 import { getJWTUsername } from "../components/common/auth";
@@ -73,8 +74,7 @@ export const getAppliedJob = (data, callback) => async dispatch => {
   }
 };
 
-
-export const saveJob = (data,callback) => async dispatch => {
+export const saveJob = (data, callback) => async dispatch => {
   try {
     var email = getJWTUsername();
     setHeader();
@@ -152,6 +152,22 @@ export const getJobById = jobId => async dispatch => {
   } catch (e) {
     return {
       type: GET_JOB_BY_ID,
+      payload: e
+    };
+  }
+};
+
+export const getJobApplications = jobId => async dispatch => {
+  try {
+    setHeader();
+    const res = await axios.get(`${ROOT_URL}/getJobApplications/${jobId}`);
+    dispatch({
+      type: VIEW_JOB_APPLICATIONS,
+      payload: res.data
+    });
+  } catch (e) {
+    return {
+      type: VIEW_JOB_APPLICATIONS,
       payload: e
     };
   }
