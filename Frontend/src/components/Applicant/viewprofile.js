@@ -23,11 +23,11 @@ class Homepage extends Component {
     //Bind the handlers to this class
   }
   //Call the Will Mount to set the auth Flag to false
-  async componentWillMount() {
+  async componentDidMount() {
     var headers = new Headers();
     //prevent page from refresh
     // e.preventDefault();
-    const username = "kesha@gmail.com";
+    const username = this.props.location.state.username;
     const data = {
       username: username
     };
@@ -45,7 +45,14 @@ class Homepage extends Component {
   }
 
   render() {
-    console.log(this.state.userdata[0] ? this.state.userdata[0].firstname : "");
+    if (this.state.userdata == null) {
+      return (
+        <React.Fragment>
+          <Header />
+          <p className="notfound">User profile does not exist.</p>
+        </React.Fragment>
+      );
+    }
 
     let experiencedata =
       this.state.userdata[0] &&
