@@ -41,10 +41,10 @@ class Homepage extends Component {
           userdata: response.data.updatedList
         });
       });
-    console.log(this.state.userdata);
   }
 
   render() {
+    console.log(this.state.userdata);
     if (this.state.userdata == null) {
       return (
         <React.Fragment>
@@ -55,8 +55,8 @@ class Homepage extends Component {
     }
 
     let experiencedata =
-      this.state.userdata[0] &&
-      this.state.userdata[0].experience.map(userdetail => {
+      this.state.userdata.experience &&
+      this.state.userdata.experience.map(userdetail => {
         return (
           <div>
             <p>{userdetail.title}</p>
@@ -71,8 +71,8 @@ class Homepage extends Component {
         );
       });
     let education =
-      this.state.userdata[0] &&
-      this.state.userdata[0].education.map(userdetail => {
+      this.state.userdata.education &&
+      this.state.userdata.education.map(userdetail => {
         return (
           <div>
             <p>{userdetail.school}</p>
@@ -126,13 +126,13 @@ class Homepage extends Component {
                           data-ember-action=""
                           data-ember-action-1110="1110"
                         >
-                          <img
+                          {/* <img
                             src="https://media.licdn.com/dms/image/C5603AQHVVPM_Y5GT8w/profile-displayphoto-shrink_200_200/0?e=1548892800&amp;v=beta&amp;t=ft0HBIT7DODYrcap2naj-e5JB_NqcRwEBFO5eLAPZ0U"
                             class="profile-photo-edit__preview"
                             alt="Edit photo"
                             height="128"
                             width="128"
-                          />
+                          /> */}
                           <span class="profile-photo-edit__edit-icon svg-icon-wrap">
                             <li-icon
                               aria-hidden="true"
@@ -168,8 +168,8 @@ class Homepage extends Component {
                       class="pv-member-badge--for-top-card-v2 pv-member-badge ember-view"
                     >
                       <span class="visually-hidden">
-                        {this.state.userdata[0]
-                          ? this.state.userdata[0].firstname
+                        {this.state.userdata
+                          ? this.state.userdata.firstname
                           : ""}{" "}
                         has a account
                       </span>
@@ -210,26 +210,31 @@ class Homepage extends Component {
                     <div class="pv-top-card-v2-section__info mr5">
                       <div>
                         <h1 class="pv-top-card-section__name inline t-24 t-black">
-                          {this.state.userdata[0]
-                            ? this.state.userdata[0].firstname
+                          {this.state.userdata
+                            ? this.state.userdata.firstname
+                            : ""}{" "}
+                          {this.state.userdata
+                            ? this.state.userdata.lastname
                             : ""}
                         </h1>
                       </div>
 
                       <h2 class="pv-top-card-section__headline  t-33 t-black">
-                        {this.state.userdata[0]
-                          ? this.state.userdata[0].education[0].degree
+                        {this.state.userdata.education
+                          ? this.state.userdata.education[0]
+                            ? this.state.userdata.education[0].degree
+                            : ""
                           : ""}{" "}
                         Student at{" "}
-                        {this.state.userdata[0]
-                          ? this.state.userdata[0].education[0].school
+                        {this.state.userdata.education
+                          ? this.state.userdata.education[0]
+                            ? this.state.userdata.education[0].school
+                            : ""
                           : ""}
                       </h2>
 
                       <h3 class="pv-top-card-section__location t-33 t-black--light  inline-block">
-                        {this.state.userdata[0]
-                          ? this.state.userdata[0].country
-                          : ""}
+                        {this.state.userdata ? this.state.userdata.country : ""}
                       </h3>
                       <div class="profilesection">
                         <div class="pv-top-card-v2-section__actions mt4 display-flex">
@@ -272,8 +277,10 @@ class Homepage extends Component {
                           style={{ "-webkit-line-clamp": "2" }}
                         >
                           {" "}
-                          {this.state.userdata[0]
-                            ? this.state.userdata[0].education[0].school
+                          {this.state.userdata.education
+                            ? this.state.userdata.education[0]
+                              ? this.state.userdata.education[0].school
+                              : ""
                             : ""}
                         </span>
                       </button>
@@ -322,9 +329,7 @@ class Homepage extends Component {
                       >
                         {" "}
                         <span class="svg-icon-wrap">
-                          <span class="visually-hidden">
-                            See connections (152)
-                          </span>
+                          <span class="visually-hidden">See connections</span>
                           <li-icon
                             aria-hidden="true"
                             type="people-icon"
@@ -349,7 +354,7 @@ class Homepage extends Component {
                           </li-icon>
                         </span>
                         <span class="pv-top-card-v2-section__entity-name pv-top-card-v2-section__connections ml2 t-33 t-black t-bold">
-                          See connections (152)
+                          See connections
                         </span>
                       </a>
                     </div>
@@ -372,17 +377,15 @@ class Homepage extends Component {
                   <section class="pv-profile-section pv-top-card-section artdeco-container-card ember-view">
                     <h3>Summary</h3>
                     <div>
-                      {this.state.userdata[0]
-                        ? this.state.userdata[0].profileSummary
+                      {this.state.userdata
+                        ? this.state.userdata.profileSummary
                         : ""}
                     </div>
                   </section>
                   <section class="pv-profile-section pv-top-card-section artdeco-container-card ember-view">
                     <h3>Skills</h3>
                     <div>
-                      {this.state.userdata[0]
-                        ? this.state.userdata[0].skills
-                        : ""}
+                      {this.state.userdata ? this.state.userdata.skills : ""}
                     </div>
                   </section>
                   <section class="pv-profile-section pv-top-card-section artdeco-container-card ember-view">
