@@ -39,6 +39,7 @@ var postProfileView = require("./services/profileStats/postProfileView");
 var addResume = require("./services/User/addResume");
 var editskills=require("./services/editskills");
 var editeducation=require("./services/editeducation");
+var searchUserByName = require("./services/User/searchUserByName");
 
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -109,6 +110,10 @@ handleTopicRequest("recruiterTraceJobs", recruiterTraceJobs);
 handleTopicRequest("addProfilePhoto_topic", addPhoto);
 handleTopicRequest("postProfileView", postProfileView);
 handleTopicRequest("addProfileResume_topic", addResume);
+<<<<<<< HEAD
 handleTopicRequest("skillsedit", editskills);
 handleTopicRequest("editeducation", editeducation);
 
+=======
+handleTopicRequest("searchUserByName_topic", searchUserByName);
+>>>>>>> 5546c901e021e641f724ea660cce2256b8abd87e

@@ -613,14 +613,11 @@ class Homepage extends Component {
                             : ""
                           : ""}{" "}
                         Student at{" "}
-                        {this.state.userdata.education
-                          ? this.state.userdata.education[0]
-                            ? this.state.userdata.education[0].school
-                            : ""
-                          : ""}{" "}
+                        {this.state.userdata ? this.state.userdata.school : ""}{" "}
                       </h2>
 
                       <h3 class="pv-top-card-section__location t-33 t-black--light  inline-block">
+                        {this.state.userdata ? this.state.userdata.city : ""} ,{" "}
                         {this.state.userdata ? this.state.userdata.country : ""}
                       </h3>
                       <div class="profilesection">
@@ -695,7 +692,7 @@ class Homepage extends Component {
 
                       <a
                         data-control-name="contact_see_more"
-                        href="/in/kesha-shah-2925b2135/detail/contact-info/"
+                        href="/home"
                         id="ember1125"
                         class="pv-top-card-v2-section__link pv-top-card-v2-section__link--contact-info mb1 ember-view"
                       >
@@ -731,7 +728,7 @@ class Homepage extends Component {
                       </a>
                       <a
                         data-control-name="topcard_view_all_connections"
-                        href="/search/results/people/?facetNetwork=%5B%22F%22%5D&amp;origin=MEMBER_PROFILE_CANNED_SEARCH"
+                        href="/network"
                         id="ember1126"
                         class="pv-top-card-v2-section__link pv-top-card-v2-section__link--connections ember-view"
                       >

@@ -13,6 +13,12 @@ router.post("/register", function(request, response) {
         status: "error",
         msg: "System Error, Try Again."
       });
+    } else if (results === "error") {
+      console.log("Inside err");
+      response.json({
+        status: "error",
+        msg: "System Error, Try Again."
+      });
     } else {
       console.log("IN reg success", results);
       console.log("IN reg success JSON", JSON.stringify(results));

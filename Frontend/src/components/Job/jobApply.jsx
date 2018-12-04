@@ -8,9 +8,14 @@ import { getJWTUsername } from "../common/auth";
 import Modal from "react-responsive-modal";
 import supportingImage4 from "../../images/supportingImage4.jpg";
 import supportingImage2 from "../../images/supportingImage2.png";
-import { searchJob, saveJob, applyJob } from "../../actions/jobActions";
+import { searchJob, saveJob, applyJob,getJobById } from "../../actions/jobActions";
 import Home from './jobFilter'
+import request from "superagent";
+import Dropzone from "react-dropzone";
 
+const CLOUDINARY_UPLOAD_PRESET = "g4q2o6at";
+const CLOUDINARY_UPLOAD_URL =
+  "https://api.cloudinary.com/v1_1/ungcmpe273/upload";
 
 class JobSearch extends Component {
   constructor(props) {
@@ -24,7 +29,9 @@ class JobSearch extends Component {
       city:"",
       email:"",
       imageNumber: 0,
+      text:"",
    selectedOption:"",
+   jobdetails:[],
       imageView: [],
       value:"",
       value1:"",
@@ -45,6 +52,40 @@ class JobSearch extends Component {
        this.Submit=this.Submit.bind(this);
   
   }
+  state = { uploadedFile: null };
+  handleResumeUpload(file) {
+    console.log("file=", file);
+    let upload = request
+      .post(CLOUDINARY_UPLOAD_URL)
+      .field("upload_preset", CLOUDINARY_UPLOAD_PRESET)
+      .field("file", file);
+
+    upload.end((err, response) => {
+      if (err) {
+        console.error(err);
+      }
+
+      if (response.body.secure_url !== "") {
+        // save to db
+        console.log("url=", response.body.secure_url);
+        this.setState({
+          url:response.body.secure_url
+        })
+      }
+    });
+  }
+
+  onResumeDrop = files => {
+    this.setState({
+      uploadedFile: files[0]
+    });
+
+    this.handleResumeUpload(files[0]);
+  };
+
+  
+
+  
 FirstnameChangeHandler = e => {
     this.setState({
       firstname: e.target.value
@@ -72,7 +113,7 @@ FirstnameChangeHandler = e => {
   };
   TextChangeHandler= e => {
     this.setState({
-      Job: e.target.value
+      text: e.target.value
     });
   };
  
@@ -94,32 +135,57 @@ handleChange2(event) {
     const data={
       username:getJWTUsername()
     }
+    var properties1 = this.props.search_job_results;
+    console.log("IDDDD:",properties1);
+    console.log(this.props.match.params.id);
+this.props.getJobById(this.props.match.params.id);
+  
     const res =  axios
     .post("http://localhost:3001/getuserdata", data)
     .then(response => {
       console.log("Updated List", response.data.updatedList);
       this.setState({
-        userdata: response.data.updatedList
+        userdata: response.data.updatedList,
+   
       });
     });
-console.log("IDDDD:",this.props.match.params.id)
+  
+  
+
   }
 
   Submit=e=>{
     const data={
-      firstname:this.state.firstname
+      firstname:this.state.firstname,
+      lastname:this.state.lastname,
+      email:this.state.email,
+      state:this.state.state,
+      city:this.state.city,
+      url:this.state.url,
+      pointOfInformation:this.state.text,
+      disabilityquestion:this.state.value,
+      diversityquestion1:this.state.value1,
+      diversityquestion2:this.state.value2,
+      timestamp:new Date()
+
     }
     console.log(data);
-    //this.props.applyJob(data);
+    this.props.applyJob(data,()=>{
+      alert("Applied for job");
+      window.location.href="/job-applied"
+      });
+    
   }
   render() {
-   console.log(this.state.userdata)
-
+ 
+console.log(this.props.job_edit ? this.props.job_edit[0] :"abc");
+var edit=this.props ? this.props.job_edit :""
+console.log(edit);
     return (
       <div class="menu">
         <div class="extendmenu row">
           <div class="icon">
-            <i class="fa fa-linkedin-square" />
+          <a href="/home" > <i class="fa fa-linkedin-square" /></a>
           </div>
           <h5 style={{"color":"white"}}>   Linkedin Apply</h5>
      </div>
@@ -128,7 +194,7 @@ console.log("IDDDD:",this.props.match.params.id)
           <div class="row" >
             <div class="col-1">
               <img
-                src={this.state.userdata.photo}
+                src={this.props.job_edit ? this.props.job_edit[0] ? this.props.job_edit[0].logo : "" :""}
                 style={{ width: "100px", height: "100px" }}
               />
             </div>
@@ -139,14 +205,15 @@ console.log("IDDDD:",this.props.match.params.id)
             >
               <li class="blue">
                 <a target="_blank">
-                  <Link to="/Detail">{this.props.location.state}</Link>
+                  <Link to="/Detail"></Link>
                 </a>
               </li>
               <br />
-              {/* {this.state.property.company} */}
+              {this.props.job_edit ? this.props.job_edit[0] ? this.props.job_edit[0].title : "" :""}
               <br />
-              {/* {property.location} */}
+              {this.props.job_edit ? this.props.job_edit[0] ? this.props.job_edit[0].company : "" :""}
               <br />
+              {this.props.job_edit ? this.props.job_edit[0] ? this.props.job_edit[0].location : "" :""}
               </div>
               </div>
      </div>
@@ -159,10 +226,10 @@ console.log("IDDDD:",this.props.match.params.id)
      
      <br></br>
                 <div>
-                   <img src={supportingImage2} style={{"border-radius":"50%", "width":"6vw","height":"4vw"}} />{" "}
+                   <img src={this.state.userdata.photo} style={{"border-radius":"50%", "width":"6vw","height":"4vw"}} />{" "}
                 </div>
                 <div class="col-4">
-                  Aishwariya Bhatt <br />
+                  {this.state.userdata.firstname}<br />
                   Student <br />
                   San Jose
                 </div>
@@ -214,23 +281,27 @@ console.log("IDDDD:",this.props.match.params.id)
           <input
             style={{"background-color": "#e1e9ee","font-size":"0.8rem"}}
             type="text"
-            placeholder="Se"
+            placeholder="Search"
             onChange={this.CityChangeHandler}
           />
           </div>
          
     Upload Your Resume:
 <br></br>
-    <button class="Button" onClick={this.upload}>
-            Upload Resume
-          </button>
+<Dropzone
+                    className="dropzone"
+                    multiple={false}
+                    onDrop={this.onResumeDrop.bind(this)}
+                  >
+                    <p>Drop a resume or click to select a file to upload.</p>
+                  </Dropzone>
           <br></br>
           <br></br>
     How did your hear about us:
     <div col="col-2" class="inputfield ">
           
           <input
-            style={{"background-color": "#e1e9ee", "width":"35vw","height":"7vw"}}
+            style={{"background-color": "#e1e9ee", "width":"35vw","height":"5vw"}}
             type="textarea"
             placeholder="Search"
             onChange={this.TextChangeHandler}
@@ -302,10 +373,11 @@ console.log("IDDDD:",this.props.match.params.id)
 }
 const mapStateToProps = state => ({
   search_job_results: state.jobReducer.search_job_results,
-  view: state.jobReducer.updatedList
+  view: state.jobReducer.updatedList,
+  job_edit:state.jobReducer.job_edit
 });
 
 export default connect(
   mapStateToProps,
-  { searchJob, saveJob, applyJob }
+  { searchJob, saveJob, applyJob,getJobById }
 )(JobSearch);

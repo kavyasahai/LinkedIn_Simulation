@@ -9,7 +9,7 @@ var config = require("../../config/database");
 router.post("/delete", function(request, response) {
   console.log("in request login", request.body.data);
   var sqlQuery =
-   " UPDATE users SET isactive = 'no' WHERE username = '"+request.body.username+"';";
+   " UPDATE users SET isactive = '0' WHERE username = '"+request.body.username+"';";
   console.log(sqlQuery);
   pool.getConnection(function(err, con) {
     if (err) {

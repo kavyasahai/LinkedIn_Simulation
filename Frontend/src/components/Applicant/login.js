@@ -125,8 +125,8 @@ class Login extends Component {
       //set the with credentials to true
       axios.defaults.withCredentials = true;
       this.props.register(data, response => {
-        console.log(response.data);
-        if (response.data === "Could not sign-up") {
+        console.log("response=", response.data);
+        if (response.data.status === "error") {
           window.alert("Username already exists.");
         } else {
           window.alert("Signed-up successfully!");

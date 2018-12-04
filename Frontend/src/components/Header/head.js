@@ -16,20 +16,19 @@ class Header extends Component {
     localStorage.clear();
     this.props.history.push("/login");
   }
-  delete(){
-    const data={
-      username:getJWTUsername()
-    }
+  delete() {
+    const data = {
+      username: getJWTUsername()
+    };
     console.log(data);
-    axios
-      .post("http://localhost:3001/delete", data)
-      .then(response => {
-        alert("Sorry to see you going u can active ur account by again logging in :)"); 
+    axios.post("http://localhost:3001/delete", data).then(response => {
+      alert(
+        "Sorry to see you going u can active ur account by again logging in :)"
+      );
 
-       window.location.href="http://localhost:3000/login";
-       localStorage.clear();
-       
-      });
+      window.location.href = "http://localhost:3000/login";
+      localStorage.clear();
+    });
   }
   render() {
     return (
@@ -99,6 +98,9 @@ class Header extends Component {
                       <a class="dropdown-item" href="/myrequests">
                         My Requests
                       </a>
+                      <a class="dropdown-item" href="/user/search">
+                        Search User
+                      </a>
                     </div>
                   </li>
                 </div>
@@ -118,7 +120,7 @@ class Header extends Component {
                   <li
                     class="blue"
                     class="nav-item dropdown"
-                    style={{ opacity: "unset", padding: 0,height:0 }}
+                    style={{ opacity: "unset", padding: 0, height: 0 }}
                   >
                     <a
                       class=" dropdown-toggle"
@@ -144,7 +146,7 @@ class Header extends Component {
                         Applied Jobs
                       </a>
                       <a class="dropdown-item" href="/job-search">
-                          Search A Job
+                        Search A Job
                       </a>
                     </div>
                   </li>
@@ -204,7 +206,8 @@ class Header extends Component {
                   id="navbardrop"
                   data-toggle="dropdown"
                 >
-                  <span class="normal" />Logout{" "}
+                  <span class="normal" />
+                  Logout{" "}
                 </a>
                 <div class="dropdown-menu">
                   <li>
@@ -213,7 +216,7 @@ class Header extends Component {
                       Logout
                     </a>
                   </li>
-                  <a class="dropdown-item"  onClick={this.delete}>
+                  <a class="dropdown-item" onClick={this.delete}>
                     Delete Your Account
                   </a>
                 </div>

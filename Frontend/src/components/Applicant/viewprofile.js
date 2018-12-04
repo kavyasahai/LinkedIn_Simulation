@@ -247,14 +247,11 @@ class ViewProfile extends Component {
                             : ""
                           : ""}{" "}
                         Student at{" "}
-                        {this.state.userdata.education
-                          ? this.state.userdata.education[0]
-                            ? this.state.userdata.education[0].school
-                            : ""
-                          : ""}
+                        {this.state.userdata ? this.state.userdata.school : ""}
                       </h2>
 
                       <h3 class="pv-top-card-section__location t-33 t-black--light  inline-block">
+                        {this.state.userdata ? this.state.userdata.city : ""} ,{" "}
                         {this.state.userdata ? this.state.userdata.country : ""}
                       </h3>
                       <div class="profilesection">
@@ -315,7 +312,7 @@ class ViewProfile extends Component {
 
                       <a
                         data-control-name="contact_see_more"
-                        href="/in/kesha-shah-2925b2135/detail/contact-info/"
+                        href="/home"
                         id="ember1125"
                         class="pv-top-card-v2-section__link pv-top-card-v2-section__link--contact-info mb1 ember-view"
                       >
@@ -351,39 +348,11 @@ class ViewProfile extends Component {
                       </a>
                       <a
                         data-control-name="topcard_view_all_connections"
-                        href="/search/results/people/?facetNetwork=%5B%22F%22%5D&amp;origin=MEMBER_PROFILE_CANNED_SEARCH"
+                        href="/network"
                         id="ember1126"
                         class="pv-top-card-v2-section__link pv-top-card-v2-section__link--connections ember-view"
                       >
                         {" "}
-                        <span class="svg-icon-wrap">
-                          <span class="visually-hidden">See connections</span>
-                          <li-icon
-                            aria-hidden="true"
-                            type="people-icon"
-                            class="pv-top-card-v2-section__icon mh1"
-                          >
-                            <svg
-                              viewBox="0 0 24 24"
-                              width="24px"
-                              height="24px"
-                              x="0"
-                              y="0"
-                              preserveAspectRatio="xMinYMin meet"
-                              class="artdeco-icon"
-                              focusable="false"
-                            >
-                              <path
-                                d="M20.74,14.2L19,13.54V12.86l0.25-.41A5,5,0,0,0,20,9.82V9a3,3,0,0,0-6,0V9.82a5,5,0,0,0,.75,2.63L15,12.86v0.68l-1,.37a4,4,0,0,0-.58-0.28l-2.45-1V10.83A8,8,0,0,0,12,7V6A4,4,0,0,0,4,6V7a8,8,0,0,0,1,3.86v1.84l-2.45,1A4,4,0,0,0,0,17.35V20a1,1,0,0,0,1,1H22a1,1,0,0,0,1-1V17.47A3.5,3.5,0,0,0,20.74,14.2ZM16,8.75a1,1,0,0,1,2,0v1.44a3,3,0,0,1-.38,1.46l-0.33.6a0.25,0.25,0,0,1-.22.13H16.93a0.25,0.25,0,0,1-.22-0.13l-0.33-.6A3,3,0,0,1,16,10.19V8.75ZM6,5.85a2,2,0,0,1,4,0V7.28a6,6,0,0,1-.71,2.83L9,10.72a1,1,0,0,1-.88.53H7.92A1,1,0,0,1,7,10.72l-0.33-.61A6,6,0,0,1,6,7.28V5.85ZM14,19H2V17.25a2,2,0,0,1,1.26-1.86L7,13.92v-1a3,3,0,0,0,1,.18H8a3,3,0,0,0,1-.18v1l3.72,1.42A2,2,0,0,1,14,17.21V19Zm7,0H16V17.35a4,4,0,0,0-.55-2l1.05-.4V14.07a2,2,0,0,0,.4.05h0.2a2,2,0,0,0,.4-0.05v0.88l2.53,1a1.5,1.5,0,0,1,1,1.4V19Z"
-                                class="large-icon"
-                                style={{ fill: "currentColor" }}
-                              />
-                            </svg>
-                          </li-icon>
-                        </span>
-                        <span class="pv-top-card-v2-section__entity-name pv-top-card-v2-section__connections ml2 t-33 t-black t-bold">
-                          See connections
-                        </span>
                       </a>
                     </div>
                   </div>

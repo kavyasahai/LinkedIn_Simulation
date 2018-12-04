@@ -47,7 +47,7 @@ db.findUser = function(user, successCallback, failureCallback) {
   console.log("db username" + user.username);
   console.log("db password" + user.password);
   var sqlQuery =
-    "SELECT * FROM users WHERE username = '" + user.username + "';";
+    "SELECT * FROM users WHERE username = '" + user.username + "' and isactive=1;";
   console.log(sqlQuery);
 
   pool.getConnection(function(err, con) {
@@ -72,6 +72,7 @@ db.findUser = function(user, successCallback, failureCallback) {
           console.log("insidesucces");
         } else {
           console.log("INSIDE SQL NO USER FOUND");
+         
           failureCallback("User not found.");
           console.log("Wrong arf");
         }
