@@ -216,6 +216,7 @@ class JobSearch extends Component {
     console.log("save data", data);
     this.props.saveJob(data, () => {
       alert("saved a job");
+      this.props.history.push("./job-saved");
     });
   };
 

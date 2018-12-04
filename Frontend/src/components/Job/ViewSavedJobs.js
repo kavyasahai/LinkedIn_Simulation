@@ -18,7 +18,7 @@ import axios from "axios";
           properties1: [],
           jobdetails:[]
         };
-       
+        this.apply = this.apply.bind(this);
       }
 
      componentDidMount(){
@@ -42,11 +42,11 @@ import axios from "axios";
           });
         }
        });
-          
-        
-
-         
-     }
+      }
+      apply=e=>{
+        console.log(e.jobId);
+      this.props.history.push(`/job-apply${e.jobId}`)
+  } 
     render(){
     
         var i = -1;
@@ -84,7 +84,7 @@ import axios from "axios";
                     
                   </div>
                   <div style={{"paddingTop":"10px"}}>
-                    <button >Apply</button>
+                    <button onClick={this.apply.bind(this, property)} >Apply</button>
                   </div>
                 </div>
               </div>
