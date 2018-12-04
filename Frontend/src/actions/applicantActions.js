@@ -167,19 +167,23 @@ export function login(data, callback) {
 //   }
 // }
 
-export const register = (data, cb) => async dispatch => {
+
+
+export function register(data, callback) {
   try {
-    const res = await axios.post(`${ROOT_URL}/register`, data);
-    dispatch({
+   
+    const request = axios
+      .post(`${ROOT_URL}/register`,data)
+      .then(res => callback(res));
+
+    return {
       type: APPLICANT_SIGNUP,
-      payload: res.data
-    });
-    cb();
-    console.log(res.data);
+      payload: request
+    };
   } catch (e) {
     return {
       type: APPLICANT_SIGNUP,
       payload: e
     };
   }
-};
+}

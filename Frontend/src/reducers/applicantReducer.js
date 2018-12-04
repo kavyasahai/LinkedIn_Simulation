@@ -78,7 +78,8 @@ export default function(state = initialState, action) {
       console.log("payload", action.payload);
       return {
         ...state,
-        username: action.payload
+        username: action.payload,
+        
       };
 
     default:

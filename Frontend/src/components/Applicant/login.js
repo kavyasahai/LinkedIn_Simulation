@@ -59,8 +59,8 @@ class Login extends Component {
     if (username == "") window.alert("Email cannot be empty.");
     else if (username.length > 30)
       window.alert("Email cannot be more than 30 characters long.");
-    // else if (!/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(username))
-    //   window.alert("Email should be a valid email-address.");
+    else if (!/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(username))
+      window.alert("Email should be a valid email-address.");
     else if (password == "") window.alert("Password cannot be empty.");
     else if (password.length > 20 || password.length < 6)
       window.alert("Password should be between 6-20 characters");
@@ -82,7 +82,7 @@ class Login extends Component {
           console.log("Login successful.");
           const token = response.data.updatedList;
           localStorage.setItem("username", token);
-          localStorage.setItem("email", data.username);
+          //localStorage.setItem("email", data.username);
 
           this.props.history.push("/home");
         }
@@ -104,11 +104,7 @@ class Login extends Component {
     else if (username == "") window.alert("Email cannot be empty.");
     else if (username.length > 30)
       window.alert("Email cannot be more than 30 characters long.");
-    else if (
-      !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-        username
-      )
-    )
+    else if (!/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(username))
       window.alert("Email should be a valid email-address.");
     else if (password == "") window.alert("Password cannot be empty.");
     else if (password.length > 20 || password.length < 6)
@@ -116,7 +112,7 @@ class Login extends Component {
     else {
       var headers = new Headers();
       //prevent page from refresh
-
+      e.preventDefault();
       const data = {
         username: this.state.username,
         password: this.state.password,
@@ -125,27 +121,23 @@ class Login extends Component {
       };
       console.log("data in submit register", data);
       //set the with credentials to true
-
-      // this.props.register(data);
+      axios.defaults.withCredentials = true;
       this.props.register(
-        data,
-        //   , response => {
-        //   console.log("REG response=", response);
-        //   if (response.data === "Could not sign-up") {
-        //     window.alert("Username already exists.");
-        //   } else {
-        //     window.alert("Signed-up successfully!");
-        //     localStorage.setItem("signup", this.state.username);
-        //     this.props.history.push("/postsignup");
-        //   }
-        // }
-        () => {
-          console.log("SIGN:", this.props.username);
-        }
-      );
+        data,response => {
+          console.log(response.data);
+          if (response.data === "Could not sign-up") {
+            window.alert("Username already exists.");
+          } else {
+            window.alert("Signed-up successfully!");
+            localStorage.setItem("signup", this.state.username);
+            this.props.history.push("/postsignup");
+          }
+        })
+      // this.props.register(data);
+
+      // localStorage.setItem("signup", this.state.username);
     }
   };
-
   render() {
     const token = getToken();
 
@@ -153,7 +145,14 @@ class Login extends Component {
     if (token === true) {
       redirectVar = <Redirect to="/home" />;
     }
-
+    if (this.props.inserted) {
+      redirectVar = <Redirect to="/postsignup" />;
+    }
+    //redirect based on successful login
+    // let redirectVar = null;
+    // if(cookie.load('cookie')){
+    //     redirectVar = <Redirect to= "/home"/>
+    // }
     return (
       <div class="container">
         {redirectVar}
@@ -171,8 +170,8 @@ class Login extends Component {
                 <div class="login-form">
                   <label for="login-email">Email</label>
                   <input
-                    type="email"
-                    class="login-email "
+                    type="text"
+                    class="login-email"
                     placeholder="Email"
                     onChange={this.usernameChangeHandler}
                     style={{ background: "white" }}
@@ -342,6 +341,7 @@ class Login extends Component {
 
 const mapStateToProps = state => ({
   username: state.applicantLogin.username,
+  inserted: state.applicantLogin.inserted,
   token: state.applicantLogin.token
 });
 
