@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import supportingImage4 from "../../images/supportingImage4.jpg";
-
+import axios from "axios";
 import { Link } from "react-router-dom";
 import "../../css/jobSearch.css";
+import { getJWTUsername } from "../common/auth";
 class Header extends Component {
   constructor(props) {
     //Call the constrictor of Super class i.e The Component
@@ -14,6 +15,21 @@ class Header extends Component {
   clear() {
     localStorage.clear();
     this.props.history.push("/login");
+  }
+  delete(){
+    const data={
+      username:getJWTUsername()
+    }
+    console.log(data);
+    axios
+      .post("http://localhost:3001/delete", data)
+      .then(response => {
+        alert("Sorry to see you going u can active ur account by again logging in :)"); 
+
+       window.location.href="http://localhost:3000/login";
+       localStorage.clear();
+       
+      });
   }
   render() {
     return (
@@ -194,7 +210,7 @@ class Header extends Component {
                       Logout
                     </a>
                   </li>
-                  <a class="dropdown-item" href="/job/posted-jobs">
+                  <a class="dropdown-item"  onClick={this.delete}>
                     Delete Your Account
                   </a>
                 </div>

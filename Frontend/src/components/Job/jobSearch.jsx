@@ -62,18 +62,18 @@ componentDidMount(){
             properties1: this.props.search_job_results,
             view1: this.state.view1.concat(this.props.search_job_results[0])
           });
-          this.state.properties1.map(property => {
-            console.log(property.Icon);
-            axios
-              .post("http://localhost:3001/download/" + property.Icon)
-              .then(response => {
-                console.log("Imgae Res : ", response);
-                let imagePreview = "data:image/jpg;base64, " + response.data;
-                this.setState({
-                  imageView: this.state.imageView.concat(imagePreview)
-                });
-              });
-          });
+          // this.state.properties1.map(property => {
+          //   console.log(property.Icon);
+          //   // axios
+          //   //   .post("http://localhost:3001/download/" + property.Icon)
+          //   //   .then(response => {
+          //   //     console.log("Imgae Res : ", response);
+          //   //     let imagePreview = "data:image/jpg;base64, " + response.data;
+          //   //     this.setState({
+          //   //       imageView: this.state.imageView.concat(imagePreview)
+          //   //     });
+          //   //   });
+          // });
         });
       this.props.getsavedJob(data,async()=>{
         this.setState({
@@ -277,7 +277,7 @@ else{
 
           <div class="Jobs  row">
             <div class="col-1">
-              <img src={supportingImage2} />
+              <img src={property.logo} />
             </div>
             <div
               class="col-11"
