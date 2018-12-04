@@ -53,7 +53,7 @@ class Header extends Component {
             </div>
           </div>
 
-          <div class="row" style={{ paddingLeft: "5vw" }}>
+          <div class="row" style={{ paddingLeft: "5vw",  }}>
             <div class="col-2">
               <div class="go-inline">
                 <div className="home">
@@ -82,12 +82,13 @@ class Header extends Component {
                   <li
                     class="blue"
                     class="nav-item dropdown"
-                    style={{ opacity: "unset" }}
+                    style={{ opacity: "unset"}}
                   >
                     <a
                       class="nav-link dropdown-toggle normal blue"
                       id="navbardrop"
                       data-toggle="dropdown"
+                      style={{ padding:".1rem 1rem" }}
                     >
                       <span class="normal">Network</span>
                     </a>
@@ -199,7 +200,7 @@ class Header extends Component {
               <li
                 class="blue"
                 class="nav-item dropdown"
-                style={{ opacity: "unset", padding: 0 }}
+                style={{ opacity: "unset", padding: "1.5vw",fontSize:"1rem" }}
               >
                 <a
                   class=" dropdown-toggle"
