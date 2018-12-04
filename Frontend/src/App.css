@@ -530,3 +530,7 @@ a {
   color: #006fa6;
   text-decoration: none;
 }
+
+.general_pagination {
+  margin-left: 45vw;
+}
