@@ -51,7 +51,7 @@ class Main extends Component {
             <Switch>
               {/*Render Different Component based on Route*/}
 
-              <Route path="/login" component={Login} />
+              <Route exact path="/login" component={Login} />
               <Route path="/postsignup" component={PostSignUp} />
               <Route path="/applicantdetails" component={ApplicantDetails} />
               <Route path="/viewprofile" component={ViewProfile} />
@@ -111,7 +111,7 @@ class Main extends Component {
               <PrivateRoute path="/job/edit" component={EditJob} />
               <PrivateRoute path="/job-details" component={jobDetails} />
               <PrivateRoute path="/job-search" component={jobSearch} />
-              <PrivateRoute path="/job-saved" component={ViewSavedJob}/>
+              <PrivateRoute path="/job-saved" component={ViewSavedJob} />
 
               <Route path="/not-found" exact component={NotFound} />
               <Route path="/" exact component={Login} />

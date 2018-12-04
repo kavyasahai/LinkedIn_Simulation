@@ -90,6 +90,7 @@ class Login extends Component {
     }
   };
   submitRegister = e => {
+    console.log("IN SUB REG");
     const { username, password, firstname, lastname } = this.state;
     if (firstname == "") window.alert("First Name cannot be empty.");
     else if (firstname.length > 30)
@@ -127,22 +128,16 @@ class Login extends Component {
       //set the with credentials to true
 
       // this.props.register(data);
-      this.props.register(
-        data,
-        //   , response => {
-        //   console.log("REG response=", response);
-        //   if (response.data === "Could not sign-up") {
-        //     window.alert("Username already exists.");
-        //   } else {
-        //     window.alert("Signed-up successfully!");
-        //     localStorage.setItem("signup", this.state.username);
-        //     this.props.history.push("/postsignup");
-        //   }
-        // }
-        () => {
-          console.log("SIGN:", this.props.username);
+      this.props.register(data, response => {
+        console.log("REG response=", response);
+        if (response.data === "Could not sign-up") {
+          window.alert("Username already exists.");
+        } else {
+          window.alert("Signed-up successfully!");
+          localStorage.setItem("signup", this.state.username);
+          this.props.history.push("/postsignup");
         }
-      );
+      });
     }
   };
 

@@ -4,9 +4,10 @@ var kafka = require("../../kafka/client");
 var express = require("express");
 const router = express.Router();
 
-router.get("/recruiterSavedJobs", function(request, response) {
+router.get("/recruiterTraceJobs", function(request, response) {
+  console.log("In recruiter Trace Job");
   console.log("Job Saves: ", request.query);
-  kafka.make_request("recruiterSavedJobs", request.query, function(
+  kafka.make_request("recruiterTraceJobs", request.query, function(
     err,
     result
   ) {

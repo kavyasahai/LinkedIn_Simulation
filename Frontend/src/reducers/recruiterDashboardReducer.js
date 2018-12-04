@@ -4,7 +4,8 @@ import {
   GET_RECRUITER_JOBS,
   RECRUITER_DASHBOARD_CITY,
   RECRUITER_DASHBOARD_JOB_CLICKS,
-  RECRUITER_NUM_SAVED_JOB
+  RECRUITER_NUM_SAVED_JOB,
+  RECRUITER_TRACE_JOB
 } from "../actions/types";
 
 const initialState = {
@@ -50,11 +51,11 @@ export default function(state = initialState, action) {
         ...state,
         data_jobsaves: action.payload
       };
-    // case RECRUITER_TRACE_JOB:
-    //   return {
-    //     ...state,
-    //     data_tracejob: action.payload
-    //   };
+    case RECRUITER_TRACE_JOB:
+      return {
+        ...state,
+        data_tracejob: action.payload
+      };
     default:
       return state;
   }

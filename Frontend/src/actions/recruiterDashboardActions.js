@@ -5,7 +5,8 @@ import {
   GET_RECRUITER_JOBS,
   RECRUITER_DASHBOARD_CITY,
   RECRUITER_DASHBOARD_JOB_CLICKS,
-  RECRUITER_NUM_SAVED_JOB
+  RECRUITER_NUM_SAVED_JOB,
+  RECRUITER_TRACE_JOB
 } from "./types";
 import { setHeader } from "../components/common/auth";
 
@@ -123,23 +124,23 @@ export const getRecruiterSavedJobs = username => async dispatch => {
   }
 };
 
-// export const getJobTrace = username => async dispatch => {
-//   try {
-//     setHeader();
+export const getJobTrace = id => async dispatch => {
+  try {
+    setHeader();
 
-//     const res = await axios.get(`${ROOT_URL}/getJobTrace`, {
-//       params: {
-//         email: username
-//       }
-//     });
-//     dispatch({
-//       type: RECRUITER_TRACE_JOB,
-//       payload: res.data
-//     });
-//   } catch (e) {
-//     return {
-//       type: RECRUITER_TRACE_JOB,
-//       payload: e
-//     };
-//   }
-// };
+    const res = await axios.get(`${ROOT_URL}/recruiterTraceJobs`, {
+      params: {
+        jobid: id
+      }
+    });
+    dispatch({
+      type: RECRUITER_TRACE_JOB,
+      payload: res.data
+    });
+  } catch (e) {
+    return {
+      type: RECRUITER_TRACE_JOB,
+      payload: e
+    };
+  }
+};

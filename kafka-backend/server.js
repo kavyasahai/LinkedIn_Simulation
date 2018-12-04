@@ -31,6 +31,7 @@ var getuserdata = require("./services/getuserdata");
 var getJobById = require("./services/Job/getJobById");
 var getsavedjobs = require("./services/Job/getsavedjobs");
 var recruiterSavedJobs = require("./services/RecruiterDashboard/recruiterSavedJobs");
+var recruiterTraceJobs = require("./services/RecruiterDashboard/recruiterTraceJob");
 
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -95,3 +96,4 @@ handleTopicRequest("getuserdata", getuserdata);
 handleTopicRequest("getJobById_topic", getJobById);
 handleTopicRequest("getsavedjobs", getsavedjobs);
 handleTopicRequest("recruiterSavedJobs", recruiterSavedJobs);
+handleTopicRequest("recruiterTraceJobs", recruiterTraceJobs);

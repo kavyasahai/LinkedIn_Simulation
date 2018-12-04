@@ -33,14 +33,14 @@ class recruiterDashboardJobSaves extends Component {
   render() {
     console.log("PROPS: ", this.props.data_jobsaves);
 
-    const data = [["Job Posting", "Clicks"]];
+    const data = [["Job Posting", "Saves"]];
 
-    // this.props.data_jobclicks &&
-    //   this.props.data_jobclicks.forEach(job => {
-    //     data.push([job.title + " at " + job.company, parseInt(job.clicks)]);
-    //   });
+    this.props.data_jobsaves &&
+      Object.keys(this.props.data_jobsaves).forEach(key => {
+        data.push([key, this.props.data_jobsaves[key]]);
+      });
 
-    // console.log("DATA", data);
+    console.log("DATA", data);
 
     return (
       <React.Fragment>
@@ -72,23 +72,15 @@ class recruiterDashboardJobSaves extends Component {
         </div>
         <div className="displayCharts">
           <Chart
-            height="30vw"
-            chartType="BarChart"
+            width={"75vw"}
+            height={"30vw"}
+            chartType="PieChart"
             loader={<div>Loading Chart</div>}
             data={data}
             options={{
-              title: "Clicks per Job Posting",
-              chartArea: { width: "50%" },
-              hAxis: {
-                title: "Number of Clicks",
-                minValue: 0
-              },
-              vAxis: {
-                title: "Job Posting"
-              }
+              title: "Total number of people who have saved your jobs",
+              is3D: true
             }}
-            // For tests
-            rootProps={{ "data-testid": "1" }}
           />
           <br />
           <br />
