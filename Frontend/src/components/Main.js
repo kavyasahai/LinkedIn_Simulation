@@ -32,6 +32,7 @@ import ViewPostedJobs from "./Recruiter/ViewPostedJobs";
 import EditJob from "./Job/jobEdit";
 import ViewSavedJob from "./Job/ViewSavedJobs";
 import ViewProfile from "./Applicant/viewprofile";
+import ViewAppliedJob from "./Job/ViewAppliedJob";
 
 //Create a Main Component
 class Main extends Component {
@@ -60,6 +61,7 @@ class Main extends Component {
               <PrivateRoute path="/network" component={network} />
               <PrivateRoute path="/myrequests" component={ConnectionRequests} />
               <PrivateRoute path="/job-apply" component={jobApply} />
+           
               <Route
                 path="/messaging"
                 store={chatstore}
@@ -112,6 +114,7 @@ class Main extends Component {
               <PrivateRoute path="/job-details" component={jobDetails} />
               <PrivateRoute path="/job-search" component={jobSearch} />
               <PrivateRoute path="/job-saved" component={ViewSavedJob}/>
+              <PrivateRoute path="/job-applied" component={ViewAppliedJob}/>
 
               <Route path="/not-found" exact component={NotFound} />
               <Route path="/" exact component={Login} />

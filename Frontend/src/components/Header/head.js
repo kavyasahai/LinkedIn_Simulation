@@ -122,7 +122,7 @@ class Header extends Component {
                       <a class="dropdown-item" href="/job-saved">
                         Saved Jobs
                       </a>
-                      <a class="dropdown-item" href="/">
+                      <a class="dropdown-item" href="/job-applied">
                         Applied Jobs
                       </a>
                     </div>
