@@ -223,7 +223,7 @@ componentDidMount(){
     console.log(data);
     this.props.applyJob(data,()=>{
       alert("Applied for job");
-     {this.closebox}
+    window.location.href="/job-applied"
     });
   };
 
@@ -463,12 +463,12 @@ else{
               >
                 <header class="modal-header">
                   <h2 style={{ color: "rgba(0,0,0,.75)" }}>
-                    Apply To {property.Company}
+                    Apply To {property.company}
                   </h2>
                 </header>
                 <div class="row">
                   <div>
-                    <img src={supportingImage4} />{" "}
+                    <img src={userdata.photo} />{" "}
                   </div>
                   <div class="col-4">
                    {userdata.firstname}  <br />
@@ -482,7 +482,7 @@ else{
                     Email:
                     <input
                       type="text"
-                      placeholder={userdata.firstname}
+                      placeholder={userdata.email}
                       onChange={this.propertyTopic}
                       style={{
                         "margin-bottom": "10px",

@@ -61,8 +61,10 @@ class Main extends Component {
               <Route path="/profilepicture" component={UserProfilePhoto} />
               <PrivateRoute path="/network" component={network} />
               <PrivateRoute path="/myrequests" component={ConnectionRequests} />
-              <PrivateRoute path="/job-apply" component={jobApply} />
-
+              {/* <PrivateRoute path="/job-apply" component={jobApply} /> */}
+<Route path="/job-apply:id" component={jobApply}
+//  render={(props)=>(<jobApply {...props}/>)}
+ />
               <Route
                 path="/messaging"
                 store={chatstore}

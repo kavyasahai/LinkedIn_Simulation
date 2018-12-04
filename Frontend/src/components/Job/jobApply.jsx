@@ -4,12 +4,13 @@ import "../common/auth"
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { getJWTUsername } from "../common/auth";
 import Modal from "react-responsive-modal";
 import supportingImage4 from "../../images/supportingImage4.jpg";
 import supportingImage2 from "../../images/supportingImage2.png";
 import { searchJob, saveJob, applyJob } from "../../actions/jobActions";
 import Home from './jobFilter'
-import { getJWTUsername } from "../common/auth";
+
 
 class JobSearch extends Component {
   constructor(props) {
@@ -28,6 +29,7 @@ class JobSearch extends Component {
       value:"",
       value1:"",
       value2:"",
+      userdata:[],
       open: false
     };
     
@@ -87,9 +89,20 @@ handleChange2(event) {
   this.setState({value2: event.target.value});
 }
   componentDidMount(){
-    const foo =this.props.location.state;
-    console.log("Foo",foo);
-
+    // const foo =this.props.location.state;
+    // console.log("Foo",foo);
+    const data={
+      username:getJWTUsername()
+    }
+    const res =  axios
+    .post("http://localhost:3001/getuserdata", data)
+    .then(response => {
+      console.log("Updated List", response.data.updatedList);
+      this.setState({
+        userdata: response.data.updatedList
+      });
+    });
+console.log("IDDDD:",this.props.match.params.id)
   }
 
   Submit=e=>{
@@ -100,8 +113,8 @@ handleChange2(event) {
     //this.props.applyJob(data);
   }
   render() {
-   
-console.log("Props",this.state.handleOptionChange);
+   console.log(this.state.userdata)
+
     return (
       <div class="menu">
         <div class="extendmenu row">
@@ -115,7 +128,7 @@ console.log("Props",this.state.handleOptionChange);
           <div class="row" >
             <div class="col-1">
               <img
-                src={supportingImage2}
+                src={this.state.userdata.photo}
                 style={{ width: "100px", height: "100px" }}
               />
             </div>
@@ -130,9 +143,9 @@ console.log("Props",this.state.handleOptionChange);
                 </a>
               </li>
               <br />
-              Googgle
+              {/* {this.state.property.company} */}
               <br />
-              San Jose, Ca
+              {/* {property.location} */}
               <br />
               </div>
               </div>
