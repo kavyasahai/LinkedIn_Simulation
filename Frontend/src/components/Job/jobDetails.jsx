@@ -37,7 +37,7 @@ class JobDetails extends Component {
       properties1: this.state.properties1.concat(propertydetails)
     });
   }
-  apply=e=>{
+  apply= e =>{
         console.log(e.jobId);
       this.props.history.push(`/job-apply${e.jobId}`)
   }
