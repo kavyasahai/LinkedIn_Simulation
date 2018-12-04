@@ -12,6 +12,13 @@ import { skillsinsert } from "../../actions/applicantActions";
 import Head from "../Header/head";
 import { Link } from "react-router-dom";
 import { DropdownMenu, MenuItem } from "react-bootstrap-dropdown-menu";
+import { addPhoto } from "../../actions/applicantActions";
+
+import request from "superagent";
+import Dropzone from "react-dropzone";
+const CLOUDINARY_UPLOAD_PRESET = "g4q2o6at";
+const CLOUDINARY_UPLOAD_URL =
+  "https://api.cloudinary.com/v1_1/ungcmpe273/upload";
 // import { getMaxListeners } from 'cluster';
 
 //Define a Login Component
@@ -87,11 +94,11 @@ class Homepage extends Component {
     this.submitskills = this.submitskills.bind(this);
   }
   //Call the Will Mount to set the auth Flag to false
-  async componentWillMount() {
+  async componentDidMount() {
     var headers = new Headers();
     //prevent page from refresh
     // e.preventDefault();
-    const username = "john.doe@gmail.com";
+    const username = getJWTUsername();
     const data = {
       username: username
     };
@@ -110,6 +117,37 @@ class Homepage extends Component {
     console.log(this.state.userdata);
     // document.getElementById("topcard-headline").text=this.state.headline
   }
+
+  handleImageUpload(file) {
+    let upload = request
+      .post(CLOUDINARY_UPLOAD_URL)
+      .field("upload_preset", CLOUDINARY_UPLOAD_PRESET)
+      .field("file", file);
+
+    upload.end((err, response) => {
+      if (err) {
+        console.error(err);
+      }
+
+      if (response.body.secure_url !== "") {
+        this.setState({ companyLogo: response.body.secure_url });
+        window.alert("Image uploaded successfully!");
+        console.log("url=", response.body.secure_url);
+        this.props.addPhoto(response.body.secure_url, getJWTUsername());
+        window.location.reload();
+      } else {
+        window.alert("There was an error in uploading the image!");
+      }
+    });
+  }
+
+  onImageDrop = files => {
+    this.setState({
+      uploadedFile: files[0]
+    });
+
+    this.handleImageUpload(files[0]);
+  };
 
   firstnameChangeHandler = e => {
     this.setState({
@@ -250,7 +288,7 @@ class Homepage extends Component {
     console.log("in submit summary method");
     //prevent page from refresh
     e.preventDefault();
-    const username = "john.doe@gmail.com";
+    const username = getJWTUsername();
     const data = {
       username: username,
       headline: this.state.headline,
@@ -378,6 +416,36 @@ class Homepage extends Component {
                         data-ember-action=""
                         data-ember-action-1110="1110"
                       >
+                        <Dropzone
+                          className="dropzone"
+                          multiple={false}
+                          accept="image/*"
+                          onDrop={this.onImageDrop.bind(this)}
+                        >
+                          <span class="profile-photo-edit__edit-icon svg-icon-wrap">
+                            <li-icon
+                              aria-hidden="true"
+                              type="pencil-icon"
+                              size="small"
+                            >
+                              <svg
+                                viewBox="0 0 24 24"
+                                width="24px"
+                                height="24px"
+                                x="0"
+                                y="0"
+                                preserveAspectRatio="xMinYMin meet"
+                                class="artdeco-icon"
+                                focusable="false"
+                              >
+                                <path
+                                  d="M14.71,4L12,1.29a1,1,0,0,0-1.41,0L3,8.85,1,15l6.15-2,7.55-7.55A1,1,0,0,0,15,4.71,1,1,0,0,0,14.71,4Zm-8.84,7.6-1.5-1.5L9.42,5.07l1.5,1.5Zm5.72-5.72-1.5-1.5,1.17-1.17,1.5,1.5Z"
+                                  class="small-icon"
+                                />
+                              </svg>
+                            </li-icon>
+                          </span>
+                        </Dropzone>
                         <img
                           src={this.state.userdata.photo}
                           class="profile-photo-edit__preview"
@@ -385,29 +453,6 @@ class Homepage extends Component {
                           height="128"
                           width="128"
                         />
-                        <span class="profile-photo-edit__edit-icon svg-icon-wrap">
-                          <li-icon
-                            aria-hidden="true"
-                            type="pencil-icon"
-                            size="small"
-                          >
-                            <svg
-                              viewBox="0 0 24 24"
-                              width="24px"
-                              height="24px"
-                              x="0"
-                              y="0"
-                              preserveAspectRatio="xMinYMin meet"
-                              class="artdeco-icon"
-                              focusable="false"
-                            >
-                              <path
-                                d="M14.71,4L12,1.29a1,1,0,0,0-1.41,0L3,8.85,1,15l6.15-2,7.55-7.55A1,1,0,0,0,15,4.71,1,1,0,0,0,14.71,4Zm-8.84,7.6-1.5-1.5L9.42,5.07l1.5,1.5Zm5.72-5.72-1.5-1.5,1.17-1.17,1.5,1.5Z"
-                                class="small-icon"
-                              />
-                            </svg>
-                          </li-icon>
-                        </span>
                       </button>
                     </div>
                   </div>
@@ -471,13 +516,17 @@ class Homepage extends Component {
                       </div>
 
                       <h2 class="pv-top-card-section__headline  t-33 t-black">
-                        {this.state.userdata
-                          ? this.state.userdata.education[0].degree
+                        {this.state.userdata.education
+                          ? this.state.userdata.education[0]
+                            ? this.state.userdata.education[0].degree
+                            : ""
                           : ""}{" "}
                         Student at{" "}
-                        {this.state.userdata
-                          ? this.state.userdata.education[0].school
-                          : ""}
+                        {this.state.userdata.education
+                          ? this.state.userdata.education[0]
+                            ? this.state.userdata.education[0].school
+                            : ""
+                          : ""}{" "}
                       </h2>
 
                       <h3 class="pv-top-card-section__location t-33 t-black--light  inline-block">
@@ -545,9 +594,11 @@ class Homepage extends Component {
                           style={{ "-webkit-line-clamp": "2" }}
                         >
                           {" "}
-                          {this.state.userdata
-                            ? this.state.userdata.education[0].school
-                            : ""}
+                          {this.state.userdata.education
+                            ? this.state.userdata.education[0]
+                              ? this.state.userdata.education[0].school
+                              : ""
+                            : ""}{" "}
                         </span>
                       </button>
 
@@ -2267,11 +2318,12 @@ const mapStateToProps = state => {
   return {
     username: state.username,
     summaryinserted: state.summaryinserted,
-    userdata: state.userdata
+    userdata: state.userdata,
+    url: state.applicantLogin.url
   };
 };
 
 export default connect(
   mapStateToProps,
-  { summaryinsert, experienceinsert, schoolinsert, skillsinsert }
+  { summaryinsert, experienceinsert, schoolinsert, skillsinsert, addPhoto }
 )(Homepage);
