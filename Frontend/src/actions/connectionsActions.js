@@ -10,7 +10,8 @@ const ROOT_URL = "http://localhost:3001";
 
 export const getAllConnections = username => async dispatch => {
   try {
-    setHeader();
+    // setHeader();
+
     const res = await axios.get(`${ROOT_URL}/connection/${username}`);
     dispatch({
       type: GET_ALL_CONNECTIONS,

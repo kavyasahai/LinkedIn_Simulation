@@ -188,20 +188,33 @@ componentDidMount(){
   };
 
   save = e => {
-    console.log("clicke");
+    console.log(e);
+   
     const data = {
-      jobid: e,
+      jobid: e._id,
       Userid: getJWTUsername(),
-      timestamp: new Date()
-    };
-    this.props.saveJob(data);
+      timestamp: new Date(),
+      firstname:this.state.userdata.firstname,
+      lastname:this.state.userdata.lastname,
+      postedBy: e.postedBy
+    }
+    console.log("save data",data);
+    this.props.saveJob(data,() =>{
+      alert("saved a job");
+
+    });
   };
 
   sendApplication = e => {
     const data = {
       email: getJWTUsername(),
-      jobid: e,
-      timestamp: new Date()
+      jobid: e._id,
+      timestamp:new Date(),
+      firstname:this.state.userdata.firstname,
+      lastname:this.state.userdata.lastname,
+      url:"http"
+
+      
     };
     console.log(data);
     this.props.applyJob(data);
@@ -320,11 +333,12 @@ else{
               <br />
               <button
                 class="Button"
-                onClick={this.save.bind(this, property._id)}
+                onClick={this.save.bind(this, property)}
+                disabled={this.state.hasApplied ? true : false}
               >
                 Save
               </button>
-              <button class="Button" onClick={this.openbox} disabled={this.state.hasApplied ? true : false}>
+              <button class="Button" onClick={this.openbox} >
                 Apply
               </button>
             </div>
@@ -544,7 +558,7 @@ else{
                     <input
                       type="submit"
                       value="Submit Application"
-                      onClick={this.sendApplication.bind(this, property._id)}
+                      onClick={this.sendApplication.bind(this, property)}
                       style={{
                         "margin-left": "5px",
                         "vertical-align": "middle",

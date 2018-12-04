@@ -6,7 +6,11 @@ function handle_request(msg, callback) {
   var Job = new job({
     submitted: "no",
     emailID: msg.Userid,
-    jobID: msg.jobid
+    jobID: msg.jobid,
+    savedTime:msg.timestamp,
+    postedBy:msg.postedBy,
+    firstname:msg.firsrname,
+    lastname:msg.lastname
   });
 
   Job.save().then(

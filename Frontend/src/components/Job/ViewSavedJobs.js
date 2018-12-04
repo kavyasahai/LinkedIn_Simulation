@@ -41,10 +41,14 @@ import axios from "axios";
             // });
           });
 
+          var jobdetails = this.props.savedjobs.filter(function(property) {
+            return property._id == ""
+          });
+
          
      }
     render(){
-        console.log()
+        console.log(this.state.properties1)
         var i = -1;
         let Details = this.state.properties1.map(property => {
             i = i + 1;
@@ -68,10 +72,10 @@ import axios from "axios";
                     style={{ "padding-left": "30px", "padding-top": "10px" }}
                   >
                     <li class="blue" >
-                      {property.title}
+                      {property.emailID}
                     </li>
                     <br />
-                    {property.company}
+                    {property.postedBy}
                     <br />
                     {property.location}
                     <br />

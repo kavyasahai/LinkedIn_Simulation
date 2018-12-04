@@ -54,7 +54,7 @@ export const getsavedJob = (data, callback) => async dispatch => {
 };
 
 
-export const saveJob = data => async dispatch => {
+export const saveJob = (data,callback) => async dispatch => {
   try {
     var email = getJWTUsername();
     setHeader();
@@ -63,6 +63,7 @@ export const saveJob = data => async dispatch => {
       type: SAVE_JOB,
       payload: res.data
     });
+    callback();
   } catch (e) {
     return {
       type: SAVE_JOB,

@@ -147,19 +147,39 @@ export function login(data, callback) {
   }
 }
 
-export function register(data, callback) {
+// export function register(data, callback) {
+//   try {
+//     setHeader();
+
+//     const request = axios
+//       .post(`${ROOT_URL}/register`, data)
+//       .then(res => callback(res));
+
+//     return {
+//       type: APPLICANT_SIGNUP,
+//       payload: request.data
+//     };
+//   } catch (e) {
+//     return {
+//       type: APPLICANT_SIGNUP,
+//       payload: e
+//     };
+//   }
+// }
+
+export const register = (data, cb) => async dispatch => {
   try {
-    const request = axios
-      .post(`${ROOT_URL}/register`, data)
-      .then(response => callback(response));
-    return {
+    const res = await axios.post(`${ROOT_URL}/register`, data);
+    dispatch({
       type: APPLICANT_SIGNUP,
-      payload: request
-    };
+      payload: res.data
+    });
+    cb();
+    console.log(res.data);
   } catch (e) {
     return {
       type: APPLICANT_SIGNUP,
       payload: e
     };
   }
-}
+};

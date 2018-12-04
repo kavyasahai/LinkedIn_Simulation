@@ -127,16 +127,22 @@ class Login extends Component {
       //set the with credentials to true
 
       // this.props.register(data);
-      this.props.register(data, response => {
-        console.log(response.data);
-        if (response.data === "Could not sign-up") {
-          window.alert("Username already exists.");
-        } else {
-          window.alert("Signed-up successfully!");
-          localStorage.setItem("signup", this.state.username);
-          this.props.history.push("/postsignup");
+      this.props.register(
+        data,
+        //   , response => {
+        //   console.log("REG response=", response);
+        //   if (response.data === "Could not sign-up") {
+        //     window.alert("Username already exists.");
+        //   } else {
+        //     window.alert("Signed-up successfully!");
+        //     localStorage.setItem("signup", this.state.username);
+        //     this.props.history.push("/postsignup");
+        //   }
+        // }
+        () => {
+          console.log("SIGN:", this.props.username);
         }
-      });
+      );
     }
   };
 
@@ -336,7 +342,6 @@ class Login extends Component {
 
 const mapStateToProps = state => ({
   username: state.applicantLogin.username,
-  inserted: state.applicantLogin.inserted,
   token: state.applicantLogin.token
 });
 

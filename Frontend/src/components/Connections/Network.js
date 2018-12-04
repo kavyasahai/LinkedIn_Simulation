@@ -38,6 +38,10 @@ class network extends Component {
   }
 
   render() {
+    console.log(
+      this.props.allConnections.connection &&
+        this.props.allConnections.connection.acceptedConnections.length === 0
+    );
     if (
       this.props.allConnections.connection &&
       this.props.allConnections.connection.acceptedConnections.length === 0

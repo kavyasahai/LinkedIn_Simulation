@@ -38,7 +38,7 @@ class JobDetails extends Component {
     });
   }
   openbox() {
-    window.location.href = "http://localhost:3000/job-apply";
+  this.props.history.push("/job-apply")
   }
   closebox() {
     this.setState({

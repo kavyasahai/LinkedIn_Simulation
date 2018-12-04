@@ -7,7 +7,6 @@ const router = express.Router();
 router.post("/register", function(request, response) {
   console.log("In signup method");
   kafka.make_request("linkedinsignup", request.body, function(err, results) {
-    console.log(results);
     if (err) {
       console.log("Inside err");
       response.json({
@@ -15,6 +14,8 @@ router.post("/register", function(request, response) {
         msg: "System Error, Try Again."
       });
     } else {
+      console.log("IN reg success", results);
+      console.log("IN reg success JSON", JSON.stringify(results));
       response.send(JSON.stringify(results));
     }
   });

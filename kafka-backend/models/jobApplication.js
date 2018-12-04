@@ -13,7 +13,8 @@ const jobApplicationSchema = new mongoose.Schema({
   savedTime: Date,
   submittedTime: Date,
   clickTime: Date,
-  postedBy: String
+  postedBy: String,
+  url:String
 });
 
 module.exports = mongoose.model(

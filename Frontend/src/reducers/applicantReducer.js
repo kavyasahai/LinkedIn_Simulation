@@ -16,12 +16,12 @@ const initialState = {
   location: false,
   details: false,
   inserted: false,
-  summaryinserted:false,
-  schoolinserted:false,
-  skillsinserted:false,
-  experienceinserted:false,
-  getuserdata:false,
-  userdata:[]
+  summaryinserted: false,
+  schoolinserted: false,
+  skillsinserted: false,
+  experienceinserted: false,
+  getuserdata: false,
+  userdata: []
 };
 
 export default function(state = initialState, action) {
@@ -29,41 +29,40 @@ export default function(state = initialState, action) {
     case APPLICANT_LOGIN:
       return {
         ...state,
-        // authFlag: true,
         token: action.payload
       };
-      case APPLICANT_SUMMARYINSERT_DATA:
+    case APPLICANT_SUMMARYINSERT_DATA:
       return {
         ...state,
         summaryinserted: true
       };
-      case APPLICANT_GETUSER_DATA:
-      console.log("payload data",action.payload);
+    case APPLICANT_GETUSER_DATA:
+      console.log("payload data", action.payload);
       return {
         ...state,
-        userdata:action.payload[0],
+        userdata: action.payload[0],
         getuserdata: true
       };
 
-      case APPLICANT_SKILLSINSERT_DATA:
+    case APPLICANT_SKILLSINSERT_DATA:
       return {
         ...state,
         skillsinserted: true
       };
 
-      case APPLICANT_SCHOOLINSERT_DATA:
+    case APPLICANT_SCHOOLINSERT_DATA:
       return {
         ...state,
         schoolinserted: true
       };
 
-      case APPLICANT_EXPERIENCEINSERT_DATA:
+    case APPLICANT_EXPERIENCEINSERT_DATA:
       return {
         ...state,
         experienceinserted: true
       };
 
-      case APPLICANT_LOCATION_DATA:
+    case APPLICANT_LOCATION_DATA:
       return {
         ...state,
         location: true
@@ -76,10 +75,10 @@ export default function(state = initialState, action) {
       };
 
     case APPLICANT_SIGNUP:
+      console.log("payload", action.payload);
       return {
         ...state,
-        inserted: true,
-        username: action.payload.email
+        username: action.payload
       };
 
     default:
