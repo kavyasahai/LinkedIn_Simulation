@@ -11,7 +11,8 @@ import {
   APPLICANT_GETUSER_DATA,
   SIGNUPSCHOOL,
   ADD_PROFILE_PICTURE,
-  ADD_USER_RESUME
+  ADD_USER_RESUME,
+  SEARCH_USER_BY_NAME
 } from "./types";
 import { setHeader } from "../components/common/auth";
 
@@ -215,6 +216,25 @@ export const addResume = (url, username) => async dispatch => {
   } catch (e) {
     return {
       type: ADD_USER_RESUME,
+      payload: e
+    };
+  }
+};
+
+export const searchUser = name => async dispatch => {
+  try {
+    setHeader();
+    console.log("name", name);
+    const res = await axios.get(
+      `${ROOT_URL}/searchUserByName/${name.userName}`
+    );
+    dispatch({
+      type: SEARCH_USER_BY_NAME,
+      payload: res.data
+    });
+  } catch (e) {
+    return {
+      type: SEARCH_USER_BY_NAME,
       payload: e
     };
   }

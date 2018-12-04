@@ -10,7 +10,8 @@ import {
   APPLICANT_GETUSER_DATA,
   SIGNUPSCHOOL,
   ADD_PROFILE_PICTURE,
-  ADD_USER_RESUME
+  ADD_USER_RESUME,
+  SEARCH_USER_BY_NAME
 } from "../actions/types";
 
 const initialState = {
@@ -27,7 +28,8 @@ const initialState = {
   userdata: [],
   signupschool: false,
   url: "",
-  resume: ""
+  resume: "",
+  searchResults: []
 };
 
 export default function(state = initialState, action) {
@@ -100,6 +102,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         resume: action.payload
+      };
+    case SEARCH_USER_BY_NAME:
+      return {
+        ...state,
+        searchResults: action.payload
       };
 
     default:

@@ -34,6 +34,7 @@ import ViewSavedJob from "./Job/ViewSavedJobs";
 import ViewProfile from "./Applicant/viewprofile";
 import ViewAppliedJob from "./Job/ViewAppliedJob";
 import ViewJobApplications from "./Recruiter/ViewJobApplications";
+import SearchUser from "./Connections/searchUser";
 
 //Create a Main Component
 class Main extends Component {
@@ -111,6 +112,7 @@ class Main extends Component {
               />
               <PrivateRoute path="/recruiter" component={Recruiter} />
               <PrivateRoute path="/job/new" component={PostAJob} />
+              <PrivateRoute path="/user/search" component={SearchUser} />
               <PrivateRoute
                 path="/job/posted-jobs"
                 component={ViewPostedJobs}

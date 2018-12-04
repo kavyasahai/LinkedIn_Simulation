@@ -37,6 +37,7 @@ var signupschool = require("./services/signupschool");
 var addPhoto = require("./services/User/addPhoto");
 var postProfileView = require("./services/profileStats/postProfileView");
 var addResume = require("./services/User/addResume");
+var searchUserByName = require("./services/User/searchUserByName");
 
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -107,3 +108,4 @@ handleTopicRequest("recruiterTraceJobs", recruiterTraceJobs);
 handleTopicRequest("addProfilePhoto_topic", addPhoto);
 handleTopicRequest("postProfileView", postProfileView);
 handleTopicRequest("addProfileResume_topic", addResume);
+handleTopicRequest("searchUserByName_topic", searchUserByName);
